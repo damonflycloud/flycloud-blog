@@ -97,7 +97,7 @@
 <meta property="og:description" content="This article on the Spring Blog. Spring MVC provides several complimentary approaches to exception handling but, when teaching Spring MVC, I often find that my students are confused or not comfortable">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://assets.spring.io/wp/wp-content/uploads/2013/10/support-page-example.png">
-<meta property="og:updated_time" content="2017-09-06T02:28:51.611Z">
+<meta property="og:updated_time" content="2017-09-06T06:28:49.674Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Exception Handling in Spring MVC">
 <meta name="twitter:description" content="This article on the Spring Blog. Spring MVC provides several complimentary approaches to exception handling but, when teaching Spring MVC, I often find that my students are confused or not comfortable">
@@ -321,7 +321,7 @@
 <p>Handler methods have flexible signatures so you can pass in obvious servlet-related objects such<br>as <code>HttpServletRequest</code>, <code>HttpServletResponse</code>, <code>HttpSession</code> and/or <code>Principle</code>.  <strong>Important Note:</strong> the<br><code>Model</code> may <strong>not</strong> be a parameter of any <code>@ExceptionHandler</code> method.  Instead, setup a model inside the method<br>using a <code>ModelAndView</code> as shown by <code>handleError()</code> above.</p>
 <h3 id="Exceptions-and-Views"><a href="#Exceptions-and-Views" class="headerlink" title="Exceptions and Views"></a>Exceptions and Views</h3><p>Be careful when adding exceptions to the model.  Your users do not want to see<br>web-pages containing Java exception details and stack-traces. However, it can be useful to put exception<br>details in the page <em>source</em> as a comment, to assist your support people.  If using JSP, you could<br>do something like this to output the exception and the corresponding stack-trace (using a hidden<br><code>&lt;div&gt;</code> is another option).</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Error Page<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Application has encountered an error. Please contact support on ...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--</span></div><div class="line">Failed URL: $&#123;url&#125;</div><div class="line">Exception:  $&#123;exception.message&#125;</div><div class="line">    &lt;c:forEach items="$&#123;exception.stackTrace&#125;" var="ste"&gt;    $&#123;ste&#125; </div><div class="line">&lt;/c:forEach&gt;</div><div class="line">--&gt;</div></pre></td></tr></table></figure>
-<p>For the Thymeleaf equivalent see<br><a href="https://github.com/paulc4/mvc-exceptions/blob/master/src/main/resources/templates/support.html" target="_blank" rel="external">support.html</a><br>in the demo application.  The result looks like this.  </p>
+<p>For the Thymeleaf equivalent see <a href="https://github.com/paulc4/mvc-exceptions/blob/master/src/main/resources/templates/support.html" target="_blank" rel="external"> support.html </a> in the demo application.  The result looks like this.  </p>
 <p><img src="http://assets.spring.io/wp/wp-content/uploads/2013/10/support-page-example.png" alt="Example of an error page with a hidden exception for support" title="Error Page with Hidden Exception"></p>
 <h2 id="Global-Exception-Handling"><a href="#Global-Exception-Handling" class="headerlink" title="Global Exception Handling"></a>Global Exception Handling</h2><h3 id="Using-ControllerAdvice-Classes"><a href="#Using-ControllerAdvice-Classes" class="headerlink" title="Using @ControllerAdvice Classes"></a>Using @ControllerAdvice Classes</h3><p>A controller advice allows you to use exactly the same exception handling techniques but apply them<br>across the whole application, not just to an individual controller.  You can think of them as an annotation<br>driven interceptor.</p>
 <p>Any class annotated with <code>@ControllerAdvice</code> becomes a controller-advice and three types of method<br>are supported:</p>
@@ -791,17 +791,6 @@
             });
 
             
-              var html="<li>" +"<a href='/2017/09/05/git&github/github/github项目排名/'>"+ " github项目排名</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github项目排名/'>"+" github项目排名</a></li></ul>"
-              
-                   if($('li#'+"52>ul").length==0){
-                    $('li#'+"52").append(chirldHtml);
-                   }else{
-                    $('li#'+"52>ul:first").append(html);
-                   }
-
-              
-            
               var html="<li>" +"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+ " Git远程操作详解</a></li>";
               var chirldHtml="<ul><li>"+"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+" Git远程操作详解</a></li></ul>"
               
@@ -809,6 +798,17 @@
                     $('li#'+"51").append(chirldHtml);
                    }else{
                     $('li#'+"51>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/05/git&github/github/github项目排名/'>"+ " github项目排名</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github项目排名/'>"+" github项目排名</a></li></ul>"
+              
+                   if($('li#'+"52>ul").length==0){
+                    $('li#'+"52").append(chirldHtml);
+                   }else{
+                    $('li#'+"52>ul:first").append(html);
                    }
 
               
