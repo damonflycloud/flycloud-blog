@@ -789,6 +789,17 @@
             });
 
             
+              var html="<li>" +"<a href='/2017/09/06/spring@springMvc/springMVC/Exception/'>"+ " Exception Handling in Spring MVC</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring@springMvc/springMVC/Exception/'>"+" Exception Handling in Spring MVC</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
               var html="<li>" +"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+ " Git远程操作详解</a></li>";
               var chirldHtml="<ul><li>"+"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+" Git远程操作详解</a></li></ul>"
               
@@ -807,17 +818,6 @@
                     $('li#'+"52").append(chirldHtml);
                    }else{
                     $('li#'+"52>ul:first").append(html);
-                   }
-
-              
-            
-              var html="<li>" +"<a href='/2017/09/06/spring@springMvc/springMVC/Exception/'>"+ " Exception Handling in Spring MVC</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring@springMvc/springMVC/Exception/'>"+" Exception Handling in Spring MVC</a></li></ul>"
-              
-                   if($('li#'+"102>ul").length==0){
-                    $('li#'+"102").append(chirldHtml);
-                   }else{
-                    $('li#'+"102>ul:first").append(html);
                    }
 
               
