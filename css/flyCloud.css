@@ -1,0 +1,51 @@
+#mmenu a {
+  border-bottom: none;
+}
+
+.footer {
+	font-size: 15px;
+}
+
+
+aside#sidebar {
+    /*top: inherit;*/
+    top:100px;
+   /* bottom :50px;*/
+    position: fixed;
+    right: -240px;
+    -webkit-transition: all .5s linear;
+    -moz-transition: all .5s linear;
+    -o-transition: all .5s linear;
+    -ms-transition: all .5s linear;
+    transition: all .5s linear
+}
+
+
+
+.donate-btn {
+    position: absolute;
+    left: -24px;
+    background: #2b2f3e;
+    font-size: 14px;
+    padding: 15px 5px;
+    width: 15px;
+    color: #fff;
+    -webkit-border-top-left-radius: 10px;
+    -moz-border-top-left-radius: 10px;
+    -o-border-top-left-radius: 10px;
+    -ms-border-top-left-radius: 10px;
+    border-top-left-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-bottom-left-radius: 10px;
+    -o-border-bottom-left-radius: 10px;
+    -ms-border-bottom-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+#sidebar:hover{
+    right:0;
+}
+
+.header-inner{
+    position:relative;
+}

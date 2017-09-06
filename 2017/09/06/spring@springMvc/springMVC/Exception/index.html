@@ -1,0 +1,924 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/flyCloud.css?v=5.1.0"/
+
+
+  <meta name="keywords" content="spring," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://7xowny.com1.z0.glb.clouddn.com/flycloud.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="This article on the Spring Blog. Spring MVC provides several complimentary approaches to exception handling but, when teaching Spring MVC, I often find that my students are confused or not comfortable">
+<meta name="keywords" content="spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Exception Handling in Spring MVC">
+<meta property="og:url" content="flycloud.me/2017/09/06/spring@springMvc/springMVC/Exception/index.html">
+<meta property="og:site_name" content="FlyCloud Blog">
+<meta property="og:description" content="This article on the Spring Blog. Spring MVC provides several complimentary approaches to exception handling but, when teaching Spring MVC, I often find that my students are confused or not comfortable">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://assets.spring.io/wp/wp-content/uploads/2013/10/support-page-example.png">
+<meta property="og:updated_time" content="2017-09-06T02:28:51.611Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Exception Handling in Spring MVC">
+<meta name="twitter:description" content="This article on the Spring Blog. Spring MVC provides several complimentary approaches to exception handling but, when teaching Spring MVC, I often find that my students are confused or not comfortable">
+<meta name="twitter:image" content="http://assets.spring.io/wp/wp-content/uploads/2013/10/support-page-example.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":0,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="flycloud.me/2017/09/06/spring@springMvc/springMVC/Exception/"/>
+
+
+
+
+
+  <title> Exception Handling in Spring MVC | FlyCloud Blog </title>
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?060f8b2450825fadd6aff6e494ce6218";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="flycloud.me/2017/09/06/spring@springMvc/springMVC/Exception/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flycloud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyCloud Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Exception Handling in Spring MVC
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-06T10:16:38+08:00">
+                2017-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+            <span class="page-pv">热度
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>℃
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>This article on the <a href="https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc" target="_blank" rel="external">Spring Blog</a>.</p>
+<p>Spring MVC provides several complimentary approaches to exception handling but, when teaching Spring MVC, I often find that my students are confused or not comfortable with them.</p>
+<p>Today I’m going to show you the<br>various options available.  Our goal is to <i>not</i> handle exceptions explicitly in Controller methods<br>where possible.  They are a cross-cutting concern better handled separately in dedicated code.</p>
+<p>There are three options: per exception, per controller or globally.</p>
+<p><em>A demonstration application that shows the points discussed here can be found at<br><a href="http://github.com/paulc4/mvc-exceptions" target="_blank" rel="external">http://github.com/paulc4/mvc-exceptions</a>.<br>See <a href="#user-content-sample-application">Sample Application</a> below for details.</em></p>
+<p><strong>NOTE:</strong> <em>The demo applications has been revamped and updated (October 2014) to use Spring Boot 1.1.8 and is (hopefully) easier to use and understand.</em></p>
+<a id="more"></a>
+<h2 id="Using-HTTP-Status-Codes"><a href="#Using-HTTP-Status-Codes" class="headerlink" title="Using HTTP Status Codes"></a>Using HTTP Status Codes</h2><p>Normally any unhandled exception thrown when processing a web-request causes the server to return an<br>HTTP 500 response.  However, any exception that you write yourself can be annotated with the<br><code>@ResponseStatus</code> annotation (which supports all the HTTP status codes defined by the HTTP<br>specification).  When an <em>annotated</em> exception is thrown from a controller method, and not handled elsewhere,<br>it will automatically cause the appropriate HTTP response to be returned with the specified status-code.</p>
+<p>For example, here is an exception for a missing order.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ResponseStatus</span>(value=HttpStatus.NOT_FOUND, reason=<span class="string">"No such Order"</span>)  <span class="comment">// 404</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderNotFoundException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span> </span>&#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>And here is a controller method using it:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/orders/&#123;id&#125;"</span>, method=GET)</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">showOrder</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> <span class="keyword">long</span> id, Model model) </span>&#123;</div><div class="line">    Order order = orderRepository.findOrderById(id);</div><div class="line">    <span class="keyword">if</span> (order == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> OrderNotFoundException(id);</div><div class="line">    model.addAttribute(order);</div><div class="line">    <span class="keyword">return</span> <span class="string">"orderDetail"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>A familiar HTTP 404 response will be returned if the URL handled by this method includes an unknown order id.</p>
+<h2 id="Controller-Based-Exception-Handling"><a href="#Controller-Based-Exception-Handling" class="headerlink" title="Controller Based Exception Handling"></a>Controller Based Exception Handling</h2><h3 id="Using-ExceptionHandler"><a href="#Using-ExceptionHandler" class="headerlink" title="Using @ExceptionHandler"></a>Using @ExceptionHandler</h3><p>You can add extra (<code>@ExceptionHandler</code>) methods to any controller to specifically handle exceptions<br>thrown by request handling (<code>@RequestMapping</code>) methods in the same controller.  Such methods can:</p>
+<ol>
+<li>Handle exceptions without the <code>@ResponseStatus</code> annotation (typically predefined exceptions<br>that you didn’t write)</li>
+<li>Redirect the user to a dedicated error view</li>
+<li>Build a totally custom error response</li>
+</ol>
+<p>The following controller demonstrates these three options:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionHandlingController</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="comment">// @RequestHandler methods</span></div><div class="line">  ...</div><div class="line">  </div><div class="line">  <span class="comment">// Exception handling methods</span></div><div class="line">  </div><div class="line">  <span class="comment">// Convert a predefined exception to an HTTP Status code</span></div><div class="line">  <span class="meta">@ResponseStatus</span>(value=HttpStatus.CONFLICT, reason=<span class="string">"Data integrity violation"</span>)  <span class="comment">// 409</span></div><div class="line">  <span class="meta">@ExceptionHandler</span>(DataIntegrityViolationException.class)</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">conflict</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">// Nothing to do</span></div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="comment">// Specify the name of a specific view that will be used to display the error:</span></div><div class="line">  <span class="meta">@ExceptionHandler</span>(&#123;SQLException.class,DataAccessException.class&#125;)</div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">databaseError</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">// Nothing to do.  Returns the logical view name of an error page, passed to</span></div><div class="line">    <span class="comment">// the view-resolver(s) in usual way.</span></div><div class="line">    <span class="comment">// Note that the exception is _not_ available to this view (it is not added to</span></div><div class="line">    <span class="comment">// the model) but see "Extending ExceptionHandlerExceptionResolver" below.</span></div><div class="line">    <span class="keyword">return</span> <span class="string">"databaseError"</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// Total control - setup a model and return the view name yourself. Or consider</span></div><div class="line">  <span class="comment">// subclassing ExceptionHandlerExceptionResolver (see below).</span></div><div class="line">  <span class="meta">@ExceptionHandler</span>(Exception.class)</div><div class="line">  <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">handleError</span><span class="params">(HttpServletRequest req, Exception exception)</span> </span>&#123;</div><div class="line">    logger.error(<span class="string">"Request: "</span> + req.getRequestURL() + <span class="string">" raised "</span> + exception);</div><div class="line"></div><div class="line">    ModelAndView mav = <span class="keyword">new</span> ModelAndView();</div><div class="line">    mav.addObject(<span class="string">"exception"</span>, exception);</div><div class="line">    mav.addObject(<span class="string">"url"</span>, req.getRequestURL());</div><div class="line">    mav.setViewName(<span class="string">"error"</span>);</div><div class="line">    <span class="keyword">return</span> mav;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>In any of these methods you might choose to do additional processing - the most common example is to log the<br>exception.</p>
+<p>Handler methods have flexible signatures so you can pass in obvious servlet-related objects such<br>as <code>HttpServletRequest</code>, <code>HttpServletResponse</code>, <code>HttpSession</code> and/or <code>Principle</code>.  <strong>Important Note:</strong> the<br><code>Model</code> may <strong>not</strong> be a parameter of any <code>@ExceptionHandler</code> method.  Instead, setup a model inside the method<br>using a <code>ModelAndView</code> as shown by <code>handleError()</code> above.</p>
+<h3 id="Exceptions-and-Views"><a href="#Exceptions-and-Views" class="headerlink" title="Exceptions and Views"></a>Exceptions and Views</h3><p>Be careful when adding exceptions to the model.  Your users do not want to see<br>web-pages containing Java exception details and stack-traces. However, it can be useful to put exception<br>details in the page <em>source</em> as a comment, to assist your support people.  If using JSP, you could<br>do something like this to output the exception and the corresponding stack-trace (using a hidden<br><code>&lt;div&gt;</code> is another option).</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Error Page<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Application has encountered an error. Please contact support on ...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--</span></div><div class="line">Failed URL: $&#123;url&#125;</div><div class="line">Exception:  $&#123;exception.message&#125;</div><div class="line">    &lt;c:forEach items="$&#123;exception.stackTrace&#125;" var="ste"&gt;    $&#123;ste&#125; </div><div class="line">&lt;/c:forEach&gt;</div><div class="line">--&gt;</div></pre></td></tr></table></figure>
+<p>For the Thymeleaf equivalent see<br><a href="https://github.com/paulc4/mvc-exceptions/blob/master/src/main/resources/templates/support.html" target="_blank" rel="external">support.html</a><br>in the demo application.  The result looks like this.  </p>
+<p><img src="http://assets.spring.io/wp/wp-content/uploads/2013/10/support-page-example.png" alt="Example of an error page with a hidden exception for support" title="Error Page with Hidden Exception"></p>
+<h2 id="Global-Exception-Handling"><a href="#Global-Exception-Handling" class="headerlink" title="Global Exception Handling"></a>Global Exception Handling</h2><h3 id="Using-ControllerAdvice-Classes"><a href="#Using-ControllerAdvice-Classes" class="headerlink" title="Using @ControllerAdvice Classes"></a>Using @ControllerAdvice Classes</h3><p>A controller advice allows you to use exactly the same exception handling techniques but apply them<br>across the whole application, not just to an individual controller.  You can think of them as an annotation<br>driven interceptor.</p>
+<p>Any class annotated with <code>@ControllerAdvice</code> becomes a controller-advice and three types of method<br>are supported:</p>
+<ul>
+<li>Exception handling methods annotated with <code>@ExceptionHandler</code>.</li>
+<li>Model enhancement methods (for adding additional data to the model) annotated with<br><code>@ModelAttribute</code>.  Note that these attributes are <em>not</em> available to the exception handling views.</li>
+<li>Binder initialization methods (used for configuring form-handling) annotated with<br><code>@InitBinder</code>.</li>
+</ul>
+<p>We are only going to look at exception handling - see the online manual for more on<br><code>@ControllerAdvice</code> methods.</p>
+<p>Any of the exception handlers you saw above can be defined on a controller-advice class - but now they<br>apply to exceptions thrown from <em>any</em> controller.  Here is a simple example:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ControllerAdvice</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">GlobalControllerExceptionHandler</span> </span>&#123;</div><div class="line">    <span class="meta">@ResponseStatus</span>(HttpStatus.CONFLICT)  <span class="comment">// 409</span></div><div class="line">    <span class="meta">@ExceptionHandler</span>(DataIntegrityViolationException.class)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleConflict</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// Nothing to do</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>If you want to have a default handler for <em>any</em> exception, there is a slight wrinkle.  You need to ensure<br>annotated exceptions are handled by the framework.  The code looks like this:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ControllerAdvice</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">GlobalDefaultExceptionHandler</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_ERROR_VIEW = <span class="string">"error"</span>;</div><div class="line"></div><div class="line">    <span class="meta">@ExceptionHandler</span>(value = Exception.class)</div><div class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">defaultErrorHandler</span><span class="params">(HttpServletRequest req, Exception e)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">// If the exception is annotated with @ResponseStatus rethrow it and let</span></div><div class="line">        <span class="comment">// the framework handle it - like the OrderNotFoundException example</span></div><div class="line">        <span class="comment">// at the start of this post.</span></div><div class="line">        <span class="comment">// AnnotationUtils is a Spring Framework utility class.</span></div><div class="line">        <span class="keyword">if</span> (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">throw</span> e;</div><div class="line"></div><div class="line">        <span class="comment">// Otherwise setup and send the user to a default error-view.</span></div><div class="line">        ModelAndView mav = <span class="keyword">new</span> ModelAndView();</div><div class="line">        mav.addObject(<span class="string">"exception"</span>, e);</div><div class="line">        mav.addObject(<span class="string">"url"</span>, req.getRequestURL());</div><div class="line">        mav.setViewName(DEFAULT_ERROR_VIEW);</div><div class="line">        <span class="keyword">return</span> mav;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Going-Deeper"><a href="#Going-Deeper" class="headerlink" title="Going Deeper"></a>Going Deeper</h2><h3 id="HandlerExceptionResolver"><a href="#HandlerExceptionResolver" class="headerlink" title="HandlerExceptionResolver"></a>HandlerExceptionResolver</h3><p>Any Spring bean declared in the <code>DispatcherServlet</code>‘s application context that implements<br><code>HandlerExceptionResolver</code> will be used to intercept and process any exception raised<br>in the MVC system and not handled by a Controller.  The interface looks like this:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HandlerExceptionResolver</span> </span>&#123;</div><div class="line">    <span class="function">ModelAndView <span class="title">resolveException</span><span class="params">(HttpServletRequest request, </span></span></div><div class="line">            HttpServletResponse response, Object handler, Exception ex);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>The <code>handler</code> refers to the controller that generated the exception (remember that<br><code>@Controller</code> instances are only one type of handler supported by Spring MVC.<br>For example: <code>HttpInvokerExporter</code> and the WebFlow Executor are also types of handler). </p>
+<p>Behind the scenes, MVC creates three such resolvers by default.  It is these resolvers that implement the<br>behaviours discussed above:</p>
+<ul>
+<li><code>ExceptionHandlerExceptionResolver</code> matches uncaught exceptions against for<br>suitable <code>@ExceptionHandler</code> methods on both the handler (controller) and on any controller-advices.</li>
+<li><code>ResponseStatusExceptionResolver</code> looks for uncaught exceptions<br>annotated by <code>@ResponseStatus</code> (as described in Section 1)</li>
+<li><code>DefaultHandlerExceptionResolver</code> converts standard Spring exceptions and converts them<br>to HTTP Status Codes (I have not mentioned this above as it is internal to Spring MVC).</li>
+</ul>
+<p>These are chained and processed in the order listed (internally Spring creates a dedicated bean - the</p>
+<p><tt>HandlerExceptionResolverComposite</tt> to do this).</p>
+<p>Notice that the method signature of <figure class="highlight plain"><figcaption><span>does not include the ```Model```.  This is why</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">```@ExceptionHandler``` methods cannot be injected with the model.</div><div class="line"></div><div class="line">You can, if you wish, implement your own `HandlerExceptionResolver` to setup your own custom</div><div class="line">exception handling system. Handlers typically implement Spring&apos;s `Ordered` interface so you can define the</div><div class="line">order that the handlers run in.</div><div class="line"></div><div class="line">### SimpleMappingExceptionResolver</div><div class="line"></div><div class="line">Spring has long provided a simple but convenient implementation of `HandlerExceptionResolver`</div><div class="line">that you may well find being used in your appication already - the `SimpleMappingExceptionResolver`.</div><div class="line">It provides options to:</div><div class="line"></div><div class="line">  * Map exception class names to view names - just specify the classname, no package needed.</div><div class="line">  * Specify a default (fallback) error page for any exception not handled anywhere else</div><div class="line">  * Log a message (this is not enabled by default).</div><div class="line">  * Set the name of the `exception` attribute to add to the Model so it can be used inside a View</div><div class="line">(such as a JSP). By default this attribute is named ```exception```.  Set to ```null``` to disable.  Remember</div><div class="line">that views returned from `@ExceptionHandler` methods _do not_ have access to the exception but views</div><div class="line">defined to `SimpleMappingExceptionResolver` _do_.</div><div class="line"></div><div class="line">Here is a typical configuration using XML:</div><div class="line"></div><div class="line">```xml</div><div class="line">    &lt;bean id=&quot;simpleMappingExceptionResolver&quot;</div><div class="line">          class=&quot;org.springframework.web.servlet.handler.SimpleMappingExceptionResolver&quot;&gt;</div><div class="line">        &lt;property name=&quot;exceptionMappings&quot;&gt;</div><div class="line">            &lt;map&gt;</div><div class="line">                &lt;entry key=&quot;DatabaseException&quot; value=&quot;databaseError&quot;/&gt;</div><div class="line">                &lt;entry key=&quot;InvalidCreditCardException&quot; value=&quot;creditCardError&quot;/&gt;</div><div class="line">            &lt;/map&gt;</div><div class="line">        &lt;/property&gt;</div><div class="line">        &lt;!-- See note below on how this interacts with Spring Boot --&gt;</div><div class="line">        &lt;property name=&quot;defaultErrorView&quot; value=&quot;error&quot;/&gt;</div><div class="line">        &lt;property name=&quot;exceptionAttribute&quot; value=&quot;ex&quot;/&gt;</div><div class="line">        </div><div class="line">        &lt;!-- Name of logger to use to log exceptions. Unset by default, so logging disabled --&gt;</div><div class="line">        &lt;property name=&quot;warnLogCategory&quot; value=&quot;example.MvcLogger&quot;/&gt;</div><div class="line">    &lt;/bean&gt;</div></pre></td></tr></table></figure></p>
+<p>Or using Java Configuration:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableWebMvc</span>   <span class="comment">// Optionally setup Spring MVC defaults if you aren't doing so elsewhere</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MvcConfiguration</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</div><div class="line">    <span class="meta">@Bean</span>(name=<span class="string">"simpleMappingExceptionResolver"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> SimpleMappingExceptionResolver <span class="title">createSimpleMappingExceptionResolver</span><span class="params">()</span> </span>&#123;</div><div class="line">        SimpleMappingExceptionResolver r =</div><div class="line">              <span class="keyword">new</span> SimpleMappingExceptionResolver();</div><div class="line"></div><div class="line">        Properties mappings = <span class="keyword">new</span> Properties();</div><div class="line">        mappings.setProperty(<span class="string">"DatabaseException"</span>, <span class="string">"databaseError"</span>);</div><div class="line">        mappings.setProperty(<span class="string">"InvalidCreditCardException"</span>, <span class="string">"creditCardError"</span>);</div><div class="line"></div><div class="line">        r.setExceptionMappings(mappings);  <span class="comment">// None by default</span></div><div class="line">        r.setDefaultErrorView(<span class="string">"error"</span>);    <span class="comment">// No default</span></div><div class="line">        r.setExceptionAttribute(<span class="string">"ex"</span>);     <span class="comment">// Default is "exception"</span></div><div class="line">        r.setWarnLogCategory(<span class="string">"example.MvcLogger"</span>);     <span class="comment">// No default</span></div><div class="line">        <span class="keyword">return</span> r;</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>The <em>defaultErrorView</em> property is especially useful as it ensures any uncaught exception generates<br>a suitable application defined error page. (The default for most application servers is to display a Java<br>stack-trace - something your users should <em>never</em> see).</p>
+<h3 id="Extending-SimpleMappingExceptionResolver"><a href="#Extending-SimpleMappingExceptionResolver" class="headerlink" title="Extending SimpleMappingExceptionResolver"></a>Extending SimpleMappingExceptionResolver</h3><p>It is quite common to extend <code>SimpleMappingExceptionResolver</code> for several reasons:</p>
+<ul>
+<li>Use the constructor to set properties directly - for example to enable exception logging and set the<br>logger to use</li>
+<li>Override the default log message by overriding <code>buildLogMessage</code>. The default implementation<br>always returns this fixed text:<ul style="margin-left: 2em"><i>Handler execution resulted in exception</i></ul></li>
+<li>To make additional information available to the error view by overriding <code>doResolveException</code></li>
+</ul>
+<p>For example:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMappingExceptionResolver</span> <span class="keyword">extends</span> <span class="title">SimpleMappingExceptionResolver</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyMappingExceptionResolver</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// Enable logging by providing the name of the logger to use</span></div><div class="line">        setWarnLogCategory(MyMappingExceptionResolver.class.getName());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">buildLogMessage</span><span class="params">(Exception e, HttpServletRequest req)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"MVC exception: "</span> + e.getLocalizedMessage();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> ModelAndView <span class="title">doResolveException</span><span class="params">(HttpServletRequest request,</span></span></div><div class="line">            HttpServletResponse response, Object handler, Exception exception) &#123;</div><div class="line">        <span class="comment">// Call super method to get the ModelAndView</span></div><div class="line">        ModelAndView mav = <span class="keyword">super</span>.doResolveException(request, response, handler, exception);</div><div class="line">        </div><div class="line">        <span class="comment">// Make the full URL available to the view - note ModelAndView uses addObject()</span></div><div class="line">        <span class="comment">// but Model uses addAttribute(). They work the same. </span></div><div class="line">        mav.addObject(<span class="string">"url"</span>, request.getRequestURL());</div><div class="line">        <span class="keyword">return</span> mav;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>This code is in the demo application as<br><a href="https://github.com/paulc4/mvc-exceptions/blob/master/src/main/java/demo1/web/ExampleSimpleMappingExceptionResolver.java" target="_blank" rel="external">ExampleSimpleMappingExceptionResolver</a></p>
+<h3 id="Extending-ExceptionHandlerExceptionResolver"><a href="#Extending-ExceptionHandlerExceptionResolver" class="headerlink" title="Extending ExceptionHandlerExceptionResolver"></a>Extending ExceptionHandlerExceptionResolver</h3><p>It is also possible to extend <code>ExceptionHandlerExceptionResolver</code> and override its<br><code>doResolveHandlerMethodException</code> method in the same way. It has almost the same signature<br>(it just takes the new <code>HandlerMethod</code> instead of a <code>Handler</code>).</p>
+<p>To make sure it gets used, also set the inherited order property (for example in the constructor of<br>your new class) to a value less than <code>MAX_INT</code> so it runs <em>before</em> the default<br>ExceptionHandlerExceptionResolver instance (it is easier to create your own handler instance than try to<br>modify/replace the one created by Spring).  See<br><a href="http://github.com/paulc4/mvc-exceptions/blob/master/src/main/java/demo1/web/ExampleExceptionHandlerExceptionResolver.java" target="_blank" rel="external">ExampleExceptionHandlerExceptionResolver</a><br>in the demo app for more.</p>
+<h3 id="Errors-and-REST"><a href="#Errors-and-REST" class="headerlink" title="Errors and REST"></a>Errors and REST</h3><p>RESTful GET requests may also generate exceptions and we have already seen how we can return standard HTTP<br>Error response codes.  However, what if you want to return information about the error?  This is very easy to do.<br>Firstly define an error class:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ErrorInfo</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">final</span> String url;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">final</span> String ex;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ErrorInfo</span><span class="params">(String url, Exception ex)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.url = url;</div><div class="line">        <span class="keyword">this</span>.ex = ex.getLocalizedMessage();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Now we can return an instance from a handler as the <figure class="highlight plain"><figcaption><span>like this:</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">```java</div><div class="line">@ResponseStatus(HttpStatus.BAD_REQUEST)</div><div class="line">@ExceptionHandler(MyBadDataException.class)</div><div class="line">@ResponseBody ErrorInfo handleBadRequest(HttpServletRequest req, Exception ex) &#123;</div><div class="line">    return new ErrorInfo(req.getRequestURL(), ex);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="What-to-Use-When"><a href="#What-to-Use-When" class="headerlink" title="What to Use When?"></a>What to Use When?</h2><p>As usual, Spring likes to offer you choice, so what should you do?  Here are some rules of thumb.<br>However if you have a preference for XML configuration or Annotations, that’s fine too.</p>
+<ul><br>  <li>For exceptions you write, consider adding <code>@ResponseStatus</code> to them.<br>  </li><li>For all other exceptions implement an <code>@ExceptionHandler</code> method on a<br>     <code>@ControllerAdvice</code> class or use an instance of <code>SimpleMappingExceptionResolver</code>.<br>      You may well have <code>SimpleMappingExceptionResolver</code> configured for your application already,<br>      in which case it may be easier to add new exception classes to it than implement a <code>@ControllerAdvice</code>.<br>  </li><li>For Controller specific exception handling add <code>@ExceptionHandler</code> methods to your controller.<br>  </li><li><b>Warning:</b> Be careful mixing too many of these options in the same application.<br>   If the same exception can be<br>   handed in more than one way, you may not get the behavior you wanted. <code>@ExceptionHandler</code><br>   methods on the Controller<br>   are always selected before those on any <code>@ControllerAdvice</code> instance.  It is <i>undefined</i><br>   what order controller-advices are processed.<br></li></ul>
+
+<h2 id="Sample-Application"><a href="#Sample-Application" class="headerlink" title="Sample Application"></a>Sample Application</h2><p>A demonstration application can be found at <a href="http://github.com/paulc4/mvc-exceptions" target="_blank" rel="external">github</a>.<br>It uses Spring Boot and Thymeleaf to build a simple web application.</p>
+<p>The application was revised (Oct 2014) and is (hopefully) better and easier to understand.  The fundamentals stay the same.  It uses Spring Boot V1.1.8 and Spring 4.1 but the code is applicable to Spring 3.x also.</p>
+<p>The demo is running on Cloud Foundry at <a href="http://mvc-exceptions-v2.cfapps.io/" target="_blank" rel="external">http://mvc-exceptions-v2.cfapps.io/</a>.</p>
+<h3 id="About-the-Demo"><a href="#About-the-Demo" class="headerlink" title="About the Demo"></a>About the Demo</h3><p>The application leads the user through 5 demo pages, highlighting different exception handling techniques:</p>
+<ol>
+<li>A controller with <code>@ExceptionHandler</code> methods to handle its own exceptions</li>
+<li>A contoller that throws exceptions for a global ControllerAdvice to handle </li>
+<li>Using a <code>SimpleMappingExceptionResolver</code> to handle exceptions</li>
+<li>Same as demo 3 but with the <code>SimpleMappingExceptionResolver</code>  disabled for comparison</li>
+<li>Shows how Spring Boot generates its error page</li>
+</ol>
+<p>A description of the most important files in the application and how they relate to each demo can be found in the project’s<br><a href="http://github.com/paulc4/mvc-exceptions/blob/master/README.md" target="_blank" rel="external">README.md</a>.</p>
+<p>The home web-page is<br><a href="http://github.com/paulc4/mvc-exceptions/blob/master/src/main/resources/templates/index.html" target="_blank" rel="external">index.html</a><br>which:</p>
+<ul>
+<li>Links to each demo page</li>
+<li>Links (bottom of the page) to Spring Boot endpoints for those interested in Spring Boot.</li>
+</ul>
+<p>Each demo page contains several links, all of which deliberately raise exceptions.  You will need to use the back-button on your browser each time to return to the demo page.</p>
+<p>Thanks to Spring Boot, you can run this demo as a Java application (it runs an embedded Tomcat container).  To run the application, you can use one of the following (the second is thanks to the Spring Boot maven plugin):</p>
+<ul>
+<li><code>mvn exec:java</code></li>
+<li><code>mvn spring-boot:run</code></li>
+</ul>
+<p>Your choice.  The home page URL will be <a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a>.</p>
+<h3 id="Spring-Boot-and-Error-Handling"><a href="#Spring-Boot-and-Error-Handling" class="headerlink" title="Spring Boot and Error Handling"></a>Spring Boot and Error Handling</h3><p><a href="http://spring.io/spring-boot" target="_blank" rel="external">Spring Boot</a> allows a Spring project to be setup with<br>minimal configuration. Spring Boot creates sensible defaults automatically when it detects<br>certain key classes and packages on the classpath.  For example if it sees that you are using a Servlet<br>environment, it sets up Spring MVC with the most commonly used view-resolvers, hander mappings and so forth.<br>If it sees JSP and/or Thymeleaf, it sets up these view-technologies.</p>
+<p>Spring MVC offers no default (fall-back) error page out-of-the-box.  The most common way to set a default error<br>page has always been the <code>SimpleMappingExceptionResolver</code> (since Spring V1 in fact). However<br>Spring Boot also provides for a fallback error-handling page.</p>
+<p>At start-up, Spring Boot tries to find a mapping for <code>/error</code>.  By convention, a URL ending in <code>/error</code> maps to<br>a logical view of the same name: <code>error</code>.  In the demo application this view maps in turn to the <code>error.html</code><br>Thymeleaf template. (If using JSP, it would map to <code>error.jsp</code> according to the setup of your<br><code>InternalResourceViewResolver</code>).</p>
+<p>If no mapping from <code>/error</code> to a View can be found, Spring Boot defines its own fall-back error page - the so-called “Whitelabel Error Page” (a minimal page with just the HTTP status information and any error details, such as the message from an uncaught exception).  If you rename the <code>error.html</code> template to, say, <code>error2.html</code><br>then restart, you will see it being used.</p>
+<p>By defining a Java configuration <code>@Bean</code> method called <code>defaultErrorView()</code> you can return your own error <code>View</code> instance. (see Spring Boot’s <code>ErrorMvcAutoConfiguration</code> class for more information).</p>
+<p>What if you are already using <code>SimpleMappingExceptionResolver</code> to setup a default<br>error view?  Simple, make sure the <code>defaultErrorView</code> defines the same view that Spring Boot uses: <code>error</code>.  Or you can disable Spring boot’s error page by setting the property<br><code>error.whitelabel.enabled</code> to <code>false</code>.  Your container’s default error page is used instead.<br>There are examples of setting Spring Boot properties in the constructor of<br><a href="http://github.com/paulc4/mvc-exceptions/blob/master/src/main/java/demo/main/Main.java" target="_blank" rel="external">Main</a>.</p>
+<p>Note that in the demo, the <code>defaultErrorView</code> property of the <code>SimpleMappingExceptionResolver</code> is<br>deliberately set not to <code>error</code> but to <code>defaultErrorPage</code> so you can see when the handler is generating the error page and when<br>Spring Boot is responsible. Normally <em>both</em> would be set to <code>error</code>.</p>
+<p>Also in the demo application I show how to create a support-ready error page with a stack-trace hidden in the HTML source (as a comment).  Ideally support should get this information from the logs, but life isn’t always ideal. Regardless, what this page <em>does</em> show is how the underlying error-handling method <code>handleError</code> creates its own <code>ModelAndView</code> to provide extra information in the error page.  See:</p>
+<ul>
+<li><code>ExceptionHandlingController.handleError()</code> on <a href="http://github.com/paulc4/mvc-exceptions/blob/master/src/main/java/demo1/web/ExceptionHandlingController.java" target="_blank" rel="external">github</a></li>
+<li><code>GlobalControllerExceptionHandler.handleError()</code> on <a href="https://github.com/paulc4/mvc-exceptions/blob/master/src/main/java/demo2/web/GlobalExceptionHandlingControllerAdvice.java" target="_blank" rel="external">github</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spring/" rel="tag"># spring</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/05/git&github/github/github项目排名/" rel="next" title="github项目排名">
+                <i class="fa fa-chevron-left"></i> github项目排名
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="donate-btn">作者</div>
+    <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyCloud Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命在于折腾!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg"
+               alt="flycloud" />
+          <p class="site-author-name" itemprop="name">flycloud</p>
+           
+              <p class="site-description motion-element" itemprop="description">Stay Hungry,Stay Foolish</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">flycloud : Stay Hungry,Stay Foolish</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+ 
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+<a id="hamburger" class="mm-slideout" href="#mmenu"><span></span></a>
+
+<nav id="mmenu">
+     <ul>
+
+     </ul>
+ </nav>
+<link type="text/css" rel="stylesheet" href="http://cdn.bootcss.com/jQuery.mmenu/5.5.3/core/css/jquery.mmenu.all.css" />
+<link type="text/css" rel="stylesheet" href="http://7xowny.com1.z0.glb.clouddn.com/flyCloudMenu.css" />
+<script type="text/javascript" src="http://7xowny.com1.z0.glb.clouddn.com/jquery.mmenu.min.all.js"></script>
+
+<script type="text/javascript">
+  $(function () {
+          $.getJSON("/json/menu.json",function(data){
+            $.each( data, function() {
+            var html="<li id='" + this.id + "'>" +"<span>"+this.text + "</span></li>"
+            var chirldHtml="<ul><li id='"+this.id+"'>"+"<span>"+this.text+"</span></li></ul>"
+            if(this.pid==''){
+                $('#mmenu>ul:first').append(html);
+              }else{
+              if($('li#'+this.pid+">ul").length==0){
+                 $('#'+this.pid).append(chirldHtml);
+              }else{
+                $('li#'+this.pid+">ul").append(html);
+              }
+             }
+            });
+
+            
+              var html="<li>" +"<a href='/2017/09/05/git&github/github/github项目排名/'>"+ " github项目排名</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github项目排名/'>"+" github项目排名</a></li></ul>"
+              
+                   if($('li#'+"52>ul").length==0){
+                    $('li#'+"52").append(chirldHtml);
+                   }else{
+                    $('li#'+"52>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+ " Git远程操作详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+" Git远程操作详解</a></li></ul>"
+              
+                   if($('li#'+"51>ul").length==0){
+                    $('li#'+"51").append(chirldHtml);
+                   }else{
+                    $('li#'+"51>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring@springMvc/springMVC/Exception/'>"+ " Exception Handling in Spring MVC</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring@springMvc/springMVC/Exception/'>"+" Exception Handling in Spring MVC</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+
+            $('#mmenu').mmenu({
+             extensions		: [ 'widescreen', 'theme-white', 'effect-menu-slide', 'pagedim-black','pageshadow'],
+             			counters		: true,
+             			dividers		: {
+             				fixed 	: true
+             			},
+             			navbar 			: {
+             				title	: 'blog-catalog'
+             			},
+             			navbars			: [{
+             				position: 'top',
+             				content : ['searchfield']
+             			}, {
+             				position: 'top'
+             			}, {
+             				position: 'bottom',
+             				content : ['<div>Hosted by <a href="http://damonflycloud.info" target="_blank">FlyCloud</a></div>']
+             			}]
+            });
+          });
+
+
+       /**$(".donate-btn").hover(function () {
+        $('#sidebar').css('display','block');
+        $('.header-inner').css('display','inherit');
+       $('.sidebar-inner').css('display','inherit');
+        });
+
+         $('#hamburger').click(function(){
+         $('.sidebar').css('display','none');
+          $('#mm-blocker').on("click",function(){
+          $('.sidebar').css('display','block');
+        })
+       });**/
+       
+       
+
+      });
+</script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+ 
+
+</body>
+
+ 
+
+</html>

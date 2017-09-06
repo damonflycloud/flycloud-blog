@@ -1,0 +1,1048 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/flyCloud.css?v=5.1.0"/
+
+
+  <meta name="keywords" content="GitHub," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://7xowny.com1.z0.glb.clouddn.com/flycloud.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一、前言现在的技术日新月异,似乎每天都有新的技术诞生,作为一名开发人员,我们不要求对每门技术都精通,但起码要赶上时代的脚步.根据网友的方法和github提供的API,可以获取github的排行榜!">
+<meta name="keywords" content="GitHub">
+<meta property="og:type" content="article">
+<meta property="og:title" content="github项目排名">
+<meta property="og:url" content="flycloud.me/2017/09/05/git&github/github/github项目排名/index.html">
+<meta property="og:site_name" content="FlyCloud Blog">
+<meta property="og:description" content="一、前言现在的技术日新月异,似乎每天都有新的技术诞生,作为一名开发人员,我们不要求对每门技术都精通,但起码要赶上时代的脚步.根据网友的方法和github提供的API,可以获取github的排行榜!">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-05T13:32:06.307Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="github项目排名">
+<meta name="twitter:description" content="一、前言现在的技术日新月异,似乎每天都有新的技术诞生,作为一名开发人员,我们不要求对每门技术都精通,但起码要赶上时代的脚步.根据网友的方法和github提供的API,可以获取github的排行榜!">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":0,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="flycloud.me/2017/09/05/git&github/github/github项目排名/"/>
+
+
+
+
+
+  <title> github项目排名 | FlyCloud Blog </title>
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?060f8b2450825fadd6aff6e494ce6218";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="flycloud.me/2017/09/05/git&github/github/github项目排名/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flycloud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyCloud Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                github项目排名
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-05T15:03:52+08:00">
+                2017-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GitHub/" itemprop="url" rel="index">
+                    <span itemprop="name">GitHub</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+            <span class="page-pv">热度
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>℃
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><p>现在的技术日新月异,似乎每天都有新的技术诞生,作为一名开发人员,我们不要求对每门技术都精通,但起码要赶上时代的脚步.<br>根据网友的方法和github提供的<a href="https://developer.github.com/v3/" title="github API" target="_blank" rel="external">API</a>,可以获取github的排行榜!</p>
+<a id="more"></a>
+<h3 id="二、使用Nodejs生成排行榜"><a href="#二、使用Nodejs生成排行榜" class="headerlink" title="二、使用Nodejs生成排行榜"></a>二、使用Nodejs生成排行榜</h3><p>下面利用NOdejs编写简单的脚本,可以自动生成项目的排行榜,大家可以自由修改下面的代码,然后使用nodejs来执行就可以自动生成.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">    <span class="attr">protocol</span>: <span class="string">'https:'</span>,</div><div class="line">    <span class="attr">host</span>: <span class="string">'api.github.com'</span>,</div><div class="line">    <span class="attr">path</span>: <span class="string">'/search/repositories?q=language:java+language:spring+forks:&gt;=1000+stars:&gt;=1000&amp;sort=stars&amp;order=desc&amp;per_page=30'</span>,</div><div class="line">    <span class="attr">method</span>: <span class="string">'GET'</span>,</div><div class="line">    <span class="attr">headers</span>: &#123;</div><div class="line">        <span class="string">'User-Agent'</span>: <span class="string">'frontend-repos-ranking'</span>,</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> getRepos = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> req = https.request(options, (res) =&gt; &#123;</div><div class="line">        <span class="keyword">var</span> data = <span class="string">''</span>;</div><div class="line">        res.setEncoding(<span class="string">'utf8'</span>);</div><div class="line">        res.on(<span class="string">'data'</span>, (chunk) =&gt; &#123;</div><div class="line">            data += chunk;</div><div class="line">        &#125;);</div><div class="line">        res.on(<span class="string">'end'</span>, () =&gt; &#123;</div><div class="line">            resolve(data);</div><div class="line">        &#125;)</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    req.on(<span class="string">'error'</span>, (e) =&gt; &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">`problem with request: <span class="subst">$&#123;e.message&#125;</span>`</span>);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    req.end();</div><div class="line">&#125;);</div><div class="line"></div><div class="line">getRepos.then(<span class="function">(<span class="params">repos</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">var</span> markdown = </div><div class="line"><span class="string">`# frontend-repos-ranking</span></div><div class="line">## <span class="subst">$&#123;(<span class="keyword">new</span> <span class="built_in">Date</span>()).toDateString()&#125;</span></div><div class="line">github上所有（java+spring）的总排名！</div><div class="line">本页面使用nodejs结合github的api自动生成，您可以通过运行\`node index.js\`来生成最新的排行榜。\n\n`;</div><div class="line"></div><div class="line">    markdown += <span class="string">' Rank | Name(Description) | forks | stars |Language | Created_At \n'</span>;</div><div class="line"></div><div class="line">    markdown += <span class="string">' :---: | :---: | :--: | :---: | :---: | :---: \n'</span>;</div><div class="line"></div><div class="line">    repos = <span class="built_in">JSON</span>.parse(repos);</div><div class="line"></div><div class="line">    repos.items.forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</div><div class="line"></div><div class="line">        markdown += <span class="string">`<span class="subst">$&#123;index+<span class="number">1</span>&#125;</span>|[**<span class="subst">$&#123;item.full_name&#125;</span>**](<span class="subst">$&#123;item.html_url&#125;</span>)&lt;br&gt;&lt;br&gt;<span class="subst">$&#123;item.description&#125;</span>|<span class="subst">$&#123;item.forks_count&#125;</span>|<span class="subst">$&#123;item.stargazers_count&#125;</span>|<span class="subst">$&#123;item.language&#125;</span>|<span class="subst">$&#123;item.created_at.split(<span class="string">'T'</span>)[<span class="number">0</span>]&#125;</span>\n`</span>;</div><div class="line"></div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    fs.writeFile(<span class="string">'java2.md'</span>, markdown);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>以下就是生成的例子,大家有兴趣可以自己修改样例!</p>
+<h1 id="frontend-repos-ranking"><a href="#frontend-repos-ranking" class="headerlink" title="frontend-repos-ranking"></a>frontend-repos-ranking</h1><h2 id="Tue-Sep-05-2017"><a href="#Tue-Sep-05-2017" class="headerlink" title="Tue Sep 05 2017"></a>Tue Sep 05 2017</h2><p>github上所有（java+spring）的总排名！<br>本页面使用nodejs结合github的api自动生成，您可以通过运行<code>node index.js</code>来生成最新的排行榜。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Rank</th>
+<th style="text-align:center">Name(Description)</th>
+<th style="text-align:center">forks</th>
+<th style="text-align:center">Language</th>
+<th style="text-align:center">Created_At </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center"><a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="external"><strong>ReactiveX/RxJava</strong></a><br><br>RxJava – Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM.</td>
+<td style="text-align:center">4762</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2013-01-08</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center"><a href="https://github.com/elastic/elasticsearch" target="_blank" rel="external"><strong>elastic/elasticsearch</strong></a><br><br>Open Source, Distributed, RESTful Search Engine</td>
+<td style="text-align:center">8804</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2010-02-08</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center"><a href="https://github.com/iluwatar/java-design-patterns" target="_blank" rel="external"><strong>iluwatar/java-design-patterns</strong></a><br><br>Design patterns implemented in Java</td>
+<td style="text-align:center">7604</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2014-08-09</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center"><a href="https://github.com/square/retrofit" target="_blank" rel="external"><strong>square/retrofit</strong></a><br><br>Type-safe HTTP client for Android and Java by Square, Inc.</td>
+<td style="text-align:center">4757</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2010-09-06</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center"><a href="https://github.com/square/okhttp" target="_blank" rel="external"><strong>square/okhttp</strong></a><br><br>An HTTP+HTTP/2 client for Android and Java applications.</td>
+<td style="text-align:center">5355</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2012-07-23</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center"><a href="https://github.com/google/guava" target="_blank" rel="external"><strong>google/guava</strong></a><br><br>Google Core Libraries for Java</td>
+<td style="text-align:center">4395</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2014-05-29</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center"><a href="https://github.com/JakeWharton/butterknife" target="_blank" rel="external"><strong>JakeWharton/butterknife</strong></a><br><br>Bind Android views and callbacks to fields and methods.</td>
+<td style="text-align:center">3689</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2013-03-05</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center"><a href="https://github.com/PhilJay/MPAndroidChart" target="_blank" rel="external"><strong>PhilJay/MPAndroidChart</strong></a><br><br>A powerful Android chart view / graph view library, supporting line- bar- pie- radar- bubble- and candlestick charts as well as scaling, dragging and animations.</td>
+<td style="text-align:center">5194</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2014-04-25</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center"><a href="https://github.com/bumptech/glide" target="_blank" rel="external"><strong>bumptech/glide</strong></a><br><br>An image loading and caching library for Android focused on smooth scrolling</td>
+<td style="text-align:center">3553</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2013-07-08</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center"><a href="https://github.com/JetBrains/kotlin" target="_blank" rel="external"><strong>JetBrains/kotlin</strong></a><br><br>The Kotlin Programming Language</td>
+<td style="text-align:center">1775</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2012-02-13</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:center"><a href="https://github.com/square/leakcanary" target="_blank" rel="external"><strong>square/leakcanary</strong></a><br><br>A memory leak detection library for Android and Java.</td>
+<td style="text-align:center">2780</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2015-04-29</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center"><a href="https://github.com/spring-projects/spring-framework" target="_blank" rel="external"><strong>spring-projects/spring-framework</strong></a><br><br>The Spring Framework</td>
+<td style="text-align:center">11401</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2010-12-08</td>
+</tr>
+<tr>
+<td style="text-align:center">13</td>
+<td style="text-align:center"><a href="https://github.com/greenrobot/EventBus" target="_blank" rel="external"><strong>greenrobot/EventBus</strong></a><br><br>Android optimized event bus that simplifies communication between Activities, Fragments, Threads, Services, etc. Less code, better quality.</td>
+<td style="text-align:center">3762</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2012-07-16</td>
+</tr>
+<tr>
+<td style="text-align:center">14</td>
+<td style="text-align:center"><a href="https://github.com/nostra13/Android-Universal-Image-Loader" target="_blank" rel="external"><strong>nostra13/Android-Universal-Image-Loader</strong></a><br><br>Powerful and flexible library for loading, caching and displaying images on Android.</td>
+<td style="text-align:center">6464</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2011-11-27</td>
+</tr>
+<tr>
+<td style="text-align:center">15</td>
+<td style="text-align:center"><a href="https://github.com/spring-projects/spring-boot" target="_blank" rel="external"><strong>spring-projects/spring-boot</strong></a><br><br>Spring Boot</td>
+<td style="text-align:center">13525</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2012-10-19</td>
+</tr>
+<tr>
+<td style="text-align:center">16</td>
+<td style="text-align:center"><a href="https://github.com/airbnb/lottie-android" target="_blank" rel="external"><strong>airbnb/lottie-android</strong></a><br><br>Render After Effects animations natively on Android and iOS</td>
+<td style="text-align:center">2214</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2016-10-06</td>
+</tr>
+<tr>
+<td style="text-align:center">17</td>
+<td style="text-align:center"><a href="https://github.com/zxing/zxing" target="_blank" rel="external"><strong>zxing/zxing</strong></a><br><br>ZXing (“Zebra Crossing”) barcode scanning library for Java, Android</td>
+<td style="text-align:center">6727</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2011-10-12</td>
+</tr>
+<tr>
+<td style="text-align:center">18</td>
+<td style="text-align:center"><a href="https://github.com/google/iosched" target="_blank" rel="external"><strong>google/iosched</strong></a><br><br>The Google I/O 2017 Android App</td>
+<td style="text-align:center">5195</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2014-04-01</td>
+</tr>
+<tr>
+<td style="text-align:center">19</td>
+<td style="text-align:center"><a href="https://github.com/square/picasso" target="_blank" rel="external"><strong>square/picasso</strong></a><br><br>A powerful image downloading and caching library for Android</td>
+<td style="text-align:center">3661</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2013-05-14</td>
+</tr>
+<tr>
+<td style="text-align:center">20</td>
+<td style="text-align:center"><a href="https://github.com/ReactiveX/RxAndroid" target="_blank" rel="external"><strong>ReactiveX/RxAndroid</strong></a><br><br>RxJava bindings for Android</td>
+<td style="text-align:center">2325</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2014-08-19</td>
+</tr>
+<tr>
+<td style="text-align:center">21</td>
+<td style="text-align:center"><a href="https://github.com/facebook/fresco" target="_blank" rel="external"><strong>facebook/fresco</strong></a><br><br>An Android library for managing images and the memory they use.</td>
+<td style="text-align:center">3426</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2015-03-02</td>
+</tr>
+<tr>
+<td style="text-align:center">22</td>
+<td style="text-align:center"><a href="https://github.com/Blankj/AndroidUtilCode" target="_blank" rel="external"><strong>Blankj/AndroidUtilCode</strong></a><br><br>:fire: Android developers should collect the following utils(updating)</td>
+<td style="text-align:center">4180</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2016-07-30</td>
+</tr>
+<tr>
+<td style="text-align:center">23</td>
+<td style="text-align:center"><a href="https://github.com/libgdx/libgdx" target="_blank" rel="external"><strong>libgdx/libgdx</strong></a><br><br>Desktop/Android/HTML5/iOS Java game development framework</td>
+<td style="text-align:center">5399</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2012-08-10</td>
+</tr>
+<tr>
+<td style="text-align:center">24</td>
+<td style="text-align:center"><a href="https://github.com/chrisbanes/PhotoView" target="_blank" rel="external"><strong>chrisbanes/PhotoView</strong></a><br><br>Implementation of ImageView for Android that supports zooming, by various touch gestures.</td>
+<td style="text-align:center">3089</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2012-07-17</td>
+</tr>
+<tr>
+<td style="text-align:center">25</td>
+<td style="text-align:center"><a href="https://github.com/netty/netty" target="_blank" rel="external"><strong>netty/netty</strong></a><br><br>Netty project - an event-driven asynchronous network application framework</td>
+<td style="text-align:center">5303</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2010-11-09</td>
+</tr>
+<tr>
+<td style="text-align:center">26</td>
+<td style="text-align:center"><a href="https://github.com/afollestad/material-dialogs" target="_blank" rel="external"><strong>afollestad/material-dialogs</strong></a><br><br>A beautiful, fluid, and customizable dialogs API.</td>
+<td style="text-align:center">2133</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2014-11-03</td>
+</tr>
+<tr>
+<td style="text-align:center">27</td>
+<td style="text-align:center"><a href="https://github.com/kdn251/interviews" target="_blank" rel="external"><strong>kdn251/interviews</strong></a><br><br>Everything you need to know to get the job.</td>
+<td style="text-align:center">1516</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2017-02-14</td>
+</tr>
+<tr>
+<td style="text-align:center">28</td>
+<td style="text-align:center"><a href="https://github.com/Netflix/Hystrix" target="_blank" rel="external"><strong>Netflix/Hystrix</strong></a><br><br>Hystrix is a latency and fault tolerance library designed to isolate points of access to remote systems, services and 3rd party libraries, stop cascading failure and enable resilience in complex distributed systems where failure is inevitable.</td>
+<td style="text-align:center">2160</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2012-11-19</td>
+</tr>
+<tr>
+<td style="text-align:center">29</td>
+<td style="text-align:center"><a href="https://github.com/alibaba/dubbo" target="_blank" rel="external"><strong>alibaba/dubbo</strong></a><br><br>:loudspeaker: Dubbo is a distributed, high performance RPC framework empowering applications with service import/export capabilities.</td>
+<td style="text-align:center">9671</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2012-06-19</td>
+</tr>
+<tr>
+<td style="text-align:center">30</td>
+<td style="text-align:center"><a href="https://github.com/jfeinstein10/SlidingMenu" target="_blank" rel="external"><strong>jfeinstein10/SlidingMenu</strong></a><br><br>An Android library that allows you to easily create applications with slide-in menus. You may use it in your Android apps provided that you cite this project and include the license in your app. Thanks!</td>
+<td style="text-align:center">5602</td>
+<td style="text-align:center">Java</td>
+<td style="text-align:center">2012-06-30</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/GitHub/" rel="tag"># GitHub</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/01/git&github/git/git远程操作详解/" rel="next" title="Git远程操作详解">
+                <i class="fa fa-chevron-left"></i> Git远程操作详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/06/spring@springMvc/springMVC/Exception/" rel="prev" title="Exception Handling in Spring MVC">
+                Exception Handling in Spring MVC <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="donate-btn">作者</div>
+    <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyCloud Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命在于折腾!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg"
+               alt="flycloud" />
+          <p class="site-author-name" itemprop="name">flycloud</p>
+           
+              <p class="site-description motion-element" itemprop="description">Stay Hungry,Stay Foolish</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">flycloud : Stay Hungry,Stay Foolish</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+ 
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+<a id="hamburger" class="mm-slideout" href="#mmenu"><span></span></a>
+
+<nav id="mmenu">
+     <ul>
+
+     </ul>
+ </nav>
+<link type="text/css" rel="stylesheet" href="http://cdn.bootcss.com/jQuery.mmenu/5.5.3/core/css/jquery.mmenu.all.css" />
+<link type="text/css" rel="stylesheet" href="http://7xowny.com1.z0.glb.clouddn.com/flyCloudMenu.css" />
+<script type="text/javascript" src="http://7xowny.com1.z0.glb.clouddn.com/jquery.mmenu.min.all.js"></script>
+
+<script type="text/javascript">
+  $(function () {
+          $.getJSON("/json/menu.json",function(data){
+            $.each( data, function() {
+            var html="<li id='" + this.id + "'>" +"<span>"+this.text + "</span></li>"
+            var chirldHtml="<ul><li id='"+this.id+"'>"+"<span>"+this.text+"</span></li></ul>"
+            if(this.pid==''){
+                $('#mmenu>ul:first').append(html);
+              }else{
+              if($('li#'+this.pid+">ul").length==0){
+                 $('#'+this.pid).append(chirldHtml);
+              }else{
+                $('li#'+this.pid+">ul").append(html);
+              }
+             }
+            });
+
+            
+              var html="<li>" +"<a href='/2017/09/05/git&github/github/github项目排名/'>"+ " github项目排名</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github项目排名/'>"+" github项目排名</a></li></ul>"
+              
+                   if($('li#'+"52>ul").length==0){
+                    $('li#'+"52").append(chirldHtml);
+                   }else{
+                    $('li#'+"52>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+ " Git远程操作详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+" Git远程操作详解</a></li></ul>"
+              
+                   if($('li#'+"51>ul").length==0){
+                    $('li#'+"51").append(chirldHtml);
+                   }else{
+                    $('li#'+"51>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring@springMvc/springMVC/Exception/'>"+ " Exception Handling in Spring MVC</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring@springMvc/springMVC/Exception/'>"+" Exception Handling in Spring MVC</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+
+            $('#mmenu').mmenu({
+             extensions		: [ 'widescreen', 'theme-white', 'effect-menu-slide', 'pagedim-black','pageshadow'],
+             			counters		: true,
+             			dividers		: {
+             				fixed 	: true
+             			},
+             			navbar 			: {
+             				title	: 'blog-catalog'
+             			},
+             			navbars			: [{
+             				position: 'top',
+             				content : ['searchfield']
+             			}, {
+             				position: 'top'
+             			}, {
+             				position: 'bottom',
+             				content : ['<div>Hosted by <a href="http://damonflycloud.info" target="_blank">FlyCloud</a></div>']
+             			}]
+            });
+          });
+
+
+       /**$(".donate-btn").hover(function () {
+        $('#sidebar').css('display','block');
+        $('.header-inner').css('display','inherit');
+       $('.sidebar-inner').css('display','inherit');
+        });
+
+         $('#hamburger').click(function(){
+         $('.sidebar').css('display','none');
+          $('#mm-blocker').on("click",function(){
+          $('.sidebar').css('display','block');
+        })
+       });**/
+       
+       
+
+      });
+</script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+ 
+
+</body>
+
+ 
+
+</html>
