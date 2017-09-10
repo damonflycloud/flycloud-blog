@@ -49,3 +49,15 @@ aside#sidebar {
 .header-inner{
     position:relative;
 }
+
+a {
+    color: #5fa134
+}
+
+code {
+    color: #d14
+}
+
+.site-title {
+    color: white
+} 
