@@ -92,18 +92,18 @@
 
 
 
-<meta name="description" content="一、前言现在的技术日新月异,似乎每天都有新的技术诞生,作为一名开发人员,我们不要求对每门技术都精通,但起码要赶上时代的脚步.根据网友的方法和github提供的API,可以获取github的排行榜!">
+<meta name="description" content="一、前言现在的技术日新月异,似乎每天都有新的技术诞生,作为一名开发人员,我们不要求对每门技术都精通,但起码要赶上时代的脚步.根据网友的方法和github提供的API,可以获取github的排行榜或者使用网友现成的githuber!">
 <meta name="keywords" content="GitHub">
 <meta property="og:type" content="article">
 <meta property="og:title" content="github项目排名">
 <meta property="og:url" content="flycloud.me/2017/09/05/git&github/github/github项目排名/index.html">
 <meta property="og:site_name" content="FlyCloud Blog">
-<meta property="og:description" content="一、前言现在的技术日新月异,似乎每天都有新的技术诞生,作为一名开发人员,我们不要求对每门技术都精通,但起码要赶上时代的脚步.根据网友的方法和github提供的API,可以获取github的排行榜!">
+<meta property="og:description" content="一、前言现在的技术日新月异,似乎每天都有新的技术诞生,作为一名开发人员,我们不要求对每门技术都精通,但起码要赶上时代的脚步.根据网友的方法和github提供的API,可以获取github的排行榜或者使用网友现成的githuber!">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-05T13:32:06.307Z">
+<meta property="og:updated_time" content="2017-09-11T07:22:12.332Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="github项目排名">
-<meta name="twitter:description" content="一、前言现在的技术日新月异,似乎每天都有新的技术诞生,作为一名开发人员,我们不要求对每门技术都精通,但起码要赶上时代的脚步.根据网友的方法和github提供的API,可以获取github的排行榜!">
+<meta name="twitter:description" content="一、前言现在的技术日新月异,似乎每天都有新的技术诞生,作为一名开发人员,我们不要求对每门技术都精通,但起码要赶上时代的脚步.根据网友的方法和github提供的API,可以获取github的排行榜或者使用网友现成的githuber!">
 
 
 
@@ -298,7 +298,7 @@
       
 
       
-        <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><p>现在的技术日新月异,似乎每天都有新的技术诞生,作为一名开发人员,我们不要求对每门技术都精通,但起码要赶上时代的脚步.<br>根据网友的方法和github提供的<a href="https://developer.github.com/v3/" title="github API" target="_blank" rel="external">API</a>,可以获取github的排行榜!</p>
+        <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><p>现在的技术日新月异,似乎每天都有新的技术诞生,作为一名开发人员,我们不要求对每门技术都精通,但起码要赶上时代的脚步.<br>根据网友的方法和github提供的<a href="https://developer.github.com/v3/" title="github API" target="_blank" rel="external">API</a>,可以获取github的排行榜或者使用网友现成的<a href="https://githuber.cn/" title="githuber" target="_blank" rel="external">githuber</a>!</p>
 <a id="more"></a>
 <h3 id="二、使用Nodejs生成排行榜"><a href="#二、使用Nodejs生成排行榜" class="headerlink" title="二、使用Nodejs生成排行榜"></a>二、使用Nodejs生成排行榜</h3><p>下面利用NOdejs编写简单的脚本,可以自动生成项目的排行榜,大家可以自由修改下面的代码,然后使用nodejs来执行就可以自动生成.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">    <span class="attr">protocol</span>: <span class="string">'https:'</span>,</div><div class="line">    <span class="attr">host</span>: <span class="string">'api.github.com'</span>,</div><div class="line">    <span class="attr">path</span>: <span class="string">'/search/repositories?q=language:java+language:spring+forks:&gt;=1000+stars:&gt;=1000&amp;sort=stars&amp;order=desc&amp;per_page=30'</span>,</div><div class="line">    <span class="attr">method</span>: <span class="string">'GET'</span>,</div><div class="line">    <span class="attr">headers</span>: &#123;</div><div class="line">        <span class="string">'User-Agent'</span>: <span class="string">'frontend-repos-ranking'</span>,</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> getRepos = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> req = https.request(options, (res) =&gt; &#123;</div><div class="line">        <span class="keyword">var</span> data = <span class="string">''</span>;</div><div class="line">        res.setEncoding(<span class="string">'utf8'</span>);</div><div class="line">        res.on(<span class="string">'data'</span>, (chunk) =&gt; &#123;</div><div class="line">            data += chunk;</div><div class="line">        &#125;);</div><div class="line">        res.on(<span class="string">'end'</span>, () =&gt; &#123;</div><div class="line">            resolve(data);</div><div class="line">        &#125;)</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    req.on(<span class="string">'error'</span>, (e) =&gt; &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">`problem with request: <span class="subst">$&#123;e.message&#125;</span>`</span>);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    req.end();</div><div class="line">&#125;);</div><div class="line"></div><div class="line">getRepos.then(<span class="function">(<span class="params">repos</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">var</span> markdown = </div><div class="line"><span class="string">`# frontend-repos-ranking</span></div><div class="line">## <span class="subst">$&#123;(<span class="keyword">new</span> <span class="built_in">Date</span>()).toDateString()&#125;</span></div><div class="line">github上所有（java+spring）的总排名！</div><div class="line">本页面使用nodejs结合github的api自动生成，您可以通过运行\`node index.js\`来生成最新的排行榜。\n\n`;</div><div class="line"></div><div class="line">    markdown += <span class="string">' Rank | Name(Description) | forks | stars |Language | Created_At \n'</span>;</div><div class="line"></div><div class="line">    markdown += <span class="string">' :---: | :---: | :--: | :---: | :---: | :---: \n'</span>;</div><div class="line"></div><div class="line">    repos = <span class="built_in">JSON</span>.parse(repos);</div><div class="line"></div><div class="line">    repos.items.forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</div><div class="line"></div><div class="line">        markdown += <span class="string">`<span class="subst">$&#123;index+<span class="number">1</span>&#125;</span>|[**<span class="subst">$&#123;item.full_name&#125;</span>**](<span class="subst">$&#123;item.html_url&#125;</span>)&lt;br&gt;&lt;br&gt;<span class="subst">$&#123;item.description&#125;</span>|<span class="subst">$&#123;item.forks_count&#125;</span>|<span class="subst">$&#123;item.stargazers_count&#125;</span>|<span class="subst">$&#123;item.language&#125;</span>|<span class="subst">$&#123;item.created_at.split(<span class="string">'T'</span>)[<span class="number">0</span>]&#125;</span>\n`</span>;</div><div class="line"></div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    fs.writeFile(<span class="string">'java2.md'</span>, markdown);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
@@ -717,7 +717,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -728,7 +728,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -739,7 +739,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -919,13 +919,35 @@
             });
 
             
-              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/Exception/'>"+ " Exception Handling in Spring MVC</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/Exception/'>"+" Exception Handling in Spring MVC</a></li></ul>"
+              var html="<li>" +"<a href='/2017/09/25/servlet/Servlet详解/'>"+ " Servlet详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/servlet/Servlet详解/'>"+" Servlet详解</a></li></ul>"
               
-                   if($('li#'+"102>ul").length==0){
-                    $('li#'+"102").append(chirldHtml);
+                   if($('li#'+"70>ul").length==0){
+                    $('li#'+"70").append(chirldHtml);
                    }else{
-                    $('li#'+"102>ul:first").append(html);
+                    $('li#'+"70>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+ " Git远程操作详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+" Git远程操作详解</a></li></ul>"
+              
+                   if($('li#'+"51>ul").length==0){
+                    $('li#'+"51").append(chirldHtml);
+                   }else{
+                    $('li#'+"51>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+ " BeanPostProcessor</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+" BeanPostProcessor</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
                    }
 
               
@@ -941,13 +963,46 @@
 
               
             
-              var html="<li>" +"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+ " Git远程操作详解</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+" Git远程操作详解</a></li></ul>"
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+ " 看看Spring的源码(二)——bean实例化</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+" 看看Spring的源码(二)——bean实例化</a></li></ul>"
               
-                   if($('li#'+"51>ul").length==0){
-                    $('li#'+"51").append(chirldHtml);
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
                    }else{
-                    $('li#'+"51>ul:first").append(html);
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+ " 看看Spring的源码 (一)——Bean加载过程</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+" 看看Spring的源码 (一)——Bean加载过程</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/Exception/'>"+ " Exception Handling in Spring MVC</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/Exception/'>"+" Exception Handling in Spring MVC</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+ " ServletContext与ApplicationContext的区别</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+" ServletContext与ApplicationContext的区别</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
                    }
 
               
