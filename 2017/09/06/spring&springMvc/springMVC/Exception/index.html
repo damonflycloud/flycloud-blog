@@ -101,7 +101,7 @@
 <meta property="og:description" content="This article on the Spring Blog. Spring MVC provides several complimentary approaches to exception handling but, when teaching Spring MVC, I often find that my students are confused or not comfortable">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://assets.spring.io/wp/wp-content/uploads/2013/10/support-page-example.png">
-<meta property="og:updated_time" content="2017-09-07T07:20:10.317Z">
+<meta property="og:updated_time" content="2017-10-13T07:57:38.122Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Exception Handling in Spring MVC">
 <meta name="twitter:description" content="This article on the Spring Blog. Spring MVC provides several complimentary approaches to exception handling but, when teaching Spring MVC, I often find that my students are confused or not comfortable">
@@ -367,7 +367,8 @@
 <p>To make sure it gets used, also set the inherited order property (for example in the constructor of<br>your new class) to a value less than <code>MAX_INT</code> so it runs <em>before</em> the default<br>ExceptionHandlerExceptionResolver instance (it is easier to create your own handler instance than try to<br>modify/replace the one created by Spring).  See<br><a href="http://github.com/paulc4/mvc-exceptions/blob/master/src/main/java/demo1/web/ExampleExceptionHandlerExceptionResolver.java" target="_blank" rel="external">ExampleExceptionHandlerExceptionResolver</a><br>in the demo app for more.</p>
 <h3 id="Errors-and-REST"><a href="#Errors-and-REST" class="headerlink" title="Errors and REST"></a>Errors and REST</h3><p>RESTful GET requests may also generate exceptions and we have already seen how we can return standard HTTP<br>Error response codes.  However, what if you want to return information about the error?  This is very easy to do.<br>Firstly define an error class:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ErrorInfo</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">final</span> String url;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">final</span> String ex;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ErrorInfo</span><span class="params">(String url, Exception ex)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.url = url;</div><div class="line">        <span class="keyword">this</span>.ex = ex.getLocalizedMessage();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Now we can return an instance from a handler as the <figure class="highlight plain"><figcaption><span>like this:</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">```java</div><div class="line">@ResponseStatus(HttpStatus.BAD_REQUEST)</div><div class="line">@ExceptionHandler(MyBadDataException.class)</div><div class="line">@ResponseBody ErrorInfo handleBadRequest(HttpServletRequest req, Exception ex) &#123;</div><div class="line">    return new ErrorInfo(req.getRequestURL(), ex);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Now we can return an instance from a handler as the <code>@ResponseBody</code> like this:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ResponseStatus</span>(HttpStatus.BAD_REQUEST)</div><div class="line"><span class="meta">@ExceptionHandler</span>(MyBadDataException.class)</div><div class="line"><span class="meta">@ResponseBody</span> <span class="function">ErrorInfo <span class="title">handleBadRequest</span><span class="params">(HttpServletRequest req, Exception ex)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ErrorInfo(req.getRequestURL(), ex);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="What-to-Use-When"><a href="#What-to-Use-When" class="headerlink" title="What to Use When?"></a>What to Use When?</h2><p>As usual, Spring likes to offer you choice, so what should you do?  Here are some rules of thumb.<br>However if you have a preference for XML configuration or Annotations, that’s fine too.</p>
 <ul><br>  <li>For exceptions you write, consider adding <code>@ResponseStatus</code> to them.<br>  </li><li>For all other exceptions implement an <code>@ExceptionHandler</code> method on a<br>     <code>@ControllerAdvice</code> class or use an instance of <code>SimpleMappingExceptionResolver</code>.<br>      You may well have <code>SimpleMappingExceptionResolver</code> configured for your application already,<br>      in which case it may be easier to add new exception classes to it than implement a <code>@ControllerAdvice</code>.<br>  </li><li>For Controller specific exception handling add <code>@ExceptionHandler</code> methods to your controller.<br>  </li><li><b>Warning:</b> Be careful mixing too many of these options in the same application.<br>   If the same exception can be<br>   handed in more than one way, you may not get the behavior you wanted. <code>@ExceptionHandler</code><br>   methods on the Controller<br>   are always selected before those on any <code>@ControllerAdvice</code> instance.  It is <i>undefined</i><br>   what order controller-advices are processed.<br></li></ul>
 
@@ -459,8 +460,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/" rel="prev" title="看看Spring的源码 (一)——Bean加载过程">
-                看看Spring的源码 (一)——Bean加载过程 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/" rel="prev" title="看看Spring的源码(二)——bean实例化">
+                看看Spring的源码(二)——bean实例化 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -597,7 +598,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -608,7 +609,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -619,7 +620,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -810,6 +811,17 @@
 
               
             
+              var html="<li>" +"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+ " markdown style guide</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+" markdown style guide</a></li></ul>"
+              
+                   if($('li#'+"160>ul").length==0){
+                    $('li#'+"160").append(chirldHtml);
+                   }else{
+                    $('li#'+"160>ul:first").append(html);
+                   }
+
+              
+            
               var html="<li>" +"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+ " Git远程操作详解</a></li>";
               var chirldHtml="<ul><li>"+"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+" Git远程操作详解</a></li></ul>"
               
@@ -832,8 +844,8 @@
 
               
             
-              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+ " ServletContext与ApplicationContext的区别</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+" ServletContext与ApplicationContext的区别</a></li></ul>"
+              var html="<li>" +"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+ " How to use the Spring FactoryBean</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+" How to use the Spring FactoryBean</a></li></ul>"
               
                    if($('li#'+"101>ul").length==0){
                     $('li#'+"101").append(chirldHtml);
@@ -843,13 +855,13 @@
 
               
             
-              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+ " BeanPostProcessor</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+" BeanPostProcessor</a></li></ul>"
+              var html="<li>" +"<a href='/2017/10/11/front/frontTec/前端常见跨域解决方案（全）/'>"+ " 前端常见跨域解决方案（全）</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/11/front/frontTec/前端常见跨域解决方案（全）/'>"+" 前端常见跨域解决方案（全）</a></li></ul>"
               
-                   if($('li#'+"101>ul").length==0){
-                    $('li#'+"101").append(chirldHtml);
+                   if($('li#'+"141>ul").length==0){
+                    $('li#'+"141").append(chirldHtml);
                    }else{
-                    $('li#'+"101>ul:first").append(html);
+                    $('li#'+"141>ul:first").append(html);
                    }
 
               
@@ -865,8 +877,41 @@
 
               
             
-              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+ " 看看Spring的源码(二)——bean实例化</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+" 看看Spring的源码(二)——bean实例化</a></li></ul>"
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+ " BeanPostProcessor</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+" BeanPostProcessor</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+ " ServletContext与ApplicationContext的区别</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+" ServletContext与ApplicationContext的区别</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+ " ContextLoaderListener And DispatcherServlet Concepts</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+" ContextLoaderListener And DispatcherServlet Concepts</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+ " 看看Spring的源码 (一)——Bean加载过程</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+" 看看Spring的源码 (一)——Bean加载过程</a></li></ul>"
               
                    if($('li#'+"121>ul").length==0){
                     $('li#'+"121").append(chirldHtml);
@@ -876,8 +921,8 @@
 
               
             
-              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+ " 看看Spring的源码 (一)——Bean加载过程</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+" 看看Spring的源码 (一)——Bean加载过程</a></li></ul>"
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+ " 看看Spring的源码(二)——bean实例化</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+" 看看Spring的源码(二)——bean实例化</a></li></ul>"
               
                    if($('li#'+"121>ul").length==0){
                     $('li#'+"121").append(chirldHtml);

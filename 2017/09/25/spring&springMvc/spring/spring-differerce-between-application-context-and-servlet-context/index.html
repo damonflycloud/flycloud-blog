@@ -100,7 +100,7 @@
 <meta property="og:site_name" content="FlyCloud Blog">
 <meta property="og:description" content="Spring中的概念在阅读Spring源码或相关的文献时，经常会遇到WebApplicationContext, ApplicationContext, ServletContext以及ServletConfig等名词，这些名词都很相近，但适用范围又有所不同，对理解源码及spring内部实现造成混淆，因此有必要对这些概念进行一些比较. 为了后续比较的方便，首先我们先来澄清这几个名词的概念  Ser">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-26T07:22:21.199Z">
+<meta property="og:updated_time" content="2017-10-20T08:22:15.893Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ServletContext与ApplicationContext的区别">
 <meta name="twitter:description" content="Spring中的概念在阅读Spring源码或相关的文献时，经常会遇到WebApplicationContext, ApplicationContext, ServletContext以及ServletConfig等名词，这些名词都很相近，但适用范围又有所不同，对理解源码及spring内部实现造成混淆，因此有必要对这些概念进行一些比较. 为了后续比较的方便，首先我们先来澄清这几个名词的概念  Ser">
@@ -333,7 +333,21 @@
 </li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> <span class="keyword">throws</span> ServletException </span>&#123;</div><div class="line">	<span class="comment">// Set bean properties from init parameters.</span></div><div class="line">	PropertyValues pvs = <span class="keyword">new</span> ServletConfigPropertyValues(getServletConfig(), <span class="keyword">this</span>.requiredProperties);</div><div class="line"></div><div class="line">	<span class="comment">// Let subclasses do whatever initialization they like.</span></div><div class="line">	initServletBean();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//遍历获取servletConfig的所有参数</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ServletConfigPropertyValues</span><span class="params">(ServletConfig config, Set&lt;String&gt; requiredProperties)</span></span></div><div class="line">	<span class="keyword">throws</span> ServletException &#123;</div><div class="line">	<span class="keyword">while</span> (en.hasMoreElements()) &#123;</div><div class="line">		String property = (String) en.nextElement();</div><div class="line">		Object value = config.getInitParameter(property);</div><div class="line">		addPropertyValue(<span class="keyword">new</span> PropertyValue(property, value));</div><div class="line">		<span class="keyword">if</span> (missingProps != <span class="keyword">null</span>) &#123;</div><div class="line">			missingProps.remove(property);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//初始化webApplicationContext</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">initServletBean</span><span class="params">()</span> <span class="keyword">throws</span> ServletException </span>&#123;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		<span class="keyword">this</span>.webApplicationContext = initWebApplicationContext();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//具体的初始化操作实现</span></div><div class="line"><span class="function"><span class="keyword">protected</span> WebApplicationContext <span class="title">initWebApplicationContext</span><span class="params">()</span> </span>&#123;</div><div class="line">	WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(getServletContext());</div><div class="line">	WebApplicationContext wac = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (<span class="keyword">this</span>.webApplicationContext != <span class="keyword">null</span>) &#123;</div><div class="line">		<span class="comment">// A context instance was injected at construction time -&gt; use it</span></div><div class="line">		wac = <span class="keyword">this</span>.webApplicationContext;</div><div class="line">		<span class="keyword">if</span> (wac <span class="keyword">instanceof</span> ConfigurableWebApplicationContext) &#123;</div><div class="line">			ConfigurableWebApplicationContext cwac = (ConfigurableWebApplicationContext) wac;</div><div class="line">			<span class="keyword">if</span> (!cwac.isActive()) &#123;</div><div class="line">				<span class="comment">// The context has not yet been refreshed -&gt; provide services such as</span></div><div class="line">				<span class="comment">// setting the parent context, setting the application context id, etc</span></div><div class="line">				<span class="keyword">if</span> (cwac.getParent() == <span class="keyword">null</span>) &#123;</div><div class="line">					<span class="comment">// The context instance was injected without an explicit parent -&gt; set</span></div><div class="line">					<span class="comment">// the root application context (if any; may be null) as the parent</span></div><div class="line">					cwac.setParent(rootContext);</div><div class="line">				&#125;</div><div class="line">				configureAndRefreshWebApplicationContext(cwac);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (wac == <span class="keyword">null</span>) &#123;</div><div class="line">		<span class="comment">// No context instance was injected at construction time -&gt; see if one</span></div><div class="line">		<span class="comment">// has been registered in the servlet context. If one exists, it is assumed</span></div><div class="line">		<span class="comment">// that the parent context (if any) has already been set and that the</span></div><div class="line">		<span class="comment">// user has performed any initialization such as setting the context id</span></div><div class="line">		wac = findWebApplicationContext();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (wac == <span class="keyword">null</span>) &#123;</div><div class="line">		<span class="comment">// No context instance is defined for this servlet -&gt; create a local one</span></div><div class="line">		<span class="comment">//就是在这个方法中，servlet application context与root application context的继承关系正式建立</span></div><div class="line">		wac = createWebApplicationContext(rootContext);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (<span class="keyword">this</span>.publishContext) &#123;</div><div class="line">		<span class="comment">// Publish the context as a servlet context attribute.</span></div><div class="line">		String attrName = getServletContextAttributeName();</div><div class="line">		getServletContext().setAttribute(attrName, wac);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> wac;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//就是在这个方法中，servlet application context与root application context的继承关系正式建立</span></div><div class="line"><span class="function"><span class="keyword">protected</span> WebApplicationContext <span class="title">createWebApplicationContext</span><span class="params">(WebApplicationContext parent)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> createWebApplicationContext((ApplicationContext) parent);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
+<h3 id="spring的启动过程"><a href="#spring的启动过程" class="headerlink" title="spring的启动过程"></a>spring的启动过程</h3><ul>
+<li><p>首先，对于一个web应用，其部署在web容器中，web容器提供其一个全局的上下文环境，这个上下文就是ServletContext，其为后面的spring IoC容器提供宿主环境；</p>
+</li>
+<li><p>其次，在web.xml中会提供有contextLoaderListener。在web容器启动时，会触发容器初始化事件，此时contextLoaderListener会监听到这个事件，其contextInitialized方法会被调用，在这个方法中，spring会初始化一个启动上下文，这个上下文被称为根上下文，即WebApplicationContext，这是一个接口类，确切的说，其实际的实现类是XmlWebApplicationContext。这个就是spring的IoC容器，其对应的Bean定义的配置由web.xml中的context-param标签指定。在这个IoC容器初始化完毕后，spring以WebApplicationContext.ROOTWEBAPPLICATIONCONTEXTATTRIBUTE为属性Key，将其存储到ServletContext中，便于获取；</p>
+</li>
+<li><p>再次，contextLoaderListener监听器初始化完毕后，开始初始化web.xml中配置的Servlet，这个servlet可以配置多个，以最常见的DispatcherServlet为例，这个servlet实际上是一个标准的前端控制器，用以转发、匹配、处理每个servlet请求。DispatcherServlet上下文在初始化的时候会建立自己的IoC上下文，用以持有spring mvc相关的bean。在建立DispatcherServlet自己的IoC上下文时，会利用WebApplicationContext.ROOTWEBAPPLICATIONCONTEXTATTRIBUTE先从ServletContext中获取之前的根上下文(即WebApplicationContext)作为自己上下文的parent上下文。有了这个parent上下文之后，再初始化自己持有的上下文。这个DispatcherServlet初始化自己上下文的工作在其initStrategies方法中可以看到，大概的工作就是初始化处理器映射、视图解析等。这个servlet自己持有的上下文默认实现类也是mlWebApplicationContext。初始化完毕后，spring以与servlet的名字相关(此处不是简单的以servlet名为Key，而是通过一些转换，具体可自行查看源码)的属性为属性Key，也将其存到ServletContext中，以便后续使用。这样每个servlet就持有自己的上下文，即拥有自己独立的bean空间，同时各个servlet共享相同的bean，即根上下文(第2步中初始化的上下文)定义的那些bean。</p>
+</li>
+</ul>
+<h3 id="ApplicationContext-VS-WebApplicationContext"><a href="#ApplicationContext-VS-WebApplicationContext" class="headerlink" title="ApplicationContext  VS WebApplicationContext"></a>ApplicationContext  VS WebApplicationContext</h3><p>This tutorial explains the difference between Application Context vs Web Application Context in spring mvc. The ApplicationContext and WebApplicationContext both are almost same thing but there are some basic differences related to the web aware environment. In Spring ApplicationContext instances can be scoped. In the Web MVC framework, each DispatcherServlet has its own WebApplicationContext (i.e own *-servlet.xml), which inherits all the beans already defined in the root WebApplicationContext. Yoc can also override the inherited bean scope in the servlet-specific scope and also can define new scope-specific beans local to a given servlet instance.<br>So we can say that both ApplicationContext and WebApplicationContext are the spring containers where WebApplicationContext is child of the ApplicationContext interface.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">WebApplicationContext</span> <span class="keyword">extends</span> <span class="title">ApplicationContext</span> </span>&#123;</div><div class="line">    <span class="function">ServletContext <span class="title">getServletContext</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>WebApplicationContext has javax.servlet.ServletContext that means it’s able to communicate with the container.</p>
+<h3 id="ApplicationContext-i-e-Root-Application-Context"><a href="#ApplicationContext-i-e-Root-Application-Context" class="headerlink" title="ApplicationContext (i.e. Root Application Context)"></a>ApplicationContext (i.e. Root Application Context)</h3><p>In spring mvc for every web application applicationContext.xml file used as the root context configuration. Spring loads this file and creates the ApplicationContext for whole application. File applicationContext.xml is loaded by ContextLoaderLoaderLinstner which is configured into web.xml file as the context configuration. The default location and name of the Root Application Context are under WEB-INF folder and applicationContext.xml respectively and throw FileNotFoundException if it could not find this file in this location. Otherwise we have to declare explicitly the context configuration file name in web.xml using the contextConfigLocation param. There will be only one application context per web application.</p>
+<h3 id="WebApplicationContext"><a href="#WebApplicationContext" class="headerlink" title="WebApplicationContext"></a>WebApplicationContext</h3><p>WebApplicationContext in Spring is web aware ApplicationContext i.e it has Servlet Context information. In single web application there can be multiple WebApplicationContext. That means each DispatcherServlet associated with single WebApplicationContext. The WebApplicationContext configuration file <em>-servlet.xml is specific to the DispatcherServlet and a web application can have more than one DispatcherServlet configured to handle the requests and each DispatcherServlet would have a separate </em>-servlet.xml file to configure. But, applicationContext.xml will be common for all the servlet configuration files. By default DispatcherServlet loads file name servletName-servlet.xml from your webapps WEB-INF folder. If you want to change the name of that file name or change the location, add init-param with contextConfigLocation as param name.</p>
+<h3 id="ContextLoaderListener"><a href="#ContextLoaderListener" class="headerlink" title="ContextLoaderListener"></a>ContextLoaderListener</h3><p>This listener is responsible to load the context configuration files. It performs the actual initialization work for the root application context. It reads a “contextConfigLocation” context-param and passes its value to the context instance. We can pass multiple files in the context configuration by commas or space separation. e.g. “WEB-INF/applicationContext.xml, WEB-INF/applicationContext-security.xml”.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line">	&lt;web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" </div><div class="line">	xmlns="http://java.sun.com/xml/ns/javaee" </div><div class="line">	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee </div><div class="line">	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" </div><div class="line">	id="WebApp_ID" version="3.0"&gt;</div><div class="line">	&lt;!-- This is the root application context for whole web application. --&gt;</div><div class="line">	&lt;context-param&gt;</div><div class="line">	  &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</div><div class="line">	  &lt;param-value&gt;/WEB-INF/rootApplicationContext.xml&lt;/param-value&gt;</div><div class="line">	&lt;/context-param</div><div class="line">	&lt;listener&gt;</div><div class="line">	  &lt;listener-class&gt;</div><div class="line">	    org.springframework.web.context.ContextLoaderListener</div><div class="line">	  &lt;/listener-class&gt;</div><div class="line">	&lt;/listener&gt;</div><div class="line">	&lt;servlet&gt;</div><div class="line">	  &lt;servlet-name&gt;webapp1&lt;/servlet-name&gt;</div><div class="line">	    &lt;servlet-class&gt;</div><div class="line">	       org.springframework.web.servlet.DispatcherServlet</div><div class="line">	    &lt;/servlet-class&gt;</div><div class="line">	</div><div class="line">	 &lt;!-- We require this configuration when we want to change the default </div><div class="line">	 name / location of the servlet specific configuration files --&gt;</div><div class="line">	 &lt;init-param&gt;</div><div class="line">	   &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</div><div class="line">	   &lt;param-value&gt;/WEB-INF/app1-servlet.xml&lt;/param-value&gt;</div><div class="line">	 &lt;/init-param&gt;</div><div class="line">	 &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</div><div class="line">	&lt;/servlet&gt;</div><div class="line">	</div><div class="line">	&lt;servlet&gt;</div><div class="line">	&lt;servlet-name&gt;webapp2&lt;/servlet-name&gt;</div><div class="line">	&lt;servlet-class&gt;</div><div class="line">	    org.springframework.web.servlet.DispatcherServlet</div><div class="line">	&lt;/servlet-class&gt;</div><div class="line">	</div><div class="line">	&lt;!-- We require this configuration when we want to change the default </div><div class="line">	name / location of the servlet specific configuration files --&gt;</div><div class="line">	&lt;init-param&gt;</div><div class="line">	 &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</div><div class="line">	 &lt;param-value&gt;/WEB-INF/app2-servlet.xml&lt;/param-value&gt;</div><div class="line">	&lt;/init-param&gt;</div><div class="line">	&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</div><div class="line">	&lt;/servlet&gt;</div><div class="line">	</div><div class="line">	   &lt;servlet-mapping&gt;</div><div class="line">	     &lt;servlet-name&gt;webapp1&lt;/servlet-name&gt;</div><div class="line">	     &lt;url-pattern&gt;/webapp1&lt;/url-pattern&gt;</div><div class="line">	   &lt;/servlet-mapping&gt;</div><div class="line">	   &lt;servlet-mapping&gt;</div><div class="line">	     &lt;servlet-name&gt;webapp2&lt;/servlet-name&gt;</div><div class="line">	     &lt;url-pattern&gt;/webapp2&lt;/url-pattern&gt;</div><div class="line">	   &lt;/servlet-mapping&gt;</div><div class="line">	&lt;/web-app&gt;</div><div class="line">&lt;/xml&gt;</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -523,7 +537,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -534,7 +548,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -545,7 +559,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -736,6 +750,17 @@
 
               
             
+              var html="<li>" +"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+ " markdown style guide</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+" markdown style guide</a></li></ul>"
+              
+                   if($('li#'+"160>ul").length==0){
+                    $('li#'+"160").append(chirldHtml);
+                   }else{
+                    $('li#'+"160>ul:first").append(html);
+                   }
+
+              
+            
               var html="<li>" +"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+ " Git远程操作详解</a></li>";
               var chirldHtml="<ul><li>"+"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+" Git远程操作详解</a></li></ul>"
               
@@ -758,8 +783,8 @@
 
               
             
-              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+ " ServletContext与ApplicationContext的区别</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+" ServletContext与ApplicationContext的区别</a></li></ul>"
+              var html="<li>" +"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+ " How to use the Spring FactoryBean</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+" How to use the Spring FactoryBean</a></li></ul>"
               
                    if($('li#'+"101>ul").length==0){
                     $('li#'+"101").append(chirldHtml);
@@ -769,13 +794,13 @@
 
               
             
-              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+ " BeanPostProcessor</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+" BeanPostProcessor</a></li></ul>"
+              var html="<li>" +"<a href='/2017/10/11/front/frontTec/前端常见跨域解决方案（全）/'>"+ " 前端常见跨域解决方案（全）</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/11/front/frontTec/前端常见跨域解决方案（全）/'>"+" 前端常见跨域解决方案（全）</a></li></ul>"
               
-                   if($('li#'+"101>ul").length==0){
-                    $('li#'+"101").append(chirldHtml);
+                   if($('li#'+"141>ul").length==0){
+                    $('li#'+"141").append(chirldHtml);
                    }else{
-                    $('li#'+"101>ul:first").append(html);
+                    $('li#'+"141>ul:first").append(html);
                    }
 
               
@@ -791,8 +816,41 @@
 
               
             
-              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+ " 看看Spring的源码(二)——bean实例化</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+" 看看Spring的源码(二)——bean实例化</a></li></ul>"
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+ " BeanPostProcessor</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+" BeanPostProcessor</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+ " ServletContext与ApplicationContext的区别</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+" ServletContext与ApplicationContext的区别</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+ " ContextLoaderListener And DispatcherServlet Concepts</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+" ContextLoaderListener And DispatcherServlet Concepts</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+ " 看看Spring的源码 (一)——Bean加载过程</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+" 看看Spring的源码 (一)——Bean加载过程</a></li></ul>"
               
                    if($('li#'+"121>ul").length==0){
                     $('li#'+"121").append(chirldHtml);
@@ -802,8 +860,8 @@
 
               
             
-              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+ " 看看Spring的源码 (一)——Bean加载过程</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+" 看看Spring的源码 (一)——Bean加载过程</a></li></ul>"
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+ " 看看Spring的源码(二)——bean实例化</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+" 看看Spring的源码(二)——bean实例化</a></li></ul>"
               
                    if($('li#'+"121>ul").length==0){
                     $('li#'+"121").append(chirldHtml);

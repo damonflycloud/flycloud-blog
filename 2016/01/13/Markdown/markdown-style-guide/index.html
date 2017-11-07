@@ -1,0 +1,2058 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/flyCloud.css?v=5.1.0"/
+
+
+  <meta name="keywords" content="markdown," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://7xowny.com1.z0.glb.clouddn.com/flycloud.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="关于参考 原始设计规范,CommonMark 和其他扩展。 本项目由社区驱动, 尝试达成共识。只有当社区达成一致时，项目维护者才将其加入此文档。 讨论将在 GitHub issue 展开。 本文档源代码托管在 GitHub。">
+<meta name="keywords" content="markdown">
+<meta property="og:type" content="article">
+<meta property="og:title" content="markdown style guide">
+<meta property="og:url" content="flycloud.me/2016/01/13/Markdown/markdown-style-guide/index.html">
+<meta property="og:site_name" content="FlyCloud Blog">
+<meta property="og:description" content="关于参考 原始设计规范,CommonMark 和其他扩展。 本项目由社区驱动, 尝试达成共识。只有当社区达成一致时，项目维护者才将其加入此文档。 讨论将在 GitHub issue 展开。 本文档源代码托管在 GitHub。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-17T09:10:51.517Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="markdown style guide">
+<meta name="twitter:description" content="关于参考 原始设计规范,CommonMark 和其他扩展。 本项目由社区驱动, 尝试达成共识。只有当社区达成一致时，项目维护者才将其加入此文档。 讨论将在 GitHub issue 展开。 本文档源代码托管在 GitHub。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":0,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="flycloud.me/2016/01/13/Markdown/markdown-style-guide/"/>
+
+
+
+
+
+  <title> markdown style guide | FlyCloud Blog </title>
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?060f8b2450825fadd6aff6e494ce6218";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="flycloud.me/2016/01/13/Markdown/markdown-style-guide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flycloud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyCloud Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                markdown style guide
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-13T22:22:12+08:00">
+                2016-01-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/markdown/" itemprop="url" rel="index">
+                    <span itemprop="name">markdown</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+            <span class="page-pv">热度
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>℃
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p>参考 <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank" rel="external">原始设计规范</a>,<br><a href="http://commonmark.org" target="_blank" rel="external">CommonMark</a> 和其他扩展。</p>
+<p>本项目由社区驱动, 尝试达成共识。<br>只有当社区达成一致时，项目维护者才将其加入此文档。</p>
+<p>讨论将在 <a href="!--￼9--&gt;/issues">GitHub issue</a> 展开。</p>
+<p>本文档源代码托管在 <a href="!--￼10--">GitHub</a>。</p>
+<a id="more"></a>
+<h3 id="设计目标"><a href="#设计目标" class="headerlink" title="设计目标"></a>设计目标</h3><ul>
+<li><p>易读</p>
+</li>
+<li><p>可移植性: 通过不同的实现，产生相同的输出或者更好的输出文本。</p>
+<p>移植性测试在 <a href="https://github.com/karlcow/markdown-testsuite" target="_blank" rel="external">Markdown Test Suite</a> 开展。</p>
+</li>
+<li><p>容易书写和修改</p>
+</li>
+<li><p>友好的文件差异对比</p>
+</li>
+<li><p>容易记忆，容易被编辑器实现</p>
+</li>
+<li><p>从不同的选择中抽取基本原理</p>
+<p>每一个需要解释的区域或者段落都会标注 <code>rationale</code><br>所以，如果你只对最后的规范感兴趣，可以跳过解释。</p>
+</li>
+</ul>
+<h3 id="著名用户"><a href="#著名用户" class="headerlink" title="著名用户"></a>著名用户</h3><ul>
+<li><a href="https://github.com/gitlabhq/gitlabhq/blob/master/CONTRIBUTING.md#style-guides" target="_blank" rel="external">GitLab</a></li>
+<li><a href="https://github.com/plasticboy/vim-markdown/blob/master/CONTRIBUTING.md#style" target="_blank" rel="external">Vim Markdown</a></li>
+</ul>
+<p>你在使用这份风格指南吗？ 将你的名字添加到我们的 <a href="!--￼11--&gt;/wiki/Users">wiki</a>.</p>
+<p>如果你很著名? 给我们发送一个 pull request.</p>
+<p>如果你是一个著名的用户：</p>
+<ul>
+<li><p>你会在此标准遇到较大更新时得到提醒。<br>在提交 pull request 之前请提前了解。</p>
+</li>
+<li><p>你对此标准的决定，制定者会有更大的考虑。</p>
+</li>
+</ul>
+<p>如果你的项目满足以下条件，请毫不犹豫的发送 pull request吧：</p>
+<ul>
+<li><p>大量使用 Markdown . 比如说: markdown 引擎, markdown 文本编辑器, 大量 markdown 文档等等。</p>
+</li>
+<li><p>是否受到欢迎的标准。任何的流行评判标准都会考虑。 比如说，GitHub 加星数,<br>Google Rank 等等. 2K+ GitHub 加星会很有说服力。</p>
+</li>
+</ul>
+<h3 id="可选"><a href="#可选" class="headerlink" title="可选"></a>可选</h3><p>有争议的内容会给出多种可选择的风格。</p>
+<p>每一种可选项会用小写连字符分割提示。</p>
+<p>每一种可选项都会有以下格式的说明:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># Option key:value</div></pre></td></tr></table></figure>
+<p>The first option header that appears in this text is the default value.</p>
+<p>比如， 如果自动换行 <code>wrap</code> 有三种风格，我们会给出关键词 <code>wrap</code>,<br>并且给每一种风格一种名字，比如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># Option wrap:space</div><div class="line"># Option wrap:no</div><div class="line"># Option wrap:sentence</div></pre></td></tr></table></figure>
+<p>当引用此标准时，准确标明所有非默认选项的风格，并用逗号分割：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Use the Markdown Style Guide wrap:space, code:indented</div></pre></td></tr></table></figure>
+<h3 id="书写约定"><a href="#书写约定" class="headerlink" title="书写约定"></a>书写约定</h3><p>当这份风格指南需要多种表示空格的方式，或者在代码区块开始或结束时出现空格时，点号将被用来表示空格。</p>
+<p>例如:</p>
+<p><code>a</code>, 空格, <code>b</code>:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a b</div></pre></td></tr></table></figure>
+<p><code>a</code>, 2 空格, <code>b</code>:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a..b</div></pre></td></tr></table></figure>
+<p>空格, <code>ab</code>:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.ab</div></pre></td></tr></table></figure>
+<p><code>ab</code>, 空格:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ab.</div></pre></td></tr></table></figure>
+<h3 id="可供选择"><a href="#可供选择" class="headerlink" title="可供选择"></a>可供选择</h3><p><a href="https://github.com/google/styleguide/blob/3591b2e540cbcb07423e02d20eee482165776603/docguide/style.md" target="_blank" rel="external">Google 风格指南</a></p>
+<p>这份指南最初从<a href="https://github.com/carwin/markdown-styleguide/tree/9121c77bd177a3ade6713d50ab1228782d7c02a7" target="_blank" rel="external">carwin/markdown-styleguide</a> fork 得来.<br>原始文档已经被大规模的改动，一些决定已经被修改，几乎已经找不到原文。</p>
+<p>Miguel de Icaza (GNOME, Mono) 已经提出一份简短的风格指南<br><a href="http://tirania.org/blog/archive/2014/Sep-30.html" target="_blank" rel="external">http://tirania.org/blog/archive/2014/Sep-30.html</a></p>
+<h3 id="Lint-tools"><a href="#Lint-tools" class="headerlink" title="Lint tools"></a>Lint tools</h3><p>在 Stack Exchange 上的提问: <a href="http://softwarerecs.stackexchange.com/questions/7138/markdown-lint-tool/" target="_blank" rel="external">http://softwarerecs.stackexchange.com/questions/7138/markdown-lint-tool/</a></p>
+<ul>
+<li><a href="https://github.com/wooorm/mdast-lint" target="_blank" rel="external">https://github.com/wooorm/mdast-lint</a></li>
+<li><a href="https://github.com/mivok/markdownlint" target="_blank" rel="external">https://github.com/mivok/markdownlint</a></li>
+</ul>
+<h2 id="通用规则"><a href="#通用规则" class="headerlink" title="通用规则"></a>通用规则</h2><h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><h4 id="文件扩展名"><a href="#文件扩展名" class="headerlink" title="文件扩展名"></a>文件扩展名</h4><p>使用 <code>.md</code>.</p>
+<p>解释: 为什么不使用 <code>.mkd</code> 或者 <code>.markdown</code>?</p>
+<ul>
+<li>更短</li>
+<li>更加流行</li>
+<li>没有明显冲突</li>
+</ul>
+<h4 id="文件名"><a href="#文件名" class="headerlink" title="文件名"></a>文件名</h4><p>文件名建议使用如下的风格:</p>
+<ul>
+<li>用小写代替大写</li>
+<li>把开头 <code>the</code>, <code>a</code>, <code>an</code> 除去</li>
+<li>用连字符代替标点和空格</li>
+<li>用一个连字符代替连续多个连字符，当多个连字符出现时，只使用一个</li>
+<li>不在文件名前后使用连字符</li>
+</ul>
+<p>建议使用:</p>
+<pre><code>file-name.md
+</code></pre><p>不建议, 多个连续的连字符:</p>
+<pre><code>file--name.md
+</code></pre><p>不建议, 包围的连字符:</p>
+<pre><code>-file-name-.md
+</code></pre><p>解释: 为何不使用下划线和驼峰大小写？连字符是现在最流行的网址分隔符，并且 Markdown 文件在上下文中经常使用:</p>
+<ul>
+<li>可能在同一个项目中有连字符分割的HTML文件使用Markdown相同的目录。</li>
+<li>文件名会被直接使用到 URL 中. 比如: GitHub blobs.</li>
+</ul>
+<h3 id="空白"><a href="#空白" class="headerlink" title="空白"></a>空白</h3><h4 id="新行"><a href="#新行" class="headerlink" title="新行"></a>新行</h4><p><em>不要</em> 使用连续两空行，也就是说，不要连续使用两个换行符，除非是在代码块中不得已而必须出现。</p>
+<p>以回车换行结束文件。<em>不要</em>在文件结束时留下空行。</p>
+<p><em>不要</em> 在行尾留空格除非是在行尾空出两个空格插入换行符。</p>
+<p>建议使用:</p>
+<pre><code>- list
+- list
+
+# Header
+</code></pre><p>建议, 代码区块:</p>
+<pre><code>The markup language X requires you to use triple newlines to separate paragraphs:
+
+    p1
+
+
+    p2
+</code></pre><p>不建议：</p>
+<pre><code>- list
+- list
+
+
+# Header
+</code></pre><p>解释: 多空行占用更多的竖直屏幕空间，并且会严重影响到可读性。</p>
+<h4 id="句子结束空格"><a href="#句子结束空格" class="headerlink" title="句子结束空格"></a>句子结束空格</h4><h5 id="可选-space-sentence-1"><a href="#可选-space-sentence-1" class="headerlink" title="可选 space-sentence:1"></a>可选 space-sentence:1</h5><p>句子结束使用一个空格</p>
+<p>不建议, 使用2个空格:</p>
+<pre><code>First sentence.  Second sentence.
+</code></pre><p>建议使用:</p>
+<pre><code>First sentence. Second sentence.
+</code></pre><p>解释: 相比于<code>space-sentence:2</code>的优点:</p>
+<ul>
+<li><p>容易编辑</p>
+</li>
+<li><p>通常不是必须的，如果使用 <code>wrap:inner-sentence</code> or <code>wrap:sentence</code></p>
+</li>
+<li><p><code>space-sentence:2</code> 对可读性造成一种错误的感觉，因为忽略了输出的 HTML 文件。</p>
+</li>
+<li><p>更加流行</p>
+</li>
+</ul>
+<p>相较于 <code>space-sentence:2</code> 的优势:</p>
+<ul>
+<li>容易查看一句话的结束</li>
+</ul>
+<h5 id="可选-space-sentence-2"><a href="#可选-space-sentence-2" class="headerlink" title="可选 space-sentence:2"></a>可选 space-sentence:2</h5><p>不建议, 单个空格:</p>
+<pre><code>First sentence. Second sentence.
+</code></pre><p>建议使用:</p>
+<pre><code>First sentence.  Second sentence.
+</code></pre><h3 id="自动换行"><a href="#自动换行" class="headerlink" title="自动换行"></a>自动换行</h3><h4 id="可选-wrap-inner-sentence"><a href="#可选-wrap-inner-sentence" class="headerlink" title="可选 wrap:inner-sentence"></a>可选 wrap:inner-sentence</h4><p>尝试将一行限制在 80 个字符以下，将长段落按照以下的逻辑分开，例如:</p>
+<ul>
+<li><p>句子: 一句话结束 <code>.</code> 之后, 问句问号 <code>?</code> 或者感叹句 <code>!</code> 之后</p>
+</li>
+<li><p><a href="http://www.oxforddictionaries.com/words/clauses" target="_blank" rel="external">子句 clauses</a>:<br>在单词 <code>and</code>, <code>which</code>, <code>if ... then</code>, 逗号 <code>,</code> 之后</p>
+</li>
+<li><p><a href="http://www.oxforddictionaries.com/words/phrases" target="_blank" rel="external">短语 phrases</a></p>
+</li>
+</ul>
+<p>一行中超过80个字符是可以接受的，但是记住长句子不适合阅读，并且在 <code>git diff</code> 中会很难看。</p>
+<p>设置你的文本编辑器对 Markdown 文件一行不要超过80字符，以免忘记。</p>
+<p>建议使用:</p>
+<pre><code>This is a very very very very very very very very very very very very very long not wrapped sentence.
+Second sentence of of the paragraph,
+third sentence of a paragraph
+and the fourth one.
+</code></pre><p>解释:</p>
+<ul>
+<li><p>Diffs 工具看起来更好, 因为一个子句的修改在 diff 工具中显示为一行修改.</p>
+</li>
+<li><p>临时的换行不会降低对 Markdown 文件的可读性，<br>因为唯一的语言特性，可以缩进表示层次结构的就是嵌套列表。</p>
+</li>
+<li><p>现在除了 GitHub 在 README 和评论中将单独一行解释成回车。<br>没有其他主流的解释引擎这么做，使用换行是非常安全的。</p>
+</li>
+<li><p>一些工具对较长的一行不友好，比如 Vim 并且 <code>git diff</code> 默认并不换行.<br>这些不友好都可以通过配置除去，对于git，使用 <code>git config --global core.pager &#39;less -r&#39;</code> 对于Vim可以使用 <code>set wrap</code> 来自动换行.</p>
+</li>
+</ul>
+<p>缺点:</p>
+<ul>
+<li><p>需要在写作时增加顾虑，尤其是在修改代码的时候。</p>
+</li>
+<li><p>Markdown 看起来和渲染输出不同, 输出没有换行符。</p>
+<p>手动的换行可以让 Markdown 比生成的文档更加易读，<br>当然这样做的同时，也造成了一种虚假的可读性错觉，让人感觉没有长段落。</p>
+</li>
+<li><p>需要用户拥有使用可编程文本编辑器，类似 Vim，可以通过配置来换行。<a href="https://github.com/editorconfig/editorconfig/issues/168" target="_blank" rel="external">EditorConfig gave it WONTFIX</a></p>
+</li>
+</ul>
+<h4 id="可选-wrap-no"><a href="#可选-wrap-no" class="headerlink" title="可选 wrap:no"></a>可选 wrap:no</h4><p>不要自动换行.</p>
+<p>解释: 很容易编辑。但是长句子的 diffs 很难阅读。</p>
+<h4 id="可选-wrap-space"><a href="#可选-wrap-space" class="headerlink" title="可选 wrap:space"></a>可选 wrap:space</h4><p>在超过80个字符的第一个单词换行。</p>
+<p>解释: 源文件易读，并且文本编辑器支持。Diff 比较难读，并且修改困难。</p>
+<h4 id="可选-wrap-sentence"><a href="#可选-wrap-sentence" class="headerlink" title="可选 wrap:sentence"></a>可选 wrap:sentence</h4><p>解释: 和 <code>wrap:inner-sentence</code> 相似的优点, 但是规则通俗易懂:<br>在句号后换行。对于长句子依然面临 Diff 难以阅读的困扰。</p>
+<p>著名事件: <a href="https://raw.githubusercontent.com/progit/progit2/5c285553c0605342339284981a9bb8a6c4e7c18e/book/01-introduction/1-introduction.asc" target="_blank" rel="external">ProGit 2</a>.</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="Shell中美元符号"><a href="#Shell中美元符号" class="headerlink" title="Shell中美元符号"></a>Shell中美元符号</h4><p><em>不要</em> 在 shell 代码前加 <code>$</code> 符号，除非你想要展示命令的输出。</p>
+<p>如果目的是表明确切的语言，那么直接在代码前标明。</p>
+<p>解释: 复制粘贴比较困难，不利于阅读。</p>
+<p>建议使用:</p>
+<pre><code>echo a
+echo a &gt; file
+</code></pre><p>不建议：</p>
+<pre><code>$ echo a
+$ echo a &gt; file
+</code></pre><p>建议, 展示输出:</p>
+<pre><code>$ echo a
+a
+$ echo a &gt; file
+</code></pre><p>建议, 在代码前标明代码语言:</p>
+<pre><code>Use the following Bash code:
+
+echo a
+echo a &gt; file
+</code></pre><h4 id="标记代码内容"><a href="#标记代码内容" class="headerlink" title="标记代码内容"></a>标记代码内容</h4><p>使用代码块，或者行内代码：</p>
+<ul>
+<li><p>可执行文件。 比如：</p>
+<pre><code>`gcc` is the best compiler available.
+</code></pre><p>注意将工具名字和项目工程名字区别开来。比如： <code>gcc</code> vs GCC.</p>
+</li>
+<li><p>文件路径</p>
+</li>
+<li><p>程序版本号</p>
+</li>
+<li><p>大写的缩写解释:</p>
+<pre><code>xinetd stands for `eXtended Internet daemon`
+</code></pre></li>
+<li><p>其他和电脑相关的术语，想要单独标明</p>
+</li>
+</ul>
+<p>不要标记为代码：</p>
+<ul>
+<li>项目名。 比如： GCC</li>
+<li>函数库名。比如： libc, glibc</li>
+</ul>
+<h4 id="拼写和语法"><a href="#拼写和语法" class="headerlink" title="拼写和语法"></a>拼写和语法</h4><p>使用正确的拼写和语法。</p>
+<p>尽量选用英语，更准确的说美式英语。<br>解释: 美式英语使用者占有最大的GDP，尤其是在计算机行业。</p>
+<p>类似 URL 或者代码，添加代码标记，这样拼写检查程序会自动忽略。</p>
+<p>注意大小写敏感的拼写错误，尤其是项目名，品牌名，或者缩写。</p>
+<ul>
+<li>建议使用: URL, LinkedIn, DoS attack</li>
+<li>不建议： <code>url</code>, <code>Linkedin</code>, <code>dos attack</code></li>
+</ul>
+<p>一旦有疑惑，尽量选用和维基百科相同的缩写。</p>
+<p>避免使用非正式的缩写:</p>
+<ul>
+<li>建议使用: biography, repository, directory</li>
+<li>不建议： <code>bio</code>, <code>repo</code>, <code>dir</code></li>
+</ul>
+<h2 id="区块"><a href="#区块" class="headerlink" title="区块"></a>区块</h2><h3 id="换行符"><a href="#换行符" class="headerlink" title="换行符"></a>换行符</h3><p>避免使用换行符, 因为他们没有被广泛认可的语义。</p>
+<p>在少数确实需要使用的时候，在行尾使用两个空格。</p>
+<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><h4 id="可选-header-atx"><a href="#可选-header-atx" class="headerlink" title="可选 header:atx"></a>可选 header:atx</h4><p>不建议：</p>
+<pre><code>Header 1
+========
+
+Header 2
+--------
+
+### Header 3
+</code></pre><p>建议使用:</p>
+<pre><code># Header 1
+
+## Header 2
+
+### Header 3
+</code></pre><ul>
+<li><p>解释: 相比 Setex 优势有:</p>
+<ul>
+<li><p>容易书写，因为在 Setex 中，为了好看需要书写和标题相同数量的符号</p>
+</li>
+<li><p>可以生成所有的等级，而 Setex 只能生成两种等级</p>
+</li>
+<li><p>只占用一行，而 Setex 占用两行</p>
+</li>
+</ul>
+<p>Setex 的优点</p>
+<ul>
+<li>更加明显。 Not very important if you have syntax highlighting.</li>
+</ul>
+</li>
+<li><p>在 <code>#</code> 和标题之间加入一个空格.</p>
+<p>不建议：</p>
+<pre><code>#Header
+
+#..Header
+</code></pre><p>建议使用:</p>
+<pre><code># Header
+</code></pre></li>
+<li><p><em>不要</em> 使用闭合的 <code>#</code> .</p>
+<p>不建议：</p>
+<pre><code># Header #
+</code></pre><p>建议使用:</p>
+<pre><code># Header
+</code></pre><p>解释: 容易维护。</p>
+</li>
+<li><p><em>不要</em> 在 <code>#</code> 前加入空格.</p>
+<p>不建议：</p>
+<pre><code>.# Header
+</code></pre><p>建议使用:</p>
+<pre><code># Header
+</code></pre></li>
+</ul>
+<h4 id="可选-header-setex"><a href="#可选-header-setex" class="headerlink" title="可选 header:setex"></a>可选 header:setex</h4><p>不建议：</p>
+<pre><code># Header 1
+
+## Header 2
+
+### Header 3
+</code></pre><p>建议使用:</p>
+<pre><code>Header 1
+========
+
+Header 2
+--------
+
+### Header 3
+</code></pre><hr>
+<ul>
+<li><p><em>不要</em> 跳跃使用标题等级.</p>
+<p>不建议：</p>
+<pre><code># Header 1
+
+### Header 3
+</code></pre><p>建议使用:</p>
+<pre><code># Header 1
+
+## Header 2
+</code></pre></li>
+<li><p>在标题上下用空行隔开，除非标题在文档开头。</p>
+<p>不建议：</p>
+<pre><code>Before.
+# Header 1
+
+## Header 2
+After.
+</code></pre><p>建议使用:</p>
+<pre><code>Before.
+
+# Header 1
+
+## Header 2
+
+After.
+</code></pre><p>不建议：</p>
+<pre><code>Before.
+Header 1
+========
+
+## Header 2
+-----------
+After.
+</code></pre><p>建议使用:</p>
+<pre><code>Before.
+
+Header 1
+========
+
+## Header 2
+-----------
+
+After.
+</code></pre></li>
+<li><p><em>避免</em> 在相同 Markdown 文件中使用相同的标题.</p>
+<p>解释: 许多的 Markdown 解释器会依据标题的内容生成标题的IDs。</p>
+<p>不建议：</p>
+<pre><code># Dogs
+
+## Anatomy
+
+# Cats
+
+## Anatomy
+</code></pre><p>建议使用:</p>
+<pre><code># Dogs
+
+## Anatomy of the dog
+
+# Cats
+
+## Anatomy of the cat
+</code></pre></li>
+</ul>
+<h4 id="顶级标题"><a href="#顶级标题" class="headerlink" title="顶级标题"></a>顶级标题</h4><p>如果你想要 HTML 直接输出，这样唯一的 <code>h1</code> 标记就是输出的第一件事，并且会成为文档的标题。这就是HTML的顶级标题。</p>
+<p><code>h1</code> 标题的产生受到使用的 Markdown 引擎的直接影响：<br>一些引擎会从元数据（metadata）中产生标题，比如 Jekyll 就是从 front-matter 中产生标题。</p>
+<p>将顶级标题保存为元数据（metadata）可以更加方便的在其他地方使用，<br>比如，在全局索引中，但也有缺点，比如降低了可读性和移植性。</p>
+<p>如果目的不是生成顶级标题，<br>include it in your markdown file. E.g., GitHub.</p>
+<p>索引文件中的顶级标题比如 <code>README.md</code> 或者 <code>index.md</code><br>应该作为他们父目录的标题。</p>
+<p>顶级标题的缺点：</p>
+<ul>
+<li><p>占用了一级标题。这就意味只剩下5个层级标题可以使用。<br>并且这样每一个新的标题就会多使用一个 <code>#</code> 符号,这样看起来不好。</p>
+</li>
+<li><p>重复了文件名, 通常已经可以直接从 URL 中读到。<br>在大多数的情况下，文件名可以直接转换成顶级标题，<br>比如: 从 <code>some-filename.md</code> 到 <code>Some filename</code>.</p>
+</li>
+</ul>
+<p>顶级标题的优点:</p>
+<ul>
+<li>比URL更加易读，尤其是对非技术出身用户。</li>
+</ul>
+<h4 id="标题大小写"><a href="#标题大小写" class="headerlink" title="标题大小写"></a>标题大小写</h4><ul>
+<li><p>标题开头使用大写字母，除非标题内容总是以小写出现, 例如，计算机代码。</p>
+<p>建议使用:</p>
+<pre><code># Header
+</code></pre><p>建议使用, 代码通常以小写开始：</p>
+<pre><code># int main
+</code></pre><p>不建议：</p>
+<pre><code># header
+</code></pre></li>
+<li><p>其他字母按照句子中原始大小写。</p>
+<p>建议使用:</p>
+<pre><code># The header of the example
+</code></pre><p>不建议：</p>
+<pre><code># The Header of the Example
+</code></pre><p>例外, <a href="http://en.wikipedia.org/wiki/Title_case#Title_case" target="_blank" rel="external">首字大写</a><br>对 <a href="#top-level-header">顶级标题</a> 可选择性支持。<br>请异常谨慎地使用, in cases where typographical perfection is important,<br>比如：项目的 <code>README</code> .</p>
+<p>解释: 为什么对所有标题<a href="http://en.wikipedia.org/wiki/Title_case#Title_case" target="_blank" rel="external">首字大写</a> ?<br>如果要决定句子中每一个单词大小写会花费太多精力。</p>
+</li>
+</ul>
+<h4 id="标题结尾"><a href="#标题结尾" class="headerlink" title="标题结尾"></a>标题结尾</h4><p>显示标题的内容，而不是用新标题和水平线紧随其后：</p>
+<pre><code># Header
+
+Content
+
+---
+
+Outside header.
+</code></pre><h4 id="标题长度"><a href="#标题长度" class="headerlink" title="标题长度"></a>标题长度</h4><p>保证标题越短越好。</p>
+<p>避免使用长句子，总结长句子作为标题，然后将长句子作为标题下的第一小节。</p>
+<p>解释: 以后引用方便，尤其是自动生成 IDs 或者生成 TOC 。</p>
+<p>建议使用:</p>
+<pre><code># Huge header
+
+Huge header that talks about a complex subject.
+</code></pre><p>不建议：</p>
+<pre><code># Huge header that talks about a complex subject
+</code></pre><h4 id="标题结尾标点"><a href="#标题结尾标点" class="headerlink" title="标题结尾标点"></a>标题结尾标点</h4><p><em>不要</em> 在标题中以 <code>:</code> 结尾。</p>
+<p>解释: 每一个标题都是接下来内容的简介，这也就正是冒号的作用。</p>
+<p><em>不要</em> 在标题中以 <code>.</code> 结尾。</p>
+<p>解释: 每一个标题都包含一个简短的句子，也就不需要句号来分隔他们。</p>
+<p>建议使用:</p>
+<pre><code># How to do make omelet
+</code></pre><p>不建议：</p>
+<pre><code># How to do make omelet:
+</code></pre><p>不建议：</p>
+<pre><code># How to do make omelet.
+</code></pre><h4 id="标题同义词"><a href="#标题同义词" class="headerlink" title="标题同义词"></a>标题同义词</h4><p>标题用作用户索引的关键词。</p>
+<p>正由于这个原因，你可能希望在标题中用多个关键词。</p>
+<p>要做到这一点，简单的创建一个同义词标题在主标题之前，并且标题下不包含内容。</p>
+<p>比如：</p>
+<pre><code># Purchase
+
+# Buy
+
+You give money and get something in return.
+</code></pre><p>每一个同层级的空标题都假定是同义的。如果层级不一样，那就是另外的含义：</p>
+<pre><code># Animals
+
+## Dog
+</code></pre><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ul>
+<li><p>在符号 <code>&gt;</code> 后面接一个空格。</p>
+<p>建议使用:</p>
+<pre><code>&gt; a
+</code></pre><p>不建议：</p>
+<pre><code>&gt;a
+</code></pre><p>不建议, 2个空格:</p>
+<pre><code>&gt;  a
+</code></pre></li>
+<li><p>在每一行使用 <code>&gt;</code> 符号，包括换行的句子。</p>
+<p>不建议：</p>
+<pre><code>&gt; Long line
+that was wrapped.
+</code></pre><p>建议使用:</p>
+<pre><code>&gt; Long line
+&gt; that was wrapped.
+</code></pre></li>
+<li><p><em>不要</em> 在单独的引用中使用空行。</p>
+<p>建议使用:</p>
+<pre><code>&gt; a
+&gt;
+&gt; b
+</code></pre><p>不建议：</p>
+<pre><code>&gt; a
+
+&gt; b
+</code></pre></li>
+</ul>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><h4 id="标记"><a href="#标记" class="headerlink" title="标记"></a>标记</h4><h5 id="无序"><a href="#无序" class="headerlink" title="无序"></a>无序</h5><p>使用连字符.</p>
+<p>建议使用：</p>
+<pre><code>- a
+- b
+</code></pre><p>不建议：</p>
+<pre><code>* a
+* b
+</code></pre><!-- -->
+<pre><code>+ a
++ b
+</code></pre><p>解释:</p>
+<ul>
+<li>星号 <code>*</code> 可能和加粗和斜体符号产生混淆。</li>
+<li>加号 <code>+</code> 不流行。</li>
+</ul>
+<h5 id="有序"><a href="#有序" class="headerlink" title="有序"></a>有序</h5><p>尽量选用 <code>1.</code> 来标记有序的列表, 除非你打算通过数字在相同 Markdown 文件或者外部文件中引用他们。</p>
+<p>尽量使用无序的列表，除非有通过数字引用的需求。</p>
+<p>最佳则是从来不通过序号来引用他们：</p>
+<pre><code>- a
+- c
+- b
+</code></pre><p>较好的方法, 仅仅使用 <code>1.</code>:</p>
+<pre><code>1. a
+1. c
+1. b
+</code></pre><p>较差的方法, 不要通过序号来标注列表项的顺序:</p>
+<pre><code>1. a
+2. c
+3. b
+</code></pre><p>可接受的, 使用文本引用:</p>
+<pre><code>The ouput of the `ls` command is of the form:
+
+    drwx------  2 ciro ciro        4096 Jul  5  2013 dir0
+    drwx------  4 ciro ciro        4096 Apr 27 08:00 dir1
+    1           2
+
+Where:
+
+1. permissions
+2. number of files directory contains
+</code></pre><p>可接受，通过外部 markdown 文件引用:</p>
+<pre><code>Terms of use.
+
+1. I will not do anything illegal.
+2. I will not do anything that can harm the website.
+</code></pre><p>解释:</p>
+<ul>
+<li><p>如果你想要改变列表中的一个列表项，你不要修改它下面的列表项。</p>
+<p>Diffs 工具只会显示被修改的重要的内容。</p>
+</li>
+<li><p>如果序列有两位，也不需要额外注意，内容保持一致。 比如：下面不对齐：</p>
+<pre><code>9. a
+10. b
+</code></pre></li>
+<li><p>如果新列表项被加入，引用会破坏。尽量减少这种问题：</p>
+<ul>
+<li>保证引用靠近列表，这样作者会更少可能的忘记去更新</li>
+<li>当从外部引用时，总是引用到一个固定版本的 markdown 文件</li>
+</ul>
+</li>
+</ul>
+<h4 id="列表项中的空格"><a href="#列表项中的空格" class="headerlink" title="列表项中的空格"></a>列表项中的空格</h4><h5 id="可选-list-space-mixed"><a href="#可选-list-space-mixed" class="headerlink" title="可选 list-space:mixed"></a>可选 list-space:mixed</h5><ul>
+<li><p>如果每一个列表项的内容都只有一段，使用 <strong>1</strong> 个空格。</p>
+</li>
+<li><p>否则，对于列表中的每一项:</p>
+<ul>
+<li><p>给无序列表使用 <strong>3</strong> 个空格。</p>
+</li>
+<li><p>给有序列表使用 <strong>2</strong> 个空格。<br>比无序少一个空格，因为符号占用两个字符。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>不建议, 每一项一行:</p>
+<pre><code>-   a
+-   b
+</code></pre><p>建议使用:</p>
+<pre><code>- a
+- b
+</code></pre><p>不建议, 每一项一行:</p>
+<pre><code>1.  a
+1.  b
+</code></pre><p>建议使用:</p>
+<pre><code>1. a
+1. b
+</code></pre><p>每一项超过一行，不建议：</p>
+<pre><code>- item that
+  is wrapped
+
+- item 2
+</code></pre><p>建议使用:</p>
+<pre><code>-   item that
+    is wrapped
+
+-   item 2
+</code></pre><p>每一项超过一行，不建议：</p>
+<pre><code>- a
+
+  par
+
+- b
+</code></pre><p>建议使用:</p>
+<pre><code>-   a
+
+    par
+
+-   b
+</code></pre><h5 id="可选-list-space-1"><a href="#可选-list-space-1" class="headerlink" title="可选 list-space:1"></a>可选 list-space:1</h5><p>列表项标记前总是留有一个空格。</p>
+<p>不建议, 使用三个空格:</p>
+<pre><code>-   a
+
+    b
+
+-   c
+</code></pre><p>建议使用:</p>
+<pre><code>- a
+
+  b
+
+- c
+</code></pre><p>不建议, 两个空格:</p>
+<pre><code>1.  a
+
+    b
+
+1.  c
+</code></pre><p>建议使用:</p>
+<pre><code>1. a
+
+   b
+
+1. c
+</code></pre><h5 id="解释-list-space-mixed-vs-1"><a href="#解释-list-space-mixed-vs-1" class="headerlink" title="解释: list-space mixed vs 1"></a>解释: list-space mixed vs 1</h5><p>使用 <code>list-space:1</code> 的有点：</p>
+<ul>
+<li><p>它去除了你需要决定在列表符号后面放置多少空格的顾虑：<br>因为只放一个</p>
+<p>我们也可以选择在列表项中如下缩进：</p>
+<pre><code>-   a
+-   b
+</code></pre><p>但是这样非常丑。</p>
+</li>
+<li><p>你不会因为新列表项而改变整个列表的缩进。</p>
+<p>但是这样的情况会发生在 <code>list-space:mixed</code> 如果你有：</p>
+<pre><code>- a
+- b
+</code></pre><p>并且想要增加一个多段落列表项：</p>
+<pre><code>-   a
+
+-   b
+
+-   c
+
+    d
+</code></pre><p>注意， <code>a</code> 和 <code>b</code> 都因为 <code>c</code> 而改变了。</p>
+</li>
+</ul>
+<p>使用 <code>list-space:1</code> 的缺点：</p>
+<ul>
+<li><p>产生了三种缩进方式：</p>
+<ul>
+<li>4 for 缩进的代码块</li>
+<li>3 for 有序列表</li>
+<li>2 for 无序列表</li>
+</ul>
+<p>这意味着你不能轻松的配置编辑器缩进来处理所有的情况， 当你想要改变缩进层级的时候需要调整多行。</p>
+</li>
+<li><p>没有被编辑器实现。</p>
+<p>具体来说下面的情况会发生什么:</p>
+<pre><code>- a
+
+        code
+</code></pre><p>这个(2 个空格):</p>
+<pre><code>&lt;pre&gt;&lt;code&gt;  code
+</code></pre><p>或者没有空格：</p>
+<pre><code>&lt;pre&gt;&lt;code&gt;code
+</code></pre><p>原始的 markdown 说不需要空格:</p>
+<blockquote>
+<p>To put a code block within a list item, the code block<br>needs to be indented twice — 8 spaces or two tabs</p>
+</blockquote>
+<p>但是许多第三方的实现了。</p>
+<p>CommonMark <a href="http://spec.commonmark.org/0.12/#example-176" target="_blank" rel="external">adds the 2 spaces</a>.</p>
+</li>
+</ul>
+<h4 id="列表内容的缩进"><a href="#列表内容的缩进" class="headerlink" title="列表内容的缩进"></a>列表内容的缩进</h4><p>列表中内容的缩进层级必须和第一个列表项一致：</p>
+<p>不建议：</p>
+<pre><code>-   item that
+  is wrapped
+
+-   item 2
+</code></pre><p>建议使用:</p>
+<pre><code>-   item that
+    is wrapped
+
+-   item 2
+</code></pre><p>不建议：</p>
+<pre><code>-   item 1
+
+  Content 1
+
+-   item 2
+
+      Content 2
+</code></pre><p>建议(如果符合列表标记之后的空格):</p>
+<pre><code>-   item 1
+
+    Content 1
+
+-   item 2
+
+    Content 2
+</code></pre><p>不建议：</p>
+<pre><code>- item 1
+
+    Content 1
+
+- item 2
+
+    Content 2
+</code></pre><p>建议(如果符合列表标记之后的空格):</p>
+<pre><code>- item 1
+
+  Content 1
+
+- item 2
+
+  Content 2
+</code></pre><p>避免开始直接使用缩进的代码列表项，因为这样不容易实现。<a href="http://spec.commonmark.org/0.12/#example-176" target="_blank" rel="external">CommonMark states that</a> 一个单独的空格需要加入:</p>
+<pre><code>-     code
+
+  a
+</code></pre><h4 id="列表中的空行"><a href="#列表中的空行" class="headerlink" title="列表中的空行"></a>列表中的空行</h4><p>如果每一个列表项只有一行, 不要在列表项之间增加空行，否则，在每一个列表项之间增加空行。</p>
+<p>不建议, single lines:</p>
+<pre><code>- item 1
+
+- item 2
+
+- item 3
+</code></pre><p>建议使用:</p>
+<pre><code>- item 1
+- item 2
+- item 3
+</code></pre><p>多行情况下，不建议:</p>
+<pre><code>-   item that
+    is wrapped
+-   item 2
+-   item 3
+</code></pre><p>建议使用:</p>
+<pre><code>-   item that
+    is wrapped
+
+-   item 2
+
+-   item 3
+</code></pre><p>不建议, 多行:</p>
+<pre><code>-   item 1
+
+    Paragraph.
+
+-   item 2
+-   item 3
+</code></pre><p>建议使用:</p>
+<pre><code>-   item 1.
+
+    Paragraph.
+
+-   item 2
+
+-   item 3
+</code></pre><p>不建议, 多行:</p>
+<pre><code>-   item 1
+
+    - item 11
+    - item 12
+    - item 13
+
+-   item 2
+-   item 3
+</code></pre><p>建议使用:</p>
+<pre><code>-   item 1
+
+    - item 11
+    - item 12
+    - item 13
+
+-   item 2
+
+-   item 3
+</code></pre><p>解释: 如果没有空行，很难分别多行的列表项开始和结束。</p>
+<h4 id="列表外的空行"><a href="#列表外的空行" class="headerlink" title="列表外的空行"></a>列表外的空行</h4><p>列表外建议留有一空行。</p>
+<p>不建议：</p>
+<pre><code>Before.
+- item
+- item
+After.
+</code></pre><p>建议使用:</p>
+<pre><code>Before.
+
+- list
+- list
+
+After.
+</code></pre><h4 id="列表项首字母大小写"><a href="#列表项首字母大小写" class="headerlink" title="列表项首字母大小写"></a>列表项首字母大小写</h4><p>每一个 list 使用原来在句子中的大小写.</p>
+<p>建议使用:</p>
+<pre><code>I want to eat:
+
+- apples
+- bananas
+- grapes
+</code></pre><p>因为它可以被如下替换：</p>
+<pre><code>I want to eat apples
+I want to eat babanas
+I want to eat grapes
+</code></pre><p>建议使用:</p>
+<pre><code>To ride a bike you have to:
+
+- get on top of the bike. This step is easy.
+- put your foot on the pedal.
+- push t the pedal. This is the most fun part.
+</code></pre><p>因为它可以被如下替换：</p>
+<pre><code>To ride a bike you have to get on top of the bike. This step is easy.
+To ride a bike you have to put your foot on the pedal.
+To ride a bike you have to push the pedal. This is the most fun part.
+</code></pre><p>建议使用:</p>
+<pre><code># How to ride a bike
+
+- Get on top of the bike.
+- Put your feet on the pedal.
+- Make the pedal turn.
+</code></pre><p>因为它可以被如下替换：</p>
+<pre><code># How to ride a bike
+
+Get on top of the bike.
+Put your feet on the pedal.
+Push the the pedal.
+</code></pre><h4 id="列表项结尾标点"><a href="#列表项结尾标点" class="headerlink" title="列表项结尾标点"></a>列表项结尾标点</h4><p>列表项结尾标点，除非:</p>
+<ul>
+<li>包含多个句子或者短语</li>
+<li>以大写字母开头</li>
+</ul>
+<p>否则, 如果以句号结尾的话，省略标点.</p>
+<p>不建议使用，以:</p>
+<pre><code>- apple.
+- banana.
+- orange.
+</code></pre><p>建议使用:</p>
+<pre><code>- apple
+- banana
+- orange
+</code></pre><p>同上:</p>
+<pre><code>- go to the market
+- then buy some fruit
+- finally eat the fruit
+</code></pre><p>建议使用, 不以句号结尾，而是以其他标点结尾：</p>
+<pre><code>- go to the marked
+- then buy fruit?
+- of course!
+</code></pre><p>不建议, 多个句子时末尾不加标点:</p>
+<pre><code>- go to the market
+- then buy some fruit. Bad for wallet
+- finally eat the fruit. Good for tummy
+</code></pre><p>建议使用:</p>
+<pre><code>- go to the market
+- then buy some fruit. Bad for wallet.
+- finally eat the fruit. Good for tummy.
+</code></pre><p>注意：没有任何理由阻止，一个列表项以句号结尾，另一个列表项没有。</p>
+<p>不建议, 多段落:</p>
+<pre><code>-   go to the market
+
+-   then buy some fruit
+
+    Bad for wallet
+
+-   finally eat the fruit
+
+    Good for tummy
+</code></pre><p>建议使用:</p>
+<pre><code>-   go to the market
+
+-   then buy some fruit.
+
+    Bad for wallet.
+
+-   finally eat the fruit.
+
+    Good for tummy.
+</code></pre><p>不建议, 如果以大写字母开头，添加标点:</p>
+<pre><code>- Go to the market
+- Then buy some fruit
+- Finally eat the fruit
+</code></pre><p>建议使用:</p>
+<pre><code>- Go to the market.
+- Then buy some fruit.
+- Finally eat the fruit.
+</code></pre><h3 id="定义列表"><a href="#定义列表" class="headerlink" title="定义列表"></a>定义列表</h3><p><em>避免</em> 使用定义列表扩展，因为他并没有被多数实现，也没有出现在 CommonMark.</p>
+<p>相反, 使用:</p>
+<ul>
+<li><p>格式化列表:</p>
+<ul>
+<li>用加粗，链接，或者代码，格式化需要定义的内容</li>
+<li>将内容和定义使用冒号和空格分割 <code>:.</code></li>
+<li>不要对齐定义，这样难以维护，并且不会显示在 HTML 输出</li>
+</ul>
+<p>建议使用:</p>
+<pre><code>- **apple**: red fruit
+- **dog**: noisy animal
+</code></pre><p>建议使用:</p>
+<pre><code>-   **apple**: red fruit.
+
+    Very tasty.
+
+-   **dog**: noisy animal.
+
+    Not tasty.
+</code></pre><p>建议使用:</p>
+<pre><code>- [apple](http://apple.com): red fruit
+- [dot](http://dog.com): red fruit
+</code></pre><p>建议使用:</p>
+<pre><code>- `-f`: force
+- `-r`: recursive
+</code></pre><p>不建议, 没有冒号:</p>
+<pre><code>- **apple** red fruit
+- **dog** noisy animal
+</code></pre><p>不建议, 在术语和冒号之间有空格:</p>
+<pre><code>- **apple** : red fruit
+- **dog** : noisy animal
+</code></pre><p>不建议, 定义对齐:</p>
+<pre><code>- **apple**: red fruit
+- **dog**:   noisy animal
+</code></pre></li>
+<li><p>headers.</p>
+<p>建议使用:</p>
+<pre><code># Apple
+
+Red fruit
+
+# Dog
+
+Noisy animal
+</code></pre></li>
+</ul>
+<h3 id="代码区域"><a href="#代码区域" class="headerlink" title="代码区域"></a>代码区域</h3><h4 id="可选-code-fenced"><a href="#可选-code-fenced" class="headerlink" title="可选 code:fenced"></a>可选 code:fenced</h4><p>仅仅使用 fenced code blocks.</p>
+<p>和缩进代码区块比较：</p>
+<ul>
+<li>不足: 不是标准 markdown 语法, 因此缺少移植性，但是加入到CommonMark.</li>
+<li>优点: 实现方式多, 包括 GitHub’s, 并且允许指定代码的语言。</li>
+</ul>
+<p><em>不要</em> 缩进 fenced code blocks.</p>
+<p>总是指定代码的语言。</p>
+<p>建议使用:</p>
+<pre><code><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a = <span class="number">1</span></div></pre></td></tr></table></figure>
+</code></pre><p>不建议：</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a = 1</div></pre></td></tr></table></figure>
+</code></pre><h4 id="可选-code-indented"><a href="#可选-code-indented" class="headerlink" title="可选 code:indented"></a>可选 code:indented</h4><p>仅仅使用缩进代码区域。</p>
+<p>代码区域缩进4个空格。</p>
+<hr>
+<p>代码区块必须以一空行隔开。</p>
+<p>尽量在代码块之前使用冒号结束短语 <code>:</code>。</p>
+<p>建议使用:</p>
+<pre><code>use this code to blow up your PC:
+
+    sudo rm -rf /
+</code></pre><p>不建议, 没有冒号</p>
+<pre><code>use this code to blow up your PC
+
+    sudo rm -rf /
+</code></pre><h3 id="水平横线"><a href="#水平横线" class="headerlink" title="水平横线"></a>水平横线</h3><p><em>不要</em> 使用水平线除非表明<a href="#end-of-a-header">End of a header</a>.</p>
+<p>解释:</p>
+<ul>
+<li><p>标题比区块更好，因为标题就是区块的开始，并且说明了区块的内容。</p>
+</li>
+<li><p>水平线没有可接受的语义。<br>这份风格指南给了语义。</p>
+</li>
+</ul>
+<p>使用 3 个无空格连字符:</p>
+<pre><code>---
+</code></pre><h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p>扩展.</p>
+<ul>
+<li><p>用一空行包围表格。</p>
+</li>
+<li><p>不要缩进表格。</p>
+</li>
+<li><p>用 <code>|</code> 包裹表格的每一行。</p>
+</li>
+<li><p>竖直对齐所有表格边框。</p>
+</li>
+<li><p>将标题和内容用连字符分割，用对齐的 <code>|</code>。</p>
+</li>
+<li><p><code>|</code> 周围必须要有一个空格，除非是外部的 <code>|</code>。</p>
+</li>
+<li><p>列的宽度通过列中最长的单元格确定。</p>
+</li>
+</ul>
+<p>建议表格:</p>
+<pre><code>Before.
+
+| h    | Long header |
+|------|-------------|
+| abc  | def         |
+| abc2 | def2        |
+
+After.
+</code></pre><p>解释:</p>
+<ul>
+<li><p>不对齐的表格很容易书写，但是对齐的表格更加易读，并且人们读代码比编辑要更多。</p>
+</li>
+<li><p>开始的 <code>|</code> 更加容易看出表格的开始和结束。结尾的 <code>|</code> 让人看起来更加舒服，因为对称。</p>
+</li>
+<li><p>这些工具让表格对齐更加容易。比如，Vim 有 <a href="https://github.com/godlygeek/tabular" target="_blank" rel="external">Tabular plugin</a> 插件，这个插件让我们可以使用 <code>:Tabular /|</code> 来使整个表格对齐。</p>
+</li>
+<li><p>为什么在连字符分割行 <code>|</code> 没有空格包围, 比如: <code>|---|</code> 而不是 <code>| - |</code>?<br>没有空格看起来更好，在GitHub可行， 缺点: 编辑器中自动对齐实现困难，因为对于分割行需要特殊的规则。</p>
+</li>
+</ul>
+<h3 id="分离相连的列表"><a href="#分离相连的列表" class="headerlink" title="分离相连的列表"></a>分离相连的列表</h3><p>分离连续:</p>
+<ul>
+<li>列表</li>
+<li>缩进的代码块</li>
+<li>引用</li>
+<li>列表之后跟随额外的代码块</li>
+</ul>
+<p>使用一个空白的 HTML 注释 <code>&lt;!-- --&gt;</code>.</p>
+<!-- -->
+<pre><code>- list 1
+- list 1
+
+&lt;!-- --&gt;
+
+- list 2
+- list 2
+</code></pre><!-- -->
+<pre><code>    code 1
+    code 1
+
+&lt;!-- --&gt;
+
+    code 2
+    code 2
+</code></pre><!-- -->
+<pre><code>&gt; blockquote 1
+&gt; blockquote 1
+
+&lt;!-- --&gt;
+
+&gt; blockquote 2
+&gt; blockquote 2
+</code></pre><!-- -->
+<pre><code>- list
+- list
+
+&lt;!-- --&gt;
+
+    code outside list
+    code outside list
+</code></pre><h2 id="Span元素"><a href="#Span元素" class="headerlink" title="Span元素"></a>Span元素</h2><p><em>不要</em> 使用内部空格。</p>
+<p>建议使用:</p>
+<pre><code>**bold**
+`code`
+[link](http://a.com)
+[text][name]
+</code></pre><p>不建议：</p>
+<pre><code>** bold **
+` code `
+[ link ]( http://a.com )
+[text] [name]
+</code></pre><p>对于空格至关重要的行内代码：</p>
+<ul>
+<li>在写作过程中解释空格存在的必要性</li>
+<li>如果可能在空格之后加入其他内容</li>
+</ul>
+<p>建议使用:</p>
+<pre><code>使用连字符并跟随一个空格来表示无序列表。
+</code></pre><p>解释: 大多数的浏览器不会生成包围的空格，或者复制的时候不会将他们添加到粘贴板。</p>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><h4 id="参考样式链接"><a href="#参考样式链接" class="headerlink" title="参考样式链接"></a>参考样式链接</h4><p>链接:</p>
+<ul>
+<li><p>使用结尾的 <code>[]</code> 隐式链接：</p>
+<p>建议使用:</p>
+<pre><code>[a][]
+</code></pre><p>不建议：</p>
+<pre><code>[a]
+</code></pre><p>解释: 省略 <code>[]</code> 大多数主要的实现都可以使用，但是这种方式并没有在文档中有实现，原始 Markdown 也没有提到。</p>
+</li>
+</ul>
+<p>定义:</p>
+<ul>
+<li>必须写到文件末</li>
+<li>必须以ID字符顺序排列</li>
+<li>不要使用尖括号包裹URL</li>
+<li>align URLs and link names as in a table</li>
+<li>链接 IDs 仅仅使用小写字母. 解释: 因为 IDs 区分大小写,</li>
+<li>只用小写容易书写，并且可读性比大小写混合单词大很多。</li>
+</ul>
+<p>建议使用:</p>
+<pre><code>[id2]     http://long-url.com
+[long id] http://a.com        &quot;name 1&quot;
+</code></pre><p>不建议, 没有安装 id 排序:</p>
+<pre><code>[b] http://a.com
+[a] http://b.com
+</code></pre><p>不建议, 没有对齐:</p>
+<pre><code>[id] http://id.com
+[long id] http://long-id.com
+</code></pre><h4 id="单引号或双引号标题"><a href="#单引号或双引号标题" class="headerlink" title="单引号或双引号标题"></a>单引号或双引号标题</h4><p>使用双引号，<em>不要</em> 使用单引号。</p>
+<p>解释: 单引号并不是在所有的实现中都有效，但是双引号可以。</p>
+<h3 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h3><h4 id="加粗"><a href="#加粗" class="headerlink" title="加粗"></a>加粗</h4><p>使用双星号格式: <code>**bold**</code>.</p>
+<p>解释: 比双下划线格式<code>__bold__</code>更加常见和可读性更高.</p>
+<h4 id="斜体"><a href="#斜体" class="headerlink" title="斜体"></a>斜体</h4><p>使用单星号格式: <code>*italic*</code>.</p>
+<p>解释:</p>
+<ul>
+<li>比下划线格式更加常见，易读性更高</li>
+<li>与加粗格式一致, 同样使用星号标记</li>
+</ul>
+<h4 id="大写强调"><a href="#大写强调" class="headerlink" title="大写强调"></a>大写强调</h4><p><em>不要</em> 使用大写来强调: 使用强调语法例如 <strong>加粗</strong> 或者 <em>斜体</em> 。</p>
+<p>解释: CSS 有 <code>text-transform:uppercase</code> 属性,如果你愿意的话，可以轻松在全网站实现相同的效果。</p>
+<h4 id="强调与标题"><a href="#强调与标题" class="headerlink" title="强调与标题"></a>强调与标题</h4><p><em>不要</em> 使用强调元素(加粗或者斜体) 来介绍多行区块: 使用标题代替.</p>
+<p>解释: 这个就是确切的标题的语义, 使用强调的并不是必须的。作为结果，许多实现，给标题增加有用的功能，并没有给强调元素，比如自动 <code>id</code> 来更加容易的引用标题。</p>
+<p>建议使用:</p>
+<pre><code># How to make omelets
+
+Break an egg.
+
+...
+
+# How to bake bread
+
+Open the flour sack.
+
+...
+</code></pre><p>不建议：</p>
+<pre><code>**How to make omelets:**
+
+Break an egg.
+
+...
+
+**How to bake bread:**
+
+Open the flour sack.
+
+...
+</code></pre><h3 id="自动链接"><a href="#自动链接" class="headerlink" title="自动链接"></a>自动链接</h3><h4 id="使用尖括号自动链接"><a href="#使用尖括号自动链接" class="headerlink" title="使用尖括号自动链接"></a>使用尖括号自动链接</h4><ul>
+<li><p><em>不要</em> 使用不带尖括号的自动链接。</p>
+<p>建议使用:</p>
+<pre><code>&lt;http://a.com&gt;
+</code></pre><p>不建议：</p>
+<pre><code>http://a.com
+</code></pre><p>解释: 这个扩展中, <code>&lt;&gt;</code> 容易从键盘敲出，也同样容易读。</p>
+</li>
+<li><p>如果你不想文字链接自动链接，将他们以代码区块方式包裹，例如：</p>
+<pre><code>`http://not-a-link.com`
+</code></pre><p>解释: 许多工具自动将 <code>http</code> 开头的字串解释成链接。</p>
+</li>
+</ul>
+<h4 id="内容的自动链接"><a href="#内容的自动链接" class="headerlink" title="内容的自动链接"></a>内容的自动链接</h4><p>所有自动链接必须以字串 <code>http</code> 开始。</p>
+<p>特别的, <em>不要</em> 在相对链接时使用自动链接。如果遇到相对链接，使用括号的方式创建链接。</p>
+<p>建议使用:</p>
+<pre><code>[file.html](file.html)
+</code></pre><p>不建议：</p>
+<pre><code>&lt;file.html&gt;
+</code></pre><p>建议使用:</p>
+<pre><code>&lt;https://github.com&gt;
+</code></pre><p>不建议：</p>
+<pre><code>&lt;github.com&gt;
+</code></pre><p>解释: 将自动链接从HTML tags区分开很困难.<br>如果你想要一个相对的链接指向一个 <code>script</code> 的文件？</p>
+<h4 id="电子邮件自动链接"><a href="#电子邮件自动链接" class="headerlink" title="电子邮件自动链接"></a>电子邮件自动链接</h4><p><em>不要</em> 使用电子邮件自动链接 <code>&lt;address@example.com&gt;</code>. 使用纯HTML .</p>
+<p>解释: 标准 markdown 设计规范这样描述:</p>
+<blockquote>
+<p>“performs a bit of randomized decimal and hex entity-encoding<br>to help obscure your address from address-harvesting spambots”.</p>
+</blockquote>
+<p>因此, 输出是随机的，丑陋的, 并且像规范中提到的:</p>
+<blockquote>
+<p>but an address published in this way will probably eventually start receiving spam</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/markdown/" rel="tag"># markdown</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/01/git&github/git/git远程操作详解/" rel="prev" title="Git远程操作详解">
+                Git远程操作详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="donate-btn">作者</div>
+    <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyCloud Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命在于折腾!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg"
+               alt="flycloud" />
+          <p class="site-author-name" itemprop="name">flycloud</p>
+           
+              <p class="site-description motion-element" itemprop="description">Stay Hungry,Stay Foolish</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">flycloud : Stay Hungry,Stay Foolish</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+ 
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+<a id="hamburger" class="mm-slideout" href="#mmenu"><span></span></a>
+
+<nav id="mmenu">
+     <ul>
+
+     </ul>
+ </nav>
+<link type="text/css" rel="stylesheet" href="http://cdn.bootcss.com/jQuery.mmenu/5.5.3/core/css/jquery.mmenu.all.css" />
+<link type="text/css" rel="stylesheet" href="http://7xowny.com1.z0.glb.clouddn.com/flyCloudMenu.css" />
+<script type="text/javascript" src="http://7xowny.com1.z0.glb.clouddn.com/jquery.mmenu.min.all.js"></script>
+
+<script type="text/javascript">
+  $(function () {
+          $.getJSON("/json/menu.json",function(data){
+            $.each( data, function() {
+            var html="<li id='" + this.id + "'>" +"<span>"+this.text + "</span></li>"
+            var chirldHtml="<ul><li id='"+this.id+"'>"+"<span>"+this.text+"</span></li></ul>"
+            if(this.pid==''){
+                $('#mmenu>ul:first').append(html);
+              }else{
+              if($('li#'+this.pid+">ul").length==0){
+                 $('#'+this.pid).append(chirldHtml);
+              }else{
+                $('li#'+this.pid+">ul").append(html);
+              }
+             }
+            });
+
+            
+              var html="<li>" +"<a href='/2017/09/25/servlet/Servlet详解/'>"+ " Servlet详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/servlet/Servlet详解/'>"+" Servlet详解</a></li></ul>"
+              
+                   if($('li#'+"70>ul").length==0){
+                    $('li#'+"70").append(chirldHtml);
+                   }else{
+                    $('li#'+"70>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+ " markdown style guide</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+" markdown style guide</a></li></ul>"
+              
+                   if($('li#'+"160>ul").length==0){
+                    $('li#'+"160").append(chirldHtml);
+                   }else{
+                    $('li#'+"160>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+ " Git远程操作详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+" Git远程操作详解</a></li></ul>"
+              
+                   if($('li#'+"51>ul").length==0){
+                    $('li#'+"51").append(chirldHtml);
+                   }else{
+                    $('li#'+"51>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/05/git&github/github/github项目排名/'>"+ " github项目排名</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github项目排名/'>"+" github项目排名</a></li></ul>"
+              
+                   if($('li#'+"52>ul").length==0){
+                    $('li#'+"52").append(chirldHtml);
+                   }else{
+                    $('li#'+"52>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+ " How to use the Spring FactoryBean</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+" How to use the Spring FactoryBean</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/11/front/frontTec/前端常见跨域解决方案（全）/'>"+ " 前端常见跨域解决方案（全）</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/11/front/frontTec/前端常见跨域解决方案（全）/'>"+" 前端常见跨域解决方案（全）</a></li></ul>"
+              
+                   if($('li#'+"141>ul").length==0){
+                    $('li#'+"141").append(chirldHtml);
+                   }else{
+                    $('li#'+"141>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/Exception/'>"+ " Exception Handling in Spring MVC</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/Exception/'>"+" Exception Handling in Spring MVC</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+ " BeanPostProcessor</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+" BeanPostProcessor</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+ " ServletContext与ApplicationContext的区别</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+" ServletContext与ApplicationContext的区别</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+ " ContextLoaderListener And DispatcherServlet Concepts</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+" ContextLoaderListener And DispatcherServlet Concepts</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+ " 看看Spring的源码 (一)——Bean加载过程</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+" 看看Spring的源码 (一)——Bean加载过程</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+ " 看看Spring的源码(二)——bean实例化</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+" 看看Spring的源码(二)——bean实例化</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+
+            $('#mmenu').mmenu({
+             extensions		: [ 'widescreen', 'theme-white', 'effect-menu-slide', 'pagedim-black','pageshadow'],
+             			counters		: true,
+             			dividers		: {
+             				fixed 	: true
+             			},
+             			navbar 			: {
+             				title	: 'blog-catalog'
+             			},
+             			navbars			: [{
+             				position: 'top',
+             				content : ['searchfield']
+             			}, {
+             				position: 'top'
+             			}, {
+             				position: 'bottom',
+             				content : ['<div>Hosted by <a href="http://damonflycloud.info" target="_blank">FlyCloud</a></div>']
+             			}]
+            });
+          });
+
+
+       /**$(".donate-btn").hover(function () {
+        $('#sidebar').css('display','block');
+        $('.header-inner').css('display','inherit');
+       $('.sidebar-inner').css('display','inherit');
+        });
+
+         $('#hamburger').click(function(){
+         $('.sidebar').css('display','none');
+          $('#mm-blocker').on("click",function(){
+          $('.sidebar').css('display','block');
+        })
+       });**/
+       
+       
+
+      });
+</script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+ 
+
+</body>
+
+ 
+
+</html>
