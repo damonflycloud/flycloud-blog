@@ -1,0 +1,1290 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/flyCloud.css?v=5.1.0"/
+
+
+  <meta name="keywords" content="MyBatis," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://7xowny.com1.z0.glb.clouddn.com/flycloud.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="MybatisMyBatis是一个支持普通SQL查询,存储过程和高级映射的优秀的持久化框架,MyBatis消除了几乎所有的JDBC代码和参数的手工设置以及对结果集的检索封装.MyBatis可以使用简单的XML或注解用于配置和原始映射,将接口和Java的POJO映射成数据库中的记录.">
+<meta name="keywords" content="MyBatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis-generator 分析">
+<meta property="og:url" content="flycloud.me/2017/11/21/MBG/MyBatis-generator 分析/index.html">
+<meta property="og:site_name" content="FlyCloud Blog">
+<meta property="og:description" content="MybatisMyBatis是一个支持普通SQL查询,存储过程和高级映射的优秀的持久化框架,MyBatis消除了几乎所有的JDBC代码和参数的手工设置以及对结果集的检索封装.MyBatis可以使用简单的XML或注解用于配置和原始映射,将接口和Java的POJO映射成数据库中的记录.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-21T13:35:02.357Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MyBatis-generator 分析">
+<meta name="twitter:description" content="MybatisMyBatis是一个支持普通SQL查询,存储过程和高级映射的优秀的持久化框架,MyBatis消除了几乎所有的JDBC代码和参数的手工设置以及对结果集的检索封装.MyBatis可以使用简单的XML或注解用于配置和原始映射,将接口和Java的POJO映射成数据库中的记录.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":0,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="flycloud.me/2017/11/21/MBG/MyBatis-generator 分析/"/>
+
+
+
+
+
+  <title> MyBatis-generator 分析 | FlyCloud Blog </title>
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?060f8b2450825fadd6aff6e494ce6218";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="flycloud.me/2017/11/21/MBG/MyBatis-generator 分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flycloud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyCloud Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MyBatis-generator 分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-21T20:53:27+08:00">
+                2017-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MyBatis/" itemprop="url" rel="index">
+                    <span itemprop="name">MyBatis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+            <span class="page-pv">热度
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>℃
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h2><p>MyBatis是一个支持普通SQL查询,存储过程和高级映射的优秀的持久化框架,MyBatis消除了几乎所有的JDBC代码和参数的手工设置以及对结果集的检索封装.MyBatis可以使用简单的XML或注解用于配置和原始映射,将接口和Java的POJO映射成数据库中的记录.</p>
+<a id="more"></a>
+<h2 id="使用Mybatis-Generator"><a href="#使用Mybatis-Generator" class="headerlink" title="使用Mybatis-Generator"></a>使用Mybatis-Generator</h2><p>使用Mybatis-Generator这个maven插件来快速生成mapper类,mapper配置文件和Model类.<a href="http://generator.sturgeon.mopaas.com" target="_blank" rel="external">中文文档</a></p>
+<p><code>MyBatis Generator</code>是<code>MyBatis</code>的代码生成器.可以自动查询数据库中的所有表,然后生成可以访问表的基础对象类型.解决了对数据库操作有最大影响的一些简单的<code>CRUD</code>增删改查操作,但是仍需要对联合查询和存储过程手写SQL语句和对象.</p>
+<h2 id="MyBatis-Generator-会生成三种对象"><a href="#MyBatis-Generator-会生成三种对象" class="headerlink" title="MyBatis Generator 会生成三种对象:"></a>MyBatis Generator 会生成三种对象:</h2><ol>
+<li><p>匹配表结构的POJO对象,可能有以下4种类型:</p>
+<ul>
+<li>一个基本的对象类型,含有单字段的主键,和<code>BLOB</code>类型除外的所有基本字段类型</li>
+<li>允许动态查询更新删除的类,后缀<code>Example</code>.</li>
+<li>如果设置<code>defaultModelType</code>为<code>conditional</code>,且含有联合主键,则会生成一个后缀<code>key</code>的实体类,只含有联合主键.如果设置<code>defaultModelType</code>为<code>hierarchical</code>,且含有主键,也会单独为主键生成一个key对象.</li>
+<li>如果存在<code>blob</code>类型的字段,且<code>defaultModelType</code>为<code>hierarchical</code>,就会为所有<code>blob</code>属性单独生成一个对象,后缀为<code>WithBLOBs</code>.</li>
+</ul>
+</li>
+<li><p>为每个表的简单CRUD操作生成SQL语句,存放在XML文件中,也就是<code>Mapper.xml</code>文件.生成的sql语句包括:</p>
+<ul>
+<li>insert 插入</li>
+<li>update by primary key 根据主键更新记录</li>
+<li>update by example 根据条件更新记录</li>
+<li>delete by primary key 根据主键删除记录</li>
+<li>delete by example 根据条件删除</li>
+<li>select by primary key 根据主键查询</li>
+<li>select by example 根据条件查询</li>
+<li><p>count by example 根据条件查询记录总数</p>
+<p><strong>根据表的结构,生成语句会有不同,如表中没有主键时,不会生成根据主键的方法.</strong></p>
+</li>
+</ul>
+</li>
+<li><p>java客户端中,MGB会为 MyBatis 3.x生成:</p>
+<p> <strong>一个可以与 <code>MyBatis 3.x</code>一起使用的mapper接口类.</strong></p>
+</li>
+</ol>
+<p>两个比较重要的事情:</p>
+<ul>
+<li>MBG运行生成的新的XML会与已经存在的进行自动合并,所以,如果对XML进行了自定义的更改,则不用担心这些修改会丢失.</li>
+<li>MGB不会合并java文件,会直接覆盖文件,所以要手动合并这些更改.</li>
+</ul>
+<h2 id="以Maven插件的形式运行-MyBatis-Generator"><a href="#以Maven插件的形式运行-MyBatis-Generator" class="headerlink" title="以Maven插件的形式运行 MyBatis Generator"></a>以Maven插件的形式运行 MyBatis Generator</h2><p>在Maven项目的<code>Pom.xml</code>文件的<code>build</code>下添加插件:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.generator<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-generator-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">verbose</span>&gt;</span>true<span class="tag">&lt;/<span class="name">verbose</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">overwrite</span>&gt;</span>true<span class="tag">&lt;/<span class="name">overwrite</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mariadb.jdbc<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mariadb-java-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>其常用的参数有:</p>
+<ul>
+<li>configurationFile 指定配置文件的名称,默认是 <code>${basedir}/src/main/resources/generatorConfig.xml</code></li>
+<li>contexts 指定哪些context会被执行,如果没有设置该参数,所有的context都会被执行.</li>
+<li>overwrite 指定该参数,则生成java文件时,直接覆盖原来的文件.默认是false,即会对生成的java文件进行编号来标记不是相同的执行结果,由用户来自行合并java文件.</li>
+<li>tableNames 如果指定了该参数,则只有指定的这些表会被运行.</li>
+<li>verbose 如果指定该参数,则会输出执行过程.</li>
+</ul>
+<p>运行时,应该先清空之前文件夹内的内容,然后再进行生成,不会自动清空之前的文件夹内容.这里要做一些思考.</p>
+<p>注意,这里在MyBatis Generator中有一个依赖,依赖的是JDBC驱动,这样做的原因,这样依赖,就会让jdbc的jar位于<code>MyBatis Generator</code>插件的classpath中,直接就可以通过<code>fully qualified class name</code>来访问jdbc,也就不用设置之后的<code>&lt;classPathEntry&gt;</code>标签了.</p>
+<h2 id="执行Mybatis-Generator后"><a href="#执行Mybatis-Generator后" class="headerlink" title="执行Mybatis Generator后"></a>执行Mybatis Generator后</h2><p>执行MBG后,需要修改MyBatis的配置文件.修改 <code>MapperConfig.xml</code>文件.</p>
+<p>在 <code>MapperConfig.xml</code>文件中,指定MBG生产的XML映射文件.在<code>&lt;mappers&gt;</code>标签下:</p>
+<p>##wating. </p>
+<p>也可以直接通过 <code>MapperConfigPlugin</code>插件来生产一个 <code>Mapper</code>配置文件的骨架,需要在设置的<code>plugins</code>标签下进行设置.</p>
+<h2 id="generatorConfig-xml-详细配置"><a href="#generatorConfig-xml-详细配置" class="headerlink" title="generatorConfig.xml 详细配置"></a>generatorConfig.xml 详细配置</h2><p>首先从层次上来说明,配置文件,有一个根元素<code>generatorConfiguration</code>和三个子元素.</p>
+<ul>
+<li>根元素为<code>&lt;generatorConfiguration&gt;</code>,包含子元素(按照严格的顺序):<code>&lt;properties&gt;</code>(0或一个),<code>&lt;classPathEntry&gt;</code>(0或多个),<code>&lt;context&gt;</code>(1或多个);</li>
+<li><code>&lt;properties&gt;</code>,指定外部的属性文件,然后在配置中就可以通过<code>${xxproperty}</code>来引用属性文件中的属性值了.属性可以通过<code>resource</code>或者<code>url</code>来指定.前者指定classpath下的属性文件,后者一般通过file协议来加载指定路径位置的属性文件,如:<code>&lt;properties url=&quot;file:///xxx/jdbc.properties&quot;/&gt;</code></li>
+<li><code>classPathEntry</code>元素,一般来指定驱动路径.属性location,来指定jdbc驱动包的位置.如果将jar包放入了classpath中,就不用设置这个属性了.</li>
+<li><code>context</code>元素:用于指定一组对象的环境.子元素用于指定连接到的数据库,要生成的对象的类型和要处理的数据库中的表.该元素只有一个必选属性<code>id</code>,来进行唯一标识.</li>
+</ul>
+<p><code>&lt;context&gt;</code>还有可选属性:</p>
+<ul>
+<li><code>defaultModelType</code> : 设置MBG如何生成实体类.<code>conditional</code>默认值,不会生成单独的<code>Blob</code>实体类,但是如果有联合主键,会生成一个主键实体类.<code>flat</code>,只生成一个实体类.<code>hierarchical</code>,如果有联合主键,会生成单独的主键实体类,如果有Blob字段,会生成单独的<code>Blob</code>实体类,然后还会有一个普通实体类.</li>
+<li><code>targetRuntime</code> : 这个属性用于指定生成代码的运行时目标.<ol>
+<li>MyBatis3 : 输出对象兼容<code>MyBatis 3.0</code>或更高版本,兼容JSE 5.0或更高版本的对象,包含泛型和注解.会生成 <code>by example</code>这类动态查询方法.</li>
+<li>MyBatis3Simple<code>: 与上面的</code>MyBatis3<code>类似,但是不会生成</code>by example`一类方法,只有少量的动态SQL.</li>
+<li><code>Ibatis2Java2</code>和<code>IbaitsJava5</code>:略.</li>
+</ol>
+</li>
+</ul>
+<p>然后在<code>&lt;context&gt;</code>有子元素:</p>
+<ul>
+<li><p><code>&lt;property&gt;</code> (0..N) ,property以name,和value的形式来设置,支持的属性有:</p>
+<ul>
+<li>autoDelimitKeywords : 自动识别数据库关键字,默认为false,设置为true后,如果遇到数据库关键字,用<code>&lt;columnOverride&gt;</code>替换.</li>
+<li>beginnginDelimiter , endingDelimiter : 用作分隔符的符号,oracle中是”,而mysql中是’</li>
+<li>javaFileEncoding : 设置Java文件的编码集,如果没有指定,则会使用系统默认编码.</li>
+<li>javaFormatter : 使用该属性来指定生成的java文件的用户指定的formater的完整的类名称,用于格式化java代码,这个类必须继承<code>org.mybatis.generator.api.JavaFormatter</code>,而且提供一个默认不含参数的构造方法.每个<code>context</code>持有一个单独的<code>javaFormatter</code>实例,默认的是<code>org.mybatis.generator.api.dom.DefaultJavaFormatter</code>,默认格式使用内脏到 Java DOM类的格式.</li>
+<li>xmlFormatter : 格式化xml文件,与上述<code>javaFormatter</code>类似.</li>
+</ul>
+</li>
+<li><p><code>&lt;plugin&gt;</code> (0..N)</p>
+<p>  用来定义一个插件,插件用于修改MBG生成的代码.类继承于 <code>org.mybatis.generator.api.Plugin</code>.</p>
+</li>
+<li><p><code>&lt;commentGenerator&gt;</code> (0 or 1)</p>
+<p>  用于定义注释生成器的属性.注释生成器用来给由MBG生成的多种元素,Java自动,java方法,XML元素等等 生成注释. 默认的注释生成器将<code>JavaDoc</code>注释添加到所有生成的Java元素上,也会添加到每个生成的XML元素上.注释的目的是告诉用户这个元素是生成的,并且有可能重新生成,也就是说不应该修改这些地方.</p>
+<p>  可选属性 type,用来指定注释生成器类型.自定义的类要继承于 <code>org.mybatis.generator.api.CommentGenerator</code>.</p>
+<p>  使用<property>子元素来设置属性:</property></p>
+<ul>
+<li>suppressAllComments : 用来指定MBG所生成的代码是否包含任何注释.默认为false,即都会生成注释.为true是,所有代码都不会生成注释,且代码不会并合并.</li>
+<li>suppressDate : 用来指定生成的注释中是否包含生成的日期.默认为false. 设置为true,不会添加时间戳.</li>
+</ul>
+</li>
+<li><p><code>&lt;jdbcConnection&gt;</code> (1 Required)</p>
+<p>  设置数据库连接的属性.每个<context>必须含有一个<jdbcconnection>元素.<br>  必选属性:</jdbcconnection></context></p>
+<ul>
+<li>driverClass : 访问数据库的JDBC驱动程序的完全名称.</li>
+<li><p>connectionURL : 用于访问数据的JDBC连接URL.</p>
+<p>可选属性:</p>
+</li>
+<li><p>userId : 访问数据库的用户ID</p>
+</li>
+<li><p>password : 访问数据库的密码</p>
+<p>可以设置子元素<code>&lt;property&gt;</code>,指定的属性都会被添加到JDBC驱动程序的属性中.</p>
+</li>
+</ul>
+</li>
+<li><p><code>&lt;javaTypeResolver&gt;</code> (0 or 1)</p>
+<p>  java类型处理器,处理数据库中类型到Java中的类型.使用属性type来设置,默认使用<code>JavaTypeResolverDefaultImpl</code>来处理类型.</p>
+<p>  子元素property支持一个属性:</p>
+<p>  <code>forceBigDecimals</code> : 是否强制将<code>DECIMAL</code>和<code>NUMERIC</code>的类型转换为<code>BigDecimal</code>类型,默认是<code>false</code>.</p>
+<p>  默认情况下的转换规则为:</p>
+<ol>
+<li>如果精度&gt;0或者长度&gt;18,使用<code>BigDecimal</code>.</li>
+<li>如果精度=0且10&lt;=长度&lt;=18,则使用Long</li>
+<li>如果精度=0且5&lt;=长度&lt;=9,则使用Integer</li>
+<li>如果精度=0且长度&lt;5 ,则使用Short.    </li>
+</ol>
+</li>
+<li><p><code>&lt;javaModelGenerator&gt;</code> (1 Required)</p>
+<p>  该元素用于控制生成的实体类.有两个必选属性:</p>
+<ul>
+<li>targetPackage : 生成实体类所在的包名.会为目标包名生成pacakge.</li>
+<li><p>targetProject : 指定目标项目,运行于Eclipse或者IDEA等IDE时,这个属性是来指定项目的<code>source root</code>,一般就是 <code>src/main/java</code>这样的路径.不会为这个路径创建文件夹.</p>
+<p>通过子元素<property>来设置属性:</property></p>
+</li>
+<li><p>constructorBased : 是否为每个类生成一个使用所有字段的构造函数.只对<code>MyBatis3</code>有效,默认为false. 如果属性<code>immutable</code>被设置了,则这个属性会被忽略.可以在<table>中对具体的一个表进行设置.</table></p>
+</li>
+<li>enableSubPackages : 是否根据表的 catalog 和 schema 来生成一个子包,默认是false.</li>
+<li>immutable : 这个属性用于选择这些类是否是可变的,如果设置true,则这些类是不可变的,所有没有setter方法,且会忽略<code>constructorBased</code>属性,来默认提供一个含有所有参数的构造函数.默认是false.</li>
+<li>rootClass : 这个属性用来指定所有生成的Java Model的基类,需要使用 <code>fully qualified class name</code> 如 <code>com.xxx.xxx.RootClass</code>. 如果生成对象生成的类型或者getter和setter方法在RootClass中存在,则不会自动生成和覆盖rootClass中的内容.</li>
+<li>trimStrings : 这个属性用来设置对从数据库取回的字符串进行<code>trim</code>操作,默认为false.</li>
+</ul>
+</li>
+<li><p><code>&lt;sqlMapGenerator&gt;</code> (0 or 1)</p>
+<p>  定义SQL映射生成器的属性,SQL映射生成器会为每个表生成Mybatis使用的XML文件.如果没有指定这个元素,不会生成SQL映射的XML文件.如果使用MyBatis3,且设置了<code>javaClientGenerator</code>需要XML时,这个属性回事必选子元素.</p>
+<p>  可选属性:</p>
+<ul>
+<li>targetPackage : 包所在位置</li>
+<li><p>targetProject : 指定目标项目</p>
+<p>可以通过子元素 <property>来设置一个属性 :enableSubPackages:是否通过目录和schema来生成子包.</property></p>
+</li>
+</ul>
+</li>
+<li><p><code>&lt;javaClientGenerator&gt;</code>(0 or 1)</p>
+<p>  用于定义Java客户端代码生成器的属性.会生成Java的接口和类,可以简单的使用生成的Java Model和XML映射文件.在MyBatis中,会生成Mapper接口形式的代码.</p>
+<p>  必选属性:</p>
+<ul>
+<li><p>type : 用户选择一个默认的生成器,或者使用用户自定义的DAO生成器.自定义需要继承与 <code>org.mybatis.generator.codegen.AbstractJavaClientGenerator</code>类.<br>  如果当前targetRuntime是 MyBatis3,有以下三个选项:</p>
+<ul>
+<li>ANNOTATEDMAPPER : 生成对象是 MyBatis3.x 映射器基础结构的Java接口,这些接口会基于注解和SqlProviders,不会有XML文件生成.就是纯接口使用注解.会有Provider生成.</li>
+<li>MIXEDMAPPER : 注解与XML混合,注解用在简单注解可以实现的地方,客户端不会生成SqlProvider,复杂的动态SQL都会生成在XML中.</li>
+<li><p>XMLMAPPER : 生成接口依赖XML文件.</p>
+<p>如果targetRuntime是<code>MyBatis3Simple</code>没有<code>MIXEDMAPPER</code>选项.</p>
+</li>
+</ul>
+</li>
+<li><p>targetPackage和targetProject</p>
+<p>可选属性 :</p>
+</li>
+<li><p>implementationPackage : 如果指定了该属性,实现类就会生成在这个包中.</p>
+<p>通过子元素 <property>来设置属性:</property></p>
+</li>
+<li><p>enableSubPackages : 是否根据 catolog和scheme来生成不同的包.</p>
+</li>
+<li>exampleMethodVisibility : 设置<code>byExample</code>方法是否可见,默认是public,可见,且在接口中声明方法.可以设置的属性有: <code>public</code>,<code>private</code>,<code>protected</code>,<code>default</code>,但是在MyBatis3中,忽略该属性.</li>
+<li>methodNameCalculator : 属性用于为DAO方法提供不同的名称.被Mybatis3忽略.</li>
+<li>rootInterface : 指定是否所有生成的接口都继承与一个父接口.使用 <code>fully qualified class name</code>.</li>
+<li>useLegacyBuilder : 默认是false.设置为true,会使用SqlBuilder为MyBatis生成动态SQL,在MyBatis3.2和以后被弃用.如果为false,则使用新的SQL生成器来生成客户端代码.</li>
+</ul>
+</li>
+<li><p><code>&lt;table&gt;</code> (1..N)</p>
+<p>  从数据库中选择一个表,来生成对象.</p>
+<p>  必选属性:</p>
+<p>  <code>tableName</code> : 数据库表的名称,不包含 catalog和schema,可以指定SQL通配符,如”%”来匹配所有的表.名称的匹配的逻辑:如果名称中有空格,则以指定大小写来查找表,如果数据库标识为大写,则用大写,如果数据库标识为小写则用小写,否则,自行定义.在创建数据库时,如果使用””来指定大小写了,即使数据库标识符是大写,也需要设置 <code>delimitIdentifiers = &quot;true&quot;</code>来保留大小写格式.</p>
+<p>  可选属性:</p>
+<ul>
+<li>schema : 可以指定通配符</li>
+<li>catalog : 可以指定通配符</li>
+<li>alias : 如果指定,则设置的别名会用在select查询上.</li>
+<li>domainObjectName : 生成的对象的基本名称,如果没有指定,则会以表名来命名.由于带domain,所以可以生成到指定包中,如 abc.Model,对象名是Model,添加到包abc中.</li>
+<li>enableInsert : 是否生成Insert语句,默认为true.</li>
+<li>enableSelectByPrimaryKey : 是否生成根据主键查询语句,默认为true.如果不存在主键,这不会生成根据主键查询的语句.</li>
+<li>enableSelectByExample : 是否通过 Example进行动态查询.默认为true.</li>
+<li>enableUpdateByPrimaryKey : 是否通过主键根据.默认为true</li>
+<li>enableDeleteByPrimaryKey : 是否通过主键删除语句.默认为true.</li>
+<li>enableUpdateByExample : 是否生成通过Example更新语句.默认为true.</li>
+<li>enableDeleteByExample : 是否生成通过Example删除语句,默认为true.</li>
+<li>enableCountByExample : 是否生成根据Example查询总数的语句,默认为true.</li>
+<li>selectByPrimaryKeyQueryId : 这个值会以<code>&lt;value&gt; as QUERYID</code>的形式被添加到主键查询语句的select列中.这样,可以对生成的每一个查询指定一个唯一的ID.</li>
+<li>selectByExampleQueryId : 对每一次查询设置一个唯一id.</li>
+<li>modelType : 可以用来重写默认的模型类型,即<code>conditional</code>,<code>flat</code>,和<code>hierarchical</code>三个属性.</li>
+<li>escapeWildcards : 这个属性表示当查询列时,是否对schema和表名中的SQL通配符(如_和%)进行转义.默认是false.</li>
+<li>delimitIdentifiers : 这个属性当查询表并且在生成的SQL中分割标识符时,是否使用指定的确切值.默认为false.如果catalog,schema或者tableName包含空白时,应该为true.</li>
+<li><p>delimitAllColumns : 指示是否给生成SQL中所有的列名添加分割符.默认为false.</p>
+<p>子元素有 : </p>
+</li>
+<li><p><code>&lt;property&gt;</code> (0 .. N) : 通过property可以设置以下属性:</p>
+<ul>
+<li>construtorBased : 是否产生一个含有所有字段的构造函数.默认为false</li>
+<li>ignoreQualifiersAtRuntime : 生成的SQL的表名将不会包含schema和catalog的前缀.默认为false.</li>
+<li>immutable : 与<code>&lt;javaModelGenerator&gt;</code>中含义相同.</li>
+<li>modelOnly : 是否值生成模型类,而不生成CRUD方法.默认是false.</li>
+<li>rootClass : 与<code>&lt;javaModelGenerator&gt;</code>中含义相同.</li>
+<li>rootInterface : 与<code>&lt;javaModelGenerator&gt;</code>中含义相同.</li>
+<li>runtimeCatalog : 指定生成SQL语句中的catalog,生成代码的catalog会与运行时的catalog不同.</li>
+<li>runtimeSchema : 运行时 schema</li>
+<li>runtimeTableName : 运行时表名.</li>
+<li>selectAllOrderByClause : 在<code>MyBatis3SseColimple</code>中,将这个属性以 <code>oder by</code>的形式添加到selectAll方法中.</li>
+<li>useActualColumnNames : 默认为false.设置为true时,将从数据库元数据获取的列名作为实体类的属性名.false时,会将名称转换为驼峰形式.如果被<code>&lt;columnOverride&gt;</code>元素指定,则会忽略这个属性. 如<code>START_DATE</code>属性会变成 startDate属性.</li>
+<li>useColumnIndexes : 默认为false.且Mybatis3中不支持这个属性.如果为true,会在生成resultMaps时使用索引.</li>
+<li>useCompoundPropertyNames : 默认为false. 如果为true,在生成属性名时,会将列名和备注连接起来.</li>
+</ul>
+</li>
+<li><p><code>&lt;generatedKey&gt;</code> (0 or 1) :</p>
+<p>  用于指定自动生成主键的属性.如果指定该元素,MBG会在生成insert的SQL映射文件中插入一个合适的<code>&lt;selectKey&gt;</code>元素.简单来说,就是可以用来做自增主键的设置.</p>
+<p>  必选属性:</p>
+<ul>
+<li>column : 生成列 的列名.</li>
+<li><p>sqlStatement : 返回新值的SQL语句.一些特殊值为 :<code>MySql</code>,转化为`SELECT LAST_INSERT_ID() . JDBC在MyBatis3中,生成正确的代码,且脱离数据库的限制.</p>
+<p>可选属性:</p>
+</li>
+<li><p>identity : 默认为false.如果为true,被标记为<code>identity</code>列,且<code>&lt;selectKey&gt;</code>元素后被插入在insert后面.如果为false,则会被插入在insert之前.</p>
+</li>
+<li><p>type : 为selectKey元素指定类型, pre或post.指定类型后,selectKey永远在insert语句之前.</p>
+<p>理解这个序列的意思,和插入前后的意思.序列表示表是一个序列,插入之前要先查询表,就需要知道当前指向的位置即主键.而自增主键要在插入之后,才能知道自己的大小.</p>
+</li>
+</ul>
+</li>
+<li><p><code>&lt;columnRenamingRule&gt;</code> (0 or 1)</p>
+<p>  列的重命名规则.MBG使用正则表达式来进行重命名规则的实现,如果有<code>&lt;columnOverride&gt;</code>,则忽略<code>&lt;columnRenamingRule&gt;</code>属性.先使用这个重命名规则后,获得的结果再去使用<code>useActualColumnNames</code>规则来判断是非需要再次更新属性名.</p>
+<p>  必选属性:</p>
+<p>  searchString : 定义将被替换的子字符串的正则表达式.</p>
+<p>  可选属性:</p>
+<p>  replaceString : 替换匹配的字符串.如果没有设置,则用空字符串替换.</p>
+</li>
+<li><p><code>&lt;columnOverride&gt;</code> (0 … N)</p>
+<p>  将默认得到的列进行修改,来设置指定的类型,名称等.</p>
+<p>  必选属性:</p>
+<p>  column : 列名</p>
+<p>  可选属性:</p>
+<ul>
+<li>property : 要使用的Java名称.</li>
+<li>javaType : 完全指定的Java类型.这里有必要来处理奇怪的数据库类型,如mysql中的unsigned bigint需要被映射为java.lang.Object.</li>
+<li>jdbcType : 该列的JDBC类型(INTEGER,DECIMAL等等)</li>
+<li>typeHandler : 用户定义的需要用来处理该列的类型处理器.</li>
+<li>delimitedColumnName : 是否需要分割列名,指的是列名可能是带空格或者保留字,所以是否需要添加分隔符.默认为false.</li>
+</ul>
+</li>
+<li><p><code>&lt;ignoreColumn&gt;</code> (0 … N)</p>
+<p>  忽略的列.可选属性:</p>
+<p>  delimitedColunmnName : 当匹配对从数据库返回列时,是否区分大小写.默认为false.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="生成的对象-Example类的使用"><a href="#生成的对象-Example类的使用" class="headerlink" title="生成的对象 Example类的使用"></a>生成的对象 Example类的使用</h2><p>Example类指定了构建一个动态查询语句,where子句里只能包含非 BLOB列.</p>
+<p>Example类内包含一个内部静态类<code>Criteria</code>,<code>Criteria</code>包含了一个用<code>anded</code>组合的where子句中的条件列表.<code>Example</code>类包含一个<code>List&lt;Criteria&gt;</code>属性,所有子句都是以<code>ored</code>组合在一起,使用不同属性的<code>Criteria</code>来生成各种条件的查询语句.可以通过<code>or()</code>来创建<code>Criteria</code>对象,如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">TestTableExample example = <span class="keyword">new</span> TestTableExample();</div><div class="line">   example.or().andField1EqualTo(<span class="number">5</span>);</div></pre></td></tr></table></figure>
+<p>对于复杂的查询,如下例:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">TestTableExample example = <span class="keyword">new</span> TestTableExample();</div><div class="line"></div><div class="line">  example.or()</div><div class="line">    .andField1EqualTo(<span class="number">5</span>)</div><div class="line">    .andField2IsNull();</div><div class="line"></div><div class="line">  example.or()</div><div class="line">    .andField3NotEqualTo(<span class="number">9</span>)</div><div class="line">    .andField4IsNotNull();</div><div class="line"></div><div class="line">  List&lt;Integer&gt; field5Values = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">  field5Values.add(<span class="number">8</span>);</div><div class="line">  field5Values.add(<span class="number">11</span>);</div><div class="line">  field5Values.add(<span class="number">14</span>);</div><div class="line">  field5Values.add(<span class="number">22</span>);</div><div class="line"></div><div class="line">  example.or()</div><div class="line">    .andField5In(field5Values);</div><div class="line"></div><div class="line">  example.or()</div><div class="line">    .andField6Between(<span class="number">3</span>, <span class="number">7</span>);</div></pre></td></tr></table></figure></p>
+<p>在上面的例子中, 动态生成的where子句是:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">where (field1 = <span class="number">5</span> and field2 is <span class="keyword">null</span>)</div><div class="line">  or (field3 &lt;&gt; <span class="number">9</span> and field4 is not <span class="keyword">null</span>)</div><div class="line">  or (<span class="function">field5 <span class="title">in</span> <span class="params">(<span class="number">8</span>, <span class="number">11</span>, <span class="number">14</span>, <span class="number">22</span>)</span>)</span></div><div class="line">  <span class="title">or</span> <span class="params">(field6 between <span class="number">3</span> and <span class="number">7</span>)</span></div></pre></td></tr></table></figure>
+<p> 去重复,在Example类中调用<code>setDistinct(true)</code>.</p>
+<p> <code>Criteria</code> 内部类的每个属性都包含 <code>andXXX</code> 方法，以及如下的标准的SQL查询方法:</p>
+<ul>
+<li><code>IS NULL</code> - 指相关的列必须为NULL</li>
+<li>IS NOT NULL - 指相关的列必须不为NULL</li>
+<li>= (equal) - 指相关的列必须等于方法参数中的值</li>
+<li>&lt;&gt; (not equal) - 指相关的列必须不等于方法参数中的值</li>
+<li>> (greater than) - 指相关的列必须大于方法参数中的值</li>
+<li>>= (greater than or equal) - 指相关的列必须大于等于方法参* 数中的值</li>
+<li>&lt; (less than) - 指相关的列必须小于于方法参数中的值</li>
+<li>&lt;= (less than or equal) - 指相关的列必须小于等于方法参数中的值</li>
+<li>LIKE - 指相关的列必须 “like” 方法参数中的值. 这个方法不用必须加入 ‘%’, 您必须设置方法参数中的值.</li>
+<li>NOT LIKE - 指相关的列必须 “not like” 方法参数中的值. 这个方法不用必须加入 ‘%’, 您必须设置方法参数中的值.</li>
+<li>BETWEEN - 指相关的列必须在 “between” 方法参数中的两个值之间.</li>
+<li>NOT BETWEEN - 指相关的列必须不在 “not between” 方法参数中的两个值之间.</li>
+<li>IN - 指相关的列必须在传入的方法参数的list中.</li>
+<li>NOT IN - 指相关的列必须不在传入的方法参数的list中.</li>
+</ul>
+<h2 id="MyBatis-Generator使用的一些心得"><a href="#MyBatis-Generator使用的一些心得" class="headerlink" title="MyBatis Generator使用的一些心得"></a>MyBatis Generator使用的一些心得</h2><ul>
+<li>可以考虑实体类类型<code>defaultModelType</code>为 <code>flat</code>,即只有一个对象,这样管理起来更加方便.</li>
+<li>注释的时间戳<code>suppressDate</code>一般都会关闭,因为每次重新生成都会修改时间戳,SVN都要重新提交,不利于多人开发.</li>
+<li>将jdbc驱动放在项目的classPath下,而不是使用<code>&lt;classPathEntry&gt;</code>来引入jar包.</li>
+<li>对于字符串类型,一般都设置<code>trimStrings</code>来去除空格.</li>
+<li>在<code>&lt;table&gt;</code>中配置<code>&lt;generatedKey&gt;</code>,来实现自增主键.</li>
+<li>在Mysql中,支持无符号数,但是java中的数据类型都是有符号的,所以要用<code>&lt;columnOverride&gt;</code>来解决这个问题,先将类型转换成 <code>java.lang.Object</code>,然后在使用时,将返回值强制转换为适当的类型.</li>
+</ul>
+<h2 id="一个简单的示例"><a href="#一个简单的示例" class="headerlink" title="一个简单的示例"></a>一个简单的示例</h2><p>首先在JDBC配置文件处,对项目文件夹布局进行指定:</p>
+<pre><code># 包路径配置
+model.package=com.lxm.ssm.pojo
+dao.package=com.lxm.ssm.dao
+xml.mapper.package=com.lxm.ssm.mapping
+target.project=src/main/java
+</code></pre><p>然后再编写这个插件的配置文件<code>generatorConfig.xml</code>:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE generatorConfiguration</span></div><div class="line">        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"</div><div class="line">        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd"&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">generatorConfiguration</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 配置文件路径 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">properties</span> <span class="attr">url</span>=<span class="string">"file:///Users/luoxianming/IdeaProjects/SSM123/src/main/resources/jdbc.properties"</span>/&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">context</span> <span class="attr">id</span>=<span class="string">"MySQLTables"</span> <span class="attr">targetRuntime</span>=<span class="string">"MyBatis3"</span> <span class="attr">defaultModelType</span>=<span class="string">"hierarchical"</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!--关闭时间注释 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">commentGenerator</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"suppressDate"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">commentGenerator</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!--数据库连接信息 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">jdbcConnection</span> <span class="attr">driverClass</span>=<span class="string">"$&#123;driver&#125;"</span> <span class="attr">connectionURL</span>=<span class="string">"$&#123;url&#125;"</span> <span class="attr">userId</span>=<span class="string">"$&#123;username&#125;"</span></span></div><div class="line">                        <span class="attr">password</span>=<span class="string">"$&#123;password&#125;"</span>&gt;</div><div class="line">        <span class="tag">&lt;/<span class="name">jdbcConnection</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!--生成的model 包路径 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">javaModelGenerator</span> <span class="attr">targetPackage</span>=<span class="string">"$&#123;model.package&#125;"</span> <span class="attr">targetProject</span>=<span class="string">"$&#123;target.project&#125;"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"enableSubPackages"</span> <span class="attr">value</span>=<span class="string">"ture"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"trimStrings"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">javaModelGenerator</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!--生成xml mapper文件 路径 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">sqlMapGenerator</span> <span class="attr">targetPackage</span>=<span class="string">"$&#123;xml.mapper.package&#125;"</span> <span class="attr">targetProject</span>=<span class="string">"$&#123;target.project&#125;"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"enableSubPackages"</span> <span class="attr">value</span>=<span class="string">"ture"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">sqlMapGenerator</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 生成的Dao接口 的包路径 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">javaClientGenerator</span> <span class="attr">type</span>=<span class="string">"ANNOTATEDMAPPER"</span> <span class="attr">targetPackage</span>=<span class="string">"$&#123;dao.package&#125;"</span> <span class="attr">targetProject</span>=<span class="string">"$&#123;target.project&#125;"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"enableSubPackages"</span> <span class="attr">value</span>=<span class="string">"ture"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">javaClientGenerator</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!--对应数据库表名 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">"%"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">generatedKey</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">sqlStatement</span>=<span class="string">"Mysql"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">table</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">context</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">generatorConfiguration</span>&gt;</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MyBatis/" rel="tag"># MyBatis</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/20/springBoot/Spring Boot的启动器Starter详解/" rel="next" title="Spring Boot的启动器Starter详解">
+                <i class="fa fa-chevron-left"></i> Spring Boot的启动器Starter详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="donate-btn">作者</div>
+    <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyCloud Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命在于折腾!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg"
+               alt="flycloud" />
+          <p class="site-author-name" itemprop="name">flycloud</p>
+           
+              <p class="site-description motion-element" itemprop="description">Stay Hungry,Stay Foolish</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">flycloud : Stay Hungry,Stay Foolish</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+ 
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+<a id="hamburger" class="mm-slideout" href="#mmenu"><span></span></a>
+
+<nav id="mmenu">
+     <ul>
+
+     </ul>
+ </nav>
+<link type="text/css" rel="stylesheet" href="http://cdn.bootcss.com/jQuery.mmenu/5.5.3/core/css/jquery.mmenu.all.css" />
+<link type="text/css" rel="stylesheet" href="http://7xowny.com1.z0.glb.clouddn.com/flyCloudMenu.css" />
+<script type="text/javascript" src="http://7xowny.com1.z0.glb.clouddn.com/jquery.mmenu.min.all.js"></script>
+
+<script type="text/javascript">
+  $(function () {
+          $.getJSON("/json/menu.json",function(data){
+            $.each( data, function() {
+            var html="<li id='" + this.id + "'>" +"<span>"+this.text + "</span></li>"
+            var chirldHtml="<ul><li id='"+this.id+"'>"+"<span>"+this.text+"</span></li></ul>"
+            if(this.pid==''){
+                $('#mmenu>ul:first').append(html);
+              }else{
+              if($('li#'+this.pid+">ul").length==0){
+                 $('#'+this.pid).append(chirldHtml);
+              }else{
+                $('li#'+this.pid+">ul").append(html);
+              }
+             }
+            });
+
+            
+              var html="<li>" +"<a href='/2016/07/14/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+ " MyBatis-generator 自动生成MyBatis代码</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+" MyBatis-generator 自动生成MyBatis代码</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/21/MBG/MyBatis-generator 分析/'>"+ " MyBatis-generator 分析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/21/MBG/MyBatis-generator 分析/'>"+" MyBatis-generator 分析</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/07/14/MBG/MyBatis配件文件详解/'>"+ " MyBatis generator 配置文件详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/MBG/MyBatis配件文件详解/'>"+" MyBatis generator 配置文件详解</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/maven/mirror和repository 区别/'>"+ " Maven：mirror和repository 区别</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/maven/mirror和repository 区别/'>"+" Maven：mirror和repository 区别</a></li></ul>"
+              
+                   if($('li#'+"220>ul").length==0){
+                    $('li#'+"220").append(chirldHtml);
+                   }else{
+                    $('li#'+"220>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/servlet/Servlet详解/'>"+ " Servlet详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/servlet/Servlet详解/'>"+" Servlet详解</a></li></ul>"
+              
+                   if($('li#'+"70>ul").length==0){
+                    $('li#'+"70").append(chirldHtml);
+                   }else{
+                    $('li#'+"70>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+ " markdown style guide</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+" markdown style guide</a></li></ul>"
+              
+                   if($('li#'+"160>ul").length==0){
+                    $('li#'+"160").append(chirldHtml);
+                   }else{
+                    $('li#'+"160>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/07/14/MBG/MybatisGeneator/'>"+ " MyBatis-generator 自动生成MyBatis代码</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/MBG/MybatisGeneator/'>"+" MyBatis-generator 自动生成MyBatis代码</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/springBoot/Spring Boot的启动器Starter详解/'>"+ " Spring Boot的启动器Starter详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/Spring Boot的启动器Starter详解/'>"+" Spring Boot的启动器Starter详解</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/17/myBatis/Mybatis-spring整合/'>"+ " MyBatis spring整合</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/17/myBatis/Mybatis-spring整合/'>"+" MyBatis spring整合</a></li></ul>"
+              
+                   if($('li#'+"180>ul").length==0){
+                    $('li#'+"180").append(chirldHtml);
+                   }else{
+                    $('li#'+"180>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+ " Git远程操作详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+" Git远程操作详解</a></li></ul>"
+              
+                   if($('li#'+"51>ul").length==0){
+                    $('li#'+"51").append(chirldHtml);
+                   }else{
+                    $('li#'+"51>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/11/front/frontTec/前端常见跨域解决方案（全）/'>"+ " 前端常见跨域解决方案（全）</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/11/front/frontTec/前端常见跨域解决方案（全）/'>"+" 前端常见跨域解决方案（全）</a></li></ul>"
+              
+                   if($('li#'+"141>ul").length==0){
+                    $('li#'+"141").append(chirldHtml);
+                   }else{
+                    $('li#'+"141>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+ " BeanPostProcessor</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+" BeanPostProcessor</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/05/git&github/github/github项目排名/'>"+ " github项目排名</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github项目排名/'>"+" github项目排名</a></li></ul>"
+              
+                   if($('li#'+"52>ul").length==0){
+                    $('li#'+"52").append(chirldHtml);
+                   }else{
+                    $('li#'+"52>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+ " How to use the Spring FactoryBean</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+" How to use the Spring FactoryBean</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+ " ServletContext与ApplicationContext的区别</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+" ServletContext与ApplicationContext的区别</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+ " ContextLoaderListener And DispatcherServlet Concepts</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+" ContextLoaderListener And DispatcherServlet Concepts</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/Exception/'>"+ " Exception Handling in Spring MVC</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/Exception/'>"+" Exception Handling in Spring MVC</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+ " 看看Spring的源码 (一)——Bean加载过程</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+" 看看Spring的源码 (一)——Bean加载过程</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+ " 看看Spring的源码(二)——bean实例化</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+" 看看Spring的源码(二)——bean实例化</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+
+            $('#mmenu').mmenu({
+             extensions		: [ 'widescreen', 'theme-white', 'effect-menu-slide', 'pagedim-black','pageshadow'],
+             			counters		: true,
+             			dividers		: {
+             				fixed 	: true
+             			},
+             			navbar 			: {
+             				title	: 'blog-catalog'
+             			},
+             			navbars			: [{
+             				position: 'top',
+             				content : ['searchfield']
+             			}, {
+             				position: 'top'
+             			}, {
+             				position: 'bottom',
+             				content : ['<div>Hosted by <a href="http://damonflycloud.info" target="_blank">FlyCloud</a></div>']
+             			}]
+            });
+          });
+
+
+       /**$(".donate-btn").hover(function () {
+        $('#sidebar').css('display','block');
+        $('.header-inner').css('display','inherit');
+       $('.sidebar-inner').css('display','inherit');
+        });
+
+         $('#hamburger').click(function(){
+         $('.sidebar').css('display','none');
+          $('#mm-blocker').on("click",function(){
+          $('.sidebar').css('display','block');
+        })
+       });**/
+       
+       
+
+      });
+</script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+ 
+
+</body>
+
+ 
+
+</html>
