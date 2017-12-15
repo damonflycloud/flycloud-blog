@@ -1,0 +1,1228 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/flyCloud.css?v=5.1.0"/
+
+
+  <meta name="keywords" content="spring," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://7xowny.com1.z0.glb.clouddn.com/flycloud.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="@Bean and @ConfigurationSpring 中新的 Java 配置支持的核心就是@Configuration注解的类和@Bean注解的方法。 @Bean注解用来指定一个方法实例，配置和初始化一个新对象交给Spring IOC容器管理。对于那些熟悉Spring&amp;lt;beans&amp;gt;XML配置的人来说，@Bean注解和&amp;lt;bean&amp;gt;元素扮演相同的角色。你可以使用在@Co">
+<meta name="keywords" content="spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Java的容器配置">
+<meta property="og:url" content="flycloud.me/2017/11/30/spring&springMvc/spring/基于Java的容器配置/index.html">
+<meta property="og:site_name" content="FlyCloud Blog">
+<meta property="og:description" content="@Bean and @ConfigurationSpring 中新的 Java 配置支持的核心就是@Configuration注解的类和@Bean注解的方法。 @Bean注解用来指定一个方法实例，配置和初始化一个新对象交给Spring IOC容器管理。对于那些熟悉Spring&amp;lt;beans&amp;gt;XML配置的人来说，@Bean注解和&amp;lt;bean&amp;gt;元素扮演相同的角色。你可以使用在@Co">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-04T07:15:12.764Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于Java的容器配置">
+<meta name="twitter:description" content="@Bean and @ConfigurationSpring 中新的 Java 配置支持的核心就是@Configuration注解的类和@Bean注解的方法。 @Bean注解用来指定一个方法实例，配置和初始化一个新对象交给Spring IOC容器管理。对于那些熟悉Spring&amp;lt;beans&amp;gt;XML配置的人来说，@Bean注解和&amp;lt;bean&amp;gt;元素扮演相同的角色。你可以使用在@Co">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":0,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="flycloud.me/2017/11/30/spring&springMvc/spring/基于Java的容器配置/"/>
+
+
+
+
+
+  <title> 基于Java的容器配置 | FlyCloud Blog </title>
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?060f8b2450825fadd6aff6e494ce6218";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="flycloud.me/2017/11/30/spring&springMvc/spring/基于Java的容器配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flycloud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyCloud Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                基于Java的容器配置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-30T21:53:55+08:00">
+                2017-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+            <span class="page-pv">热度
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>℃
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Bean-and-Configuration"><a href="#Bean-and-Configuration" class="headerlink" title="@Bean and @Configuration"></a>@Bean and @Configuration</h3><p>Spring 中新的 Java 配置支持的核心就是<code>@Configuration</code>注解的类和<code>@Bean</code>注解的方法。</p>
+<p><code>@Bean</code>注解用来指定一个方法实例，配置和初始化一个新对象交给Spring IOC容器管理。对于那些熟悉Spring<code>&lt;beans&gt;</code>XML配置的人来说，<code>@Bean</code>注解和<code>&lt;bean&gt;</code>元素扮演相同的角色。你可以使用在<code>@Component</code>类中使用<code>@Bean</code>注解方法，但更常用的，是在<code>@Configuration</code>类中使用,<strong>@Bean标注在方法上(返回某个实例的方法)，等价于spring的xml配置文件中的<bean>，作用为：注册bean对象</bean></strong>。</p>
+<a id="more"></a>
+<p><code>@Configuration</code>注解的类表示它的主要目的是作为bean定义的来源。另外，<code>@Configuration</code>类允许内部bean依赖通过简单地调用同一类内的其他<code>@Bean</code>方法进行定义。<strong>@Configuration标注在类上，相当于把该类作为spring的xml配置文件中的<beans>，作用为：配置spring容器(应用上下文)</beans></strong> 最简单的<code>@Configuration</code>类可能是这样的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> MyService <span class="title">myService</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MyServiceImpl();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面<code>AppConfig</code>类与下面Spring XML中的<beans>配置是等同的：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"myService"</span> <span class="attr">class</span>=<span class="string">"com.acme.services.MyServiceImpl"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure></beans></p>
+<blockquote>
+<p>Full @Configuration vs ‘lite’ @Beans mode?<br>当<code>@Bean</code>方法不是在<code>@Configuration</code>中声明时，被称为‘lite’ mode。例如，bean方法在<code>@Component</code>或甚至在简单的PO类中声明，都被认为是’lite‘。<br>与full <code>@Configuration</code>不同的是，lite<code>@Bean</code>方法无法声明内部bean依赖。通常，当在<code>lite</code>mode下时一个<code>@Bean</code>方法不应该调用另一个<code>@Bean</code>方法。<br>只有在<code>@Configuration</code>类下使用<code>@Bean</code>方法是被推荐的，确保’full’mode经常使用到。这将阻止被同一个<code>@Bean</code>方法意外地多次调用，帮助减少在<code>lite</code>mode下出现的难以追踪的bugs。</p>
+</blockquote>
+<p><code>@Bean</code>和<code>@Configuration</code>注解将会在下面的章节中被深入地探讨。首先，我们先来看看使用基于 Java 的配置创建 Spring 容器的各种方式。</p>
+<h3 id="Instantiating-the-Spring-container-using-AnnotationConfigApplicationContext"><a href="#Instantiating-the-Spring-container-using-AnnotationConfigApplicationContext" class="headerlink" title="Instantiating the Spring container using AnnotationConfigApplicationContext"></a>Instantiating the Spring container using AnnotationConfigApplicationContext</h3><p>下面的章节讲解了 Spring 的 <code>AnnotationConfigApplicationContext</code>，是在 Spring3.0 中新加入的。这个全能的<code>ApplicationContext</code>实现类不仅仅可以接受<code>@Configuration</code>类作为输入，也可以是普通的<code>@Component</code>类，还有使用 JSR-330 元数据注解的类。<br>当<code>@Configuration</code>类作为输入时，<code>@Configuration</code>类本身作为 bean 被注册了，并且类内所有声明的<code>@Bean</code>方法也被作为 bean 注册了。<br>当<code>@Component</code> 和 JSR-330 类作为输入时，它们被注册为 bean，并且被假设如<code>@Autowired</code> 或<code>@Inject</code> 的 DI 元数据在类中需要的地方使用。</p>
+<h4 id="简单构造"><a href="#简单构造" class="headerlink" title="简单构造"></a>简单构造</h4><p>与使用Spring XML配置作为输入实例化<code>ClassPathXmlApplicationContext</code>过程类似，当实例化<code>AnnotationConfigApplicationContext</code>时<code>@Configuration</code>类可能作为输入。这就允许在 Spring 容器中完全可以不使用 XML：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    ApplicationContext ctx = <span class="keyword">new</span> AnnotationConfigApplicationContext(AppConfig.class);</div><div class="line">    MyService myService = ctx.getBean(MyService.class);</div><div class="line">    myService.doStuff();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>正如上面所提到的，<code>AnnotationConfigApplicationContext</code>不仅仅局限于和<code>@Configuration</code>类合作。任意<code>@Component</code>或 JSR-330 注解的类都可以作为构造方法的输入。比如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    ApplicationContext ctx = <span class="keyword">new</span> AnnotationConfigApplicationContext(MyServiceImpl.class, Dependency1.class, Dependency2.class);</div><div class="line">    MyService myService = ctx.getBean(MyService.class);</div><div class="line">    myService.doStuff();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面假设<code>MyServiceImpl</code>，<code>Dependency1</code>和 <code>Dependency2</code> 使用了 Spring 依赖注入注解，比如<code>@Autowired</code>。</p>
+<h3 id="使用-register-Class-lt-gt-…-编程式构建容器"><a href="#使用-register-Class-lt-gt-…-编程式构建容器" class="headerlink" title="使用 register(Class&lt;?&gt;…)编程式构建容器"></a>使用 register(Class&lt;?&gt;…)编程式构建容器</h3><p><code>AnnotationConfigApplicationContext</code>可以使用无参构造方法来实例化，之后使用<code>register()</code>方法来配置。这个方法当编程式地构建<code>AnnotationConfigApplicationContext</code>时尤其有用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public static void main(String[] args) &#123;</div><div class="line">    AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();</div><div class="line">    ctx.register(AppConfig.class, OtherConfig.class);</div><div class="line">    ctx.register(AdditionalConfig.class);</div><div class="line">    ctx.refresh();</div><div class="line">    MyService myService = ctx.getBean(MyService.class);</div><div class="line">    myService.doStuff();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="使用-scan-String-开启组件扫描"><a href="#使用-scan-String-开启组件扫描" class="headerlink" title="使用 scan(String..)开启组件扫描"></a>使用 scan(String..)开启组件扫描</h4><p>要开启组件扫描，仅仅需要在你的<code>@Configuration</code>类上加上如下注解：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">@ComponentScan(basePackages = &quot;com.acme&quot;)</div><div class="line">public class AppConfig  &#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>有经验的 Spring 用户肯定会熟悉下面这个 Spring 的 <code>context:</code>命名空间中的常用 XML声明：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;beans&gt;</div><div class="line">    &lt;context:component-scan base-package=&quot;com.acme&quot;/&gt;</div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure></p>
+<p>在上面的示例中，<code>com.acme</code>包会被扫描到，去查找任意<code>@Component</code>注解的类，那些类就会被注册为 Spring 容器中的 bean。<code>AnnotationConfigApplicationContext</code> 暴露出 <code>scan(String ...)</code>方法，允许相同的组件扫描功能：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public static void main(String[] args) &#123;</div><div class="line">    AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();</div><div class="line">    ctx.scan(&quot;com.acme&quot;);</div><div class="line">    ctx.refresh();</div><div class="line">    MyService myService = ctx.getBean(MyService.class);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>记得<code>@Configuration</code>类是使用<code>@Component</code>进行元数据注解的，所以它们是组件扫描的候选者！在上面的示例中，假设 <code>AppConfig</code> 是声明在 <code>com.acme</code> 包（或是其中的子包）中的，那么会在调用 <code>scan()</code>方法时被找到，在调用 <code>refresh()</code>方法时，所有它的<code>@Bean</code>方法就会被处理并注册为容器中的 bean。</p>
+</blockquote>
+<p>总结:</p>
+<blockquote>
+<p>(1)、@Bean注解在返回实例的方法上，如果未通过@Bean指定bean的名称，则默认与标注的方法名相同； </p>
+<p>(2)、@Bean注解默认作用域为单例singleton作用域，可通过@Scope(“prototype”)设置为原型作用域； </p>
+<p>(3)、既然@Bean的作用是注册bean对象，那么完全可以使用@Component、@Controller、@Service、@Ripository等注解注册bean，当然需要配置@ComponentScan注解进行自动扫描。</p>
+</blockquote>
+<h4 id="支持Web应用的AnnotationConfigWebApplicationContext"><a href="#支持Web应用的AnnotationConfigWebApplicationContext" class="headerlink" title="支持Web应用的AnnotationConfigWebApplicationContext"></a>支持Web应用的<code>AnnotationConfigWebApplicationContext</code></h4><p><code>WebApplicationContext</code> 是 <code>AnnotationConfigApplicationContext</code> 的变种，适用于 <code>AnnotationConfigWebApplicationContext</code>。当配置 Spring 的 Servlet 监听器<code>ContextLoaderListener</code>，Spring MVC 的 <code>DispatcherServlet</code> 等时，这个实现类就可能被用到了。下面的代码是在 <code>web.xml</code> 中的片段，配置了典型的 Spring MVC 的 Web 应用程序。注意 <code>contextClass</code> 上下文参数和初始化参数的使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">&lt;web-app&gt;</div><div class="line">    &lt;!-- Configure ContextLoaderListener to use AnnotationConfigWebApplicationContext</div><div class="line">        instead of the default XmlWebApplicationContext --&gt;</div><div class="line">    &lt;context-param&gt;</div><div class="line">        &lt;param-name&gt;contextClass&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;</div><div class="line">            org.springframework.web.context.support.AnnotationConfigWebApplicationContext</div><div class="line">        &lt;/param-value&gt;</div><div class="line">    &lt;/context-param&gt;</div><div class="line"></div><div class="line">    &lt;!-- Configuration locations must consist of one or more comma- or space-delimited</div><div class="line">        fully-qualified @Configuration classes. Fully-qualified packages may also be</div><div class="line">        specified for component-scanning --&gt;</div><div class="line">    &lt;context-param&gt;</div><div class="line">        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;com.acme.AppConfig&lt;/param-value&gt;</div><div class="line">    &lt;/context-param&gt;</div><div class="line"></div><div class="line">    &lt;!-- Bootstrap the root application context as usual using ContextLoaderListener --&gt;</div><div class="line">    &lt;listener&gt;</div><div class="line">        &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;</div><div class="line">    &lt;/listener&gt;</div><div class="line"></div><div class="line">    &lt;!-- Declare a Spring MVC DispatcherServlet as usual --&gt;</div><div class="line">    &lt;servlet&gt;</div><div class="line">        &lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;</div><div class="line">        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;</div><div class="line">        &lt;!-- Configure DispatcherServlet to use AnnotationConfigWebApplicationContext</div><div class="line">            instead of the default XmlWebApplicationContext --&gt;</div><div class="line">        &lt;init-param&gt;</div><div class="line">            &lt;param-name&gt;contextClass&lt;/param-name&gt;</div><div class="line">            &lt;param-value&gt;</div><div class="line">                org.springframework.web.context.support.AnnotationConfigWebApplicationContext</div><div class="line">            &lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">        &lt;!-- Again, config locations must consist of one or more comma- or space-delimited</div><div class="line">            and fully-qualified @Configuration classes --&gt;</div><div class="line">        &lt;init-param&gt;</div><div class="line">            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</div><div class="line">            &lt;param-value&gt;com.acme.web.MvcConfig&lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">    &lt;/servlet&gt;</div><div class="line"></div><div class="line">    &lt;!-- map all requests for /app/* to the dispatcher servlet --&gt;</div><div class="line">    &lt;servlet-mapping&gt;</div><div class="line">        &lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;</div><div class="line">        &lt;url-pattern&gt;/app/*&lt;/url-pattern&gt;</div><div class="line">    &lt;/servlet-mapping&gt;</div><div class="line">&lt;/web-app&gt;</div></pre></td></tr></table></figure></p>
+<h4 id="6-12-3-Using-the-Bean-annotation"><a href="#6-12-3-Using-the-Bean-annotation" class="headerlink" title="6.12.3 Using the @Bean annotation"></a>6.12.3 Using the @Bean annotation</h4><p><code>@Bean</code>是一个方法级的注解，与XML的<code>&lt;bean/&gt;</code>元素功能相同。该注解支持一些<code>&lt;bean/&gt;</code>上的属性，如:<code>init-method</code>, <code>destroy-method</code>, <code>autowiring</code> 和 <code>name</code>。<br>你可以在<code>@Configuration</code>或<code>@Component</code>类里使用<code>@Bean</code>注解。</p>
+<h5 id="声明一个bean"><a href="#声明一个bean" class="headerlink" title="声明一个bean"></a>声明一个bean</h5><p>要声明一个bean，可以简单地使用<code>@Bean</code>注解到一个方法上。你可以在<code>ApplicationContext</code>容器中使用这个方法的返回值来注册一个bean定义。默认的，bean的名称将会与方法的名称相同。下面是一个<code>@Bean</code>声明的简单示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class AppConfig &#123;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public TransferService transferService() &#123;</div><div class="line">        return new TransferServiceImpl();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上述配置是完全与下面的Spring XML相等的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;beans&gt;</div><div class="line">    &lt;bean id=&quot;transferService&quot; class=&quot;com.acme.TransferServiceImpl&quot;/&gt;</div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure></p>
+<p>两者的声明都在<code>ApplicationContext</code>中创建了一个名为<code>transferService</code>的bean，绑定了一个<code>TransferServiceImpl</code>类型的实例对象：</p>
+<blockquote>
+<p>transferService -&gt; com.acme.TransferServiceImpl</p>
+</blockquote>
+<h4 id="Bean依赖"><a href="#Bean依赖" class="headerlink" title="Bean依赖"></a>Bean依赖</h4><p><code>@Bean</code>注解的方法可以有任意数量的参数依赖来构建bean。比如，如果我们的<code>TransferService</code>要求一个<code>AccountRepository</code>，我们可以具体化该依赖通过一个方法参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class AppConfig &#123;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public TransferService transferService(AccountRepository accountRepository) &#123;</div><div class="line">        return new TransferServiceImpl(accountRepository);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个解析机制与基于构造器的依赖注入非常相似，详情查看“Constructor-based dependency injection”章节。</p>
+<h4 id="接收生命周期回调"><a href="#接收生命周期回调" class="headerlink" title="接收生命周期回调"></a>接收生命周期回调</h4><p>任何使用<code>@Bean</code>注解定义的类都支持定期的生命周期回调，可以使用 JSR-250 的<code>@PostConstruct</code>和<code>@PreDestroy</code>注解，详情查看<code>6.9.8 @PostConstruct and @PreDestroy</code></p>
+<p>定期的生命周期回调得到了很好地支持。如果一个bean实现了<code>InitializingBean</code>, <code>DisposableBean</code>, or <code>Lifecycle</code>接口，他们各自的方法将会被容器调用。</p>
+<p>标准的一套<code>*Aware</code>接口，例如，<code>BeanFactoryAware</code>, <code>BeanNameAware</code>, <code>MessageSourceAware</code>, <code>ApplicationContextAware</code>等等，也一样得到了很好的支持。</p>
+<p><code>@Bean</code>注解支持指定任意的初始化和销毁的回调方法，非常类似于Spring XML中bean元素的<code>init-method</code>和<code>destroy-method</code>属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">public class Foo &#123;</div><div class="line">    public void init() &#123;</div><div class="line">        // initialization logic</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class Bar &#123;</div><div class="line">    public void cleanup() &#123;</div><div class="line">        // destruction logic</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@Configuration</div><div class="line">public class AppConfig &#123;</div><div class="line"></div><div class="line">    @Bean(initMethod = &quot;init&quot;)</div><div class="line">    public Foo foo() &#123;</div><div class="line">        return new Foo();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Bean(destroyMethod = &quot;cleanup&quot;)</div><div class="line">    public Bar bar() &#123;</div><div class="line">        return new Bar();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>默认地，使用Java配置的bean定义有public的<code>close</code>或<code>shutdown</code>方法时，在销毁回调时会被自动地调用。所以如果你有public的<code>close</code>或<code>shutdown</code>方法，而你不想它在容器关闭时被调用，那你可以简单地加上<code>@Bean(destroyMethod=&quot;&quot;)</code>到你的bean定义上，以此来使默认的<code>(inferred)</code>行为失效。</p>
+<p>你可以想默认地通过JNDI获取你需要的在应用之外管理的资源作为它的生命周期。特别地，一定要始终做一个<code>DataSource</code>，因为它是已知的有问题的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@Bean(destroyMethod=&quot;&quot;)</div><div class="line">public DataSource dataSource() throws NamingException &#123;</div><div class="line">    return (DataSource) jndiTemplate.lookup(&quot;MyDS&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当然，上面<code>Foo</code>的示例，它等同于在构造期间调用<code>init()</code>方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class AppConfig &#123;</div><div class="line">    @Bean</div><div class="line">    public Foo foo() &#123;</div><div class="line">        Foo foo = new Foo();</div><div class="line">        foo.init();</div><div class="line">        return foo;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>当你完全使用Java配置，你对你的对象可以做任何你想做的，不要总必须依赖于容器的生命周期！</p>
+</blockquote>
+<h4 id="指定bean的作用域"><a href="#指定bean的作用域" class="headerlink" title="指定bean的作用域"></a>指定bean的作用域</h4><h5 id="使用-Scope注解"><a href="#使用-Scope注解" class="headerlink" title="使用@Scope注解"></a>使用<code>@Scope</code>注解</h5><p>你可以指定使用<code>@Bean</code>注解的bean定义应该有个指定的作用域。你可以使用任何在6.5章节 Bean scopes中提到的标准的作用域。</p>
+<p>默认的作用域是<code>singleton</code>，但你可以使用<code>@Scope</code>注解进行覆盖：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class MyConfiguration &#123;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    @Scope(&quot;prototype&quot;)</div><div class="line">    public Encryptor encryptor() &#123;</div><div class="line">        // ...</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h5 id="Scope-和-scoped-proxy"><a href="#Scope-和-scoped-proxy" class="headerlink" title="@Scope 和 scoped-proxy"></a>@Scope 和 scoped-proxy</h5><p>Spring 提供了一个便利的途径，通过作用域代理处理作用域依赖。当使用XML配置时，最简单的方法创建这样一个代理就是使用<code>&lt;aop:scoped-proxy/&gt;</code>元素。在Java中使用<code>@Scope</code>注解带<code>proxyMode</code>属性来配置你的beans是等价的。默认的是没有代理（<code>ScopedProxyMode.NO</code>），但你可以指定<code>ScopedProxyMode.TARGET_CLASS</code>或<code>ScopedProxyMode.INTERFACES</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// an HTTP Session-scoped bean exposed as a proxy</div><div class="line">@Bean</div><div class="line">@Scope(value = &quot;session&quot;, proxyMode = ScopedProxyMode.TARGET_CLASS)</div><div class="line">public UserPreferences userPreferences() &#123;</div><div class="line">    return new UserPreferences();</div><div class="line">&#125;</div><div class="line"></div><div class="line">@Bean</div><div class="line">public Service userService() &#123;</div><div class="line">    UserService service = new SimpleUserService();</div><div class="line">    // a reference to the proxied userPreferences bean</div><div class="line">    service.setUserPreferences(userPreferences());</div><div class="line">    return service;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h5 id="自定义bean命名"><a href="#自定义bean命名" class="headerlink" title="自定义bean命名"></a>自定义bean命名</h5><p>默认地，配置类使用<code>@Bean</code>方法的名称来作为注册bean的名称。这个方法可以被重写，当然，使用的是<code>name</code>属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class AppConfig &#123;</div><div class="line"></div><div class="line">    @Bean(name = &quot;myFoo&quot;)</div><div class="line">    public Foo foo() &#123;</div><div class="line">        return new Foo();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="Bean-混淆现象"><a href="#Bean-混淆现象" class="headerlink" title="Bean 混淆现象"></a>Bean 混淆现象</h4><p>在 6.3.1 , “Naming beans” 章节讨论过，有时需要对单个bean使用多个名称才能满足需要，否则就会有bean混淆现象。<code>@Bean</code>注解的<code>name</code>属性为了达到该目的可以接收一个字符串数组。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class AppConfig &#123;</div><div class="line"></div><div class="line">    @Bean(name = &#123; &quot;dataSource&quot;, &quot;subsystemA-dataSource&quot;, &quot;subsystemB-dataSource&quot; &#125;)</div><div class="line">    public DataSource dataSource() &#123;</div><div class="line">        // instantiate, configure and return DataSource bean...</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="Bean-描述"><a href="#Bean-描述" class="headerlink" title="Bean 描述"></a>Bean 描述</h4><p>有时提供一个更详细的bean的文本描述是很有帮助的。这是特别有用当beans用于（可能通过JMX）监测的目的。</p>
+<p>使用<code>@Description</code>注解来对<code>@Bean</code>添加一个描述：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class AppConfig &#123;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    @Description(&quot;Provides a basic example of a bean&quot;)</div><div class="line">    public Foo foo() &#123;</div><div class="line">        return new Foo();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="6-12-4-Using-the-Configuration-annotation"><a href="#6-12-4-Using-the-Configuration-annotation" class="headerlink" title="6.12.4 Using the @Configuration annotation"></a>6.12.4 Using the @Configuration annotation</h4><p><code>@Configuration</code>是一个类级别的注解，用于表明此对象是一个bean定义的资源。<code>@Configuration</code>类通过public的<code>@Bean</code>注解的方法来声明beans。调用<code>@Configuration</code>类的<code>@Bean</code>方法也可以被用于定义inter-bean依赖。详情查看<code>6.12.1, “Basic concepts: @Bean and @Configuration”章节</code>。</p>
+<h4 id="Injecting-inter-bean-dependencies"><a href="#Injecting-inter-bean-dependencies" class="headerlink" title="Injecting inter-bean dependencies"></a>Injecting inter-bean dependencies</h4><p>当<code>@Beans</code>上有其它bean的依赖，简单演示一个bean方法调用另一个：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class AppConfig &#123;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public Foo foo() &#123;</div><div class="line">        return new Foo(bar());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public Bar bar() &#123;</div><div class="line">        return new Bar();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在上面的例子中，<code>foo</code>bean通过构造器注入接收了一个<code>bar</code>引用。</p>
+<blockquote>
+<p>这个声明inter-bean依赖的方法只会在<code>@Bean</code>声明在<code>@Configuration</code>类下时才会起效。你不能使用简单的<code>@Component</code>类声明inter-bean依赖。</p>
+</blockquote>
+<h4 id="查找方法注入"><a href="#查找方法注入" class="headerlink" title="查找方法注入"></a>查找方法注入</h4><p>如前所述，查找方法注入是一个高级特性，你应该很少会用到。当一个singleton作用域的bean有一个prototype作用域bean的依赖时，这将很有用。对于Java配置，提供了一种自然的方式实现这一模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public abstract class CommandManager &#123;</div><div class="line">    public Object process(Object commandState) &#123;</div><div class="line">        // grab a new instance of the appropriate Command interface</div><div class="line">        Command command = createCommand();</div><div class="line"></div><div class="line">        // set the state on the (hopefully brand new) Command instance</div><div class="line">        command.setState(commandState);</div><div class="line">    return command.execute();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // okay... but where is the implementation of this method?</div><div class="line">    protected abstract Command createCommand();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用Java配置支持，你可以创建一个<code>CommandManager</code>的子类，其虚方法<code>createCommand()</code>将会被重写，通过此种方式，来查找一个新的（prototype）的command对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">@Bean</div><div class="line">@Scope(&quot;prototype&quot;)</div><div class="line">public AsyncCommand asyncCommand() &#123;</div><div class="line">    AsyncCommand command = new AsyncCommand();</div><div class="line">    // inject dependencies here as required</div><div class="line">    return command;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@Bean</div><div class="line">public CommandManager commandManager() &#123;</div><div class="line">    // return new anonymous implementation of CommandManager with command() overridden</div><div class="line">    // to return a new prototype Command object</div><div class="line">    return new CommandManager() &#123;</div><div class="line">        protected Command createCommand() &#123;</div><div class="line">            return asyncCommand();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="Further-information-about-how-Java-based-configuration-works-internally"><a href="#Further-information-about-how-Java-based-configuration-works-internally" class="headerlink" title="Further information about how Java-based configuration works internally"></a>Further information about how Java-based configuration works internally</h4><p>下面的例子展示了<code>@Bean</code>注解的方法被调用了2次：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class AppConfig &#123;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public ClientService clientService1() &#123;</div><div class="line">        ClientServiceImpl clientService = new ClientServiceImpl();</div><div class="line">        clientService.setClientDao(clientDao());</div><div class="line">        return clientService;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public ClientService clientService2() &#123;</div><div class="line">        ClientServiceImpl clientService = new ClientServiceImpl();</div><div class="line">        clientService.setClientDao(clientDao());</div><div class="line">        return clientService;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public ClientDao clientDao() &#123;</div><div class="line">        return new ClientDaoImpl();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>clientDao()</code>在<code>clientService1()</code>中被调用一次，在<code>clientService2()</code>也被调用一次。从这个方法创建一个<code>ClientDaoImpl</code>实例并返回它，你通常期望会生成2个实例（每个service一个）。那肯定是有问题的：在Spring中，实例化beans默认拥有一个singleton作用域。这就是神奇的地方：所有的<code>@Configuration</code>类在启动的阶段使用CGLIB进行子类化。在子类中，子方法首先检查容器中任何缓存（scoped）的beans在它调用父方法及创建新的实例之前。注意，Spring3.2已经不再需要添加CGLIB到你的classpath中了，因为CGLIB类已经被打包到<code>org.springframework</code>，并被包含到<code>spring-core</code>JAR包中了。</p>
+<blockquote>
+<p>根据你的bean的作用域的不同，行为可能会有所不同。我们这里仅谈论了singltons。</p>
+<p>由于CGLIB在启动期间动态添加特性，所以这里有几个限制：</p>
+<ul>
+<li>配置类必须不能为final</li>
+<li>应该有一个无参的构造器</li>
+</ul>
+</blockquote>
+<h4 id="6-12-5-Composing-Java-based-configurations"><a href="#6-12-5-Composing-Java-based-configurations" class="headerlink" title="6.12.5 Composing Java-based configurations"></a>6.12.5 Composing Java-based configurations</h4><h5 id="使用-Import注解"><a href="#使用-Import注解" class="headerlink" title="使用@Import注解"></a>使用<code>@Import</code>注解</h5><p>就像 Spring 的 XML 文件中使用的<code>&lt;import/&gt;</code>元素帮助模块化配置一样，<code>@Import</code>注解允许从其它配置类中加载<code>@Bean</code>的配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class ConfigA &#123;</div><div class="line"></div><div class="line">     @Bean</div><div class="line">    public A a() &#123;</div><div class="line">        return new A();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">@Configuration</div><div class="line">@Import(ConfigA.class)</div><div class="line">public class ConfigB &#123;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public B b() &#123;</div><div class="line">        return new B();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>现在，当实例化上下文时，不需要指定<code>ConfigA.class</code> 和 <code>ConfigB.class</code> 了，仅仅 <code>ConfigB</code> 需要被显式提供：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public static void main(String[] args) &#123;</div><div class="line">    ApplicationContext ctx = new AnnotationConfigApplicationContext(ConfigB.class);</div><div class="line"></div><div class="line">    // now both beans A and B will be available...</div><div class="line">    A a = ctx.getBean(A.class);</div><div class="line">    B b = ctx.getBean(B.class);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这种方式简化了容器的实例化，仅仅是一个类需要被处理，而不是需要开发人员在构造时记住很多大量的<code>@Configuration</code>类。</p>
+<h5 id="在引入的-Bean定义中注入依赖"><a href="#在引入的-Bean定义中注入依赖" class="headerlink" title="在引入的@Bean定义中注入依赖"></a>在引入的@Bean定义中注入依赖</h5><p>上面的示例是可行的，但是太过简单。在很多实际场景中，bean 会有依赖其它配置的类的依赖。当使用 XML 时，这本身不是什么问题，因为没有调用编译器，而且我们可以仅仅声明 <code>ref=&quot;someBean&quot;</code>并且相信 Spring 在容器初始化时可以完成。当然，当使用<code>@Configuration</code>的类时，Java 编译器在配置模型上放置约束，对其它 bean 的引用必须是符合 Java 语法的。</p>
+<p>幸运的是，解决这个问题非常简单。我们已经讨论过了，<code>@Bean</code>方法可以有任意个参数声明bean依赖。让我们考虑一个更真实的场景，有个<code>@Configuration</code>类，每个bean都依赖其他的配置中声明的bean：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class ServiceConfig &#123;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public TransferService transferService(AccountRepository accountRepository) &#123;</div><div class="line">        return new TransferServiceImpl(accountRepository);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">@Configuration</div><div class="line">public class RepositoryConfig &#123;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public AccountRepository accountRepository(DataSource dataSource) &#123;</div><div class="line">        return new JdbcAccountRepository(dataSource);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">@Configuration</div><div class="line">@Import(&#123;ServiceConfig.class, RepositoryConfig.class&#125;)</div><div class="line">public class SystemTestConfig &#123;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public DataSource dataSource() &#123;</div><div class="line">        // return new DataSource</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">public static void main(String[] args) &#123;</div><div class="line">    ApplicationContext ctx = new AnnotationConfigApplicationContext(SystemTestConfig.class);</div><div class="line">    // everything wires up across configuration classes...</div><div class="line">    TransferService transferService = ctx.getBean(TransferService.class);</div><div class="line">    transferService.transfer(100.00, &quot;A123&quot;, &quot;C456&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>有另外一种方法可以达到一样的结果。记住<code>@Configuration</code>类最终是容器中的另外一个bean：也就是说它们可以像其它 bean 那样利用<code>@Autowired</code>注入元数据！</p>
+<blockquote>
+<p>要确定这种方式的依赖注入是最简单的那种。<code>@Configuration</code>类在容器初始化时就进行处理了，强制要求依赖使用这种方式进行注入可能导致意外的早期初始化问题。如果可能，就采用如上述例子所示的基于参数的注入。<br>同时，也要特别小心通过<code>@Bean</code>的<code>BeanPostProcessor</code> <code>BeanFactoryPostProcessor</code>定义。它们应该被声明为static的<code>@Bean</code>方法，不会触发实例化它们的包含类。否则，<code>@Autowired</code>和<code>@Value</code>将在配置类上不生效，因为它太早被创建为一个实例了。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class ServiceConfig &#123;</div><div class="line"></div><div class="line">    @Autowired</div><div class="line">    private AccountRepository accountRepository;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public TransferService transferService() &#123;</div><div class="line">        return new TransferServiceImpl(accountRepository);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">@Configuration</div><div class="line">public class RepositoryConfig &#123;</div><div class="line"></div><div class="line">    @Autowired</div><div class="line">    private DataSource dataSource;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public AccountRepository accountRepository() &#123;</div><div class="line">        return new JdbcAccountRepository(dataSource);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">@Configuration</div><div class="line">@Import(&#123;ServiceConfig.class, RepositoryConfig.class&#125;)</div><div class="line">public class SystemTestConfig &#123;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public DataSource dataSource() &#123;</div><div class="line">        // return new DataSource</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">public static void main(String[] args) &#123;</div><div class="line">    ApplicationContext ctx = new AnnotationConfigApplicationContext(SystemTestConfig.class);</div><div class="line">    // everything wires up across configuration classes...</div><div class="line">    TransferService transferService = ctx.getBean(TransferService.class);</div><div class="line">    transferService.transfer(100.00, &quot;A123&quot;, &quot;C456&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在上面的场景中，使用<code>@Autowired</code>工作正常，提供所需的模块化，但是准确地决定在哪儿声明自动装配的 bean 还是有些含糊。比如，作为开发者来看待 <code>ServiceConfig</code>，你如何准确知道<code>@Autowired AccountRepository</code> 在哪里声明的？它没有显式地出现在代码中，这可能很不错。要记得 <code>SpringSource Tool Suite</code> 提供工具可以生成展示所有对象是如何装配起来的-那可能就是你所需要的。而且，你的 Java IDE 可以很容器发现所有的声明，还有使用的 <code>AccountRepository</code> 类型，也会很快地给你展示出<code>@Bean</code>方法的位置和返回的类型。</p>
+<p>在这种歧义不能接受，你想直接在 IDE 中从一个<code>@Configuration</code> 类导航到另一个，要考虑自动装配配置类的本身：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class ServiceConfig &#123;</div><div class="line"></div><div class="line">    @Autowired</div><div class="line">    private RepositoryConfig repositoryConfig;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public TransferService transferService() &#123;</div><div class="line">        // navigate &apos;through&apos; the config class to the @Bean method!</div><div class="line">        return new TransferServiceImpl(repositoryConfig.accountRepository());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在上面的情形中，定义<code>AccountRepository</code>是完全明确的。而<code>ServiceConfig</code>却紧紧耦合到<code>RepositoryConfig</code>中了；这就需要我们来权衡了。这种紧耦合可以使用基于接口或抽象基类的<code>@Configuration</code>类来减轻。考虑下面的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class ServiceConfig &#123;</div><div class="line"></div><div class="line">    @Autowired</div><div class="line">    private RepositoryConfig repositoryConfig;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public TransferService transferService() &#123;</div><div class="line">        return new TransferServiceImpl(repositoryConfig.accountRepository());</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@Configuration</div><div class="line">public interface RepositoryConfig &#123;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    AccountRepository accountRepository();</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">@Configuration</div><div class="line">public class DefaultRepositoryConfig implements RepositoryConfig &#123;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public AccountRepository accountRepository() &#123;</div><div class="line">        return new JdbcAccountRepository(...);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">@Configuration</div><div class="line">@Import(&#123;ServiceConfig.class, DefaultRepositoryConfig.class&#125;) // import the concrete config!</div><div class="line">public class SystemTestConfig &#123;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public DataSource dataSource() &#123;</div><div class="line">        // return DataSource</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">public static void main(String[] args) &#123;</div><div class="line">    ApplicationContext ctx = new AnnotationConfigApplicationContext(SystemTestConfig.class);</div><div class="line">    TransferService transferService = ctx.getBean(TransferService.class);</div><div class="line">    transferService.transfer(100.00, &quot;A123&quot;, &quot;C456&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>现在<code>ServiceConfig</code> 和 <code>DefaultRepositoryConfig</code> 的耦合就比较松了，并且内建的 IDE 工具也一直有效：对于开发人员来说会更加简单地获取 <code>RepositoryConfig</code> 实现类的类型层次。以这种方式，导航<code>@Configuration</code> 类和它们的依赖就和普通的基于接口代码的导航过程没有任何区别了。</p>
+<h4 id="Conditionally-include-Configuration-classes-or-Bean-methods"><a href="#Conditionally-include-Configuration-classes-or-Bean-methods" class="headerlink" title="Conditionally include @Configuration classes or @Bean methods"></a>Conditionally include @Configuration classes or @Bean methods</h4><p>基于任意的系统状态，使完整的<code>@Configuration</code>类或单独的<code>@Bean</code>方法有条件性地生效或失效是很有用的。一个常见的例子就是当一个指定的profile已经在Spring环境中生效时使用<code>@Profile</code>注解来激活beans（详见<code>Section 6.13.1, “Bean definition profiles”</code>）。</p>
+<p><code>@Profile</code>注解是通过使用一个非常灵活的称为<code>@Conditional</code>的注解实现的。<code>@Conditional</code>注解表示具体的<code>org.springframework.context.annotation.Condition</code>实现者应该在<code>@Bean</code>被注册前先被访问。</p>
+<p><code>Condition</code>接口的实现简单地提供了一个<code>matches(…​)</code>方法，用来返回<code>true</code>或<code>false</code>。例如，以下就是使用<code>@Profile</code>具体的<code>Condition</code>实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) &#123;</div><div class="line">    if (context.getEnvironment() != null) &#123;</div><div class="line">        // Read the @Profile annotation attributes</div><div class="line">        MultiValueMap&lt;String, Object&gt; attrs = metadata.getAllAnnotationAttributes(Profile.class.getName());</div><div class="line">        if (attrs != null) &#123;</div><div class="line">            for (Object value : attrs.get(&quot;value&quot;)) &#123;</div><div class="line">                if (context.getEnvironment().acceptsProfiles(((String[]) value))) &#123;</div><div class="line">                    return true;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            return false;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return true;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="结合-Java和-和-XML"><a href="#结合-Java和-和-XML" class="headerlink" title="结合 Java和 和 XML"></a>结合 Java和 和 XML</h4><p>Spring 的<code>@Configuration</code>类并不是完全100%地支持 Spring XML 替换的。一些基本特性，比如 Spring XML 的命名空间会保持在一个理想的方式下去配置容器。在 XML 更便于使用或是必须要使用的情况下，你也有另外一个选择：以“XML为中心”的方式来实例化容器，比如，<code>ClassPathXmlApplicationContext</code>，或者以“Java 为中心”的方式，使用<code>AnnotationConfigurationApplicationContext</code> 和<code>@ImportResource</code>注解来引入需要的 XML。</p>
+<h5 id="以“XML为中心”使用-Configuration"><a href="#以“XML为中心”使用-Configuration" class="headerlink" title="以“XML为中心”使用@Configuration"></a>以“XML为中心”使用@Configuration</h5><p>以XML配置文件结合包含<code>@Configuration</code>类的点对点的方式来启动 Spring 容器是更好的选择。比如，在使用了 Spring XML配置的大型的代码库中，根据需要从已有的 XML 文件中创建<code>@Configuration</code>类是很简单的。在下面，你会发现在这种“XML为中心”情形下，使用<code>@Configuration</code> 类的选项。<br>记住，<code>@Configuration</code>类最终仅仅是容器中的bean。在这个示例中，我们创建了名为<code>AppConfig</code>的<code>@Configuration</code>类，并且将它包含在 <code>system-test-config.xml</code>文件中作为<code>&lt;bean/&gt;</code>的定义。因为开启了<code>&lt;context:annotation-config/&gt;</code>配置，容器会识别<code>@Configuration</code>注解，并以合适的方式处理声明在<code>AppConfig</code>中<code>@Bean</code>方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class AppConfig &#123;</div><div class="line"></div><div class="line">    @Autowired</div><div class="line">    private DataSource dataSource;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public AccountRepository accountRepository() &#123;</div><div class="line">        return new JdbcAccountRepository(dataSource);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public TransferService transferService() &#123;</div><div class="line">        return new TransferService(accountRepository());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h6 id="system-test-config-xml"><a href="#system-test-config-xml" class="headerlink" title="system-test-config.xml:"></a>system-test-config.xml:</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;beans&gt;</div><div class="line">    &lt;!-- enable processing of annotations such as @Autowired and @Configuration --&gt;</div><div class="line">    &lt;context:annotation-config/&gt;</div><div class="line">    &lt;context:property-placeholder location=&quot;classpath:/com/acme/jdbc.properties&quot;/&gt;</div><div class="line"></div><div class="line">    &lt;bean class=&quot;com.acme.AppConfig&quot;/&gt;</div><div class="line"></div><div class="line">    &lt;bean class=&quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;</div><div class="line">        &lt;property name=&quot;url&quot; value=&quot;$&#123;jdbc.url&#125;&quot;/&gt;</div><div class="line">        &lt;property name=&quot;username&quot; value=&quot;$&#123;jdbc.username&#125;&quot;/&gt;</div><div class="line">        &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot;/&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>jdbc.properties:<br>jdbc.url=jdbc:hsqldb:hsql://localhost/xdb<br>jdbc.username=sa<br>jdbc.password=   </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public static void main(String[] args) &#123;</div><div class="line">    ApplicationContext ctx = new ClassPathXmlApplicationContext(&quot;classpath:/com/acme/system-test-config.xml&quot;);</div><div class="line">    TransferService transferService = ctx.getBean(TransferService.class);</div><div class="line">    // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>在上面的<code>system-test-config.xml</code>文件中，<code>AppConfig</code>的<code>&lt;bean/&gt;</code>定义没有声明<code>id</code>元素。这么做也是可以接受的，就不必让其它 bean 去引用它了，同时也就不可能从容器中通过明确的名称来获取它了。同样地，<code>DataSource</code>bean，通过类型自动装配，那么明确的 bean<code>id</code>就不严格要求了。</p>
+</blockquote>
+<p>因为<code>@Configuration</code>是使用<code>@Component</code>来元数据注解的，被<code>@Configuration</code>注解的类是自动作为组件扫描的候选者的。使用上面相同的场景，我们可以重新来定义<code>system-test-config.xml</code>文件来利用组件扫描的优点。注意这种情况下，我们不需要明确地声明<code>&lt;context:annotation-config/&gt;</code>，因为<code>&lt;context:component-scan/&gt;</code>开启了相同的功能。</p>
+<h5 id="system-test-config-xml-1"><a href="#system-test-config-xml-1" class="headerlink" title="system-test-config.xml:"></a>system-test-config.xml:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;beans&gt;</div><div class="line">    &lt;!-- picks up and registers AppConfig as a bean definition --&gt;</div><div class="line">    &lt;context:component-scan base-package=&quot;com.acme&quot;/&gt;</div><div class="line">    &lt;context:property-placeholder location=&quot;classpath:/com/acme/jdbc.properties&quot;/&gt;</div><div class="line"></div><div class="line">    &lt;bean class=&quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;</div><div class="line">        &lt;property name=&quot;url&quot; value=&quot;$&#123;jdbc.url&#125;&quot;/&gt;</div><div class="line">        &lt;property name=&quot;username&quot; value=&quot;$&#123;jdbc.username&#125;&quot;/&gt;</div><div class="line">        &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot;/&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure>
+<h5 id="使用了-ImportResource导入XML的-Configuration类为中心"><a href="#使用了-ImportResource导入XML的-Configuration类为中心" class="headerlink" title="使用了@ImportResource导入XML的@Configuration类为中心"></a>使用了@ImportResource导入XML的@Configuration类为中心</h5><p>在<code>@Configuration</code>类作为配置容器主要机制的应用程序中，使用一些 XML 还是必要的。在这些情况中，仅仅使用<code>@ImportResource</code>来定义 XML 就可以了。这么来做就实现了“Java为中心”的方式来配置容器并保持 XML 在最低限度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">@ImportResource(&quot;classpath:/com/acme/properties-config.xml&quot;)</div><div class="line">public class AppConfig &#123;</div><div class="line"></div><div class="line">    @Value(&quot;$&#123;jdbc.url&#125;&quot;)</div><div class="line">    private String url;</div><div class="line"></div><div class="line">    @Value(&quot;$&#123;jdbc.username&#125;&quot;)</div><div class="line">    private String username;</div><div class="line"></div><div class="line">    @Value(&quot;$&#123;jdbc.password&#125;&quot;)</div><div class="line">    private String password;</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public DataSource dataSource() &#123;</div><div class="line">        return new DriverManagerDataSource(url, username, password);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">properties-config.xml</div><div class="line">&lt;beans&gt;</div><div class="line">    &lt;context:property-placeholder location=&quot;classpath:/com/acme/jdbc.properties&quot;/&gt;</div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>jdbc.properties<br>jdbc.url=jdbc:hsqldb:hsql://localhost/xdb<br>jdbc.username=sa<br>jdbc.password=<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public static void main(String[] args) &#123;</div><div class="line">    ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);</div><div class="line">    TransferService transferService = ctx.getBean(TransferService.class);</div><div class="line">    // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spring/" rel="tag"># spring</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/21/MBG/MyBatis-generator 分析/" rel="next" title="MyBatis-generator 分析">
+                <i class="fa fa-chevron-left"></i> MyBatis-generator 分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/04/rocketMQ/rocketMQ学习/十分钟入门RocketMQ/" rel="prev" title="十分钟入门RocketMQ">
+                十分钟入门RocketMQ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="donate-btn">作者</div>
+    <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyCloud Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命在于折腾!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg"
+               alt="flycloud" />
+          <p class="site-author-name" itemprop="name">flycloud</p>
+           
+              <p class="site-description motion-element" itemprop="description">Stay Hungry,Stay Foolish</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">flycloud : Stay Hungry,Stay Foolish</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+ 
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+<a id="hamburger" class="mm-slideout" href="#mmenu"><span></span></a>
+
+<nav id="mmenu">
+     <ul>
+
+     </ul>
+ </nav>
+<link type="text/css" rel="stylesheet" href="http://cdn.bootcss.com/jQuery.mmenu/5.5.3/core/css/jquery.mmenu.all.css" />
+<link type="text/css" rel="stylesheet" href="http://7xowny.com1.z0.glb.clouddn.com/flyCloudMenu.css" />
+<script type="text/javascript" src="http://7xowny.com1.z0.glb.clouddn.com/jquery.mmenu.min.all.js"></script>
+
+<script type="text/javascript">
+  $(function () {
+          $.getJSON("/json/menu.json",function(data){
+            $.each( data, function() {
+            var html="<li id='" + this.id + "'>" +"<span>"+this.text + "</span></li>"
+            var chirldHtml="<ul><li id='"+this.id+"'>"+"<span>"+this.text+"</span></li></ul>"
+            if(this.pid==''){
+                $('#mmenu>ul:first').append(html);
+              }else{
+              if($('li#'+this.pid+">ul").length==0){
+                 $('#'+this.pid).append(chirldHtml);
+              }else{
+                $('li#'+this.pid+">ul").append(html);
+              }
+             }
+            });
+
+            
+              var html="<li>" +"<a href='/2016/07/14/MBG/MyBatis配件文件详解/'>"+ " MyBatis generator 配置文件详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/MBG/MyBatis配件文件详解/'>"+" MyBatis generator 配置文件详解</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/07/14/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+ " MyBatis-generator 自动生成MyBatis代码</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+" MyBatis-generator 自动生成MyBatis代码</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/21/MBG/MyBatis-generator 分析/'>"+ " MyBatis-generator 分析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/21/MBG/MyBatis-generator 分析/'>"+" MyBatis-generator 分析</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+ " markdown style guide</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+" markdown style guide</a></li></ul>"
+              
+                   if($('li#'+"160>ul").length==0){
+                    $('li#'+"160").append(chirldHtml);
+                   }else{
+                    $('li#'+"160>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/17/myBatis/Mybatis-spring整合/'>"+ " MyBatis spring整合</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/17/myBatis/Mybatis-spring整合/'>"+" MyBatis spring整合</a></li></ul>"
+              
+                   if($('li#'+"180>ul").length==0){
+                    $('li#'+"180").append(chirldHtml);
+                   }else{
+                    $('li#'+"180>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/maven/mirror和repository 区别/'>"+ " Maven：mirror和repository 区别</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/maven/mirror和repository 区别/'>"+" Maven：mirror和repository 区别</a></li></ul>"
+              
+                   if($('li#'+"220>ul").length==0){
+                    $('li#'+"220").append(chirldHtml);
+                   }else{
+                    $('li#'+"220>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/servlet/Servlet详解/'>"+ " Servlet详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/servlet/Servlet详解/'>"+" Servlet详解</a></li></ul>"
+              
+                   if($('li#'+"70>ul").length==0){
+                    $('li#'+"70").append(chirldHtml);
+                   }else{
+                    $('li#'+"70>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/07/14/MBG/MybatisGeneator/'>"+ " MyBatis-generator 自动生成MyBatis代码</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/MBG/MybatisGeneator/'>"+" MyBatis-generator 自动生成MyBatis代码</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+ " java 注解总结</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+" java 注解总结</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+ " Git远程操作详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+" Git远程操作详解</a></li></ul>"
+              
+                   if($('li#'+"51>ul").length==0){
+                    $('li#'+"51").append(chirldHtml);
+                   }else{
+                    $('li#'+"51>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/11/front/frontTec/前端常见跨域解决方案（全）/'>"+ " 前端常见跨域解决方案（全）</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/11/front/frontTec/前端常见跨域解决方案（全）/'>"+" 前端常见跨域解决方案（全）</a></li></ul>"
+              
+                   if($('li#'+"141>ul").length==0){
+                    $('li#'+"141").append(chirldHtml);
+                   }else{
+                    $('li#'+"141>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/06/26/java/日志/log4j学习/'>"+ " Log4j学习</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/06/26/java/日志/log4j学习/'>"+" Log4j学习</a></li></ul>"
+              
+                   if($('li#'+"262>ul").length==0){
+                    $('li#'+"262").append(chirldHtml);
+                   }else{
+                    $('li#'+"262>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/05/rocketMQ/rocketMQ学习/RocketMQ命令/'>"+ " RocketMQ命令</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/05/rocketMQ/rocketMQ学习/RocketMQ命令/'>"+" RocketMQ命令</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/'>"+ " slf4j log4j logback关系详解和相关用法</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/'>"+" slf4j log4j logback关系详解和相关用法</a></li></ul>"
+              
+                   if($('li#'+"262>ul").length==0){
+                    $('li#'+"262").append(chirldHtml);
+                   }else{
+                    $('li#'+"262>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/04/rocketMQ/rocketMQ学习/十分钟入门RocketMQ/'>"+ " 十分钟入门RocketMQ</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/rocketMQ/rocketMQ学习/十分钟入门RocketMQ/'>"+" 十分钟入门RocketMQ</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/05/git&github/github/github项目排名/'>"+ " github项目排名</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github项目排名/'>"+" github项目排名</a></li></ul>"
+              
+                   if($('li#'+"52>ul").length==0){
+                    $('li#'+"52").append(chirldHtml);
+                   }else{
+                    $('li#'+"52>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/'>"+ " 消息ACK机制及消费进度管理</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/'>"+" 消息ACK机制及消费进度管理</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+ " ContextLoaderListener And DispatcherServlet Concepts</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+" ContextLoaderListener And DispatcherServlet Concepts</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/06/26/java/日志/log4j例子/'>"+ " Log4j例子</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/06/26/java/日志/log4j例子/'>"+" Log4j例子</a></li></ul>"
+              
+                   if($('li#'+"262>ul").length==0){
+                    $('li#'+"262").append(chirldHtml);
+                   }else{
+                    $('li#'+"262>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+ " BeanPostProcessor</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+" BeanPostProcessor</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/04/spring&springMvc/spring/Environment abstraction/'>"+ " Environment abstraction</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/spring&springMvc/spring/Environment abstraction/'>"+" Environment abstraction</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+ " RocketMQ开发指南</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+" RocketMQ开发指南</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+ " How to use the Spring FactoryBean</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+" How to use the Spring FactoryBean</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/Exception/'>"+ " Exception Handling in Spring MVC</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/Exception/'>"+" Exception Handling in Spring MVC</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+ " 基于Java的容器配置</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+" 基于Java的容器配置</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/14/springBoot/springboot学习/Spring Boot 默认日志logback配置解析/'>"+ " springBoot默认日志logback配置解析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/14/springBoot/springboot学习/Spring Boot 默认日志logback配置解析/'>"+" springBoot默认日志logback配置解析</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+ " ServletContext与ApplicationContext的区别</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+" ServletContext与ApplicationContext的区别</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+ " 看看Spring的源码(二)——bean实例化</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+" 看看Spring的源码(二)——bean实例化</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+ " 看看Spring的源码 (一)——Bean加载过程</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+" 看看Spring的源码 (一)——Bean加载过程</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+ " Spring Boot的启动器Starter详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+" Spring Boot的启动器Starter详解</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+
+            $('#mmenu').mmenu({
+             extensions		: [ 'widescreen', 'theme-white', 'effect-menu-slide', 'pagedim-black','pageshadow'],
+             			counters		: true,
+             			dividers		: {
+             				fixed 	: true
+             			},
+             			navbar 			: {
+             				title	: 'blog-catalog'
+             			},
+             			navbars			: [{
+             				position: 'top',
+             				content : ['searchfield']
+             			}, {
+             				position: 'top'
+             			}, {
+             				position: 'bottom',
+             				content : ['<div>Hosted by <a href="http://damonflycloud.info" target="_blank">FlyCloud</a></div>']
+             			}]
+            });
+          });
+
+          
+      $("table").wrap("<div class='table-area'></div>");
+
+
+       /**$(".donate-btn").hover(function () {
+        $('#sidebar').css('display','block');
+        $('.header-inner').css('display','inherit');
+       $('.sidebar-inner').css('display','inherit');
+        });
+
+         $('#hamburger').click(function(){
+         $('.sidebar').css('display','none');
+          $('#mm-blocker').on("click",function(){
+          $('.sidebar').css('display','block');
+        })
+       });**/
+       
+       
+
+      });
+</script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+ 
+
+</body>
+
+ 
+
+</html>
