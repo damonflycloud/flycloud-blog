@@ -501,6 +501,290 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="flycloud.me/2016/06/26/java/日志/log4j学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flycloud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyCloud Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/26/java/日志/log4j学习/" itemprop="url">
+                  Log4j学习
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-26T21:11:05+08:00">
+                2016-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/262/" itemprop="url" rel="index">
+                    <span itemprop="name">262</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="log4j日志级别"><a href="#log4j日志级别" class="headerlink" title="log4j日志级别:"></a>log4j日志级别:</h3><p>程序会打印高于或等于所设置级别的日志，设置的日志等级越高，打印出来的日志就越少.</p>
+<pre><code>log4j日志级别(由低到高)
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:center">Level</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">all</td>
+<td style="text-align:center">All levels including custom levels</td>
+</tr>
+<tr>
+<td style="text-align:center">trace (since log4j 1.2.12)</td>
+<td style="text-align:center">developing only, can be used to follow the program execution</td>
+</tr>
+<tr>
+<td style="text-align:center">debug</td>
+<td style="text-align:center">developing only, for debugging purpose</td>
+</tr>
+<tr>
+<td style="text-align:center">info</td>
+<td style="text-align:center">Production optionally, Course grained (rarely written informations), I use it to print that a configuration is initialized, a long running import job is starting and ending.</td>
+</tr>
+<tr>
+<td style="text-align:center">warn</td>
+<td style="text-align:center">Production, simple application error or unexpected behaviour. Application can continue. I warn for example in case of bad login attemps, unexpected data during import jobs</td>
+</tr>
+<tr>
+<td style="text-align:center">error</td>
+<td style="text-align:center">Production, application error/exception but application can continue. Part of the application is probably not working.</td>
+</tr>
+<tr>
+<td style="text-align:center">fatal</td>
+<td style="text-align:center">Production, fatal application error/exception, application cannot continue, for example database is down.</td>
+</tr>
+<tr>
+<td style="text-align:center">no</td>
+<td style="text-align:center">Do not log at all.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Layout-of-the-log-file"><a href="#Layout-of-the-log-file" class="headerlink" title="Layout of the log file"></a>Layout of the log file</h3><p>The layout specifies how a log message looks like.</p>
+<p>First you define the layout.</p>
+<pre><code>log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+</code></pre><p>The pattern layout requires another parameter, i.e. the pattern.</p>
+<pre><code>log4j.appender.stdout.layout.ConversionPattern=%d{ABSOLUTE} %5p %c{1}:%L - %m%n
+</code></pre><p>The best up-to-date documentation about available layouts can be found in the API<br>documentation:</p>
+<p><a href="http://logging.apache.org/log4j/docs/api/org/apache/log4j/Layout.html" target="_blank" rel="external">Layout</a></p>
+<p>There you can see that we have DateLayout, HTMLLayout, PatternLayout, SimpleLayout,<br>XMLLayout as options.<br>SimpleLayout has no properties to be set. It is simple.<br>We used PatternLayout in our example and we set a property named ConversionPattern. This<br>property allows us to define the log output.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">表达式</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%d{ABSOLUTE}</td>
+<td style="text-align:center">Date in Format Absolute</td>
+</tr>
+<tr>
+<td style="text-align:center">%5p</td>
+<td style="text-align:center">%5 defines a right justified print with 5 characters, p prints the priority of the log message</td>
+</tr>
+<tr>
+<td style="text-align:center">%c{1}:%L - %m%n</td>
+<td style="text-align:center">And the other settings. Very simple. They are all explained in the API.</td>
+</tr>
+</tbody>
+</table>
+<p>The options to influence the layout are explained perfectly in the API documentation:</p>
+<p><a href="http://logging.apache.org/log4j/docs/api/org/apache/log4j/PatternLayout.html" target="_blank" rel="external">PatternLayout</a></p>
+<h3 id="Custom-Layout"><a href="#Custom-Layout" class="headerlink" title="Custom Layout"></a>Custom Layout</h3><p>If the configuration options does not suite your needs, you can define custom layouts as well.<br>Examples for custom layout are provided with the log4j download. Have a look in the examples<br>directory.</p>
+<h3 id="Types-of-log-appender"><a href="#Types-of-log-appender" class="headerlink" title="Types of log appender"></a>Types of log appender</h3><p>An appender specifies where your log messages are written to. There is a wide choice of<br>appenders available. All appenders are direct or indirect subclasses of the AppenderSkeleton.<br>Therefore we can find all options on the following API page:</p>
+<p><a href="http://logging.apache.org/log4j/docs/api/org/apache/log4j/AppenderSkeleton.html" target="_blank" rel="external">Appender</a></p>
+<p>The console and the file appender are a subclass of WriterAppender.<br>Later on, we are going to choose examples for the following appenders.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Appender</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ConsoleAppender</td>
+<td style="text-align:center">Logs to console</td>
+</tr>
+<tr>
+<td style="text-align:center">FileAppender</td>
+<td style="text-align:center">Logs to a file</td>
+</tr>
+<tr>
+<td style="text-align:center">SMTPAppender</td>
+<td style="text-align:center">Logs by email</td>
+</tr>
+<tr>
+<td style="text-align:center">SMTPAppender</td>
+<td style="text-align:center">Logs to a file, starts a new file once the max size is reached. (An alternative is the DailyRollingFileAppender which creates on file per day)</td>
+</tr>
+</tbody>
+</table>
+<p>But there are as well:</p>
+<pre><code>AsyncAppender, JDBCAppender, JMSAppender, LF5Appender, NTEventLogAppender,
+NullAppender, NullAppender, SMTPAppender, SocketAppender, SocketHubAppender,
+SyslogAppender, TelnetAppender, DailyRollingFileAppender, RollingFileAppender.
+</code></pre><p>Custom appenders can be created as well. The log4j download comes with a whole bunch of<br>samples in the examples directory.</p>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><pre><code>log4j.rootLogger=INFO,Console,OneFile,HtmlFile
+
+#记录所有的信息
+#log4j.logger.org.hibernate=INFO
+#记录执行的SQL DML语句
+#log4j.logger.org.hibernate.SQL=DEBUG
+#记录JDBC参数
+#log4j.logger.org.hibernate.type=DEBUG
+log4j.logger.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
+#log4j.logger.org.hibernate.type.descriptor.sql.BasicExtractor=TRACE
+#在所有 SQL DDL 语句执行时为它们记录日志
+log4j.logger.org.hibernate.tool.hbm2ddl=DEBUG
+#log4j.logger.org.hibernate.SQL=DEBUG
+
+log4j.appender.Console=org.apache.log4j.ConsoleAppender
+log4j.appender.Console.Target=System.out
+log4j.appender.Console.layout=org.apache.log4j.PatternLayout
+log4j.appender.Console.layout.ConversionPattern=[%p][%d{yyyy-MM-dd HH\:mm\:ss,SSS}][%c]%m%n
+
+log4j.appender.OneFile=org.apache.log4j.RollingFileAppender
+log4j.appender.OneFile.File=../sypro.log
+log4j.appender.OneFile.MaxFileSize=10MB
+log4j.appender.OneFile.Threshold=ALL
+log4j.appender.OneFile.layout=org.apache.log4j.PatternLayout
+log4j.appender.OneFile.layout.ConversionPattern=[%p][%d{yyyy-MM-dd HH\:mm\:ss,SSS}][%c]%m%n
+
+log4j.appender.HtmlFile=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.HtmlFile.file=../sypro_log
+log4j.appender.HtmlFile.DatePattern=&apos;_&apos;yyyy-MM-dd&apos;.html&apos;
+log4j.appender.HtmlFile.layout=org.apache.log4j.HTMLLayout
+log4j.appender.HtmlFile.Threshold=ALL
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="flycloud.me/2016/06/26/java/日志/log4j例子/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -800,290 +1084,6 @@ public class Log4jTest {
         logger3.fatal(&quot;fatal!!!&quot;);  
     }  
 }  
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="flycloud.me/2016/06/26/java/日志/log4j学习/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="flycloud">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FlyCloud Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/26/java/日志/log4j学习/" itemprop="url">
-                  Log4j学习
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-26T21:11:05+08:00">
-                2016-06-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/262/" itemprop="url" rel="index">
-                    <span itemprop="name">262</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="log4j日志级别"><a href="#log4j日志级别" class="headerlink" title="log4j日志级别:"></a>log4j日志级别:</h3><p>程序会打印高于或等于所设置级别的日志，设置的日志等级越高，打印出来的日志就越少.</p>
-<pre><code>log4j日志级别(由低到高)
-</code></pre><table>
-<thead>
-<tr>
-<th style="text-align:center">Level</th>
-<th style="text-align:center">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">all</td>
-<td style="text-align:center">All levels including custom levels</td>
-</tr>
-<tr>
-<td style="text-align:center">trace (since log4j 1.2.12)</td>
-<td style="text-align:center">developing only, can be used to follow the program execution</td>
-</tr>
-<tr>
-<td style="text-align:center">debug</td>
-<td style="text-align:center">developing only, for debugging purpose</td>
-</tr>
-<tr>
-<td style="text-align:center">info</td>
-<td style="text-align:center">Production optionally, Course grained (rarely written informations), I use it to print that a configuration is initialized, a long running import job is starting and ending.</td>
-</tr>
-<tr>
-<td style="text-align:center">warn</td>
-<td style="text-align:center">Production, simple application error or unexpected behaviour. Application can continue. I warn for example in case of bad login attemps, unexpected data during import jobs</td>
-</tr>
-<tr>
-<td style="text-align:center">error</td>
-<td style="text-align:center">Production, application error/exception but application can continue. Part of the application is probably not working.</td>
-</tr>
-<tr>
-<td style="text-align:center">fatal</td>
-<td style="text-align:center">Production, fatal application error/exception, application cannot continue, for example database is down.</td>
-</tr>
-<tr>
-<td style="text-align:center">no</td>
-<td style="text-align:center">Do not log at all.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="Layout-of-the-log-file"><a href="#Layout-of-the-log-file" class="headerlink" title="Layout of the log file"></a>Layout of the log file</h3><p>The layout specifies how a log message looks like.</p>
-<p>First you define the layout.</p>
-<pre><code>log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
-</code></pre><p>The pattern layout requires another parameter, i.e. the pattern.</p>
-<pre><code>log4j.appender.stdout.layout.ConversionPattern=%d{ABSOLUTE} %5p %c{1}:%L - %m%n
-</code></pre><p>The best up-to-date documentation about available layouts can be found in the API<br>documentation:</p>
-<p><a href="http://logging.apache.org/log4j/docs/api/org/apache/log4j/Layout.html" target="_blank" rel="external">Layout</a></p>
-<p>There you can see that we have DateLayout, HTMLLayout, PatternLayout, SimpleLayout,<br>XMLLayout as options.<br>SimpleLayout has no properties to be set. It is simple.<br>We used PatternLayout in our example and we set a property named ConversionPattern. This<br>property allows us to define the log output.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">表达式</th>
-<th style="text-align:center">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">%d{ABSOLUTE}</td>
-<td style="text-align:center">Date in Format Absolute</td>
-</tr>
-<tr>
-<td style="text-align:center">%5p</td>
-<td style="text-align:center">%5 defines a right justified print with 5 characters, p prints the priority of the log message</td>
-</tr>
-<tr>
-<td style="text-align:center">%c{1}:%L - %m%n</td>
-<td style="text-align:center">And the other settings. Very simple. They are all explained in the API.</td>
-</tr>
-</tbody>
-</table>
-<p>The options to influence the layout are explained perfectly in the API documentation:</p>
-<p><a href="http://logging.apache.org/log4j/docs/api/org/apache/log4j/PatternLayout.html" target="_blank" rel="external">PatternLayout</a></p>
-<h3 id="Custom-Layout"><a href="#Custom-Layout" class="headerlink" title="Custom Layout"></a>Custom Layout</h3><p>If the configuration options does not suite your needs, you can define custom layouts as well.<br>Examples for custom layout are provided with the log4j download. Have a look in the examples<br>directory.</p>
-<h3 id="Types-of-log-appender"><a href="#Types-of-log-appender" class="headerlink" title="Types of log appender"></a>Types of log appender</h3><p>An appender specifies where your log messages are written to. There is a wide choice of<br>appenders available. All appenders are direct or indirect subclasses of the AppenderSkeleton.<br>Therefore we can find all options on the following API page:</p>
-<p><a href="http://logging.apache.org/log4j/docs/api/org/apache/log4j/AppenderSkeleton.html" target="_blank" rel="external">Appender</a></p>
-<p>The console and the file appender are a subclass of WriterAppender.<br>Later on, we are going to choose examples for the following appenders.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Appender</th>
-<th style="text-align:center">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">ConsoleAppender</td>
-<td style="text-align:center">Logs to console</td>
-</tr>
-<tr>
-<td style="text-align:center">FileAppender</td>
-<td style="text-align:center">Logs to a file</td>
-</tr>
-<tr>
-<td style="text-align:center">SMTPAppender</td>
-<td style="text-align:center">Logs by email</td>
-</tr>
-<tr>
-<td style="text-align:center">SMTPAppender</td>
-<td style="text-align:center">Logs to a file, starts a new file once the max size is reached. (An alternative is the DailyRollingFileAppender which creates on file per day)</td>
-</tr>
-</tbody>
-</table>
-<p>But there are as well:</p>
-<pre><code>AsyncAppender, JDBCAppender, JMSAppender, LF5Appender, NTEventLogAppender,
-NullAppender, NullAppender, SMTPAppender, SocketAppender, SocketHubAppender,
-SyslogAppender, TelnetAppender, DailyRollingFileAppender, RollingFileAppender.
-</code></pre><p>Custom appenders can be created as well. The log4j download comes with a whole bunch of<br>samples in the examples directory.</p>
-<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><pre><code>log4j.rootLogger=INFO,Console,OneFile,HtmlFile
-
-#记录所有的信息
-#log4j.logger.org.hibernate=INFO
-#记录执行的SQL DML语句
-#log4j.logger.org.hibernate.SQL=DEBUG
-#记录JDBC参数
-#log4j.logger.org.hibernate.type=DEBUG
-log4j.logger.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
-#log4j.logger.org.hibernate.type.descriptor.sql.BasicExtractor=TRACE
-#在所有 SQL DDL 语句执行时为它们记录日志
-log4j.logger.org.hibernate.tool.hbm2ddl=DEBUG
-#log4j.logger.org.hibernate.SQL=DEBUG
-
-log4j.appender.Console=org.apache.log4j.ConsoleAppender
-log4j.appender.Console.Target=System.out
-log4j.appender.Console.layout=org.apache.log4j.PatternLayout
-log4j.appender.Console.layout.ConversionPattern=[%p][%d{yyyy-MM-dd HH\:mm\:ss,SSS}][%c]%m%n
-
-log4j.appender.OneFile=org.apache.log4j.RollingFileAppender
-log4j.appender.OneFile.File=../sypro.log
-log4j.appender.OneFile.MaxFileSize=10MB
-log4j.appender.OneFile.Threshold=ALL
-log4j.appender.OneFile.layout=org.apache.log4j.PatternLayout
-log4j.appender.OneFile.layout.ConversionPattern=[%p][%d{yyyy-MM-dd HH\:mm\:ss,SSS}][%c]%m%n
-
-log4j.appender.HtmlFile=org.apache.log4j.DailyRollingFileAppender
-log4j.appender.HtmlFile.file=../sypro_log
-log4j.appender.HtmlFile.DatePattern=&apos;_&apos;yyyy-MM-dd&apos;.html&apos;
-log4j.appender.HtmlFile.layout=org.apache.log4j.HTMLLayout
-log4j.appender.HtmlFile.Threshold=ALL
 </code></pre>
           
         
@@ -1588,17 +1588,6 @@ log4j.appender.HtmlFile.Threshold=ALL
             });
 
             
-              var html="<li>" +"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+ " markdown style guide</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+" markdown style guide</a></li></ul>"
-              
-                   if($('li#'+"160>ul").length==0){
-                    $('li#'+"160").append(chirldHtml);
-                   }else{
-                    $('li#'+"160>ul:first").append(html);
-                   }
-
-              
-            
               var html="<li>" +"<a href='/2017/11/20/maven/mirror和repository 区别/'>"+ " Maven：mirror和repository 区别</a></li>";
               var chirldHtml="<ul><li>"+"<a href='/2017/11/20/maven/mirror和repository 区别/'>"+" Maven：mirror和repository 区别</a></li></ul>"
               
@@ -1606,6 +1595,17 @@ log4j.appender.HtmlFile.Threshold=ALL
                     $('li#'+"220").append(chirldHtml);
                    }else{
                     $('li#'+"220>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+ " markdown style guide</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+" markdown style guide</a></li></ul>"
+              
+                   if($('li#'+"160>ul").length==0){
+                    $('li#'+"160").append(chirldHtml);
+                   }else{
+                    $('li#'+"160>ul:first").append(html);
                    }
 
               
@@ -1621,17 +1621,6 @@ log4j.appender.HtmlFile.Threshold=ALL
 
               
             
-              var html="<li>" +"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+ " Git远程操作详解</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+" Git远程操作详解</a></li></ul>"
-              
-                   if($('li#'+"51>ul").length==0){
-                    $('li#'+"51").append(chirldHtml);
-                   }else{
-                    $('li#'+"51>ul:first").append(html);
-                   }
-
-              
-            
               var html="<li>" +"<a href='/2017/09/05/git&github/github/github项目排名/'>"+ " github项目排名</a></li>";
               var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github项目排名/'>"+" github项目排名</a></li></ul>"
               
@@ -1639,17 +1628,6 @@ log4j.appender.HtmlFile.Threshold=ALL
                     $('li#'+"52").append(chirldHtml);
                    }else{
                     $('li#'+"52>ul:first").append(html);
-                   }
-
-              
-            
-              var html="<li>" +"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+ " java 注解总结</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+" java 注解总结</a></li></ul>"
-              
-                   if($('li#'+"261>ul").length==0){
-                    $('li#'+"261").append(chirldHtml);
-                   }else{
-                    $('li#'+"261>ul:first").append(html);
                    }
 
               
@@ -1665,13 +1643,35 @@ log4j.appender.HtmlFile.Threshold=ALL
 
               
             
-              var html="<li>" +"<a href='/2016/06/26/java/日志/log4j学习/'>"+ " Log4j学习</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2016/06/26/java/日志/log4j学习/'>"+" Log4j学习</a></li></ul>"
+              var html="<li>" +"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+ " Git远程操作详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+" Git远程操作详解</a></li></ul>"
               
-                   if($('li#'+"262>ul").length==0){
-                    $('li#'+"262").append(chirldHtml);
+                   if($('li#'+"51>ul").length==0){
+                    $('li#'+"51").append(chirldHtml);
                    }else{
-                    $('li#'+"262>ul:first").append(html);
+                    $('li#'+"51>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+ " java 注解总结</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+" java 注解总结</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+ " RocketMQ开发指南</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+" RocketMQ开发指南</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
                    }
 
               
@@ -1698,24 +1698,24 @@ log4j.appender.HtmlFile.Threshold=ALL
 
               
             
-              var html="<li>" +"<a href='/2017/12/05/rocketMQ/rocketMQ学习/RocketMQ命令/'>"+ " RocketMQ命令</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/12/05/rocketMQ/rocketMQ学习/RocketMQ命令/'>"+" RocketMQ命令</a></li></ul>"
+              var html="<li>" +"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+ " MyBatis-generator 分析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+" MyBatis-generator 分析</a></li></ul>"
               
-                   if($('li#'+"241>ul").length==0){
-                    $('li#'+"241").append(chirldHtml);
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
                    }else{
-                    $('li#'+"241>ul:first").append(html);
+                    $('li#'+"200>ul:first").append(html);
                    }
 
               
             
-              var html="<li>" +"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+ " RocketMQ开发指南</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+" RocketMQ开发指南</a></li></ul>"
+              var html="<li>" +"<a href='/2016/06/26/java/日志/log4j学习/'>"+ " Log4j学习</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/06/26/java/日志/log4j学习/'>"+" Log4j学习</a></li></ul>"
               
-                   if($('li#'+"241>ul").length==0){
-                    $('li#'+"241").append(chirldHtml);
+                   if($('li#'+"262>ul").length==0){
+                    $('li#'+"262").append(chirldHtml);
                    }else{
-                    $('li#'+"241>ul:first").append(html);
+                    $('li#'+"262>ul:first").append(html);
                    }
 
               
@@ -1731,13 +1731,24 @@ log4j.appender.HtmlFile.Threshold=ALL
 
               
             
-              var html="<li>" +"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+ " MyBatis-generator 分析</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+" MyBatis-generator 分析</a></li></ul>"
+              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MyBatis配件文件详解/'>"+ " MyBatis generator 配置文件详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MyBatis配件文件详解/'>"+" MyBatis generator 配置文件详解</a></li></ul>"
               
                    if($('li#'+"200>ul").length==0){
                     $('li#'+"200").append(chirldHtml);
                    }else{
                     $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/05/rocketMQ/rocketMQ学习/RocketMQ命令/'>"+ " RocketMQ命令</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/05/rocketMQ/rocketMQ学习/RocketMQ命令/'>"+" RocketMQ命令</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
                    }
 
               
@@ -1753,19 +1764,19 @@ log4j.appender.HtmlFile.Threshold=ALL
 
               
             
-              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+ " MyBatis-generator 自动生成MyBatis代码</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+" MyBatis-generator 自动生成MyBatis代码</a></li></ul>"
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+ " BeanPostProcessor</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+" BeanPostProcessor</a></li></ul>"
               
-                   if($('li#'+"200>ul").length==0){
-                    $('li#'+"200").append(chirldHtml);
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
                    }else{
-                    $('li#'+"200>ul:first").append(html);
+                    $('li#'+"101>ul:first").append(html);
                    }
 
               
             
-              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MyBatis配件文件详解/'>"+ " MyBatis generator 配置文件详解</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MyBatis配件文件详解/'>"+" MyBatis generator 配置文件详解</a></li></ul>"
+              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+ " MyBatis-generator 自动生成MyBatis代码</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+" MyBatis-generator 自动生成MyBatis代码</a></li></ul>"
               
                    if($('li#'+"200>ul").length==0){
                     $('li#'+"200").append(chirldHtml);
@@ -1782,6 +1793,72 @@ log4j.appender.HtmlFile.Threshold=ALL
                     $('li#'+"200").append(chirldHtml);
                    }else{
                     $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/04/spring&springMvc/spring/Environment abstraction/'>"+ " Environment abstraction</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/spring&springMvc/spring/Environment abstraction/'>"+" Environment abstraction</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+ " 基于Java的容器配置</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+" 基于Java的容器配置</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+ " ServletContext与ApplicationContext的区别</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+" ServletContext与ApplicationContext的区别</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+ " How to use the Spring FactoryBean</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+" How to use the Spring FactoryBean</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+ " 看看Spring的源码(二)——bean实例化</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+" 看看Spring的源码(二)——bean实例化</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+ " 看看Spring的源码 (一)——Bean加载过程</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+" 看看Spring的源码 (一)——Bean加载过程</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
                    }
 
               
@@ -1819,50 +1896,6 @@ log4j.appender.HtmlFile.Threshold=ALL
 
               
             
-              var html="<li>" +"<a href='/2017/12/04/spring&springMvc/spring/Environment abstraction/'>"+ " Environment abstraction</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/spring&springMvc/spring/Environment abstraction/'>"+" Environment abstraction</a></li></ul>"
-              
-                   if($('li#'+"101>ul").length==0){
-                    $('li#'+"101").append(chirldHtml);
-                   }else{
-                    $('li#'+"101>ul:first").append(html);
-                   }
-
-              
-            
-              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+ " BeanPostProcessor</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+" BeanPostProcessor</a></li></ul>"
-              
-                   if($('li#'+"101>ul").length==0){
-                    $('li#'+"101").append(chirldHtml);
-                   }else{
-                    $('li#'+"101>ul:first").append(html);
-                   }
-
-              
-            
-              var html="<li>" +"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+ " How to use the Spring FactoryBean</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+" How to use the Spring FactoryBean</a></li></ul>"
-              
-                   if($('li#'+"101>ul").length==0){
-                    $('li#'+"101").append(chirldHtml);
-                   }else{
-                    $('li#'+"101>ul:first").append(html);
-                   }
-
-              
-            
-              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+ " ServletContext与ApplicationContext的区别</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+" ServletContext与ApplicationContext的区别</a></li></ul>"
-              
-                   if($('li#'+"101>ul").length==0){
-                    $('li#'+"101").append(chirldHtml);
-                   }else{
-                    $('li#'+"101>ul:first").append(html);
-                   }
-
-              
-            
               var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+ " Spring Boot的启动器Starter详解</a></li>";
               var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+" Spring Boot的启动器Starter详解</a></li></ul>"
               
@@ -1870,39 +1903,6 @@ log4j.appender.HtmlFile.Threshold=ALL
                     $('li#'+"281").append(chirldHtml);
                    }else{
                     $('li#'+"281>ul:first").append(html);
-                   }
-
-              
-            
-              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+ " 基于Java的容器配置</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+" 基于Java的容器配置</a></li></ul>"
-              
-                   if($('li#'+"101>ul").length==0){
-                    $('li#'+"101").append(chirldHtml);
-                   }else{
-                    $('li#'+"101>ul:first").append(html);
-                   }
-
-              
-            
-              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+ " 看看Spring的源码 (一)——Bean加载过程</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+" 看看Spring的源码 (一)——Bean加载过程</a></li></ul>"
-              
-                   if($('li#'+"121>ul").length==0){
-                    $('li#'+"121").append(chirldHtml);
-                   }else{
-                    $('li#'+"121>ul:first").append(html);
-                   }
-
-              
-            
-              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+ " 看看Spring的源码(二)——bean实例化</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+" 看看Spring的源码(二)——bean实例化</a></li></ul>"
-              
-                   if($('li#'+"121>ul").length==0){
-                    $('li#'+"121").append(chirldHtml);
-                   }else{
-                    $('li#'+"121>ul:first").append(html);
                    }
 
               
