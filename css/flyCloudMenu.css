@@ -1,0 +1,99 @@
+/**
+ * Description:
+ * User: flycloud
+ * Date: 2015/12/9
+ * Time: 22:12
+ */
+
+/**mmenu**/
+html, body{
+  height :auto
+}
+
+.mm-search input{
+  height : 36px
+}
+
+
+
+#hamburger
+{
+  box-sizing: border-box;
+  display: block;
+  width: 70px;
+  height: 45px;
+  position: fixed;
+  top: 10px;
+  left: 0;
+  z-index: 4;
+  border-bottom: none;
+}
+#hamburger:before,
+#hamburger:after,
+#hamburger span
+{
+  background: #5BC5FF;
+  content: '';
+  display: block;
+  width: 30px;
+  height: 5px;
+  position: absolute;
+  left: 20px;
+}
+#hamburger:before
+{
+  top: 10px;
+}
+#hamburger span
+{
+  top: 20px;
+}
+#hamburger:after
+{
+  top: 30px;
+}
+
+/* Hamburger animation */
+#hamburger:before,
+#hamburger:after,
+#hamburger span
+{
+  -webkit-transition: none 0.5s ease 0.5s;
+  transition: none 0.5s ease 0.5s;
+
+  -webkit-transition-property: transform, top, bottom, left, opacity;
+  transition-property: transform, top, bottom, left, opacity;
+}
+html.mm-opening #hamburger:before,
+html.mm-opening #hamburger:after
+{
+  top: 20px;
+}
+html.mm-opening #hamburger span
+{
+  left: -50px;
+  opacity: 0;
+}
+html.mm-opening #hamburger:before
+{
+  transform: rotate( 45deg );
+}
+html.mm-opening #hamburger:after
+{
+  transform: rotate( -45deg );
+}
+
+
+
+
+@media  (max-width: 760px) {
+
+  #hamburger
+  {
+    /**border-bottom: 1px solid rgba( 255, 255, 255, 0.5 );**/
+    opacity: 0.9;
+    width: 100%;
+    top: 0;
+  }
+}
+

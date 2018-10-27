@@ -1,0 +1,1732 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/flyCloud.css?v=5.1.0"/
+
+
+  <meta name="keywords" content="java," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/blog/flycloud.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1. 内部类 概念：一个类里面放另一个类，这个类就称作内部类 作用：为什么要放到别的类内部呢？一般而言，内部类与包含它的外部类有比较密切的关系，而与其他类关系不大，定义在类内部，可以实现对外部完全隐藏，可以有更好的封装性，代码实现上也往往更为简洁。 注意：不过，内部类只是Java编译器的概念，对于Java虚拟机而言，每个内部类最后都会被编译为一个独立的类，生成一个独立的字节码文件。 其他好处： 1">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内部类的本质">
+<meta property="og:url" content="flycloud.me/2017/03/20/java/java基础/内部类的本质 /index.html">
+<meta property="og:site_name" content="FlyCloud Blog">
+<meta property="og:description" content="1. 内部类 概念：一个类里面放另一个类，这个类就称作内部类 作用：为什么要放到别的类内部呢？一般而言，内部类与包含它的外部类有比较密切的关系，而与其他类关系不大，定义在类内部，可以实现对外部完全隐藏，可以有更好的封装性，代码实现上也往往更为简洁。 注意：不过，内部类只是Java编译器的概念，对于Java虚拟机而言，每个内部类最后都会被编译为一个独立的类，生成一个独立的字节码文件。 其他好处： 1">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-26T08:50:04.675Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="内部类的本质">
+<meta name="twitter:description" content="1. 内部类 概念：一个类里面放另一个类，这个类就称作内部类 作用：为什么要放到别的类内部呢？一般而言，内部类与包含它的外部类有比较密切的关系，而与其他类关系不大，定义在类内部，可以实现对外部完全隐藏，可以有更好的封装性，代码实现上也往往更为简洁。 注意：不过，内部类只是Java编译器的概念，对于Java虚拟机而言，每个内部类最后都会被编译为一个独立的类，生成一个独立的字节码文件。 其他好处： 1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":0,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="flycloud.me/2017/03/20/java/java基础/内部类的本质 /"/>
+
+
+
+
+
+  <title> 内部类的本质 | FlyCloud Blog </title>
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?060f8b2450825fadd6aff6e494ce6218";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="flycloud.me/2017/03/20/java/java基础/内部类的本质 /">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flycloud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://flycloud.me/images/blog/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyCloud Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                内部类的本质
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-20T15:19:11+08:00">
+                2017-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+            <span class="page-pv">热度
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>℃
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-内部类"><a href="#1-内部类" class="headerlink" title="1. 内部类"></a>1. <strong>内部类</strong></h2><blockquote>
+<p>概念：一个类里面放另一个类，这个类就称作<strong>内部类</strong></p>
+<p>作用：为什么要放到别的类内部呢？<strong>一般而言，内部类与包含它的外部类有比较密切的关系，而与其他类关系不大，定义在类内部，可以实现对外部完全隐藏，可以有更好的封装性，代码实现上也往往更为简洁</strong>。</p>
+<p>注意：不过，内部类只是<strong>Java编译器</strong>的概念，对于<strong>Java虚拟机</strong>而言，<strong>每个内部类最后都会被编译为一个独立的类，生成一个独立的字节码文件</strong>。</p>
+<p>其他好处：</p>
+<p>1、内部类可以方便的访问外部类的私有变量</p>
+<p>2、可以声明为private从而实现对外完全隐藏</p>
+<p>3、相关代码写在一起，写法也更为简洁</p>
+</blockquote>
+<p>在Java中，根据定义的位置和方式不同，主要有四种内部类：</p>
+<ol>
+<li>静态内部类</li>
+<li>成员内部类</li>
+<li>方法内部类</li>
+<li>匿名内部类</li>
+</ol>
+<p>成员内部类和静态内部类可以被外部使用，不过它们都可以被声明为private，这样，外部就使用不了了。</p>
+<p>方法内部类是在一个方法内定义和使用的，匿名内部类使用范围更小，它们都不能在外部使用</p>
+<a id="more"></a>
+<h2 id="2-静态内部类"><a href="#2-静态内部类" class="headerlink" title="2. 静态内部类"></a>2. <strong>静态内部类</strong></h2><h3 id="2-1-语法"><a href="#2-1-语法" class="headerlink" title="2.1 语法"></a>2.1 语法</h3><p>静态内部类与静态变量和静态方法定义的位置一样，也带有static关键字，只是它定义的是类，示例代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> shared = <span class="number">100</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticInner</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">innerMethod</span><span class="params">()</span></span>&#123;</div><div class="line">            System.out.println(<span class="string">"inner "</span> + shared);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">        StaticInner si = <span class="keyword">new</span> StaticInner();</div><div class="line">        si.innerMethod();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>语法上，静态内部类除了位置放在别的类内部外，它与一个独立的类差别不大，可以有</p>
+<ol>
+<li>静态变量</li>
+<li>静态方法</li>
+<li>成员方法</li>
+<li>成员变量</li>
+<li>构造方法等</li>
+</ol>
+<p><strong>静态内部类与外部类的联系也不大</strong>（与后面其他内部类相比）。它可以访问外部类的<strong>静态变量和方法</strong>，如innerMethod直接访问shared变量，<strong>但不可以访问实例变量和方法</strong>。在类内部，可以直接使用内部静态类，如test()方法所示。</p>
+<p>public静态内部类可以被外部使用，只是需要通过”外部类.静态内部类”的方式使用，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Outer.StaticInner si = <span class="keyword">new</span> Outer.StaticInner();</div><div class="line">si.innerMethod();</div></pre></td></tr></table></figure>
+<h3 id="2-2-实现原理"><a href="#2-2-实现原理" class="headerlink" title="2.2 实现原理"></a>2.2 <strong>实现原理</strong></h3><p>以上代码实际上会生成两个类，一个是Outer，另一个是<code>Outer$StaticInner</code>，它们的代码大概如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> shared = <span class="number">100</span>;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">        Outer$StaticInner si = <span class="keyword">new</span> Outer$StaticInner();</div><div class="line">        si.innerMethod();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">static</span> <span class="keyword">int</span> access$<span class="number">0</span>()&#123;</div><div class="line">        <span class="keyword">return</span> shared;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span>$<span class="title">StaticInner</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">innerMethod</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"inner "</span> + Outer.access$<span class="number">0</span>());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>内部类访问了外部类的一个私有静态变量shared，而我们知道私有变量是不能被类外部访问的，Java的解决方法是，自动为Outer生成了一个非私有访问方法access$0，它返回这个私有静态变量shared。</p>
+<p><strong>注意：<code>StaticInner</code>的static关键字没了</strong></p>
+<h3 id="2-3-使用场景"><a href="#2-3-使用场景" class="headerlink" title="2.3 使用场景"></a>2.3 <strong>使用场景</strong></h3><p>静态内部类使用场景是很多的，如果<strong>它与外部类关系密切，且不依赖于外部类实例</strong>，则可以考虑定义为静态内部类。</p>
+<p>比如说，一个类内部，如果既要计算最大值，也要计算最小值，可以在一次遍历中将最大值和最小值都计算出来，但怎么返回呢？可以定义一个类Pair，包括最大值和最小值，但Pair这个名字太普遍，而且它主要是类内部使用的，就可以定义为一个静态内部类。</p>
+<p>我们也可以看一些在Java API中使用静态内部类的例子：</p>
+<ul>
+<li>Integer类内部有一个私有静态内部类IntegerCache，用于支持整数的自动装箱。</li>
+<li>表示链表的LinkedList类内部有一个私有静态内部类Node，表示链表中的每个节点。</li>
+<li>Character类内部有一个public静态内部类UnicodeBlock，用于表示一个Unicode block。</li>
+</ul>
+<h2 id="3-成员内部类"><a href="#3-成员内部类" class="headerlink" title="3. 成员内部类"></a>3. <strong>成员内部类</strong></h2><h3 id="3-1-语法"><a href="#3-1-语法" class="headerlink" title="3.1 语法"></a>3.1 <strong>语法</strong></h3><p>成员内部类没有static修饰符，少了一个static修饰符，但含义却有很大不同，示例代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> a = <span class="number">100</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">innerMethod</span><span class="params">()</span></span>&#123;</div><div class="line">            System.out.println(<span class="string">"outer a "</span> +a);</div><div class="line">            Outer.<span class="keyword">this</span>.action();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">action</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"action"</span>);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">        Inner inner = <span class="keyword">new</span> Inner();</div><div class="line">        inner.innerMethod();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><p><strong>成员内部类访问外部类成员：</strong></p>
+<p>Inner就是成员内部类，与静态内部类不同，<strong>除了静态变量和方法，成员内部类还可以直接访问外部类的实例变量和方法</strong>（所以需要先有外部类实例）<br>1、如innerMethod直接访问外部类私有实例变量a。<br>2、成员内部类还可以通过”外部类.this.xxx”的方式引用外部类的实例变量和方法，如Outer.this.action()，这种写法一般在重名的情况下使用，没有重名的话，”外部类.this.”是多余的。</p>
+<p>在外部类内，使用成员内部类与静态内部类是一样的，直接使用即可，如test()方法所示。</p>
+</li>
+<li><p><strong>成员内部类的创建：</strong></p>
+<p>与静态内部类不同，成员内部类对象总是与一个外部类对象相连的，在外部使用时，它不能直接通过new Outer.Inner()的方式创建对象，而是要先将创建一个Outer类对象，代码如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Outer outer = <span class="keyword">new</span> Outer();</div><div class="line">Outer.Inner inner = outer.new Inner();</div><div class="line">inner.innerMethod();</div></pre></td></tr></table></figure>
+<p>创建内部类对象的语法是”外部类对象.new 内部类()”，如outer.new Inner()。</p>
+</li>
+<li><p><strong>注意：</strong><br>与静态内部类不同，<strong>成员内部类中不可以定义静态变量和方法 (final变量例外，它等同于常量）</strong>，下面介绍的方法内部类和匿名内部类也都不可以。<br>Java为什么要有这个规定呢？<strong>具体原因不得而知，个人认为这个规定不是必须的，Java这个规定大概是因为这些内部类是与外部实例相连的，不应独立使用，而静态变量和方法作为类型的属性和方法，一般是独立使用的，在内部类中意义不大吧，而如果内部类确实需要静态变量和方法，也可以挪到外部类中</strong>。</p>
+</li>
+</ol>
+<h3 id="3-2-实现原理"><a href="#3-2-实现原理" class="headerlink" title="3.2 实现原理"></a>3.2 <strong>实现原理</strong></h3><p>以上代码也会生成两个类，一个是Outer，另一个是Outer$Inner，它们的代码大概如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> a = <span class="number">100</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">action</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"action"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</div><div class="line">        Outer$Inner inner = <span class="keyword">new</span> Outer$Inner(<span class="keyword">this</span>);</div><div class="line">        inner.innerMethod();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="keyword">int</span> access$<span class="number">0</span>(Outer outer) &#123;</div><div class="line">        <span class="keyword">return</span> outer.a;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="keyword">void</span> access$<span class="number">1</span>(Outer outer) &#123;</div><div class="line">        outer.action();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span>$<span class="title">Inner</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">final</span> Outer outer;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> Outer$Inner(Outer outer)&#123;</div><div class="line">        ths.outer = outer;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">innerMethod</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"outer a "</span></div><div class="line">                + Outer.access$<span class="number">0</span>(outer));</div><div class="line">        Outer.access$<span class="number">1</span>(outer);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Outer\$Inner类有个实例变量outer指向外部类的对象，它在构造方法中被初始化，Outer在新建Outer\$Inner对象时传递当前对象给它，由于内部类访问了外部类的私有变量和方法，外部类Outer生成了两个非私有静态方法，access\$0用于访问变量a，access$1用于访问方法action。</p>
+<h3 id="3-3-使用场景"><a href="#3-3-使用场景" class="headerlink" title="3.3 使用场景"></a>3.3 <strong>使用场景</strong></h3><p>如果内部类与外部类关系密切，且操作或依赖外部类实例变量和方法，则可以考虑定义为成员内部类。</p>
+<p>外部类的一些方法的返回值可能是某个接口，为了返回这个接口，外部类方法可能使用内部类实现这个接口，这个内部类可以被设为private，对外完全隐藏。</p>
+<p>比如说，在Java API 类LinkedList中，它的两个方法<code>listIterator()</code>和<code>descendingIterator()</code>的返回值都是接口<code>Iterator</code>，调用者可以通过<code>Iterator</code>接口对链表遍历，<code>listIterator</code>和<code>descendingIterator</code>内部分别使用了成员内部类<code>ListItr</code>和<code>DescendingIterator</code>，这两个内部类都实现了接口<code>Iterator</code>。关于<code>LinkedList</code>，后续文章我们还会介绍。</p>
+<h2 id="4-方法内部类"><a href="#4-方法内部类" class="headerlink" title="4. 方法内部类"></a>4. <strong>方法内部类</strong></h2><h3 id="4-1-语法"><a href="#4-1-语法" class="headerlink" title="4.1 语法"></a>4.1 语法</h3><p>内部类还可以定义在一个方法体中，示例代码如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> a = <span class="number">100</span>;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> param)</span></span>&#123;</div><div class="line">        <span class="keyword">final</span> String str = <span class="string">"hello"</span>;</div><div class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">innerMethod</span><span class="params">()</span></span>&#123;</div><div class="line">                System.out.println(<span class="string">"outer a "</span> +a);</div><div class="line">                System.out.println(<span class="string">"param "</span> +param);</div><div class="line">                System.out.println(<span class="string">"local var "</span> +str);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        Inner inner = <span class="keyword">new</span> Inner();</div><div class="line">        inner.innerMethod();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>类Inner定义在外部类方法test中，<strong>方法内部类只能在定义的方法内被使用</strong>。</p>
+<ol>
+<li>如果方法是实例方法，则除了静态变量和方法，内部类还可以直接访问外部类的实例变量和方法，如innerMethod直接访问了外部私有实例变量a。// 方法外</li>
+<li>如果方法是静态方法，则方法内部类只能访问外部类的静态变量和方法。// 方法外</li>
+<li>方法内部类还可以直接访问方法的参数和方法中的局部变量，不过，<strong>这些变量必须被声明为final</strong>，如innerMethod直接访问了方法参数param和局部变量str。// 方法内</li>
+</ol>
+<h3 id="4-2-实现原理"><a href="#4-2-实现原理" class="headerlink" title="4.2 实现原理"></a>4.2 实现原理</h3><p>系统生成的两个类代码大概如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> a = <span class="number">100</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> param)</span> </span>&#123;</div><div class="line">        <span class="keyword">final</span> String str = <span class="string">"hello"</span>;</div><div class="line">        OuterInner inner = <span class="keyword">new</span> OuterInner(<span class="keyword">this</span>, param);</div><div class="line">        inner.innerMethod();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">static</span> <span class="keyword">int</span> access$<span class="number">0</span>(Outer outer)&#123;</div><div class="line">        <span class="keyword">return</span> outer.a;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OuterInner</span> </span>&#123;</div><div class="line">    Outer outer;</div><div class="line">    <span class="keyword">int</span> param;</div><div class="line">    </div><div class="line">    OuterInner(Outer outer, <span class="keyword">int</span> param)&#123;</div><div class="line">        <span class="keyword">this</span>.outer = outer;</div><div class="line">        <span class="keyword">this</span>.param = param;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">innerMethod</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"outer a "</span></div><div class="line">                + Outer.access$<span class="number">0</span>(<span class="keyword">this</span>.outer));</div><div class="line">        System.out.println(<span class="string">"param "</span> + param);</div><div class="line">        System.out.println(<span class="string">"local var "</span> + <span class="string">"hello"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>与成员内部类类似，OuterInner类<strong>也有一个实例变量outer指向外部对象</strong>，在构造方法中被初始化，对外部私有实例变量的访问也是通过Outer添加的方法access$0来进行的。</p>
+<p>方法内部类可以访问方法中的参数和局部变量，这是通过在构造方法中传递参数来实现的，如OuterInner构造方法中有参数int param，在新建OuterInner对象时，Outer类将方法中的参数传递给了内部类，如OuterInner inner = new OuterInner(this, param);。在上面代码中，String str并没有被作为参数传递，这是因为它被定义为了常量，在生成的代码中，可以直接使用它的值。</p>
+<p>这也解释了，为什么方法内部类访问外部方法中的参数和局部变量时，这些变量必须被声明为final，因为实际上，方法内部类操作的并不是外部的变量，而是它自己的实例变量，只是这些变量的值和外部一样，对这些变量赋值，并不会改变外部的值，为避免混淆，所以干脆强制规定必须声明为final。</p>
+<p>如果的确需要修改外部的变量，可以将变量改为只含该变量的数组，修改数组中的值，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">final</span> String[] str = <span class="keyword">new</span> String[]&#123;<span class="string">"hello"</span>&#125;;</div><div class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">innerMethod</span><span class="params">()</span></span>&#123;</div><div class="line">                str[<span class="number">0</span>] = <span class="string">"hello world"</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        Inner inner = <span class="keyword">new</span> Inner();</div><div class="line">        inner.innerMethod();</div><div class="line">        System.out.println(str[<span class="number">0</span>]);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>str是一个只含一个元素的数组。</p>
+<h3 id="4-3-使用场景"><a href="#4-3-使用场景" class="headerlink" title="4.3 使用场景"></a>4.3 使用场景</h3><p>方法内部类都可以用成员内部类代替，至于方法参数，也可以作为参数传递给成员内部类。不过，如果类只在某个方法内被使用，使用方法内部类，可以实现更好的封装。</p>
+<h2 id="5-匿名内部类"><a href="#5-匿名内部类" class="headerlink" title="5. 匿名内部类"></a>5. <strong>匿名内部类</strong></h2><h3 id="5-1语法"><a href="#5-1语法" class="headerlink" title="5.1语法"></a>5.1语法</h3><p>匿名内部类没有名字，在创建对象的同时定义类，语法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> 父类(参数列表) &#123;</div><div class="line">   <span class="comment">//匿名内部类实现部分</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> 父接口() &#123;</div><div class="line">   <span class="comment">//匿名内部类实现部分</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>匿名内部类是与new关联的，在创建对象的时候定义类，new后面是父类或者父接口，然后是圆括号()，里面可以是传递给父类构造方法的参数，最后是大括号{}，里面是类的定义。</p>
+<p>看个具体的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> x, <span class="keyword">final</span> <span class="keyword">int</span> y)</span></span>&#123;</div><div class="line">        Point p = <span class="keyword">new</span> Point(<span class="number">2</span>,<span class="number">3</span>)&#123;                             </div><div class="line">            <span class="meta">@Override</span>                              </div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">distance</span><span class="params">()</span> </span>&#123;             </div><div class="line">                <span class="keyword">return</span> distance(<span class="keyword">new</span> Point(x,y));     </div><div class="line">            &#125;                                      </div><div class="line">        &#125;;                                       </div><div class="line">                                                 </div><div class="line">        System.out.println(p.distance());        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>创建Point对象的时候，定义了一个匿名内部类，这个类的父类是Point，创建对象的时候，给父类构造方法传递了参数2和3，重写了distance()方法，在方法中访问了外部方法final参数x和y。</p>
+<p>匿名内部类只能被使用一次，用来创建一个对象。它没有名字，没有构造方法，但可以根据参数列表，调用对应的父类构造方法。它可以定义实例变量和方法，可以有初始化代码块，初始化代码块可以起到构造方法的作用，只是构造方法可以有多个，而初始化代码块只能有一份。</p>
+<p>因为没有构造方法，它自己无法接受参数，如果必须要参数，则应该使用其他内部类。</p>
+<p>与方法内部类一样，匿名内部类也可以访问外部类的所有变量和方法，可以访问方法中的final参数和局部变量</p>
+<h3 id="5-2-实现原理"><a href="#5-2-实现原理" class="headerlink" title="5.2 实现原理"></a>5.2 实现原理</h3><p>每个匿名内部类也都被生成为了一个独立的类，只是类的名字以外部类加数字编号，没有有意义的名字。上例中，产生了两个类Outer和Outer$1，代码大概如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> x, <span class="keyword">final</span> <span class="keyword">int</span> y)</span></span>&#123;</div><div class="line">        Point p = <span class="keyword">new</span> Outer$<span class="number">1</span>(<span class="keyword">this</span>,<span class="number">2</span>,<span class="number">3</span>,x,y);                                            </div><div class="line">        System.out.println(p.distance());        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span>$1 <span class="keyword">extends</span> <span class="title">Point</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> x2;</div><div class="line">    <span class="keyword">int</span> y2;</div><div class="line">    Outer outer;</div><div class="line">    </div><div class="line">    Outer$<span class="number">1</span>(Outer outer, <span class="keyword">int</span> x1, <span class="keyword">int</span> y1, <span class="keyword">int</span> x2, <span class="keyword">int</span> y2)&#123;</div><div class="line">        <span class="keyword">super</span>(x1,y1);</div><div class="line">        <span class="keyword">this</span>.outer = outer;</div><div class="line">        <span class="keyword">this</span>.x2 = x2;</div><div class="line">        <span class="keyword">this</span>.y2 = y2;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="meta">@Override</span>                              </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">distance</span><span class="params">()</span> </span>&#123;             </div><div class="line">        <span class="keyword">return</span> distance(<span class="keyword">new</span> Point(<span class="keyword">this</span>.x2,y2));     </div><div class="line">    &#125;   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>与方法内部类类似，外部实例this，方法参数x和y都作为参数传递给了内部类构造方法。此外，new时的参数2和3也传递给了构造方法，内部类构造方法又将它们传递给了父类构造方法。</p>
+<h3 id="5-3-使用场景"><a href="#5-3-使用场景" class="headerlink" title="5.3 使用场景"></a>5.3 使用场景</h3><p>匿名内部类能做的，方法内部类都能做。但如果对象只会创建一次，且不需要构造方法来接受参数，则可以使用匿名内部类，代码书写上更为简洁。</p>
+<p>在调用方法时，很多方法需要一个接口参数，比如说Arrays.sort方法，它可以接受一个数组，以及一个Comparator接口参数，Comparator有一个方法compare用于比较两个对象。</p>
+<p>比如说，我们要对一个字符串数组不区分大小写排序，可以使用Arrays.sort方法，但需要传递一个实现了Comparator接口的对象，这时就可以使用匿名内部类，代码如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sortIgnoreCase</span><span class="params">(String[] strs)</span></span>&#123;</div><div class="line">    Arrays.sort(strs, <span class="keyword">new</span> Comparator&lt;String&gt;() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String o1, String o2)</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> o1.compareToIgnoreCase(o2);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Comparator后面的<stirng>与泛型有关，表示比较的对象是字符串类型，后续文章会讲解泛型。</stirng></p>
+<p>匿名内部类还经常用于事件处理程序中，用于响应某个事件，比如说一个Button，处理点击事件的代码可能类似如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Button bt = <span class="keyword">new</span> Button();</div><div class="line">bt.addActionListener(<span class="keyword">new</span> ActionListener()&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</div><div class="line">        <span class="comment">//处理事件</span></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>调用addActionListener将事件处理程序注册到了Button对象bt中，当事件发生时，会调用actionPerformed方法，并传递事件详情ActionEvent作为参数。</p>
+<p>以上Arrays.sort和Button都是上节提到的一种针对接口编程的例子，另外，它们也都是一种回调的例子。所谓回调是相对于一般的正向调用而言，平时一般都是正向调用，但Arrays.sort中传递的Comparator对象，它的compare方法并不是在写代码的时候被调用的，而是在Arrays.sort的内部某个地方回过头来调用的。Button中的传递的ActionListener对象，它的actionPerformed方法也一样，是在事件发生的时候回过头来调用的。</p>
+<p>将程序分为保持不变的主体框架，和针对具体情况的可变逻辑，通过回调的方式进行协作，是计算机程序的一种常用实践。匿名内部类是实现回调接口的一种简便方式。</p>
+<h2 id="6-小结"><a href="#6-小结" class="headerlink" title="6. 小结"></a>6. 小结</h2><p>本节，我们谈了各种内部类的语法、实现原理、以及使用场景，内部类本质上都会被转换为独立的类，但一般而言，它们可以实现更好的封装，代码上也更为简洁。</p>
+<p>我们一直没有讨论一个重要的问题，类放在哪里？类文件是如何组织的？本节中，自动生成的方法如access$0没有可见性修饰符，那可见性是什么？这些都与包有关，让我们下节来探讨。</p>
+<p>原文：<a href="http://www.cnblogs.com/swiftma/p/5619071.html" target="_blank" rel="external">http://www.cnblogs.com/swiftma/p/5619071.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/20/java/jvm/ClassLoader/" rel="next" title="ClassLoader">
+                <i class="fa fa-chevron-left"></i> ClassLoader
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/20/java/java基础/Java集合/" rel="prev" title="java 集合">
+                java 集合 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="donate-btn">作者</div>
+    <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyCloud Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命在于折腾!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://flycloud.me/images/blog/avatar.jpg"
+               alt="flycloud" />
+          <p class="site-author-name" itemprop="name">flycloud</p>
+           
+              <p class="site-description motion-element" itemprop="description">Stay Hungry,Stay Foolish</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">flycloud : Stay Hungry,Stay Foolish</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https:/busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+ 
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+<a id="hamburger" class="mm-slideout" href="#mmenu"><span></span></a>
+
+<nav id="mmenu">
+     <ul>
+
+     </ul>
+ </nav>
+<link type="text/css" rel="stylesheet" href="http://cdn.bootcss.com/jQuery.mmenu/5.5.3/core/css/jquery.mmenu.all.css" />
+<link type="text/css" rel="stylesheet" href="/css/flyCloudMenu.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.5.3/core/js/jquery.mmenu.min.all.js"></script>
+
+
+<script type="text/javascript">
+  $(function () {
+          $.getJSON("/json/menu.json",function(data){
+            $.each( data, function() {
+            var html="<li id='" + this.id + "'>" +"<span>"+this.text + "</span></li>"
+            var chirldHtml="<ul><li id='"+this.id+"'>"+"<span>"+this.text+"</span></li></ul>"
+            if(this.pid==''){
+                $('#mmenu>ul:first').append(html);
+              }else{
+              if($('li#'+this.pid+">ul").length==0){
+                 $('#'+this.pid).append(chirldHtml);
+              }else{
+                $('li#'+this.pid+">ul").append(html);
+              }
+             }
+            });
+
+            
+              var html="<li>" +"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+ " markdown style guide</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+" markdown style guide</a></li></ul>"
+              
+                   if($('li#'+"160>ul").length==0){
+                    $('li#'+"160").append(chirldHtml);
+                   }else{
+                    $('li#'+"160>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/maven/maven环境差异化应用/'>"+ " maven环境差异化应用</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/maven/maven环境差异化应用/'>"+" maven环境差异化应用</a></li></ul>"
+              
+                   if($('li#'+"220>ul").length==0){
+                    $('li#'+"220").append(chirldHtml);
+                   }else{
+                    $('li#'+"220>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/maven/mirror和repository 区别/'>"+ " Maven：mirror和repository 区别</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/maven/mirror和repository 区别/'>"+" Maven：mirror和repository 区别</a></li></ul>"
+              
+                   if($('li#'+"220>ul").length==0){
+                    $('li#'+"220").append(chirldHtml);
+                   }else{
+                    $('li#'+"220>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/20/架构&高并发/Java并发编程与高并发解决方案/'>"+ " Java并发编程与高并发解决方案</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/20/架构&高并发/Java并发编程与高并发解决方案/'>"+" Java并发编程与高并发解决方案</a></li></ul>"
+              
+                   if($('li#'+"400>ul").length==0){
+                    $('li#'+"400").append(chirldHtml);
+                   }else{
+                    $('li#'+"400>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/servlet/Servlet详解/'>"+ " Servlet详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/servlet/Servlet详解/'>"+" Servlet详解</a></li></ul>"
+              
+                   if($('li#'+"70>ul").length==0){
+                    $('li#'+"70").append(chirldHtml);
+                   }else{
+                    $('li#'+"70>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(一)/'>"+ " 网站海量数据和高并发解决方案(一)</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(一)/'>"+" 网站海量数据和高并发解决方案(一)</a></li></ul>"
+              
+                   if($('li#'+"400>ul").length==0){
+                    $('li#'+"400").append(chirldHtml);
+                   }else{
+                    $('li#'+"400>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(二)/'>"+ " 网站海量数据和高并发解决方案(二)</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(二)/'>"+" 网站海量数据和高并发解决方案(二)</a></li></ul>"
+              
+                   if($('li#'+"400>ul").length==0){
+                    $('li#'+"400").append(chirldHtml);
+                   }else{
+                    $('li#'+"400>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/30/集锦/50个最常用的UnixLinux命令/'>"+ " 50个最常用的UnixLinux命令</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/30/集锦/50个最常用的UnixLinux命令/'>"+" 50个最常用的UnixLinux命令</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/02/集锦/graphics/'>"+ " 程序员必知的七个图形工具</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/02/集锦/graphics/'>"+" 程序员必知的七个图形工具</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/30/集锦/promotion_rule/'>"+ " 零售行业优惠规则分析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/30/集锦/promotion_rule/'>"+" 零售行业优惠规则分析</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/05/30/集锦/shell/'>"+ " Shell脚本编程30分钟入门</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/05/30/集锦/shell/'>"+" Shell脚本编程30分钟入门</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/MySQL/'>"+ " MySQL 必看</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/MySQL/'>"+" MySQL 必看</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/MySQ大表优化/'>"+ " MySQL大表优化方案</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/MySQ大表优化/'>"+" MySQL大表优化方案</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/分库分表的几种常见形式以及可能遇到的难/'>"+ " 分库分表的几种常见玩法及如何解决跨库查询等问题</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/分库分表的几种常见形式以及可能遇到的难/'>"+" 分库分表的几种常见玩法及如何解决跨库查询等问题</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/大众点评订单系统分库分表实践/'>"+ " 大众点评订单系统分库分表实践</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/大众点评订单系统分库分表实践/'>"+" 大众点评订单系统分库分表实践</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/dubbo/dubbo学习/dubbo容器启动/'>"+ " dubbo容器启动</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/dubbo/dubbo学习/dubbo容器启动/'>"+" dubbo容器启动</a></li></ul>"
+              
+                   if($('li#'+"301>ul").length==0){
+                    $('li#'+"301").append(chirldHtml);
+                   }else{
+                    $('li#'+"301>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/dubbo/dubbo学习/dubbo服务启动/'>"+ " dubbo服务启动</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/dubbo/dubbo学习/dubbo服务启动/'>"+" dubbo服务启动</a></li></ul>"
+              
+                   if($('li#'+"301>ul").length==0){
+                    $('li#'+"301").append(chirldHtml);
+                   }else{
+                    $('li#'+"301>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/11/front/frontTec/前端常见跨域解决方案（全）/'>"+ " 前端常见跨域解决方案（全）</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/11/front/frontTec/前端常见跨域解决方案（全）/'>"+" 前端常见跨域解决方案（全）</a></li></ul>"
+              
+                   if($('li#'+"141>ul").length==0){
+                    $('li#'+"141").append(chirldHtml);
+                   }else{
+                    $('li#'+"141>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+ " Git远程操作详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+" Git远程操作详解</a></li></ul>"
+              
+                   if($('li#'+"51>ul").length==0){
+                    $('li#'+"51").append(chirldHtml);
+                   }else{
+                    $('li#'+"51>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/31/front/jquery/jQuery-plugin-authoring/'>"+ " 如何编写 jQuery 插件</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/31/front/jquery/jQuery-plugin-authoring/'>"+" 如何编写 jQuery 插件</a></li></ul>"
+              
+                   if($('li#'+"141>ul").length==0){
+                    $('li#'+"141").append(chirldHtml);
+                   }else{
+                    $('li#'+"141>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/05/git&github/github/github wiki下载/'>"+ " github wiki下载</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github wiki下载/'>"+" github wiki下载</a></li></ul>"
+              
+                   if($('li#'+"52>ul").length==0){
+                    $('li#'+"52").append(chirldHtml);
+                   }else{
+                    $('li#'+"52>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/05/git&github/github/github项目排名/'>"+ " github项目排名</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github项目排名/'>"+" github项目排名</a></li></ul>"
+              
+                   if($('li#'+"52>ul").length==0){
+                    $('li#'+"52").append(chirldHtml);
+                   }else{
+                    $('li#'+"52>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/05/16/java/java基础/2017-05-16-java-collection/'>"+ " Java - 集合框架完全解析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/05/16/java/java基础/2017-05-16-java-collection/'>"+" Java - 集合框架完全解析</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/java/java基础/2016-10-18-JavaCryptography/'>"+ " Java的加密解密</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/java/java基础/2016-10-18-JavaCryptography/'>"+" Java的加密解密</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/java基础/Java集合/'>"+ " java 集合</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/java基础/Java集合/'>"+" java 集合</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/java基础/内部类的本质 /'>"+ " 内部类的本质</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/java基础/内部类的本质 /'>"+" 内部类的本质</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+ " java 注解总结</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+" java 注解总结</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/06/26/java/日志/log4j例子/'>"+ " Log4j例子</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/06/26/java/日志/log4j例子/'>"+" Log4j例子</a></li></ul>"
+              
+                   if($('li#'+"262>ul").length==0){
+                    $('li#'+"262").append(chirldHtml);
+                   }else{
+                    $('li#'+"262>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/06/26/java/日志/log4j学习/'>"+ " Log4j学习</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/06/26/java/日志/log4j学习/'>"+" Log4j学习</a></li></ul>"
+              
+                   if($('li#'+"262>ul").length==0){
+                    $('li#'+"262").append(chirldHtml);
+                   }else{
+                    $('li#'+"262>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/'>"+ " slf4j log4j logback关系详解和相关用法</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/'>"+" slf4j log4j logback关系详解和相关用法</a></li></ul>"
+              
+                   if($('li#'+"262>ul").length==0){
+                    $('li#'+"262").append(chirldHtml);
+                   }else{
+                    $('li#'+"262>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+ " MyBatis-generator 自动生成MyBatis代码</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+" MyBatis-generator 自动生成MyBatis代码</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MyBatis配件文件详解/'>"+ " MyBatis generator 配置文件详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MyBatis配件文件详解/'>"+" MyBatis generator 配置文件详解</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+ " MyBatis-generator 分析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+" MyBatis-generator 分析</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/19/myBatis/mybatis学习/Mybatis二级缓存/'>"+ " Mybatis二级缓存</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/19/myBatis/mybatis学习/Mybatis二级缓存/'>"+" Mybatis二级缓存</a></li></ul>"
+              
+                   if($('li#'+"180>ul").length==0){
+                    $('li#'+"180").append(chirldHtml);
+                   }else{
+                    $('li#'+"180>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MybatisGeneator/'>"+ " MyBatis-generator</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MybatisGeneator/'>"+" MyBatis-generator</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/19/myBatis/mybatis学习/深入了解MyBatis二级缓存/'>"+ " Mybatis二级缓存</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/19/myBatis/mybatis学习/深入了解MyBatis二级缓存/'>"+" Mybatis二级缓存</a></li></ul>"
+              
+                   if($('li#'+"180>ul").length==0){
+                    $('li#'+"180").append(chirldHtml);
+                   }else{
+                    $('li#'+"180>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/17/myBatis/mybatis学习/Mybatis-spring整合/'>"+ " MyBatis spring整合</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/17/myBatis/mybatis学习/Mybatis-spring整合/'>"+" MyBatis spring整合</a></li></ul>"
+              
+                   if($('li#'+"180>ul").length==0){
+                    $('li#'+"180").append(chirldHtml);
+                   }else{
+                    $('li#'+"180>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/05/rocketMQ/rocketMQ学习/RocketMQ命令/'>"+ " RocketMQ命令</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/05/rocketMQ/rocketMQ学习/RocketMQ命令/'>"+" RocketMQ命令</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/04/rocketMQ/rocketMQ学习/十分钟入门RocketMQ/'>"+ " 十分钟入门RocketMQ</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/rocketMQ/rocketMQ学习/十分钟入门RocketMQ/'>"+" 十分钟入门RocketMQ</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/'>"+ " 消息ACK机制及消费进度管理</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/'>"+" 消息ACK机制及消费进度管理</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+ " RocketMQ开发指南</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+" RocketMQ开发指南</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/2016-07-25-spring-interview-details/'>"+ " Spring、Hibernate、Mybatis面试相关知识点</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/2016-07-25-spring-interview-details/'>"+" Spring、Hibernate、Mybatis面试相关知识点</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+ " BeanPostProcessor</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+" BeanPostProcessor</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/04/spring&springMvc/spring/Environment abstraction/'>"+ " Environment abstraction</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/spring&springMvc/spring/Environment abstraction/'>"+" Environment abstraction</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+ " How to use the Spring FactoryBean</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+" How to use the Spring FactoryBean</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/07/14/spring&springMvc/spring/Spring事务配置解惑/'>"+ " Spring事务配置解惑</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/07/14/spring&springMvc/spring/Spring事务配置解惑/'>"+" Spring事务配置解惑</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/08/14/spring&springMvc/spring/Spring与线程安全/'>"+ " Spring与线程安全</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/08/14/spring&springMvc/spring/Spring与线程安全/'>"+" Spring与线程安全</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/14/spring&springMvc/spring/spring单例与线程并发/'>"+ " spring单例与线程并发</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/14/spring&springMvc/spring/spring单例与线程并发/'>"+" spring单例与线程并发</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+ " ServletContext与ApplicationContext的区别</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+" ServletContext与ApplicationContext的区别</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/spring 自动装配/'>"+ " spring 自动装配</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/spring 自动装配/'>"+" spring 自动装配</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/13/spring&springMvc/spring/使用Spring特性实现接口多实现类的动态调用/'>"+ " 使用Spring特性实现接口多实现类的动态调用</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/13/spring&springMvc/spring/使用Spring特性实现接口多实现类的动态调用/'>"+" 使用Spring特性实现接口多实现类的动态调用</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+ " 基于Java的容器配置</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+" 基于Java的容器配置</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/2017-07-31-RESTful_api_develop-api_doc/'>"+ " 接口开发从前到后-文档</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/2017-07-31-RESTful_api_develop-api_doc/'>"+" 接口开发从前到后-文档</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/09/06/spring&springMvc/springMVC/2014-08-28-what-does-mvc-annotation-driven-do/'>"+ " mvc:annotation-driven到底帮我们做了什么</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/09/06/spring&springMvc/springMVC/2014-08-28-what-does-mvc-annotation-driven-do/'>"+" mvc:annotation-driven到底帮我们做了什么</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/Exception/'>"+ " Exception Handling in Spring MVC</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/Exception/'>"+" Exception Handling in Spring MVC</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+ " ContextLoaderListener And DispatcherServlet Concepts</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+" ContextLoaderListener And DispatcherServlet Concepts</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/SpringMVC异常统一处理的几种方式/'>"+ " Exception Handling in Spring MVC</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/SpringMVC异常统一处理的几种方式/'>"+" Exception Handling in Spring MVC</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/springBoot/springboot学习/Spring Boot 单元测试/'>"+ " Spring Boot 单元测试</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/springBoot/springboot学习/Spring Boot 单元测试/'>"+" Spring Boot 单元测试</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/14/springBoot/springboot学习/Spring Boot 默认日志logback配置解析/'>"+ " springBoot默认日志logback配置解析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/14/springBoot/springboot学习/Spring Boot 默认日志logback配置解析/'>"+" springBoot默认日志logback配置解析</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+ " Spring Boot的启动器Starter详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+" Spring Boot的启动器Starter详解</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot事务/'>"+ " Spring Boot事务</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot事务/'>"+" Spring Boot事务</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot使用redis - 副本/'>"+ " Spring Boot的启动器Starter详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot使用redis - 副本/'>"+" Spring Boot的启动器Starter详解</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/13/spring源码/spring/2016-08-29-spring-schema (1)/'>"+ " Spring schema 解析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/13/spring源码/spring/2016-08-29-spring-schema (1)/'>"+" Spring schema 解析</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/spring 查看 加载bean/'>"+ " spring 查看 加载bean</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/spring 查看 加载bean/'>"+" spring 查看 加载bean</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+ " 看看Spring的源码 (一)——Bean加载过程</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+" 看看Spring的源码 (一)——Bean加载过程</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+ " 看看Spring的源码(二)——bean实例化</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+" 看看Spring的源码(二)——bean实例化</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/30/spring源码/springMVC/spring父子容器/'>"+ " Spring-SpringMVC父子容器&AOP使用总结</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/30/spring源码/springMVC/spring父子容器/'>"+" Spring-SpringMVC父子容器&AOP使用总结</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop 学习/'>"+ " spring aop学习</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop 学习/'>"+" spring aop学习</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop实现缓存/'>"+ " spring aop实现缓存</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop实现缓存/'>"+" spring aop实现缓存</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/shiro/新的RBAC：基于资源的权限管理/'>"+ " 新的RBAC：基于资源的权限管理(Resource-Based Access Control)</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/shiro/新的RBAC：基于资源的权限管理/'>"+" 新的RBAC：基于资源的权限管理(Resource-Based Access Control)</a></li></ul>"
+              
+                   if($('li#'+"360>ul").length==0){
+                    $('li#'+"360").append(chirldHtml);
+                   }else{
+                    $('li#'+"360>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/12/设计模式/singleton_pattern/'>"+ " 单例模式使用</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/12/设计模式/singleton_pattern/'>"+" 单例模式使用</a></li></ul>"
+              
+                   if($('li#'+"380>ul").length==0){
+                    $('li#'+"380").append(chirldHtml);
+                   }else{
+                    $('li#'+"380>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/12/设计模式/design-pattern/'>"+ " 设计模式原则</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/12/设计模式/design-pattern/'>"+" 设计模式原则</a></li></ul>"
+              
+                   if($('li#'+"380>ul").length==0){
+                    $('li#'+"380").append(chirldHtml);
+                   }else{
+                    $('li#'+"380>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/12/04/maven/MavenUsageSummary/'>"+ " Maven基础</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/12/04/maven/MavenUsageSummary/'>"+" Maven基础</a></li></ul>"
+              
+                   if($('li#'+"220>ul").length==0){
+                    $('li#'+"220").append(chirldHtml);
+                   }else{
+                    $('li#'+"220>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/多线程/ThreadLocal/'>"+ " ThreadLocal</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/多线程/ThreadLocal/'>"+" ThreadLocal</a></li></ul>"
+              
+                   if($('li#'+"264>ul").length==0){
+                    $('li#'+"264").append(chirldHtml);
+                   }else{
+                    $('li#'+"264>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/jvm/ClassLoader/'>"+ " ClassLoader</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/jvm/ClassLoader/'>"+" ClassLoader</a></li></ul>"
+              
+                   if($('li#'+"263>ul").length==0){
+                    $('li#'+"263").append(chirldHtml);
+                   }else{
+                    $('li#'+"263>ul:first").append(html);
+                   }
+
+              
+            
+
+            $('#mmenu').mmenu({
+             extensions		: [ 'widescreen', 'theme-white', 'effect-menu-slide', 'pagedim-black','pageshadow'],
+             			counters		: true,
+             			dividers		: {
+             				fixed 	: true
+             			},
+             			navbar 			: {
+             				title	: 'blog-catalog'
+             			},
+             			navbars			: [{
+             				position: 'top',
+             				content : ['searchfield']
+             			}, {
+             				position: 'top'
+             			}, {
+             				position: 'bottom',
+             				content : ['<div>Hosted by <a href="http://flycloud.me" target="_blank">FlyCloud</a></div>']
+             			}]
+            });
+          });
+
+          
+      $("table").wrap("<div class='table-area'></div>");
+
+
+       /**$(".donate-btn").hover(function () {
+        $('#sidebar').css('display','block');
+        $('.header-inner').css('display','inherit');
+       $('.sidebar-inner').css('display','inherit');
+        });
+
+         $('#hamburger').click(function(){
+         $('.sidebar').css('display','none');
+          $('#mm-blocker').on("click",function(){
+          $('.sidebar').css('display','block');
+        })
+       });**/
+       
+       
+
+      });
+</script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+ 
+
+</body>
+
+ 
+
+</html>

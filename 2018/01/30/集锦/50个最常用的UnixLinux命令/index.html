@@ -1,0 +1,1770 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/flyCloud.css?v=5.1.0"/
+
+
+  <meta name="keywords" content="flycloud" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/blog/flycloud.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="50个最常用的Unix/Linux命令 2014-08-20  这篇文章翻译自http://www.thegeekstuff.com/2010/11/50-linux-commands/这些都是一些很常用的命令，这篇文章中每个命令都有一些简单的示例说明它的用法，对于想学习Unix/Linux的人，这些命令基本上都是需要掌握的：  tar    grep    find    ssh    sed">
+<meta name="keywords" content="前端博客,JavaScript,html5,css3,Jquery,NodeJs,Ubuntu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="50个最常用的UnixLinux命令">
+<meta property="og:url" content="flycloud.me/2018/01/30/集锦/50个最常用的UnixLinux命令/index.html">
+<meta property="og:site_name" content="FlyCloud Blog">
+<meta property="og:description" content="50个最常用的Unix/Linux命令 2014-08-20  这篇文章翻译自http://www.thegeekstuff.com/2010/11/50-linux-commands/这些都是一些很常用的命令，这篇文章中每个命令都有一些简单的示例说明它的用法，对于想学习Unix/Linux的人，这些命令基本上都是需要掌握的：  tar    grep    find    ssh    sed">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="/images/linuxlinux%20command.png">
+<meta property="og:updated_time" content="2018-10-26T08:57:47.221Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="50个最常用的UnixLinux命令">
+<meta name="twitter:description" content="50个最常用的Unix/Linux命令 2014-08-20  这篇文章翻译自http://www.thegeekstuff.com/2010/11/50-linux-commands/这些都是一些很常用的命令，这篇文章中每个命令都有一些简单的示例说明它的用法，对于想学习Unix/Linux的人，这些命令基本上都是需要掌握的：  tar    grep    find    ssh    sed">
+<meta name="twitter:image" content="/images/linuxlinux%20command.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":0,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="flycloud.me/2018/01/30/集锦/50个最常用的UnixLinux命令/"/>
+
+
+
+
+
+  <title> 50个最常用的UnixLinux命令 | FlyCloud Blog </title>
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?060f8b2450825fadd6aff6e494ce6218";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="flycloud.me/2018/01/30/集锦/50个最常用的UnixLinux命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flycloud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://flycloud.me/images/blog/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyCloud Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                50个最常用的UnixLinux命令
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-30T09:48:56+08:00">
+                2018-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+            <span class="page-pv">热度
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>℃
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>50个最常用的Unix/Linux命令 2014-08-20</p>
+<blockquote>
+<p>这篇文章翻译自<a href="http://www.thegeekstuff.com/2010/11/50-linux-commands/这些都是一些很常用的命令，这篇文章中每个命令都有一些简单的示例说明它的用法，对于想学习Unix/Linux的人，这些命令基本上都是需要掌握的：" target="_blank" rel="external">http://www.thegeekstuff.com/2010/11/50-linux-commands/这些都是一些很常用的命令，这篇文章中每个命令都有一些简单的示例说明它的用法，对于想学习Unix/Linux的人，这些命令基本上都是需要掌握的：</a></p>
+</blockquote>
+<p>tar    grep    find    ssh    sed    awk    vim    diff    sort    export<br>args    ls    pwd    cd    gzip    bzip2    unzip    shutdown    ftp    crontab<br>service    ps    free        df    kill    rm    cp    mv    cat<br>mount    chmod    chown    passwd    mkdir    ifconfig    uname    whereis    whatis    locate<br>man    tail    less    su    mysql    yum    rpm    ping    date    wget</p>
+<p>同时我也做了一张简易版的图例：</p>
+<p><img src="/images/linuxlinux command.png" alt="linux command"></p>
+<h3 id="1-tar"><a href="#1-tar" class="headerlink" title="1. tar"></a>1. tar</h3><p>创建一个新的tar文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ tar cvf archive_name.tar dirname/</div></pre></td></tr></table></figure></p>
+<p>解压tar文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ tar xvf archive_name.tar</div></pre></td></tr></table></figure></p>
+<p>查看tar文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ tar tvf archive_name.tar</div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="The Ultimate Tar Command Tutorial with 10 Practical Examples">The Ultimate Tar Command Tutorial with 10 Practical Examples</a></p>
+<h3 id="2-grep"><a href="#2-grep" class="headerlink" title="2. grep"></a>2. grep</h3><p>在文件中查找字符串(不区分大小写)<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ grep -i <span class="string">"the"</span> demo_file</div></pre></td></tr></table></figure></p>
+<p>输出成功匹配的行，以及该行之后的三行<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ grep -A 3 -i <span class="string">"example"</span> demo_text</div></pre></td></tr></table></figure></p>
+<p>在一个文件夹中递归查询包含指定字符串的文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ grep -r <span class="string">"ramesh"</span> *</div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2009/03/15-practical-unix-grep-command-examples/" target="_blank" rel="external">Get a Grip on the Grep! – 15 Practical Grep Command Examples</a></p>
+<h3 id="3-find"><a href="#3-find" class="headerlink" title="3. find"></a>3. find</h3><p>查找指定文件名的文件(不区分大小写)<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ find -iname <span class="string">"MyProgram.c"</span></div></pre></td></tr></table></figure></p>
+<p>对找到的文件执行某个命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ find -iname &quot;MyProgram.c&quot; -exec md5sum &#123;&#125; \;</div></pre></td></tr></table></figure></p>
+<p>查找home目录下的所有空文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ find ~ -empty</div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2009/03/15-practical-linux-find-command-examples/" target="_blank" rel="external">Mommy, I found it! — 15 Practical Linux Find Command Examples</a></p>
+<h3 id="4-ssh"><a href="#4-ssh" class="headerlink" title="4. ssh"></a>4. ssh</h3><p>登录到远程主机<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh -l jsmith remotehost.example.com</div></pre></td></tr></table></figure></p>
+<p>调试ssh客户端<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh -v -l jsmith remotehost.example.com</div></pre></td></tr></table></figure></p>
+<p>显示ssh客户端版本<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh -V</div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2008/05/5-basic-linux-ssh-client-commands/" target="_blank" rel="external">5 Basic Linux SSH Client Commands</a></p>
+<h3 id="5-sed"><a href="#5-sed" class="headerlink" title="5. sed"></a>5. sed</h3><p>当你将Dos系统中的文件复制到Unix/Linux后，这个文件每行都会以\r\n结尾，sed可以轻易将其转换为Unix格式的文件，使用\n结尾的文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sed <span class="string">'s/.$//'</span> filename</div></pre></td></tr></table></figure></p>
+<p>反转文件内容并输出<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sed -n <span class="string">'1!G; h; p'</span> filename</div></pre></td></tr></table></figure></p>
+<p>为非空行添加行号<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sed <span class="string">'/./='</span> thegeekstuff.txt | sed <span class="string">'N; s/\n/ /'</span></div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2009/10/unix-sed-tutorial-advanced-sed-substitution-examples/" target="_blank" rel="external">Advanced Sed Substitution Examples</a></p>
+<h3 id="6-awk"><a href="#6-awk" class="headerlink" title="6. awk"></a>6. awk</h3><p>删除重复行<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ awk <span class="string">'!($0 in array) &#123; array[$0]; print&#125;'</span> temp</div></pre></td></tr></table></figure></p>
+<p>打印/etc/passwd中所有包含同样的uid和gid的行<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ awk -F <span class="string">':'</span> <span class="string">'$3=$4'</span> /etc/passwd</div></pre></td></tr></table></figure></p>
+<p>打印文件中的指定部分的字段<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ awk <span class="string">'&#123;print $2,$5;&#125;'</span> employee.txt</div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2010/01/8-powerful-awk-built-in-variables-fs-ofs-rs-ors-nr-nf-filename-fnr/" target="_blank" rel="external">8 Powerful Awk Built-in Variables – FS, OFS, RS, ORS, NR, NF, FILENAME, FNR</a></p>
+<h3 id="7-vim"><a href="#7-vim" class="headerlink" title="7. vim"></a>7. vim</h3><p>打开文件并跳到第10行<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ vim +10 filename.txt</div></pre></td></tr></table></figure></p>
+<p>打开文件跳到第一个匹配的行<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ vim +/search-term filename.txt</div></pre></td></tr></table></figure></p>
+<p>以只读模式打开文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ vim -R /etc/passwd</div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2009/01/vi-and-vim-macro-tutorial-how-to-record-and-play/" target="_blank" rel="external">How To Record and Play in Vim Editor</a></p>
+<h3 id="8-diff"><a href="#8-diff" class="headerlink" title="8. diff"></a>8. diff</h3><p>比较的时候忽略空白符<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ diff -w name_list.txt name_list_new.txt</div></pre></td></tr></table></figure></p>
+<h3 id="9-sort"><a href="#9-sort" class="headerlink" title="9. sort"></a>9. sort</h3><p>以升序对文件内容排序<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sort names.txt</div></pre></td></tr></table></figure></p>
+<p>以降序对文件内容排序<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sort -r names.txt</div></pre></td></tr></table></figure></p>
+<p>以第三个字段对/etc/passwd的内容排序<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ sort -t: -k 3n /etc/passwd | more</div><div class="line">```sh</div><div class="line"><span class="comment">### 10. export</span></div><div class="line">输出跟字符串oracle匹配的环境变量</div><div class="line">```sh</div><div class="line">$ <span class="built_in">export</span> | grep ORCALE</div><div class="line"><span class="built_in">declare</span> -x ORACLE_BASE=<span class="string">"/u01/app/oracle"</span></div><div class="line"><span class="built_in">declare</span> -x ORACLE_HOME=<span class="string">"/u01/app/oracle/product/10.2.0"</span></div><div class="line"><span class="built_in">declare</span> -x ORACLE_SID=<span class="string">"med"</span></div><div class="line"><span class="built_in">declare</span> -x ORACLE_TERM=<span class="string">"xterm"</span></div></pre></td></tr></table></figure></p>
+<p>设置全局环境变量<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">export</span> ORACLE_HOME=/u01/app/oracle/product/10.2.0</div></pre></td></tr></table></figure></p>
+<h3 id="11-xargs"><a href="#11-xargs" class="headerlink" title="11. xargs"></a>11. xargs</h3><p>将所有图片文件拷贝到外部驱动器<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ls *.jpg | xargs -n1 -i cp &#123;&#125; /external-hard-drive/directory</div></pre></td></tr></table></figure></p>
+<p>将系统中所有jpd文件压缩打包<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ find / -name *.jpg -<span class="built_in">type</span> f -<span class="built_in">print</span> | xargs tar -cvzf images.tar.gz</div></pre></td></tr></table></figure></p>
+<p>下载文件中列出的所有url对应的页面<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cat url-list.txt | xargs wget –c</div></pre></td></tr></table></figure></p>
+<h3 id="12-ls"><a href="#12-ls" class="headerlink" title="12. ls"></a>12. ls</h3><p>以易读的方式显示文件大小(显示为MB,GB…)<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ls -lh</div><div class="line">-rw-r----- 1 ramesh team-dev 8.9M Jun 12 15:27 arch-linux.txt.gz</div></pre></td></tr></table></figure></p>
+<p>以最后修改时间升序列出文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ls -ltr</div></pre></td></tr></table></figure></p>
+<p>在文件名后面显示文件类型<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ls -F</div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2009/07/linux-ls-command-examples/" target="_blank" rel="external">Unix LS Command: 15 Practical Examples</a></p>
+<h3 id="13-pwd"><a href="#13-pwd" class="headerlink" title="13. pwd"></a>13. pwd</h3><p>输出当前工作目录</p>
+<h3 id="14-cd"><a href="#14-cd" class="headerlink" title="14. cd"></a>14. cd</h3><p>cd -可以在最近工作的两个目录间切换<br>使用<code>shopt -s cdspell</code>可以设置自动对cd命令进行拼写检查</p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2008/10/6-awesome-linux-cd-command-hacks-productivity-tip3-for-geeks/" target="_blank" rel="external">6 Awesome Linux cd command Hacks</a></p>
+<h3 id="15-gzip"><a href="#15-gzip" class="headerlink" title="15. gzip"></a>15. gzip</h3><p>创建一个*.gz的压缩文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gzip test.txt</div></pre></td></tr></table></figure></p>
+<p>解压*.gz文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gzip -d test.txt.gz</div></pre></td></tr></table></figure></p>
+<p>显示压缩的比率<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ gzip -l *.gz</div><div class="line">     compressed        uncompressed  ratio uncompressed_name</div><div class="line">          23709               97975  75.8% asp-patch-rpms.txt</div></pre></td></tr></table></figure></p>
+<h3 id="16-bzip2"><a href="#16-bzip2" class="headerlink" title="16. bzip2"></a>16. bzip2</h3><p>创建*.bz2压缩文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ bzip2 test.txt</div></pre></td></tr></table></figure></p>
+<p>解压*.bz2文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bzip2 -d test.txt.bz2</div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2010/10/bzcommand-examples/" target="_blank" rel="external">BZ is Eazy! bzip2, bzgrep, bzcmp, bzdiff, bzcat, bzless, bzmore examples</a></p>
+<h3 id="17-uzip"><a href="#17-uzip" class="headerlink" title="17. uzip"></a>17. uzip</h3><p>解压*.zip文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ unzip test.zip</div></pre></td></tr></table></figure></p>
+<p>查看*.zip文件的内容<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ unzip -l jasper.zip</div><div class="line">Archive:  jasper.zip</div><div class="line">Length     Date   Time    Name</div><div class="line">--------    ----   ----    ----</div><div class="line">40995  11-30-98 23:50   META-INF/MANIFEST.MF</div><div class="line">32169  08-25-98 21:07   classes_</div><div class="line">15964  08-25-98 21:07   classes_names</div><div class="line">10542  08-25-98 21:07   classes_ncomp</div><div class="line">```sh</div><div class="line"><span class="comment">### 18. shutdown</span></div><div class="line">关闭系统并立即关机</div><div class="line">```sh</div><div class="line">$ shutdown -h now</div></pre></td></tr></table></figure></p>
+<p>10分钟后关机<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ shutdown -h +10</div></pre></td></tr></table></figure></p>
+<p>重启<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ shutdown -r now</div></pre></td></tr></table></figure></p>
+<p>重启期间强制进行系统检查<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ shutdown -Fr now</div></pre></td></tr></table></figure></p>
+<h3 id="19-ftp"><a href="#19-ftp" class="headerlink" title="19. ftp"></a>19. ftp</h3><p>ftp命令和sftp命令的用法基本相似连接ftp服务器并下载多个文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ftp IP/hostname</div><div class="line">ftp&gt; mget *.html</div></pre></td></tr></table></figure></p>
+<p>显示远程主机上文件列表<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ftp&gt; mls *.html -</div><div class="line">/ftptest/features.html</div><div class="line">/ftptest/index.html</div><div class="line">/ftptest/othertools.html</div><div class="line">/ftptest/samplereport.html</div><div class="line">/ftptest/usage.html</div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2010/06/ftp-sftp-tutorial/" target="_blank" rel="external">FTP and SFTP Beginners Guide with 10 Examples</a></p>
+<h3 id="20-crontab"><a href="#20-crontab" class="headerlink" title="20. crontab"></a>20. crontab</h3><p>查看某个用户的crontab入口<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ crontab -u john -l</div></pre></td></tr></table></figure></p>
+<p>设置一个每十分钟执行一次的计划任务</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">*/10 * * * * /home/ramesh/check-disk-space</div></pre></td></tr></table></figure>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2009/06/15-practical-crontab-examples/" target="_blank" rel="external">Linux Crontab: 15 Awesome Cron Job Examples</a></p>
+<h3 id="21-service"><a href="#21-service" class="headerlink" title="21. service"></a>21. service</h3><p>service命令用于运行System V init脚本，这些脚本一般位于/etc/init.d文件下，这个命令可以直接运行这个文件夹里面的脚本，而不用加上路径</p>
+<p>查看服务状态<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ service ssh status</div></pre></td></tr></table></figure></p>
+<p>查看所有服务状态<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ service --status-all</div></pre></td></tr></table></figure></p>
+<p>重启服务<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ service ssh restart</div></pre></td></tr></table></figure></p>
+<h3 id="22-ps"><a href="#22-ps" class="headerlink" title="22. ps"></a>22. ps</h3><p>ps命令用于显示正在运行中的进程的信息，ps命令有很多选项，这里只列出了几个</p>
+<p>查看当前正在运行的所有进程<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ps -ef | more</div></pre></td></tr></table></figure></p>
+<p>以树状结构显示当前正在运行的进程，H选项表示显示进程的层次结构<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ps -efH | more</div></pre></td></tr></table></figure></p>
+<h3 id="23-free"><a href="#23-free" class="headerlink" title="23. free"></a>23. free</h3><p>这个命令用于显示系统当前内存的使用情况，包括已用内存、可用内存和交换内存的情况</p>
+<p>默认情况下free会以字节为单位输出内存的使用量<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ free</div><div class="line">             total       used       free     shared    buffers     cached</div><div class="line">Mem:       3566408    1580220    1986188          0     203988     902960</div><div class="line">-/+ buffers/cache:     473272    3093136</div><div class="line">Swap:      4000176          0    4000176</div></pre></td></tr></table></figure></p>
+<p>如果你想以其他单位输出内存的使用量，需要加一个选项，-g为GB，-m为MB，-k为KB，-b为字节<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ free -g</div><div class="line">             total       used       free     shared    buffers     cached</div><div class="line">Mem:             3          1          1          0          0          0</div><div class="line">-/+ buffers/cache:          0          2</div><div class="line">Swap:            3          0          3</div></pre></td></tr></table></figure></p>
+<p>如果你想查看所有内存的汇总，请使用-t选项，使用这个选项会在输出中加一个汇总行<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ramesh@ramesh-laptop:~$ free -t</div><div class="line">             total       used       free     shared    buffers     cached</div><div class="line">Mem:       3566408    1592148    1974260          0     204260     912556</div><div class="line">-/+ buffers/cache:     475332    3091076</div><div class="line">Swap:      4000176          0    4000176</div><div class="line">Total:     7566584    1592148    5974436</div></pre></td></tr></table></figure></p>
+<h3 id="24-top"><a href="#24-top" class="headerlink" title="24. top"></a>24. top</h3><p>top命令会显示当前系统中占用资源最多的一些进程（默认以CPU占用率排序）如果你想改变排序方式，可以在结果列表中点击O（大写字母O）会显示所有可用于排序的列，这个时候你就可以选择你想排序的列<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Current Sort Field:  P  <span class="keyword">for</span> window 1:Def</div><div class="line">Select sort field via field letter, <span class="built_in">type</span> any other key to <span class="built_in">return</span></div><div class="line"></div><div class="line">  a: PID        = Process Id              v: nDRT       = Dirty Pages count</div><div class="line">  d: UID        = User Id                 y: WCHAN      = Sleeping <span class="keyword">in</span> Function</div><div class="line">  e: USER       = User Name               z: Flags      = Task Flags</div><div class="line">  ........</div></pre></td></tr></table></figure></p>
+<p>如果只想显示某个特定用户的进程，可以使用-u选项<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ top -u oracle</div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2010/01/15-practical-unix-linux-top-command-examples/" target="_blank" rel="external">Can You Top This? 15 Practical Linux Top Command Examples</a></p>
+<h3 id="25-df"><a href="#25-df" class="headerlink" title="25. df"></a>25. df</h3><p>显示文件系统的磁盘使用情况，默认情况下df -k 将以字节为单位输出磁盘的使用量<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ df -k</div><div class="line">Filesystem           1K-blocks      Used Available Use% Mounted on</div><div class="line">/dev/sda1             29530400   3233104  24797232  12% /</div><div class="line">/dev/sda2            120367992  50171596  64082060  44% /home</div></pre></td></tr></table></figure></p>
+<p>使用-h选项可以以更符合阅读习惯的方式显示磁盘使用量<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ df -h</div><div class="line">Filesystem                  Size   Used  Avail Capacity  iused      ifree %iused  Mounted on</div><div class="line">/dev/disk0s2               232Gi   84Gi  148Gi    37% 21998562   38864868   36%   /</div><div class="line">devfs                      187Ki  187Ki    0Bi   100%      648          0  100%   /dev</div><div class="line">map -hosts                   0Bi    0Bi    0Bi   100%        0          0  100%   /net</div><div class="line">map auto_home                0Bi    0Bi    0Bi   100%        0          0  100%   /home</div><div class="line">/dev/disk0s4               466Gi   45Gi  421Gi    10%   112774  440997174    0%   /Volumes/BOOTCAMP</div><div class="line">//app@izenesoft.cn/public  2.7Ti  1.3Ti  1.4Ti    48%        0 18446744073709551615    0%   /Volumes/public</div></pre></td></tr></table></figure></p>
+<p>使用-T选项显示文件系统类型<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ df -T</div><div class="line">Filesystem    Type   1K-blocks      Used Available Use% Mounted on</div><div class="line">/dev/sda1     ext4    29530400   3233120  24797216  12% /</div><div class="line">/dev/sda2     ext4   120367992  50171596  64082060  44% /home</div></pre></td></tr></table></figure></p>
+<h3 id="26-kill"><a href="#26-kill" class="headerlink" title="26. kill"></a>26. kill</h3><p>kill用于终止一个进程。一般我们会先用ps -ef查找某个进程得到它的进程号，然后再使用kill -9 进程号终止该进程。你还可以使用killall、pkill、xkill来终止进程<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ ps -ef | grep vim</div><div class="line">ramesh    7243  7222  9 22:43 pts/2    00:00:00 vim</div><div class="line"></div><div class="line">$ <span class="built_in">kill</span> -9 7243</div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2009/12/4-ways-to-kill-a-process-kill-killall-pkill-xkill/" target="_blank" rel="external">4 Ways to Kill a Process – kill, killall, pkill, xkill</a></p>
+<h3 id="27-rm"><a href="#27-rm" class="headerlink" title="27. rm"></a>27. rm</h3><p>删除文件前先确认<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rm -i filename.txt</div></pre></td></tr></table></figure></p>
+<p>在文件名中使用shell的元字符会非常有用。删除文件前先打印文件名并进行确认<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rm -i file*</div></pre></td></tr></table></figure></p>
+<p>递归删除文件夹下所有文件，并删除该文件夹<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rm -r example</div></pre></td></tr></table></figure></p>
+<h3 id="28-cp"><a href="#28-cp" class="headerlink" title="28. cp"></a>28. cp</h3><p>拷贝文件1到文件2，并保持文件的权限、属主和时间戳<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cp -p file1 file2</div></pre></td></tr></table></figure></p>
+<p>拷贝file1到file2，如果file2存在会提示是否覆盖<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cp -i file1 file2</div></pre></td></tr></table></figure></p>
+<h3 id="29-mv"><a href="#29-mv" class="headerlink" title="29. mv"></a>29. mv</h3><p>将文件名file1重命名为file2，如果file2存在则提示是否覆盖<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mv -i file1 file2</div></pre></td></tr></table></figure></p>
+<p>注意如果使用-f选项则不会进行提示</p>
+<p>-v会输出重命名的过程，当文件名中包含通配符时，这个选项会非常方便<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mv -v file1 file2</div></pre></td></tr></table></figure></p>
+<h3 id="30-cat"><a href="#30-cat" class="headerlink" title="30. cat"></a>30. cat</h3><p>你可以一次查看多个文件的内容，下面的命令会先打印file1的内容，然后打印file2的内容<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cat file1 file2</div></pre></td></tr></table></figure></p>
+<p>-n命令可以在每行的前面加上行号<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ cat -n /etc/logrotate.conf</div><div class="line">/var/<span class="built_in">log</span>/btmp &#123;</div><div class="line">missingok</div><div class="line">3	    monthly</div><div class="line">4	    create 0660 root utmp</div><div class="line">5	    rotate 1</div><div class="line">6 &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="31-mount"><a href="#31-mount" class="headerlink" title="31. mount"></a>31. mount</h3><p>如果要挂载一个文件系统，需要先创建一个目录，然后将这个文件系统挂载到这个目录上<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># mkdir /u01</span></div><div class="line"></div><div class="line"><span class="comment"># mount /dev/sdb1 /u01</span></div></pre></td></tr></table></figure></p>
+<p>也可以把它添加到fstab中进行自动挂载，这样任何时候系统重启的时候，文件系统都会被加载<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/dev/sdb1 /u01 ext2 defaults 0 2</div></pre></td></tr></table></figure></p>
+<h3 id="32-chmod"><a href="#32-chmod" class="headerlink" title="32. chmod"></a>32. chmod</h3><p>chmod用于改变文件和目录的权限</p>
+<p>给指定文件的属主和属组所有权限(包括读、写、执行)<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chmod ug+rwx file.txt</div></pre></td></tr></table></figure></p>
+<p>删除指定文件的属组的所有权限<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chmod g-rwx file.txt</div></pre></td></tr></table></figure></p>
+<p>修改目录的权限，以及递归修改目录下面所有文件和子目录的权限<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chmod -R ug+rwx file.txt</div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2010/06/chmod-command-examples/" target="_blank" rel="external">7 Chmod Command Examples for Beginners</a></p>
+<h3 id="33-chown"><a href="#33-chown" class="headerlink" title="33. chown"></a>33. chown</h3><p>chown用于改变文件属主和属组</p>
+<p>同时将某个文件的属主改为oracle，属组改为db<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chown oracle:dba dbora.sh</div></pre></td></tr></table></figure></p>
+<p>使用-R选项对目录和目录下的文件进行递归修改<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chown -R oracle:dba /home/oracle</div></pre></td></tr></table></figure></p>
+<h3 id="34-passwd"><a href="#34-passwd" class="headerlink" title="34. passwd"></a>34. passwd</h3><p>passwd用于在命令行修改密码，使用这个命令会要求你先输入旧密码，然后输入新密码<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ passwd</div></pre></td></tr></table></figure></p>
+<p>超级用户可以用这个命令修改其他用户的密码，这个时候不需要输入用户的密码<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># passwd USERNAME</span></div></pre></td></tr></table></figure></p>
+<p>passwd还可以删除某个用户的密码，这个命令只有root用户才能操作，删除密码后，这个用户不需要输入密码就可以登录到系统<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># passwd -d USERNAME</span></div></pre></td></tr></table></figure></p>
+<h3 id="35-mkdir"><a href="#35-mkdir" class="headerlink" title="35. mkdir"></a>35. mkdir</h3><p>在home目录下创建一个名为temp的目录<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mkdir ~/temp</div></pre></td></tr></table></figure></p>
+<p>使用-p选项可以创建一个路径上所有不存在的目录<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mkdir -p dir1/dir2/dir3/dir4/</div></pre></td></tr></table></figure></p>
+<h3 id="36-ifconfig"><a href="#36-ifconfig" class="headerlink" title="36. ifconfig"></a>36. ifconfig</h3><p>ifconfig用于查看和配置Linux系统的网络接口</p>
+<p>查看所有网络接口及其状态<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ifconfig -a</div></pre></td></tr></table></figure></p>
+<p>使用up和down命令启动或停止某个接口<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ ifconfig eth0 up</div><div class="line"></div><div class="line">$ ifconfig eth0 down</div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2009/03/ifconfig-7-examples-to-configure-network-interface/" target="_blank" rel="external">Ifconfig: 7 Examples To Configure Network Interface</a></p>
+<h3 id="37-uname"><a href="#37-uname" class="headerlink" title="37. uname"></a>37. uname</h3><p>uname可以显示一些重要的系统信息，例如内核名称、主机名、内核版本号、处理器类型之类的信息<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ uname -a</div><div class="line">Linux john-laptop 2.6.32-24-generic <span class="comment">#41-Ubuntu SMP Thu Aug 19 01:12:52 UTC 2010 i686 GNU/Linux</span></div></pre></td></tr></table></figure></p>
+<h3 id="38-whereis"><a href="#38-whereis" class="headerlink" title="38. whereis"></a>38. whereis</h3><p>当你不知道某个命令的位置时可以使用whereis命令，下面使用whereis查找ls的位置<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ whereis ls</div><div class="line">ls: /bin/ls /usr/share/man/man1/ls.1.gz /usr/share/man/man1p/ls.1p.gz</div></pre></td></tr></table></figure></p>
+<p>当你想查找某个可执行程序的位置，但这个程序又不在whereis的默认目录下，你可以使用-B选项，并指定目录作为这个选项的参数。下面的命令在/tmp目录下查找lsmk命令<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ whereis -u -B /tmp -f lsmk</div><div class="line">lsmk: /tmp/lsmk</div></pre></td></tr></table></figure></p>
+<h3 id="39-whatis"><a href="#39-whatis" class="headerlink" title="39. whatis"></a>39. whatis</h3><p>wathis显示某个命令的描述信息<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ whatis ls</div><div class="line">ls		(1)  - list directory contents</div><div class="line"></div><div class="line">$ whatis ifconfig</div><div class="line">ifconfig (8)         - configure a network interface</div></pre></td></tr></table></figure></p>
+<h3 id="40-locate"><a href="#40-locate" class="headerlink" title="40. locate"></a>40. locate</h3><p>locate命名可以显示某个指定文件（或一组文件）的路径，它会使用由updatedb创建的数据库</p>
+<p>下面的命令会显示系统中所有包含crontab字符串的文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ locate crontab</div><div class="line">/etc/anacrontab</div><div class="line">/etc/crontab</div><div class="line">/usr/bin/crontab</div><div class="line">/usr/share/doc/cron/examples/crontab2english.pl.gz</div><div class="line">/usr/share/man/man1/crontab.1.gz</div><div class="line">/usr/share/man/man5/anacrontab.5.gz</div><div class="line">/usr/share/man/man5/crontab.5.gz</div><div class="line">/usr/share/vim/vim72/syntax/crontab.vim</div></pre></td></tr></table></figure></p>
+<h3 id="41-man"><a href="#41-man" class="headerlink" title="41. man"></a>41. man</h3><p>显示某个命令的man页面<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ man crontab</div></pre></td></tr></table></figure></p>
+<p>有些命令可能会有多个man页面，每个man页面对应一种命令类型<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ man SECTION-NUMBER commandname</div></pre></td></tr></table></figure></p>
+<p>man页面一般可以分为8种命令类型</p>
+<p>用户命令<br>系统调用<br>c库函数<br>设备与网络接口<br>文件格式<br>游戏与屏保<br>环境、表、宏<br>系统管理员命令和后台运行命令<br>例如，我们执行whatis crontab，你可以看到crontab有两个命令类型1和5，所以我们可以通过下面的命令查看命令类型5的man页面<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ whatis crontab</div><div class="line">crontab (1)          - maintain crontab files <span class="keyword">for</span> individual users (V3)</div><div class="line">crontab (5)          - tables <span class="keyword">for</span> driving cron</div><div class="line"></div><div class="line">$ man 5 crontab</div></pre></td></tr></table></figure></p>
+<h3 id="42-tail"><a href="#42-tail" class="headerlink" title="42. tail"></a>42. tail</h3><p>tail命令默认显示文件最后的10行文本<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ tail filename.txt</div></pre></td></tr></table></figure></p>
+<p>你可以使用-n选项指定要显示的行数<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ tail -n N filename.txt</div></pre></td></tr></table></figure></p>
+<p>你也可以使用-f选项进行实时查看，这个命令执行后会等待，如果有新行添加到文件尾部，它会继续输出新的行，在查看日志时这个选项会非常有用。你可以通过CTRL-C终止命令的执行<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ tail -f <span class="built_in">log</span>-file</div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2009/09/multitail-to-view-tail-f-output-of-multiple-log-files-in-one-terminal/" target="_blank" rel="external">3 Methods To View tail -f output of Multiple Log Files in One Terminal</a></p>
+<h3 id="43-less"><a href="#43-less" class="headerlink" title="43. less"></a>43. less</h3><p>这个命名可以在不加载整个文件的前提下显示文件内容，在查看大型日志文件的时候这个命令会非常有用<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ less huge-log-file.log</div></pre></td></tr></table></figure></p>
+<p>当你用less命令打开某个文件时，下面两个按键会给你带来很多帮助，他们用于向前和向后滚屏<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CTRL+F – forward one window</div><div class="line">CTRL+B – backward one window</div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2010/02/unix-less-command-10-tips-for-effective-navigation/" target="_blank" rel="external">Unix Less Command: 10 Tips for Effective Navigation</a></p>
+<h3 id="44-su"><a href="#44-su" class="headerlink" title="44. su"></a>44. su</h3><p>su命令用于切换用户账号，超级用户使用这个命令可以切换到任何其他用户而不用输入密码<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ su - USERNAME</div></pre></td></tr></table></figure></p>
+<p>用另外一个用户名执行一个命令下面的示例中用户john使用raj用户名执行ls命令，执行完后返回john的账号</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[john@dev-server]$ su - raj -c <span class="string">'ls'</span></div><div class="line"></div><div class="line">[john@dev-server]$</div></pre></td></tr></table></figure>
+<p>用指定用户登录，并且使用指定的shell程序，而不用默认的<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ su -s <span class="string">'SHELLNAME'</span> USERNAME</div></pre></td></tr></table></figure></p>
+<h3 id="45-mysql"><a href="#45-mysql" class="headerlink" title="45. mysql"></a>45. mysql</h3><p>mysql可能是Linux上使用最广泛的数据库，即使你没有在你的服务器上安装mysql，你也可以使用mysql客户端连接到远程的mysql服务器</p>
+<p>连接一个远程数据库，需要输入密码<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mysql -u root -p -h 192.168.1.2</div></pre></td></tr></table></figure></p>
+<p>连接本地数据库<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mysql -u root -p</div></pre></td></tr></table></figure></p>
+<p>你也可以在命令行中输入数据库密码，只需要在-p后面加上密码作为参数，可以直接写在p后面而不用加空格</p>
+<h3 id="46-yum"><a href="#46-yum" class="headerlink" title="46. yum"></a>46. yum</h3><p>使用yum安装apache<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yum install httpd</div></pre></td></tr></table></figure></p>
+<p>更新apache<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yum update httpd</div></pre></td></tr></table></figure></p>
+<p>卸载/删除apache<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yum remove httpd</div></pre></td></tr></table></figure></p>
+<h3 id="47-rpm"><a href="#47-rpm" class="headerlink" title="47. rpm"></a>47. rpm</h3><p>使用rpm安装apache<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># rpm -ivh httpd-2.2.3-22.0.1.el5.i386.rpm</span></div></pre></td></tr></table></figure></p>
+<p>更新apache<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># rpm -uvh httpd-2.2.3-22.0.1.el5.i386.rpm</span></div></pre></td></tr></table></figure></p>
+<p>卸载/删除apache<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># rpm -ev httpd</span></div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2010/07/rpm-command-examples/" target="_blank" rel="external">RPM Command: 15 Examples to Install, Uninstall, Upgrade, Query RPM Packages</a></p>
+<h3 id="48-ping"><a href="#48-ping" class="headerlink" title="48. ping"></a>48. ping</h3><p>ping一个远程主机，只发5个数据包<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ping -c 5 gmail.com</div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2009/11/ping-tutorial-13-effective-ping-command-examples/" target="_blank" rel="external">Ping Tutorial: 15 Effective Ping Command Examples</a></p>
+<h3 id="49-date"><a href="#49-date" class="headerlink" title="49. date"></a>49. date</h3><p>设置系统日期<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># date -s "01/31/2010 23:59:53"</span></div></pre></td></tr></table></figure></p>
+<p>当你修改了系统时间，你需要同步硬件时间和系统时间<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># hwclock –systohc</span></div><div class="line"></div><div class="line"><span class="comment"># hwclock --systohc –utc</span></div></pre></td></tr></table></figure></p>
+<h3 id="50-wget"><a href="#50-wget" class="headerlink" title="50. wget"></a>50. wget</h3><p>使用wget从网上下载软件、音乐、视频<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ wget http://prdownloads.sourceforge.net/sourceforge/nagios/nagios-3.2.1.tar.gz</div></pre></td></tr></table></figure></p>
+<p>下载文件并以指定的文件名保存文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ wget -O taglist.zip http://www.vim.org/scripts/download_script.php?src_id=7701</div></pre></td></tr></table></figure></p>
+<p>更多示例：<a href="http://link.zhihu.com/?target=http%3A//www.thegeekstuff.com/2010/07/rpm-command-examples/" target="_blank" rel="external">The Ultimate Wget Download Guide With 15 Awesome Examples</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/12/设计模式/singleton_pattern/" rel="next" title="单例模式使用">
+                <i class="fa fa-chevron-left"></i> 单例模式使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/31/front/jquery/jQuery-plugin-authoring/" rel="prev" title="如何编写 jQuery 插件">
+                如何编写 jQuery 插件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="donate-btn">作者</div>
+    <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyCloud Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命在于折腾!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://flycloud.me/images/blog/avatar.jpg"
+               alt="flycloud" />
+          <p class="site-author-name" itemprop="name">flycloud</p>
+           
+              <p class="site-description motion-element" itemprop="description">Stay Hungry,Stay Foolish</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">flycloud : Stay Hungry,Stay Foolish</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https:/busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+ 
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+<a id="hamburger" class="mm-slideout" href="#mmenu"><span></span></a>
+
+<nav id="mmenu">
+     <ul>
+
+     </ul>
+ </nav>
+<link type="text/css" rel="stylesheet" href="http://cdn.bootcss.com/jQuery.mmenu/5.5.3/core/css/jquery.mmenu.all.css" />
+<link type="text/css" rel="stylesheet" href="/css/flyCloudMenu.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.5.3/core/js/jquery.mmenu.min.all.js"></script>
+
+
+<script type="text/javascript">
+  $(function () {
+          $.getJSON("/json/menu.json",function(data){
+            $.each( data, function() {
+            var html="<li id='" + this.id + "'>" +"<span>"+this.text + "</span></li>"
+            var chirldHtml="<ul><li id='"+this.id+"'>"+"<span>"+this.text+"</span></li></ul>"
+            if(this.pid==''){
+                $('#mmenu>ul:first').append(html);
+              }else{
+              if($('li#'+this.pid+">ul").length==0){
+                 $('#'+this.pid).append(chirldHtml);
+              }else{
+                $('li#'+this.pid+">ul").append(html);
+              }
+             }
+            });
+
+            
+              var html="<li>" +"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+ " markdown style guide</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+" markdown style guide</a></li></ul>"
+              
+                   if($('li#'+"160>ul").length==0){
+                    $('li#'+"160").append(chirldHtml);
+                   }else{
+                    $('li#'+"160>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/maven/maven环境差异化应用/'>"+ " maven环境差异化应用</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/maven/maven环境差异化应用/'>"+" maven环境差异化应用</a></li></ul>"
+              
+                   if($('li#'+"220>ul").length==0){
+                    $('li#'+"220").append(chirldHtml);
+                   }else{
+                    $('li#'+"220>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/maven/mirror和repository 区别/'>"+ " Maven：mirror和repository 区别</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/maven/mirror和repository 区别/'>"+" Maven：mirror和repository 区别</a></li></ul>"
+              
+                   if($('li#'+"220>ul").length==0){
+                    $('li#'+"220").append(chirldHtml);
+                   }else{
+                    $('li#'+"220>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/20/架构&高并发/Java并发编程与高并发解决方案/'>"+ " Java并发编程与高并发解决方案</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/20/架构&高并发/Java并发编程与高并发解决方案/'>"+" Java并发编程与高并发解决方案</a></li></ul>"
+              
+                   if($('li#'+"400>ul").length==0){
+                    $('li#'+"400").append(chirldHtml);
+                   }else{
+                    $('li#'+"400>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/servlet/Servlet详解/'>"+ " Servlet详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/servlet/Servlet详解/'>"+" Servlet详解</a></li></ul>"
+              
+                   if($('li#'+"70>ul").length==0){
+                    $('li#'+"70").append(chirldHtml);
+                   }else{
+                    $('li#'+"70>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(一)/'>"+ " 网站海量数据和高并发解决方案(一)</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(一)/'>"+" 网站海量数据和高并发解决方案(一)</a></li></ul>"
+              
+                   if($('li#'+"400>ul").length==0){
+                    $('li#'+"400").append(chirldHtml);
+                   }else{
+                    $('li#'+"400>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(二)/'>"+ " 网站海量数据和高并发解决方案(二)</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(二)/'>"+" 网站海量数据和高并发解决方案(二)</a></li></ul>"
+              
+                   if($('li#'+"400>ul").length==0){
+                    $('li#'+"400").append(chirldHtml);
+                   }else{
+                    $('li#'+"400>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/30/集锦/50个最常用的UnixLinux命令/'>"+ " 50个最常用的UnixLinux命令</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/30/集锦/50个最常用的UnixLinux命令/'>"+" 50个最常用的UnixLinux命令</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/02/集锦/graphics/'>"+ " 程序员必知的七个图形工具</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/02/集锦/graphics/'>"+" 程序员必知的七个图形工具</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/30/集锦/promotion_rule/'>"+ " 零售行业优惠规则分析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/30/集锦/promotion_rule/'>"+" 零售行业优惠规则分析</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/05/30/集锦/shell/'>"+ " Shell脚本编程30分钟入门</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/05/30/集锦/shell/'>"+" Shell脚本编程30分钟入门</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/MySQL/'>"+ " MySQL 必看</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/MySQL/'>"+" MySQL 必看</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/MySQ大表优化/'>"+ " MySQL大表优化方案</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/MySQ大表优化/'>"+" MySQL大表优化方案</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/分库分表的几种常见形式以及可能遇到的难/'>"+ " 分库分表的几种常见玩法及如何解决跨库查询等问题</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/分库分表的几种常见形式以及可能遇到的难/'>"+" 分库分表的几种常见玩法及如何解决跨库查询等问题</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/大众点评订单系统分库分表实践/'>"+ " 大众点评订单系统分库分表实践</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/大众点评订单系统分库分表实践/'>"+" 大众点评订单系统分库分表实践</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/dubbo/dubbo学习/dubbo容器启动/'>"+ " dubbo容器启动</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/dubbo/dubbo学习/dubbo容器启动/'>"+" dubbo容器启动</a></li></ul>"
+              
+                   if($('li#'+"301>ul").length==0){
+                    $('li#'+"301").append(chirldHtml);
+                   }else{
+                    $('li#'+"301>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/dubbo/dubbo学习/dubbo服务启动/'>"+ " dubbo服务启动</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/dubbo/dubbo学习/dubbo服务启动/'>"+" dubbo服务启动</a></li></ul>"
+              
+                   if($('li#'+"301>ul").length==0){
+                    $('li#'+"301").append(chirldHtml);
+                   }else{
+                    $('li#'+"301>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/11/front/frontTec/前端常见跨域解决方案（全）/'>"+ " 前端常见跨域解决方案（全）</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/11/front/frontTec/前端常见跨域解决方案（全）/'>"+" 前端常见跨域解决方案（全）</a></li></ul>"
+              
+                   if($('li#'+"141>ul").length==0){
+                    $('li#'+"141").append(chirldHtml);
+                   }else{
+                    $('li#'+"141>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+ " Git远程操作详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+" Git远程操作详解</a></li></ul>"
+              
+                   if($('li#'+"51>ul").length==0){
+                    $('li#'+"51").append(chirldHtml);
+                   }else{
+                    $('li#'+"51>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/31/front/jquery/jQuery-plugin-authoring/'>"+ " 如何编写 jQuery 插件</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/31/front/jquery/jQuery-plugin-authoring/'>"+" 如何编写 jQuery 插件</a></li></ul>"
+              
+                   if($('li#'+"141>ul").length==0){
+                    $('li#'+"141").append(chirldHtml);
+                   }else{
+                    $('li#'+"141>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/05/git&github/github/github wiki下载/'>"+ " github wiki下载</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github wiki下载/'>"+" github wiki下载</a></li></ul>"
+              
+                   if($('li#'+"52>ul").length==0){
+                    $('li#'+"52").append(chirldHtml);
+                   }else{
+                    $('li#'+"52>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/05/git&github/github/github项目排名/'>"+ " github项目排名</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github项目排名/'>"+" github项目排名</a></li></ul>"
+              
+                   if($('li#'+"52>ul").length==0){
+                    $('li#'+"52").append(chirldHtml);
+                   }else{
+                    $('li#'+"52>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/05/16/java/java基础/2017-05-16-java-collection/'>"+ " Java - 集合框架完全解析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/05/16/java/java基础/2017-05-16-java-collection/'>"+" Java - 集合框架完全解析</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/java/java基础/2016-10-18-JavaCryptography/'>"+ " Java的加密解密</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/java/java基础/2016-10-18-JavaCryptography/'>"+" Java的加密解密</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/java基础/Java集合/'>"+ " java 集合</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/java基础/Java集合/'>"+" java 集合</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/java基础/内部类的本质 /'>"+ " 内部类的本质</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/java基础/内部类的本质 /'>"+" 内部类的本质</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+ " java 注解总结</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+" java 注解总结</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/06/26/java/日志/log4j例子/'>"+ " Log4j例子</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/06/26/java/日志/log4j例子/'>"+" Log4j例子</a></li></ul>"
+              
+                   if($('li#'+"262>ul").length==0){
+                    $('li#'+"262").append(chirldHtml);
+                   }else{
+                    $('li#'+"262>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/06/26/java/日志/log4j学习/'>"+ " Log4j学习</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/06/26/java/日志/log4j学习/'>"+" Log4j学习</a></li></ul>"
+              
+                   if($('li#'+"262>ul").length==0){
+                    $('li#'+"262").append(chirldHtml);
+                   }else{
+                    $('li#'+"262>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/'>"+ " slf4j log4j logback关系详解和相关用法</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/'>"+" slf4j log4j logback关系详解和相关用法</a></li></ul>"
+              
+                   if($('li#'+"262>ul").length==0){
+                    $('li#'+"262").append(chirldHtml);
+                   }else{
+                    $('li#'+"262>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+ " MyBatis-generator 自动生成MyBatis代码</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+" MyBatis-generator 自动生成MyBatis代码</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MyBatis配件文件详解/'>"+ " MyBatis generator 配置文件详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MyBatis配件文件详解/'>"+" MyBatis generator 配置文件详解</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+ " MyBatis-generator 分析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+" MyBatis-generator 分析</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/19/myBatis/mybatis学习/Mybatis二级缓存/'>"+ " Mybatis二级缓存</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/19/myBatis/mybatis学习/Mybatis二级缓存/'>"+" Mybatis二级缓存</a></li></ul>"
+              
+                   if($('li#'+"180>ul").length==0){
+                    $('li#'+"180").append(chirldHtml);
+                   }else{
+                    $('li#'+"180>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MybatisGeneator/'>"+ " MyBatis-generator</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MybatisGeneator/'>"+" MyBatis-generator</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/19/myBatis/mybatis学习/深入了解MyBatis二级缓存/'>"+ " Mybatis二级缓存</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/19/myBatis/mybatis学习/深入了解MyBatis二级缓存/'>"+" Mybatis二级缓存</a></li></ul>"
+              
+                   if($('li#'+"180>ul").length==0){
+                    $('li#'+"180").append(chirldHtml);
+                   }else{
+                    $('li#'+"180>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/17/myBatis/mybatis学习/Mybatis-spring整合/'>"+ " MyBatis spring整合</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/17/myBatis/mybatis学习/Mybatis-spring整合/'>"+" MyBatis spring整合</a></li></ul>"
+              
+                   if($('li#'+"180>ul").length==0){
+                    $('li#'+"180").append(chirldHtml);
+                   }else{
+                    $('li#'+"180>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/05/rocketMQ/rocketMQ学习/RocketMQ命令/'>"+ " RocketMQ命令</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/05/rocketMQ/rocketMQ学习/RocketMQ命令/'>"+" RocketMQ命令</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/04/rocketMQ/rocketMQ学习/十分钟入门RocketMQ/'>"+ " 十分钟入门RocketMQ</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/rocketMQ/rocketMQ学习/十分钟入门RocketMQ/'>"+" 十分钟入门RocketMQ</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/'>"+ " 消息ACK机制及消费进度管理</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/'>"+" 消息ACK机制及消费进度管理</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+ " RocketMQ开发指南</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+" RocketMQ开发指南</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/2016-07-25-spring-interview-details/'>"+ " Spring、Hibernate、Mybatis面试相关知识点</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/2016-07-25-spring-interview-details/'>"+" Spring、Hibernate、Mybatis面试相关知识点</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+ " BeanPostProcessor</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+" BeanPostProcessor</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/04/spring&springMvc/spring/Environment abstraction/'>"+ " Environment abstraction</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/spring&springMvc/spring/Environment abstraction/'>"+" Environment abstraction</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+ " How to use the Spring FactoryBean</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+" How to use the Spring FactoryBean</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/07/14/spring&springMvc/spring/Spring事务配置解惑/'>"+ " Spring事务配置解惑</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/07/14/spring&springMvc/spring/Spring事务配置解惑/'>"+" Spring事务配置解惑</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/08/14/spring&springMvc/spring/Spring与线程安全/'>"+ " Spring与线程安全</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/08/14/spring&springMvc/spring/Spring与线程安全/'>"+" Spring与线程安全</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/14/spring&springMvc/spring/spring单例与线程并发/'>"+ " spring单例与线程并发</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/14/spring&springMvc/spring/spring单例与线程并发/'>"+" spring单例与线程并发</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+ " ServletContext与ApplicationContext的区别</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+" ServletContext与ApplicationContext的区别</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/spring 自动装配/'>"+ " spring 自动装配</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/spring 自动装配/'>"+" spring 自动装配</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/13/spring&springMvc/spring/使用Spring特性实现接口多实现类的动态调用/'>"+ " 使用Spring特性实现接口多实现类的动态调用</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/13/spring&springMvc/spring/使用Spring特性实现接口多实现类的动态调用/'>"+" 使用Spring特性实现接口多实现类的动态调用</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+ " 基于Java的容器配置</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+" 基于Java的容器配置</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/2017-07-31-RESTful_api_develop-api_doc/'>"+ " 接口开发从前到后-文档</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/2017-07-31-RESTful_api_develop-api_doc/'>"+" 接口开发从前到后-文档</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/09/06/spring&springMvc/springMVC/2014-08-28-what-does-mvc-annotation-driven-do/'>"+ " mvc:annotation-driven到底帮我们做了什么</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/09/06/spring&springMvc/springMVC/2014-08-28-what-does-mvc-annotation-driven-do/'>"+" mvc:annotation-driven到底帮我们做了什么</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/Exception/'>"+ " Exception Handling in Spring MVC</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/Exception/'>"+" Exception Handling in Spring MVC</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+ " ContextLoaderListener And DispatcherServlet Concepts</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+" ContextLoaderListener And DispatcherServlet Concepts</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/SpringMVC异常统一处理的几种方式/'>"+ " Exception Handling in Spring MVC</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/SpringMVC异常统一处理的几种方式/'>"+" Exception Handling in Spring MVC</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/springBoot/springboot学习/Spring Boot 单元测试/'>"+ " Spring Boot 单元测试</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/springBoot/springboot学习/Spring Boot 单元测试/'>"+" Spring Boot 单元测试</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/14/springBoot/springboot学习/Spring Boot 默认日志logback配置解析/'>"+ " springBoot默认日志logback配置解析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/14/springBoot/springboot学习/Spring Boot 默认日志logback配置解析/'>"+" springBoot默认日志logback配置解析</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+ " Spring Boot的启动器Starter详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+" Spring Boot的启动器Starter详解</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot事务/'>"+ " Spring Boot事务</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot事务/'>"+" Spring Boot事务</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot使用redis - 副本/'>"+ " Spring Boot的启动器Starter详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot使用redis - 副本/'>"+" Spring Boot的启动器Starter详解</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/13/spring源码/spring/2016-08-29-spring-schema (1)/'>"+ " Spring schema 解析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/13/spring源码/spring/2016-08-29-spring-schema (1)/'>"+" Spring schema 解析</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/spring 查看 加载bean/'>"+ " spring 查看 加载bean</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/spring 查看 加载bean/'>"+" spring 查看 加载bean</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+ " 看看Spring的源码 (一)——Bean加载过程</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+" 看看Spring的源码 (一)——Bean加载过程</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+ " 看看Spring的源码(二)——bean实例化</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+" 看看Spring的源码(二)——bean实例化</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/30/spring源码/springMVC/spring父子容器/'>"+ " Spring-SpringMVC父子容器&AOP使用总结</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/30/spring源码/springMVC/spring父子容器/'>"+" Spring-SpringMVC父子容器&AOP使用总结</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop 学习/'>"+ " spring aop学习</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop 学习/'>"+" spring aop学习</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop实现缓存/'>"+ " spring aop实现缓存</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop实现缓存/'>"+" spring aop实现缓存</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/shiro/新的RBAC：基于资源的权限管理/'>"+ " 新的RBAC：基于资源的权限管理(Resource-Based Access Control)</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/shiro/新的RBAC：基于资源的权限管理/'>"+" 新的RBAC：基于资源的权限管理(Resource-Based Access Control)</a></li></ul>"
+              
+                   if($('li#'+"360>ul").length==0){
+                    $('li#'+"360").append(chirldHtml);
+                   }else{
+                    $('li#'+"360>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/12/设计模式/singleton_pattern/'>"+ " 单例模式使用</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/12/设计模式/singleton_pattern/'>"+" 单例模式使用</a></li></ul>"
+              
+                   if($('li#'+"380>ul").length==0){
+                    $('li#'+"380").append(chirldHtml);
+                   }else{
+                    $('li#'+"380>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/12/设计模式/design-pattern/'>"+ " 设计模式原则</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/12/设计模式/design-pattern/'>"+" 设计模式原则</a></li></ul>"
+              
+                   if($('li#'+"380>ul").length==0){
+                    $('li#'+"380").append(chirldHtml);
+                   }else{
+                    $('li#'+"380>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/12/04/maven/MavenUsageSummary/'>"+ " Maven基础</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/12/04/maven/MavenUsageSummary/'>"+" Maven基础</a></li></ul>"
+              
+                   if($('li#'+"220>ul").length==0){
+                    $('li#'+"220").append(chirldHtml);
+                   }else{
+                    $('li#'+"220>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/多线程/ThreadLocal/'>"+ " ThreadLocal</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/多线程/ThreadLocal/'>"+" ThreadLocal</a></li></ul>"
+              
+                   if($('li#'+"264>ul").length==0){
+                    $('li#'+"264").append(chirldHtml);
+                   }else{
+                    $('li#'+"264>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/jvm/ClassLoader/'>"+ " ClassLoader</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/jvm/ClassLoader/'>"+" ClassLoader</a></li></ul>"
+              
+                   if($('li#'+"263>ul").length==0){
+                    $('li#'+"263").append(chirldHtml);
+                   }else{
+                    $('li#'+"263>ul:first").append(html);
+                   }
+
+              
+            
+
+            $('#mmenu').mmenu({
+             extensions		: [ 'widescreen', 'theme-white', 'effect-menu-slide', 'pagedim-black','pageshadow'],
+             			counters		: true,
+             			dividers		: {
+             				fixed 	: true
+             			},
+             			navbar 			: {
+             				title	: 'blog-catalog'
+             			},
+             			navbars			: [{
+             				position: 'top',
+             				content : ['searchfield']
+             			}, {
+             				position: 'top'
+             			}, {
+             				position: 'bottom',
+             				content : ['<div>Hosted by <a href="http://flycloud.me" target="_blank">FlyCloud</a></div>']
+             			}]
+            });
+          });
+
+          
+      $("table").wrap("<div class='table-area'></div>");
+
+
+       /**$(".donate-btn").hover(function () {
+        $('#sidebar').css('display','block');
+        $('.header-inner').css('display','inherit');
+       $('.sidebar-inner').css('display','inherit');
+        });
+
+         $('#hamburger').click(function(){
+         $('.sidebar').css('display','none');
+          $('#mm-blocker').on("click",function(){
+          $('.sidebar').css('display','block');
+        })
+       });**/
+       
+       
+
+      });
+</script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+ 
+
+</body>
+
+ 
+
+</html>

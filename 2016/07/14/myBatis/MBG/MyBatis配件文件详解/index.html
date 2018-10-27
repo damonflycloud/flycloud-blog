@@ -85,7 +85,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="http://7xowny.com1.z0.glb.clouddn.com/flycloud.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/blog/flycloud.ico?v=5.1.0" />
 
 
 
@@ -100,7 +100,7 @@
 <meta property="og:site_name" content="FlyCloud Blog">
 <meta property="og:description" content="平时经常使用 mybatis generator,特意把mybatis generator的配置文件整理一下.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-21T13:22:47.836Z">
+<meta property="og:updated_time" content="2018-01-09T01:19:18.814Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MyBatis generator 配置文件详解">
 <meta name="twitter:description" content="平时经常使用 mybatis generator,特意把mybatis generator的配置文件整理一下.">
@@ -201,7 +201,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="flycloud">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg">
+      <meta itemprop="image" content="http://flycloud.me/images/blog/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -299,290 +299,7 @@
 
       
         <p>平时经常使用 mybatis generator,特意把mybatis generator的配置文件整理一下.<br><a id="more"></a></p>
-<h3 id="以下为MyBatis-Generator-配置文件"><a href="#以下为MyBatis-Generator-配置文件" class="headerlink" title="以下为MyBatis-Generator 配置文件"></a>以下为MyBatis-Generator 配置文件</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE generatorConfiguration
-  PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;
-&quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;
-&lt;!-- 配置生成器 --&gt;
-&lt;generatorConfiguration&gt;
-&lt;!-- 可以用于加载配置项或者配置文件，在整个配置文件中就可以使用${propertyKey}的方式来引用配置项
-    resource：配置资源加载地址，使用resource，MBG从classpath开始找，比如com/myproject/generatorConfig.properties        
-    url：配置资源加载地质，使用URL的方式，比如file:///C:/myfolder/generatorConfig.properties.
-    注意，两个属性只能选址一个;
-
-    另外，如果使用了mybatis-generator-maven-plugin，那么在pom.xml中定义的properties都可以直接在generatorConfig.xml中使用
-&lt;properties resource=&quot;&quot; url=&quot;&quot; /&gt;
- --&gt;
-
- &lt;!-- 在MBG工作的时候，需要额外加载的依赖包
-     location属性指明加载jar/zip包的全路径
-&lt;classPathEntry location=&quot;/Program Files/IBM/SQLLIB/java/db2java.zip&quot; /&gt;
-  --&gt;
-
-&lt;!-- 
-    context:生成一组对象的环境 
-    id:必选，上下文id，用于在生成错误时提示
-    defaultModelType:指定生成对象的样式
-        1，conditional：类似hierarchical；
-        2，flat：所有内容（主键，blob）等全部生成在一个对象中；
-        3，hierarchical：主键生成一个XXKey对象(key class)，Blob等单独生成一个对象，其他简单属性在一个对象中(record class)
-    targetRuntime:
-        1，MyBatis3：默认的值，生成基于MyBatis3.x以上版本的内容，包括XXXBySample；
-        2，MyBatis3Simple：类似MyBatis3，只是不生成XXXBySample；
-    introspectedColumnImpl：类全限定名，用于扩展MBG
---&gt;
-&lt;context id=&quot;mysql&quot; defaultModelType=&quot;hierarchical&quot; targetRuntime=&quot;MyBatis3Simple&quot; &gt;
-
-    &lt;!-- 自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表；
-        一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖
-     --&gt;
-    &lt;property name=&quot;autoDelimitKeywords&quot; value=&quot;false&quot;/&gt;
-    &lt;!-- 生成的Java文件的编码 --&gt;
-    &lt;property name=&quot;javaFileEncoding&quot; value=&quot;UTF-8&quot;/&gt;
-    &lt;!-- 格式化java代码 --&gt;
-    &lt;property name=&quot;javaFormatter&quot; value=&quot;org.mybatis.generator.api.dom.DefaultJavaFormatter&quot;/&gt;
-    &lt;!-- 格式化XML代码 --&gt;
-    &lt;property name=&quot;xmlFormatter&quot; value=&quot;org.mybatis.generator.api.dom.DefaultXmlFormatter&quot;/&gt;
-
-    &lt;!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； --&gt;
-    &lt;property name=&quot;beginningDelimiter&quot; value=&quot;`&quot;/&gt;
-    &lt;property name=&quot;endingDelimiter&quot; value=&quot;`&quot;/&gt;
-
-    &lt;!-- 必须要有的，使用这个配置链接数据库
-        @TODO:是否可以扩展
-     --&gt;
-    &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot; connectionURL=&quot;jdbc:mysql:///pss&quot; userId=&quot;root&quot; password=&quot;admin&quot;&gt;
-        &lt;!-- 这里面可以设置property属性，每一个property属性都设置到配置的Driver上 --&gt;
-    &lt;/jdbcConnection&gt;
-
-    &lt;!-- java类型处理器 
-        用于处理DB中的类型到Java中的类型，默认使用JavaTypeResolverDefaultImpl；
-        注意一点，默认会先尝试使用Integer，Long，Short等来对应DECIMAL和 NUMERIC数据类型； 
-    --&gt;
-    &lt;javaTypeResolver type=&quot;org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl&quot;&gt;
-        &lt;!-- 
-            true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
-            false：默认,
-                scale&gt;0;length&gt;18：使用BigDecimal;
-                scale=0;length[10,18]：使用Long；
-                scale=0;length[5,9]：使用Integer；
-                scale=0;length&lt;5：使用Short；
-         --&gt;
-        &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot;/&gt;
-    &lt;/javaTypeResolver&gt;
-
-
-    &lt;!-- java模型创建器，是必须要的元素
-        负责：1，key类（见context的defaultModelType）；2，java类；3，查询类
-        targetPackage：生成的类要放的包，真实的包受enableSubPackages属性控制；
-        targetProject：目标项目，指定一个存在的目录下，生成的内容会放到指定目录中，如果目录不存在，MBG不会自动建目录
-     --&gt;
-    &lt;javaModelGenerator targetPackage=&quot;com._520it.mybatis.domain&quot; targetProject=&quot;src/main/java&quot;&gt;
-        &lt;!--  for MyBatis3/MyBatis3Simple
-            自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter；
-         --&gt;
-        &lt;property name=&quot;constructorBased&quot; value=&quot;false&quot;/&gt;
-
-        &lt;!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false --&gt;
-        &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;
-
-        &lt;!-- for MyBatis3 / MyBatis3Simple
-            是否创建一个不可变的类，如果为true，
-            那么MBG会创建一个没有setter方法的类，取而代之的是类似constructorBased的类
-         --&gt;
-        &lt;property name=&quot;immutable&quot; value=&quot;false&quot;/&gt;
-
-        &lt;!-- 设置一个根对象，
-            如果设置了这个根对象，那么生成的keyClass或者recordClass会继承这个类；在Table的rootClass属性中可以覆盖该选项
-            注意：如果在key class或者record class中有root class相同的属性，MBG就不会重新生成这些属性了，包括：
-                1，属性名相同，类型相同，有相同的getter/setter方法；
-         --&gt;
-        &lt;property name=&quot;rootClass&quot; value=&quot;com._520it.mybatis.domain.BaseDomain&quot;/&gt;
-
-        &lt;!-- 设置是否在getter方法中，对String类型字段调用trim()方法 --&gt;
-        &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot;/&gt;
-    &lt;/javaModelGenerator&gt;
-
-
-    &lt;!-- 生成SQL map的XML文件生成器，
-        注意，在Mybatis3之后，我们可以使用mapper.xml文件+Mapper接口（或者不用mapper接口），
-            或者只使用Mapper接口+Annotation，所以，如果 javaClientGenerator配置中配置了需要生成XML的话，这个元素就必须配置
-        targetPackage/targetProject:同javaModelGenerator
-     --&gt;
-    &lt;sqlMapGenerator targetPackage=&quot;com._520it.mybatis.mapper&quot; targetProject=&quot;src/main/resources&quot;&gt;
-        &lt;!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false --&gt;
-        &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;
-    &lt;/sqlMapGenerator&gt;
-
-
-    &lt;!-- 对于mybatis来说，即生成Mapper接口，注意，如果没有配置该元素，那么默认不会生成Mapper接口 
-        targetPackage/targetProject:同javaModelGenerator
-        type：选择怎么生成mapper接口（在MyBatis3/MyBatis3Simple下）：
-            1，ANNOTATEDMAPPER：会生成使用Mapper接口+Annotation的方式创建（SQL生成在annotation中），不会生成对应的XML；
-            2，MIXEDMAPPER：使用混合配置，会生成Mapper接口，并适当添加合适的Annotation，但是XML会生成在XML中；
-            3，XMLMAPPER：会生成Mapper接口，接口完全依赖XML；
-        注意，如果context是MyBatis3Simple：只支持ANNOTATEDMAPPER和XMLMAPPER
-    --&gt;
-    &lt;javaClientGenerator targetPackage=&quot;com._520it.mybatis.mapper&quot; type=&quot;ANNOTATEDMAPPER&quot; targetProject=&quot;src/main/java&quot;&gt;
-        &lt;!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false --&gt;
-        &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;
-
-        &lt;!-- 可以为所有生成的接口添加一个父接口，但是MBG只负责生成，不负责检查
-        &lt;property name=&quot;rootInterface&quot; value=&quot;&quot;/&gt;
-         --&gt;
-    &lt;/javaClientGenerator&gt;
-
-    &lt;!-- 选择一个table来生成相关文件，可以有一个或多个table，必须要有table元素
-        选择的table会生成一下文件：
-        1，SQL map文件
-        2，生成一个主键类；
-        3，除了BLOB和主键的其他字段的类；
-        4，包含BLOB的类；
-        5，一个用户生成动态查询的条件类（selectByExample, deleteByExample），可选；
-        6，Mapper接口（可选）
-
-        tableName（必要）：要生成对象的表名；
-        注意：大小写敏感问题。正常情况下，MBG会自动的去识别数据库标识符的大小写敏感度，在一般情况下，MBG会
-            根据设置的schema，catalog或tablename去查询数据表，按照下面的流程：
-            1，如果schema，catalog或tablename中有空格，那么设置的是什么格式，就精确的使用指定的大小写格式去查询；
-            2，否则，如果数据库的标识符使用大写的，那么MBG自动把表名变成大写再查找；
-            3，否则，如果数据库的标识符使用小写的，那么MBG自动把表名变成小写再查找；
-            4，否则，使用指定的大小写格式查询；
-        另外的，如果在创建表的时候，使用的&quot;&quot;把数据库对象规定大小写，就算数据库标识符是使用的大写，在这种情况下也会使用给定的大小写来创建表名；
-        这个时候，请设置delimitIdentifiers=&quot;true&quot;即可保留大小写格式；
-
-        可选：
-        1，schema：数据库的schema；
-        2，catalog：数据库的catalog；
-        3，alias：为数据表设置的别名，如果设置了alias，那么生成的所有的SELECT SQL语句中，列名会变成：alias_actualColumnName
-        4，domainObjectName：生成的domain类的名字，如果不设置，直接使用表名作为domain类的名字；可以设置为somepck.domainName，那么会自动把domainName类再放到somepck包里面；
-        5，enableInsert（默认true）：指定是否生成insert语句；
-        6，enableSelectByPrimaryKey（默认true）：指定是否生成按照主键查询对象的语句（就是getById或get）；
-        7，enableSelectByExample（默认true）：MyBatis3Simple为false，指定是否生成动态查询语句；
-        8，enableUpdateByPrimaryKey（默认true）：指定是否生成按照主键修改对象的语句（即update)；
-        9，enableDeleteByPrimaryKey（默认true）：指定是否生成按照主键删除对象的语句（即delete）；
-        10，enableDeleteByExample（默认true）：MyBatis3Simple为false，指定是否生成动态删除语句；
-        11，enableCountByExample（默认true）：MyBatis3Simple为false，指定是否生成动态查询总条数语句（用于分页的总条数查询）；
-        12，enableUpdateByExample（默认true）：MyBatis3Simple为false，指定是否生成动态修改语句（只修改对象中不为空的属性）；
-        13，modelType：参考context元素的defaultModelType，相当于覆盖；
-        14，delimitIdentifiers：参考tableName的解释，注意，默认的delimitIdentifiers是双引号，如果类似MYSQL这样的数据库，使用的是`（反引号，那么还需要设置context的beginningDelimiter和endingDelimiter属性）
-        15，delimitAllColumns：设置是否所有生成的SQL中的列名都使用标识符引起来。默认为false，delimitIdentifiers参考context的属性
-
-        注意，table里面很多参数都是对javaModelGenerator，context等元素的默认属性的一个复写；
-     --&gt;
-    &lt;table tableName=&quot;userinfo&quot; &gt;
-
-        &lt;!-- 参考 javaModelGenerator 的 constructorBased属性--&gt;
-        &lt;property name=&quot;constructorBased&quot; value=&quot;false&quot;/&gt;
-
-        &lt;!-- 默认为false，如果设置为true，在生成的SQL中，table名字不会加上catalog或schema； --&gt;
-        &lt;property name=&quot;ignoreQualifiersAtRuntime&quot; value=&quot;false&quot;/&gt;
-
-        &lt;!-- 参考 javaModelGenerator 的 immutable 属性 --&gt;
-        &lt;property name=&quot;immutable&quot; value=&quot;false&quot;/&gt;
-
-        &lt;!-- 指定是否只生成domain类，如果设置为true，只生成domain类，如果还配置了sqlMapGenerator，那么在mapper XML文件中，只生成resultMap元素 --&gt;
-        &lt;property name=&quot;modelOnly&quot; value=&quot;false&quot;/&gt;
-
-        &lt;!-- 参考 javaModelGenerator 的 rootClass 属性 
-        &lt;property name=&quot;rootClass&quot; value=&quot;&quot;/&gt;
-         --&gt;
-
-        &lt;!-- 参考javaClientGenerator 的  rootInterface 属性
-        &lt;property name=&quot;rootInterface&quot; value=&quot;&quot;/&gt;
-        --&gt;
-
-        &lt;!-- 如果设置了runtimeCatalog，那么在生成的SQL中，使用该指定的catalog，而不是table元素上的catalog 
-        &lt;property name=&quot;runtimeCatalog&quot; value=&quot;&quot;/&gt;
-        --&gt;
-
-        &lt;!-- 如果设置了runtimeSchema，那么在生成的SQL中，使用该指定的schema，而不是table元素上的schema 
-        &lt;property name=&quot;runtimeSchema&quot; value=&quot;&quot;/&gt;
-        --&gt;
-
-        &lt;!-- 如果设置了runtimeTableName，那么在生成的SQL中，使用该指定的tablename，而不是table元素上的tablename 
-        &lt;property name=&quot;runtimeTableName&quot; value=&quot;&quot;/&gt;
-        --&gt;
-
-        &lt;!-- 注意，该属性只针对MyBatis3Simple有用；
-            如果选择的runtime是MyBatis3Simple，那么会生成一个SelectAll方法，如果指定了selectAllOrderByClause，那么会在该SQL中添加指定的这个order条件；
-         --&gt;
-        &lt;property name=&quot;selectAllOrderByClause&quot; value=&quot;age desc,username asc&quot;/&gt;
-
-        &lt;!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate --&gt;
-        &lt;property name=&quot;useActualColumnNames&quot; value=&quot;false&quot;/&gt;
-
-
-        &lt;!-- generatedKey用于生成生成主键的方法，
-            如果设置了该元素，MBG会在生成的&lt;insert&gt;元素中生成一条正确的&lt;selectKey&gt;元素，该元素可选
-            column:主键的列名；
-            sqlStatement：要生成的selectKey语句，有以下可选项：
-                Cloudscape:相当于selectKey的SQL为： VALUES IDENTITY_VAL_LOCAL()
-                DB2       :相当于selectKey的SQL为： VALUES IDENTITY_VAL_LOCAL()
-                DB2_MF    :相当于selectKey的SQL为：SELECT IDENTITY_VAL_LOCAL() FROM SYSIBM.SYSDUMMY1
-                Derby      :相当于selectKey的SQL为：VALUES IDENTITY_VAL_LOCAL()
-                HSQLDB      :相当于selectKey的SQL为：CALL IDENTITY()
-                Informix  :相当于selectKey的SQL为：select dbinfo(&apos;sqlca.sqlerrd1&apos;) from systables where tabid=1
-                MySql      :相当于selectKey的SQL为：SELECT LAST_INSERT_ID()
-                SqlServer :相当于selectKey的SQL为：SELECT SCOPE_IDENTITY()
-                SYBASE      :相当于selectKey的SQL为：SELECT @@IDENTITY
-                JDBC      :相当于在生成的insert元素上添加useGeneratedKeys=&quot;true&quot;和keyProperty属性
-        &lt;generatedKey column=&quot;&quot; sqlStatement=&quot;&quot;/&gt;
-         --&gt;
-
-        &lt;!-- 
-            该元素会在根据表中列名计算对象属性名之前先重命名列名，非常适合用于表中的列都有公用的前缀字符串的时候，
-            比如列名为：CUST_ID,CUST_NAME,CUST_EMAIL,CUST_ADDRESS等；
-            那么就可以设置searchString为&quot;^CUST_&quot;，并使用空白替换，那么生成的Customer对象中的属性名称就不是
-            custId,custName等，而是先被替换为ID,NAME,EMAIL,然后变成属性：id，name，email；
-
-            注意，MBG是使用java.util.regex.Matcher.replaceAll来替换searchString和replaceString的，
-            如果使用了columnOverride元素，该属性无效；
-
-        &lt;columnRenamingRule searchString=&quot;&quot; replaceString=&quot;&quot;/&gt;
-         --&gt;
-
-
-         &lt;!-- 用来修改表中某个列的属性，MBG会使用修改后的列来生成domain的属性；
-             column:要重新设置的列名；
-             注意，一个table元素中可以有多个columnOverride元素哈~
-          --&gt;
-         &lt;columnOverride column=&quot;username&quot;&gt;
-             &lt;!-- 使用property属性来指定列要生成的属性名称 --&gt;
-             &lt;property name=&quot;property&quot; value=&quot;userName&quot;/&gt;
-
-             &lt;!-- javaType用于指定生成的domain的属性类型，使用类型的全限定名
-             &lt;property name=&quot;javaType&quot; value=&quot;&quot;/&gt;
-              --&gt;
-
-             &lt;!-- jdbcType用于指定该列的JDBC类型 
-             &lt;property name=&quot;jdbcType&quot; value=&quot;&quot;/&gt;
-              --&gt;
-
-             &lt;!-- typeHandler 用于指定该列使用到的TypeHandler，如果要指定，配置类型处理器的全限定名
-                 注意，mybatis中，不会生成到mybatis-config.xml中的typeHandler
-                 只会生成类似：where id = #{id,jdbcType=BIGINT,typeHandler=com._520it.mybatis.MyTypeHandler}的参数描述
-             &lt;property name=&quot;jdbcType&quot; value=&quot;&quot;/&gt;
-             --&gt;
-
-             &lt;!-- 参考table元素的delimitAllColumns配置，默认为false
-             &lt;property name=&quot;delimitedColumnName&quot; value=&quot;&quot;/&gt;
-              --&gt;
-         &lt;/columnOverride&gt;
-
-         &lt;!-- ignoreColumn设置一个MGB忽略的列，如果设置了改列，那么在生成的domain中，生成的SQL中，都不会有该列出现 
-             column:指定要忽略的列的名字；
-             delimitedColumnName：参考table元素的delimitAllColumns配置，默认为false
-
-             注意，一个table元素中可以有多个ignoreColumn元素
-         &lt;ignoreColumn column=&quot;deptId&quot; delimitedColumnName=&quot;&quot;/&gt;
-         --&gt;
-    &lt;/table&gt;
-
-&lt;/context&gt;
-
-&lt;/generatorConfiguration&gt;
-</code></pre>
+<h3 id="以下为MyBatis-Generator-配置文件"><a href="#以下为MyBatis-Generator-配置文件" class="headerlink" title="以下为MyBatis-Generator 配置文件"></a>以下为MyBatis-Generator 配置文件</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE generatorConfiguration</span></div><div class="line">  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"</div><div class="line">"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd"&gt;</div><div class="line"><span class="comment">&lt;!-- 配置生成器 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">generatorConfiguration</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 可以用于加载配置项或者配置文件，在整个配置文件中就可以使用$&#123;propertyKey&#125;的方式来引用配置项</span></div><div class="line">    resource：配置资源加载地址，使用resource，MBG从classpath开始找，比如com/myproject/generatorConfig.properties        </div><div class="line">    url：配置资源加载地质，使用URL的方式，比如file:///C:/myfolder/generatorConfig.properties.</div><div class="line">    注意，两个属性只能选址一个;</div><div class="line"></div><div class="line">    另外，如果使用了mybatis-generator-maven-plugin，那么在pom.xml中定义的properties都可以直接在generatorConfig.xml中使用</div><div class="line">&lt;properties resource="" url="" /&gt;</div><div class="line"> --&gt;</div><div class="line"></div><div class="line"> <span class="comment">&lt;!-- 在MBG工作的时候，需要额外加载的依赖包</span></div><div class="line">     location属性指明加载jar/zip包的全路径</div><div class="line">&lt;classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" /&gt;</div><div class="line">  --&gt;</div><div class="line"></div><div class="line"><span class="comment">&lt;!-- </span></div><div class="line">    context:生成一组对象的环境 </div><div class="line">    id:必选，上下文id，用于在生成错误时提示</div><div class="line">    defaultModelType:指定生成对象的样式</div><div class="line">        1，conditional：类似hierarchical；</div><div class="line">        2，flat：所有内容（主键，blob）等全部生成在一个对象中；</div><div class="line">        3，hierarchical：主键生成一个XXKey对象(key class)，Blob等单独生成一个对象，其他简单属性在一个对象中(record class)</div><div class="line">    targetRuntime:</div><div class="line">        1，MyBatis3：默认的值，生成基于MyBatis3.x以上版本的内容，包括XXXBySample；</div><div class="line">        2，MyBatis3Simple：类似MyBatis3，只是不生成XXXBySample；</div><div class="line">    introspectedColumnImpl：类全限定名，用于扩展MBG</div><div class="line">--&gt;</div><div class="line"><span class="tag">&lt;<span class="name">context</span> <span class="attr">id</span>=<span class="string">"mysql"</span> <span class="attr">defaultModelType</span>=<span class="string">"hierarchical"</span> <span class="attr">targetRuntime</span>=<span class="string">"MyBatis3Simple"</span> &gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表；</span></div><div class="line">        一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖</div><div class="line">     --&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"autoDelimitKeywords"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 生成的Java文件的编码 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"javaFileEncoding"</span> <span class="attr">value</span>=<span class="string">"UTF-8"</span>/&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 格式化java代码 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"javaFormatter"</span> <span class="attr">value</span>=<span class="string">"org.mybatis.generator.api.dom.DefaultJavaFormatter"</span>/&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 格式化XML代码 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"xmlFormatter"</span> <span class="attr">value</span>=<span class="string">"org.mybatis.generator.api.dom.DefaultXmlFormatter"</span>/&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"beginningDelimiter"</span> <span class="attr">value</span>=<span class="string">"`"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"endingDelimiter"</span> <span class="attr">value</span>=<span class="string">"`"</span>/&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 必须要有的，使用这个配置链接数据库</span></div><div class="line">        @<span class="doctag">TODO:</span>是否可以扩展</div><div class="line">     --&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">jdbcConnection</span> <span class="attr">driverClass</span>=<span class="string">"com.mysql.jdbc.Driver"</span> <span class="attr">connectionURL</span>=<span class="string">"jdbc:mysql:///pss"</span> <span class="attr">userId</span>=<span class="string">"root"</span> <span class="attr">password</span>=<span class="string">"admin"</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- 这里面可以设置property属性，每一个property属性都设置到配置的Driver上 --&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">jdbcConnection</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- java类型处理器 </span></div><div class="line">        用于处理DB中的类型到Java中的类型，默认使用JavaTypeResolverDefaultImpl；</div><div class="line">        注意一点，默认会先尝试使用Integer，Long，Short等来对应DECIMAL和 NUMERIC数据类型； </div><div class="line">    --&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">javaTypeResolver</span> <span class="attr">type</span>=<span class="string">"org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl"</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- </span></div><div class="line">            true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型</div><div class="line">            false：默认,</div><div class="line">                scale&gt;0;length&gt;18：使用BigDecimal;</div><div class="line">                scale=0;length[10,18]：使用Long；</div><div class="line">                scale=0;length[5,9]：使用Integer；</div><div class="line">                scale=0;length&lt;5：使用Short；</div><div class="line">         --&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"forceBigDecimals"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">javaTypeResolver</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- java模型创建器，是必须要的元素</span></div><div class="line">        负责：1，key类（见context的defaultModelType）；2，java类；3，查询类</div><div class="line">        targetPackage：生成的类要放的包，真实的包受enableSubPackages属性控制；</div><div class="line">        targetProject：目标项目，指定一个存在的目录下，生成的内容会放到指定目录中，如果目录不存在，MBG不会自动建目录</div><div class="line">     --&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">javaModelGenerator</span> <span class="attr">targetPackage</span>=<span class="string">"com._520it.mybatis.domain"</span> <span class="attr">targetProject</span>=<span class="string">"src/main/java"</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!--  for MyBatis3/MyBatis3Simple</span></div><div class="line">            自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter；</div><div class="line">         --&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"constructorBased"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"enableSubPackages"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- for MyBatis3 / MyBatis3Simple</span></div><div class="line">            是否创建一个不可变的类，如果为true，</div><div class="line">            那么MBG会创建一个没有setter方法的类，取而代之的是类似constructorBased的类</div><div class="line">         --&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"immutable"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 设置一个根对象，</span></div><div class="line">            如果设置了这个根对象，那么生成的keyClass或者recordClass会继承这个类；在Table的rootClass属性中可以覆盖该选项</div><div class="line">            注意：如果在key class或者record class中有root class相同的属性，MBG就不会重新生成这些属性了，包括：</div><div class="line">                1，属性名相同，类型相同，有相同的getter/setter方法；</div><div class="line">         --&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"rootClass"</span> <span class="attr">value</span>=<span class="string">"com._520it.mybatis.domain.BaseDomain"</span>/&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 设置是否在getter方法中，对String类型字段调用trim()方法 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"trimStrings"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">javaModelGenerator</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 生成SQL map的XML文件生成器，</span></div><div class="line">        注意，在Mybatis3之后，我们可以使用mapper.xml文件+Mapper接口（或者不用mapper接口），</div><div class="line">            或者只使用Mapper接口+Annotation，所以，如果 javaClientGenerator配置中配置了需要生成XML的话，这个元素就必须配置</div><div class="line">        targetPackage/targetProject:同javaModelGenerator</div><div class="line">     --&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">sqlMapGenerator</span> <span class="attr">targetPackage</span>=<span class="string">"com._520it.mybatis.mapper"</span> <span class="attr">targetProject</span>=<span class="string">"src/main/resources"</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"enableSubPackages"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">sqlMapGenerator</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 对于mybatis来说，即生成Mapper接口，注意，如果没有配置该元素，那么默认不会生成Mapper接口 </span></div><div class="line">        targetPackage/targetProject:同javaModelGenerator</div><div class="line">        type：选择怎么生成mapper接口（在MyBatis3/MyBatis3Simple下）：</div><div class="line">            1，ANNOTATEDMAPPER：会生成使用Mapper接口+Annotation的方式创建（SQL生成在annotation中），不会生成对应的XML；</div><div class="line">            2，MIXEDMAPPER：使用混合配置，会生成Mapper接口，并适当添加合适的Annotation，但是XML会生成在XML中；</div><div class="line">            3，XMLMAPPER：会生成Mapper接口，接口完全依赖XML；</div><div class="line">        注意，如果context是MyBatis3Simple：只支持ANNOTATEDMAPPER和XMLMAPPER</div><div class="line">    --&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">javaClientGenerator</span> <span class="attr">targetPackage</span>=<span class="string">"com._520it.mybatis.mapper"</span> <span class="attr">type</span>=<span class="string">"ANNOTATEDMAPPER"</span> <span class="attr">targetProject</span>=<span class="string">"src/main/java"</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"enableSubPackages"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 可以为所有生成的接口添加一个父接口，但是MBG只负责生成，不负责检查</span></div><div class="line">        &lt;property name="rootInterface" value=""/&gt;</div><div class="line">         --&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">javaClientGenerator</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 选择一个table来生成相关文件，可以有一个或多个table，必须要有table元素</span></div><div class="line">        选择的table会生成一下文件：</div><div class="line">        1，SQL map文件</div><div class="line">        2，生成一个主键类；</div><div class="line">        3，除了BLOB和主键的其他字段的类；</div><div class="line">        4，包含BLOB的类；</div><div class="line">        5，一个用户生成动态查询的条件类（selectByExample, deleteByExample），可选；</div><div class="line">        6，Mapper接口（可选）</div><div class="line"></div><div class="line">        tableName（必要）：要生成对象的表名；</div><div class="line">        注意：大小写敏感问题。正常情况下，MBG会自动的去识别数据库标识符的大小写敏感度，在一般情况下，MBG会</div><div class="line">            根据设置的schema，catalog或tablename去查询数据表，按照下面的流程：</div><div class="line">            1，如果schema，catalog或tablename中有空格，那么设置的是什么格式，就精确的使用指定的大小写格式去查询；</div><div class="line">            2，否则，如果数据库的标识符使用大写的，那么MBG自动把表名变成大写再查找；</div><div class="line">            3，否则，如果数据库的标识符使用小写的，那么MBG自动把表名变成小写再查找；</div><div class="line">            4，否则，使用指定的大小写格式查询；</div><div class="line">        另外的，如果在创建表的时候，使用的""把数据库对象规定大小写，就算数据库标识符是使用的大写，在这种情况下也会使用给定的大小写来创建表名；</div><div class="line">        这个时候，请设置delimitIdentifiers="true"即可保留大小写格式；</div><div class="line"></div><div class="line">        可选：</div><div class="line">        1，schema：数据库的schema；</div><div class="line">        2，catalog：数据库的catalog；</div><div class="line">        3，alias：为数据表设置的别名，如果设置了alias，那么生成的所有的SELECT SQL语句中，列名会变成：alias_actualColumnName</div><div class="line">        4，domainObjectName：生成的domain类的名字，如果不设置，直接使用表名作为domain类的名字；可以设置为somepck.domainName，那么会自动把domainName类再放到somepck包里面；</div><div class="line">        5，enableInsert（默认true）：指定是否生成insert语句；</div><div class="line">        6，enableSelectByPrimaryKey（默认true）：指定是否生成按照主键查询对象的语句（就是getById或get）；</div><div class="line">        7，enableSelectByExample（默认true）：MyBatis3Simple为false，指定是否生成动态查询语句；</div><div class="line">        8，enableUpdateByPrimaryKey（默认true）：指定是否生成按照主键修改对象的语句（即update)；</div><div class="line">        9，enableDeleteByPrimaryKey（默认true）：指定是否生成按照主键删除对象的语句（即delete）；</div><div class="line">        10，enableDeleteByExample（默认true）：MyBatis3Simple为false，指定是否生成动态删除语句；</div><div class="line">        11，enableCountByExample（默认true）：MyBatis3Simple为false，指定是否生成动态查询总条数语句（用于分页的总条数查询）；</div><div class="line">        12，enableUpdateByExample（默认true）：MyBatis3Simple为false，指定是否生成动态修改语句（只修改对象中不为空的属性）；</div><div class="line">        13，modelType：参考context元素的defaultModelType，相当于覆盖；</div><div class="line">        14，delimitIdentifiers：参考tableName的解释，注意，默认的delimitIdentifiers是双引号，如果类似MYSQL这样的数据库，使用的是`（反引号，那么还需要设置context的beginningDelimiter和endingDelimiter属性）</div><div class="line">        15，delimitAllColumns：设置是否所有生成的SQL中的列名都使用标识符引起来。默认为false，delimitIdentifiers参考context的属性</div><div class="line"></div><div class="line">        注意，table里面很多参数都是对javaModelGenerator，context等元素的默认属性的一个复写；</div><div class="line">     --&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">"userinfo"</span> &gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 参考 javaModelGenerator 的 constructorBased属性--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"constructorBased"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 默认为false，如果设置为true，在生成的SQL中，table名字不会加上catalog或schema； --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"ignoreQualifiersAtRuntime"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 参考 javaModelGenerator 的 immutable 属性 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"immutable"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 指定是否只生成domain类，如果设置为true，只生成domain类，如果还配置了sqlMapGenerator，那么在mapper XML文件中，只生成resultMap元素 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"modelOnly"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 参考 javaModelGenerator 的 rootClass 属性 </span></div><div class="line">        &lt;property name="rootClass" value=""/&gt;</div><div class="line">         --&gt;</div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 参考javaClientGenerator 的  rootInterface 属性</span></div><div class="line">        &lt;property name="rootInterface" value=""/&gt;</div><div class="line">        --&gt;</div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 如果设置了runtimeCatalog，那么在生成的SQL中，使用该指定的catalog，而不是table元素上的catalog </span></div><div class="line">        &lt;property name="runtimeCatalog" value=""/&gt;</div><div class="line">        --&gt;</div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 如果设置了runtimeSchema，那么在生成的SQL中，使用该指定的schema，而不是table元素上的schema </span></div><div class="line">        &lt;property name="runtimeSchema" value=""/&gt;</div><div class="line">        --&gt;</div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 如果设置了runtimeTableName，那么在生成的SQL中，使用该指定的tablename，而不是table元素上的tablename </span></div><div class="line">        &lt;property name="runtimeTableName" value=""/&gt;</div><div class="line">        --&gt;</div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 注意，该属性只针对MyBatis3Simple有用；</span></div><div class="line">            如果选择的runtime是MyBatis3Simple，那么会生成一个SelectAll方法，如果指定了selectAllOrderByClause，那么会在该SQL中添加指定的这个order条件；</div><div class="line">         --&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"selectAllOrderByClause"</span> <span class="attr">value</span>=<span class="string">"age desc,username asc"</span>/&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"useActualColumnNames"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- generatedKey用于生成生成主键的方法，</span></div><div class="line">            如果设置了该元素，MBG会在生成的&lt;insert&gt;元素中生成一条正确的&lt;selectKey&gt;元素，该元素可选</div><div class="line">            column:主键的列名；</div><div class="line">            sqlStatement：要生成的selectKey语句，有以下可选项：</div><div class="line">                Cloudscape:相当于selectKey的SQL为： VALUES IDENTITY_VAL_LOCAL()</div><div class="line">                DB2       :相当于selectKey的SQL为： VALUES IDENTITY_VAL_LOCAL()</div><div class="line">                DB2_MF    :相当于selectKey的SQL为：SELECT IDENTITY_VAL_LOCAL() FROM SYSIBM.SYSDUMMY1</div><div class="line">                Derby      :相当于selectKey的SQL为：VALUES IDENTITY_VAL_LOCAL()</div><div class="line">                HSQLDB      :相当于selectKey的SQL为：CALL IDENTITY()</div><div class="line">                Informix  :相当于selectKey的SQL为：select dbinfo('sqlca.sqlerrd1') from systables where tabid=1</div><div class="line">                MySql      :相当于selectKey的SQL为：SELECT LAST_INSERT_ID()</div><div class="line">                SqlServer :相当于selectKey的SQL为：SELECT SCOPE_IDENTITY()</div><div class="line">                SYBASE      :相当于selectKey的SQL为：SELECT @@IDENTITY</div><div class="line">                JDBC      :相当于在生成的insert元素上添加useGeneratedKeys="true"和keyProperty属性</div><div class="line">        &lt;generatedKey column="" sqlStatement=""/&gt;</div><div class="line">         --&gt;</div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- </span></div><div class="line">            该元素会在根据表中列名计算对象属性名之前先重命名列名，非常适合用于表中的列都有公用的前缀字符串的时候，</div><div class="line">            比如列名为：CUST_ID,CUST_NAME,CUST_EMAIL,CUST_ADDRESS等；</div><div class="line">            那么就可以设置searchString为"^CUST_"，并使用空白替换，那么生成的Customer对象中的属性名称就不是</div><div class="line">            custId,custName等，而是先被替换为ID,NAME,EMAIL,然后变成属性：id，name，email；</div><div class="line"></div><div class="line">            注意，MBG是使用java.util.regex.Matcher.replaceAll来替换searchString和replaceString的，</div><div class="line">            如果使用了columnOverride元素，该属性无效；</div><div class="line"></div><div class="line">        &lt;columnRenamingRule searchString="" replaceString=""/&gt;</div><div class="line">         --&gt;</div><div class="line"></div><div class="line"></div><div class="line">         <span class="comment">&lt;!-- 用来修改表中某个列的属性，MBG会使用修改后的列来生成domain的属性；</span></div><div class="line">             column:要重新设置的列名；</div><div class="line">             注意，一个table元素中可以有多个columnOverride元素哈~</div><div class="line">          --&gt;</div><div class="line">         <span class="tag">&lt;<span class="name">columnOverride</span> <span class="attr">column</span>=<span class="string">"username"</span>&gt;</span></div><div class="line">             <span class="comment">&lt;!-- 使用property属性来指定列要生成的属性名称 --&gt;</span></div><div class="line">             <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"property"</span> <span class="attr">value</span>=<span class="string">"userName"</span>/&gt;</span></div><div class="line"></div><div class="line">             <span class="comment">&lt;!-- javaType用于指定生成的domain的属性类型，使用类型的全限定名</span></div><div class="line">             &lt;property name="javaType" value=""/&gt;</div><div class="line">              --&gt;</div><div class="line"></div><div class="line">             <span class="comment">&lt;!-- jdbcType用于指定该列的JDBC类型 </span></div><div class="line">             &lt;property name="jdbcType" value=""/&gt;</div><div class="line">              --&gt;</div><div class="line"></div><div class="line">             <span class="comment">&lt;!-- typeHandler 用于指定该列使用到的TypeHandler，如果要指定，配置类型处理器的全限定名</span></div><div class="line">                 注意，mybatis中，不会生成到mybatis-config.xml中的typeHandler</div><div class="line">                 只会生成类似：where id = #&#123;id,jdbcType=BIGINT,typeHandler=com._520it.mybatis.MyTypeHandler&#125;的参数描述</div><div class="line">             &lt;property name="jdbcType" value=""/&gt;</div><div class="line">             --&gt;</div><div class="line"></div><div class="line">             <span class="comment">&lt;!-- 参考table元素的delimitAllColumns配置，默认为false</span></div><div class="line">             &lt;property name="delimitedColumnName" value=""/&gt;</div><div class="line">              --&gt;</div><div class="line">         <span class="tag">&lt;/<span class="name">columnOverride</span>&gt;</span></div><div class="line"></div><div class="line">         <span class="comment">&lt;!-- ignoreColumn设置一个MGB忽略的列，如果设置了改列，那么在生成的domain中，生成的SQL中，都不会有该列出现 </span></div><div class="line">             column:指定要忽略的列的名字；</div><div class="line">             delimitedColumnName：参考table元素的delimitAllColumns配置，默认为false</div><div class="line"></div><div class="line">             注意，一个table元素中可以有多个ignoreColumn元素</div><div class="line">         &lt;ignoreColumn column="deptId" delimitedColumnName=""/&gt;</div><div class="line">         --&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">table</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">context</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">generatorConfiguration</span>&gt;</span></div></pre></td></tr></table></figure>
       
     </div>
 
@@ -624,7 +341,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/14/myBatis/MBG/MybatisGeneator/" rel="next" title="MyBatis-generator 自动生成MyBatis代码">
+              <a href="/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/" rel="next" title="MyBatis-generator 自动生成MyBatis代码">
                 <i class="fa fa-chevron-left"></i> MyBatis-generator 自动生成MyBatis代码
               </a>
             
@@ -634,8 +351,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/" rel="prev" title="MyBatis-generator 自动生成MyBatis代码">
-                MyBatis-generator 自动生成MyBatis代码 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/07/14/myBatis/MBG/MybatisGeneator/" rel="prev" title="MyBatis-generator">
+                MyBatis-generator <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -760,7 +477,7 @@
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg"
+               src="http://flycloud.me/images/blog/avatar.jpg"
                alt="flycloud" />
           <p class="site-author-name" itemprop="name">flycloud</p>
            
@@ -772,7 +489,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">75</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -783,7 +500,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -794,7 +511,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -836,7 +553,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -847,7 +564,7 @@
 
         
 <div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https:/busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
 
@@ -953,8 +670,9 @@
      </ul>
  </nav>
 <link type="text/css" rel="stylesheet" href="http://cdn.bootcss.com/jQuery.mmenu/5.5.3/core/css/jquery.mmenu.all.css" />
-<link type="text/css" rel="stylesheet" href="http://7xowny.com1.z0.glb.clouddn.com/flyCloudMenu.css" />
-<script type="text/javascript" src="http://7xowny.com1.z0.glb.clouddn.com/jquery.mmenu.min.all.js"></script>
+<link type="text/css" rel="stylesheet" href="/css/flyCloudMenu.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.5.3/core/js/jquery.mmenu.min.all.js"></script>
+
 
 <script type="text/javascript">
   $(function () {
@@ -974,6 +692,28 @@
             });
 
             
+              var html="<li>" +"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+ " markdown style guide</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+" markdown style guide</a></li></ul>"
+              
+                   if($('li#'+"160>ul").length==0){
+                    $('li#'+"160").append(chirldHtml);
+                   }else{
+                    $('li#'+"160>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/maven/maven环境差异化应用/'>"+ " maven环境差异化应用</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/maven/maven环境差异化应用/'>"+" maven环境差异化应用</a></li></ul>"
+              
+                   if($('li#'+"220>ul").length==0){
+                    $('li#'+"220").append(chirldHtml);
+                   }else{
+                    $('li#'+"220>ul:first").append(html);
+                   }
+
+              
+            
               var html="<li>" +"<a href='/2017/11/20/maven/mirror和repository 区别/'>"+ " Maven：mirror和repository 区别</a></li>";
               var chirldHtml="<ul><li>"+"<a href='/2017/11/20/maven/mirror和repository 区别/'>"+" Maven：mirror和repository 区别</a></li></ul>"
               
@@ -985,13 +725,13 @@
 
               
             
-              var html="<li>" +"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+ " markdown style guide</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+" markdown style guide</a></li></ul>"
+              var html="<li>" +"<a href='/2017/12/20/架构&高并发/Java并发编程与高并发解决方案/'>"+ " Java并发编程与高并发解决方案</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/20/架构&高并发/Java并发编程与高并发解决方案/'>"+" Java并发编程与高并发解决方案</a></li></ul>"
               
-                   if($('li#'+"160>ul").length==0){
-                    $('li#'+"160").append(chirldHtml);
+                   if($('li#'+"400>ul").length==0){
+                    $('li#'+"400").append(chirldHtml);
                    }else{
-                    $('li#'+"160>ul:first").append(html);
+                    $('li#'+"400>ul:first").append(html);
                    }
 
               
@@ -1007,13 +747,134 @@
 
               
             
-              var html="<li>" +"<a href='/2017/09/05/git&github/github/github项目排名/'>"+ " github项目排名</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github项目排名/'>"+" github项目排名</a></li></ul>"
+              var html="<li>" +"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(一)/'>"+ " 网站海量数据和高并发解决方案(一)</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(一)/'>"+" 网站海量数据和高并发解决方案(一)</a></li></ul>"
               
-                   if($('li#'+"52>ul").length==0){
-                    $('li#'+"52").append(chirldHtml);
+                   if($('li#'+"400>ul").length==0){
+                    $('li#'+"400").append(chirldHtml);
                    }else{
-                    $('li#'+"52>ul:first").append(html);
+                    $('li#'+"400>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(二)/'>"+ " 网站海量数据和高并发解决方案(二)</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(二)/'>"+" 网站海量数据和高并发解决方案(二)</a></li></ul>"
+              
+                   if($('li#'+"400>ul").length==0){
+                    $('li#'+"400").append(chirldHtml);
+                   }else{
+                    $('li#'+"400>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/30/集锦/50个最常用的UnixLinux命令/'>"+ " 50个最常用的UnixLinux命令</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/30/集锦/50个最常用的UnixLinux命令/'>"+" 50个最常用的UnixLinux命令</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/02/集锦/graphics/'>"+ " 程序员必知的七个图形工具</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/02/集锦/graphics/'>"+" 程序员必知的七个图形工具</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/30/集锦/promotion_rule/'>"+ " 零售行业优惠规则分析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/30/集锦/promotion_rule/'>"+" 零售行业优惠规则分析</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/05/30/集锦/shell/'>"+ " Shell脚本编程30分钟入门</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/05/30/集锦/shell/'>"+" Shell脚本编程30分钟入门</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/MySQL/'>"+ " MySQL 必看</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/MySQL/'>"+" MySQL 必看</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/MySQ大表优化/'>"+ " MySQL大表优化方案</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/MySQ大表优化/'>"+" MySQL大表优化方案</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/分库分表的几种常见形式以及可能遇到的难/'>"+ " 分库分表的几种常见玩法及如何解决跨库查询等问题</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/分库分表的几种常见形式以及可能遇到的难/'>"+" 分库分表的几种常见玩法及如何解决跨库查询等问题</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/大众点评订单系统分库分表实践/'>"+ " 大众点评订单系统分库分表实践</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/大众点评订单系统分库分表实践/'>"+" 大众点评订单系统分库分表实践</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/dubbo/dubbo学习/dubbo容器启动/'>"+ " dubbo容器启动</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/dubbo/dubbo学习/dubbo容器启动/'>"+" dubbo容器启动</a></li></ul>"
+              
+                   if($('li#'+"301>ul").length==0){
+                    $('li#'+"301").append(chirldHtml);
+                   }else{
+                    $('li#'+"301>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/dubbo/dubbo学习/dubbo服务启动/'>"+ " dubbo服务启动</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/dubbo/dubbo学习/dubbo服务启动/'>"+" dubbo服务启动</a></li></ul>"
+              
+                   if($('li#'+"301>ul").length==0){
+                    $('li#'+"301").append(chirldHtml);
+                   }else{
+                    $('li#'+"301>ul:first").append(html);
                    }
 
               
@@ -1040,8 +901,41 @@
 
               
             
-              var html="<li>" +"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+ " java 注解总结</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+" java 注解总结</a></li></ul>"
+              var html="<li>" +"<a href='/2018/01/31/front/jquery/jQuery-plugin-authoring/'>"+ " 如何编写 jQuery 插件</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/31/front/jquery/jQuery-plugin-authoring/'>"+" 如何编写 jQuery 插件</a></li></ul>"
+              
+                   if($('li#'+"141>ul").length==0){
+                    $('li#'+"141").append(chirldHtml);
+                   }else{
+                    $('li#'+"141>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/05/git&github/github/github wiki下载/'>"+ " github wiki下载</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github wiki下载/'>"+" github wiki下载</a></li></ul>"
+              
+                   if($('li#'+"52>ul").length==0){
+                    $('li#'+"52").append(chirldHtml);
+                   }else{
+                    $('li#'+"52>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/05/git&github/github/github项目排名/'>"+ " github项目排名</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github项目排名/'>"+" github项目排名</a></li></ul>"
+              
+                   if($('li#'+"52>ul").length==0){
+                    $('li#'+"52").append(chirldHtml);
+                   }else{
+                    $('li#'+"52>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/05/16/java/java基础/2017-05-16-java-collection/'>"+ " Java - 集合框架完全解析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/05/16/java/java基础/2017-05-16-java-collection/'>"+" Java - 集合框架完全解析</a></li></ul>"
               
                    if($('li#'+"261>ul").length==0){
                     $('li#'+"261").append(chirldHtml);
@@ -1051,24 +945,46 @@
 
               
             
-              var html="<li>" +"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+ " RocketMQ开发指南</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+" RocketMQ开发指南</a></li></ul>"
+              var html="<li>" +"<a href='/2018/01/09/java/java基础/2016-10-18-JavaCryptography/'>"+ " Java的加密解密</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/java/java基础/2016-10-18-JavaCryptography/'>"+" Java的加密解密</a></li></ul>"
               
-                   if($('li#'+"241>ul").length==0){
-                    $('li#'+"241").append(chirldHtml);
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
                    }else{
-                    $('li#'+"241>ul:first").append(html);
+                    $('li#'+"261>ul:first").append(html);
                    }
 
               
             
-              var html="<li>" +"<a href='/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/'>"+ " slf4j log4j logback关系详解和相关用法</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/'>"+" slf4j log4j logback关系详解和相关用法</a></li></ul>"
+              var html="<li>" +"<a href='/2017/03/20/java/java基础/Java集合/'>"+ " java 集合</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/java基础/Java集合/'>"+" java 集合</a></li></ul>"
               
-                   if($('li#'+"262>ul").length==0){
-                    $('li#'+"262").append(chirldHtml);
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
                    }else{
-                    $('li#'+"262>ul:first").append(html);
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/java基础/内部类的本质 /'>"+ " 内部类的本质</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/java基础/内部类的本质 /'>"+" 内部类的本质</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+ " java 注解总结</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+" java 注解总结</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
                    }
 
               
@@ -1084,17 +1000,6 @@
 
               
             
-              var html="<li>" +"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+ " MyBatis-generator 分析</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+" MyBatis-generator 分析</a></li></ul>"
-              
-                   if($('li#'+"200>ul").length==0){
-                    $('li#'+"200").append(chirldHtml);
-                   }else{
-                    $('li#'+"200>ul:first").append(html);
-                   }
-
-              
-            
               var html="<li>" +"<a href='/2016/06/26/java/日志/log4j学习/'>"+ " Log4j学习</a></li>";
               var chirldHtml="<ul><li>"+"<a href='/2016/06/26/java/日志/log4j学习/'>"+" Log4j学习</a></li></ul>"
               
@@ -1106,13 +1011,24 @@
 
               
             
-              var html="<li>" +"<a href='/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/'>"+ " 消息ACK机制及消费进度管理</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/'>"+" 消息ACK机制及消费进度管理</a></li></ul>"
+              var html="<li>" +"<a href='/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/'>"+ " slf4j log4j logback关系详解和相关用法</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/'>"+" slf4j log4j logback关系详解和相关用法</a></li></ul>"
               
-                   if($('li#'+"241>ul").length==0){
-                    $('li#'+"241").append(chirldHtml);
+                   if($('li#'+"262>ul").length==0){
+                    $('li#'+"262").append(chirldHtml);
                    }else{
-                    $('li#'+"241>ul:first").append(html);
+                    $('li#'+"262>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+ " MyBatis-generator 自动生成MyBatis代码</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+" MyBatis-generator 自动生成MyBatis代码</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
                    }
 
               
@@ -1124,6 +1040,61 @@
                     $('li#'+"200").append(chirldHtml);
                    }else{
                     $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+ " MyBatis-generator 分析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+" MyBatis-generator 分析</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/19/myBatis/mybatis学习/Mybatis二级缓存/'>"+ " Mybatis二级缓存</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/19/myBatis/mybatis学习/Mybatis二级缓存/'>"+" Mybatis二级缓存</a></li></ul>"
+              
+                   if($('li#'+"180>ul").length==0){
+                    $('li#'+"180").append(chirldHtml);
+                   }else{
+                    $('li#'+"180>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MybatisGeneator/'>"+ " MyBatis-generator</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MybatisGeneator/'>"+" MyBatis-generator</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/19/myBatis/mybatis学习/深入了解MyBatis二级缓存/'>"+ " Mybatis二级缓存</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/19/myBatis/mybatis学习/深入了解MyBatis二级缓存/'>"+" Mybatis二级缓存</a></li></ul>"
+              
+                   if($('li#'+"180>ul").length==0){
+                    $('li#'+"180").append(chirldHtml);
+                   }else{
+                    $('li#'+"180>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/17/myBatis/mybatis学习/Mybatis-spring整合/'>"+ " MyBatis spring整合</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/17/myBatis/mybatis学习/Mybatis-spring整合/'>"+" MyBatis spring整合</a></li></ul>"
+              
+                   if($('li#'+"180>ul").length==0){
+                    $('li#'+"180").append(chirldHtml);
+                   }else{
+                    $('li#'+"180>ul:first").append(html);
                    }
 
               
@@ -1150,6 +1121,39 @@
 
               
             
+              var html="<li>" +"<a href='/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/'>"+ " 消息ACK机制及消费进度管理</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/'>"+" 消息ACK机制及消费进度管理</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+ " RocketMQ开发指南</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+" RocketMQ开发指南</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/2016-07-25-spring-interview-details/'>"+ " Spring、Hibernate、Mybatis面试相关知识点</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/2016-07-25-spring-interview-details/'>"+" Spring、Hibernate、Mybatis面试相关知识点</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
               var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+ " BeanPostProcessor</a></li>";
               var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+" BeanPostProcessor</a></li></ul>"
               
@@ -1161,52 +1165,8 @@
 
               
             
-              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+ " MyBatis-generator 自动生成MyBatis代码</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+" MyBatis-generator 自动生成MyBatis代码</a></li></ul>"
-              
-                   if($('li#'+"200>ul").length==0){
-                    $('li#'+"200").append(chirldHtml);
-                   }else{
-                    $('li#'+"200>ul:first").append(html);
-                   }
-
-              
-            
-              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MybatisGeneator/'>"+ " MyBatis-generator 自动生成MyBatis代码</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MybatisGeneator/'>"+" MyBatis-generator 自动生成MyBatis代码</a></li></ul>"
-              
-                   if($('li#'+"200>ul").length==0){
-                    $('li#'+"200").append(chirldHtml);
-                   }else{
-                    $('li#'+"200>ul:first").append(html);
-                   }
-
-              
-            
               var html="<li>" +"<a href='/2017/12/04/spring&springMvc/spring/Environment abstraction/'>"+ " Environment abstraction</a></li>";
               var chirldHtml="<ul><li>"+"<a href='/2017/12/04/spring&springMvc/spring/Environment abstraction/'>"+" Environment abstraction</a></li></ul>"
-              
-                   if($('li#'+"101>ul").length==0){
-                    $('li#'+"101").append(chirldHtml);
-                   }else{
-                    $('li#'+"101>ul:first").append(html);
-                   }
-
-              
-            
-              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+ " 基于Java的容器配置</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+" 基于Java的容器配置</a></li></ul>"
-              
-                   if($('li#'+"101>ul").length==0){
-                    $('li#'+"101").append(chirldHtml);
-                   }else{
-                    $('li#'+"101>ul:first").append(html);
-                   }
-
-              
-            
-              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+ " ServletContext与ApplicationContext的区别</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+" ServletContext与ApplicationContext的区别</a></li></ul>"
               
                    if($('li#'+"101>ul").length==0){
                     $('li#'+"101").append(chirldHtml);
@@ -1227,41 +1187,96 @@
 
               
             
-              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+ " 看看Spring的源码(二)——bean实例化</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+" 看看Spring的源码(二)——bean实例化</a></li></ul>"
+              var html="<li>" +"<a href='/2018/07/14/spring&springMvc/spring/Spring事务配置解惑/'>"+ " Spring事务配置解惑</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/07/14/spring&springMvc/spring/Spring事务配置解惑/'>"+" Spring事务配置解惑</a></li></ul>"
               
-                   if($('li#'+"121>ul").length==0){
-                    $('li#'+"121").append(chirldHtml);
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
                    }else{
-                    $('li#'+"121>ul:first").append(html);
+                    $('li#'+"101>ul:first").append(html);
                    }
 
               
             
-              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+ " 看看Spring的源码 (一)——Bean加载过程</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+" 看看Spring的源码 (一)——Bean加载过程</a></li></ul>"
+              var html="<li>" +"<a href='/2018/08/14/spring&springMvc/spring/Spring与线程安全/'>"+ " Spring与线程安全</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/08/14/spring&springMvc/spring/Spring与线程安全/'>"+" Spring与线程安全</a></li></ul>"
               
-                   if($('li#'+"121>ul").length==0){
-                    $('li#'+"121").append(chirldHtml);
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
                    }else{
-                    $('li#'+"121>ul:first").append(html);
+                    $('li#'+"101>ul:first").append(html);
                    }
 
               
             
-              var html="<li>" +"<a href='/2017/11/17/myBatis/mybatis学习/Mybatis-spring整合/'>"+ " MyBatis spring整合</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/11/17/myBatis/mybatis学习/Mybatis-spring整合/'>"+" MyBatis spring整合</a></li></ul>"
+              var html="<li>" +"<a href='/2017/12/14/spring&springMvc/spring/spring单例与线程并发/'>"+ " spring单例与线程并发</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/14/spring&springMvc/spring/spring单例与线程并发/'>"+" spring单例与线程并发</a></li></ul>"
               
-                   if($('li#'+"180>ul").length==0){
-                    $('li#'+"180").append(chirldHtml);
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
                    }else{
-                    $('li#'+"180>ul:first").append(html);
+                    $('li#'+"101>ul:first").append(html);
                    }
 
               
             
-              var html="<li>" +"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+ " ContextLoaderListener And DispatcherServlet Concepts</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+" ContextLoaderListener And DispatcherServlet Concepts</a></li></ul>"
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+ " ServletContext与ApplicationContext的区别</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+" ServletContext与ApplicationContext的区别</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/spring 自动装配/'>"+ " spring 自动装配</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/spring 自动装配/'>"+" spring 自动装配</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/13/spring&springMvc/spring/使用Spring特性实现接口多实现类的动态调用/'>"+ " 使用Spring特性实现接口多实现类的动态调用</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/13/spring&springMvc/spring/使用Spring特性实现接口多实现类的动态调用/'>"+" 使用Spring特性实现接口多实现类的动态调用</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+ " 基于Java的容器配置</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+" 基于Java的容器配置</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/2017-07-31-RESTful_api_develop-api_doc/'>"+ " 接口开发从前到后-文档</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/2017-07-31-RESTful_api_develop-api_doc/'>"+" 接口开发从前到后-文档</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/09/06/spring&springMvc/springMVC/2014-08-28-what-does-mvc-annotation-driven-do/'>"+ " mvc:annotation-driven到底帮我们做了什么</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/09/06/spring&springMvc/springMVC/2014-08-28-what-does-mvc-annotation-driven-do/'>"+" mvc:annotation-driven到底帮我们做了什么</a></li></ul>"
               
                    if($('li#'+"102>ul").length==0){
                     $('li#'+"102").append(chirldHtml);
@@ -1282,8 +1297,30 @@
 
               
             
-              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+ " Spring Boot的启动器Starter详解</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+" Spring Boot的启动器Starter详解</a></li></ul>"
+              var html="<li>" +"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+ " ContextLoaderListener And DispatcherServlet Concepts</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+" ContextLoaderListener And DispatcherServlet Concepts</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/SpringMVC异常统一处理的几种方式/'>"+ " Exception Handling in Spring MVC</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/SpringMVC异常统一处理的几种方式/'>"+" Exception Handling in Spring MVC</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/springBoot/springboot学习/Spring Boot 单元测试/'>"+ " Spring Boot 单元测试</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/springBoot/springboot学习/Spring Boot 单元测试/'>"+" Spring Boot 单元测试</a></li></ul>"
               
                    if($('li#'+"281>ul").length==0){
                     $('li#'+"281").append(chirldHtml);
@@ -1300,6 +1337,182 @@
                     $('li#'+"281").append(chirldHtml);
                    }else{
                     $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+ " Spring Boot的启动器Starter详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+" Spring Boot的启动器Starter详解</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot事务/'>"+ " Spring Boot事务</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot事务/'>"+" Spring Boot事务</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot使用redis - 副本/'>"+ " Spring Boot的启动器Starter详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot使用redis - 副本/'>"+" Spring Boot的启动器Starter详解</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/13/spring源码/spring/2016-08-29-spring-schema (1)/'>"+ " Spring schema 解析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/13/spring源码/spring/2016-08-29-spring-schema (1)/'>"+" Spring schema 解析</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/spring 查看 加载bean/'>"+ " spring 查看 加载bean</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/spring 查看 加载bean/'>"+" spring 查看 加载bean</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+ " 看看Spring的源码 (一)——Bean加载过程</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+" 看看Spring的源码 (一)——Bean加载过程</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+ " 看看Spring的源码(二)——bean实例化</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+" 看看Spring的源码(二)——bean实例化</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/30/spring源码/springMVC/spring父子容器/'>"+ " Spring-SpringMVC父子容器&AOP使用总结</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/30/spring源码/springMVC/spring父子容器/'>"+" Spring-SpringMVC父子容器&AOP使用总结</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop 学习/'>"+ " spring aop学习</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop 学习/'>"+" spring aop学习</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop实现缓存/'>"+ " spring aop实现缓存</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop实现缓存/'>"+" spring aop实现缓存</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/shiro/新的RBAC：基于资源的权限管理/'>"+ " 新的RBAC：基于资源的权限管理(Resource-Based Access Control)</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/shiro/新的RBAC：基于资源的权限管理/'>"+" 新的RBAC：基于资源的权限管理(Resource-Based Access Control)</a></li></ul>"
+              
+                   if($('li#'+"360>ul").length==0){
+                    $('li#'+"360").append(chirldHtml);
+                   }else{
+                    $('li#'+"360>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/12/设计模式/singleton_pattern/'>"+ " 单例模式使用</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/12/设计模式/singleton_pattern/'>"+" 单例模式使用</a></li></ul>"
+              
+                   if($('li#'+"380>ul").length==0){
+                    $('li#'+"380").append(chirldHtml);
+                   }else{
+                    $('li#'+"380>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/12/设计模式/design-pattern/'>"+ " 设计模式原则</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/12/设计模式/design-pattern/'>"+" 设计模式原则</a></li></ul>"
+              
+                   if($('li#'+"380>ul").length==0){
+                    $('li#'+"380").append(chirldHtml);
+                   }else{
+                    $('li#'+"380>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/12/04/maven/MavenUsageSummary/'>"+ " Maven基础</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/12/04/maven/MavenUsageSummary/'>"+" Maven基础</a></li></ul>"
+              
+                   if($('li#'+"220>ul").length==0){
+                    $('li#'+"220").append(chirldHtml);
+                   }else{
+                    $('li#'+"220>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/多线程/ThreadLocal/'>"+ " ThreadLocal</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/多线程/ThreadLocal/'>"+" ThreadLocal</a></li></ul>"
+              
+                   if($('li#'+"264>ul").length==0){
+                    $('li#'+"264").append(chirldHtml);
+                   }else{
+                    $('li#'+"264>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/jvm/ClassLoader/'>"+ " ClassLoader</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/jvm/ClassLoader/'>"+" ClassLoader</a></li></ul>"
+              
+                   if($('li#'+"263>ul").length==0){
+                    $('li#'+"263").append(chirldHtml);
+                   }else{
+                    $('li#'+"263>ul:first").append(html);
                    }
 
               
@@ -1321,7 +1534,7 @@
              				position: 'top'
              			}, {
              				position: 'bottom',
-             				content : ['<div>Hosted by <a href="http://damonflycloud.info" target="_blank">FlyCloud</a></div>']
+             				content : ['<div>Hosted by <a href="http://flycloud.me" target="_blank">FlyCloud</a></div>']
              			}]
             });
           });

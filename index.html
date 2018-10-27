@@ -85,7 +85,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="http://7xowny.com1.z0.glb.clouddn.com/flycloud.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/blog/flycloud.ico?v=5.1.0" />
 
 
 
@@ -197,12 +197,12 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="flycloud.me/2017/12/14/springBoot/springboot学习/Spring Boot 默认日志logback配置解析/">
+    <link itemprop="mainEntityOfPage" href="flycloud.me/2018/10/26/数据库/MySQ大表优化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="flycloud">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg">
+      <meta itemprop="image" content="http://flycloud.me/images/blog/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -219,8 +219,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/12/14/springBoot/springboot学习/Spring Boot 默认日志logback配置解析/" itemprop="url">
-                  springBoot默认日志logback配置解析
+                <a class="post-title-link" href="/2018/10/26/数据库/MySQ大表优化/" itemprop="url">
+                  MySQL大表优化方案
                 </a>
               
             
@@ -236,8 +236,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-14T09:46:01+08:00">
-                2017-12-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-26T14:51:39+08:00">
+                2018-10-26
               </time>
             
 
@@ -259,8 +259,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/springBoot/" itemprop="url" rel="index">
-                    <span itemprop="name">springBoot</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
                   </a>
                 </span>
 
@@ -295,15 +295,18 @@
 
       
         
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天来介绍下Spring Boot如何配置日志logback,我刚学习的时候，是带着下面几个问题来查资料的，你呢</p>
-<ul>
-<li>如何引入日志？</li>
-<li>日志输出格式以及输出方式如何配置？</li>
-<li>代码中如何使用？</li>
-</ul>
+          <p>当MySQL单表记录数过大时，增删改查性能都会急剧下降，可以参考以下步骤来优化：</p>
+<h3 id="单表优化"><a href="#单表优化" class="headerlink" title="单表优化"></a>单表优化</h3><p>除非单表数据未来会一直不断上涨，否则不要一开始就考虑拆分，拆分会带来逻辑、部署、运维的各种复杂度，一般以整型值为主的表在千万级以下，字符串为主的表在五百万以下是没有太大问题的。而事实上很多时候MySQL单表的性能依然有不少优化空间，甚至能正常支撑千万级以上的数据量：</p>
+<h4 id="字段"><a href="#字段" class="headerlink" title="字段"></a>字段</h4><p>尽量使用TINYINT、SMALLINT、MEDIUM_INT作为整数类型而非INT，如果非负则加上UNSIGNED</p>
+<p>VARCHAR的长度只分配真正需要的空间</p>
+<p>使用枚举或整数代替字符串类型</p>
+<p>尽量使用TIMESTAMP而非DATETIME，</p>
+<p>单表不要有太多字段，建议在20以内</p>
+<p>避免使用NULL字段，很难查询优化且占用额外索引空间</p>
+<p>用整型来存IP</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/12/14/springBoot/springboot学习/Spring Boot 默认日志logback配置解析/#more" rel="contents">
+            <a class="btn" href="/2018/10/26/数据库/MySQ大表优化/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -349,12 +352,12 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="flycloud.me/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/">
+    <link itemprop="mainEntityOfPage" href="flycloud.me/2018/10/26/数据库/大众点评订单系统分库分表实践/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="flycloud">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg">
+      <meta itemprop="image" content="http://flycloud.me/images/blog/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -371,8 +374,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/" itemprop="url">
-                  slf4j log4j logback关系详解和相关用法
+                <a class="post-title-link" href="/2018/10/26/数据库/大众点评订单系统分库分表实践/" itemprop="url">
+                  大众点评订单系统分库分表实践
                 </a>
               
             
@@ -388,8 +391,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-12T18:17:12+08:00">
-                2017-12-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-26T14:51:39+08:00">
+                2018-10-26
               </time>
             
 
@@ -411,8 +414,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Log4j/" itemprop="url" rel="index">
-                    <span itemprop="name">Log4j</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
                   </a>
                 </span>
 
@@ -447,14 +450,13 @@
 
       
         
-          <h2 id="slf4j-log4j-logback的关系"><a href="#slf4j-log4j-logback的关系" class="headerlink" title="slf4j log4j logback的关系"></a>slf4j log4j logback的关系</h2><h3 id="The-Simple-Logging-Facade-for-Java是什么？"><a href="#The-Simple-Logging-Facade-for-Java是什么？" class="headerlink" title="The Simple Logging Facade for Java是什么？"></a>The Simple Logging Facade for Java是什么？</h3><p>笼统的讲就是slf4j是一系列的日志接口，而log4j logback是具体实现了的日志框架。接下来我们跟着官方文档详细的来看一下他们的关系。</p>
-<blockquote>
-<p>The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks, such as java.util.logging, logback and log4j. SLF4J allows the end-user to plug in the desired logging framework at deployment time. Note that SLF4J-enabling your library/application implies the addition of only a single mandatory dependency, namely slf4j-api-1.7.21.jar.</p>
-</blockquote>
-<p>官方文档的这一段话已经明确描述了三者的关系。slf4j译为简单日志门面，是日志框架的抽象。而log4j和logback是众多日志框架中的几种。</p>
+          <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>原大众点评的订单单表早就已经突破两百G，由于查询维度较多，即使加了两个从库，优化索引，仍然存在很多查询不理想的情况。去年大量抢购活动的开展，使数据库达到瓶颈，应用只能通过限速、异步队列等对其进行保护；业务需求层出不穷，原有的订单模型很难满足业务需求，但是基于原订单表的DDL又非常吃力，无法达到业务要求。随着这些问题越来越突出，订单数据库的切分就愈发急迫了。</p>
+<p>这次切分，我们的目标是未来十年内不需要担心订单容量的问题。</p>
+<h1 id="垂直切分"><a href="#垂直切分" class="headerlink" title="垂直切分"></a>垂直切分</h1><p>先对订单库进行垂直切分，将原有的订单库分为基础订单库、订单流程库等，本文就不展开讲了。</p>
+<p><img src="/images/database/垂直拆分.jpeg" alt="垂直切分"></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/#more" rel="contents">
+            <a class="btn" href="/2018/10/26/数据库/大众点评订单系统分库分表实践/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -500,12 +502,12 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="flycloud.me/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/">
+    <link itemprop="mainEntityOfPage" href="flycloud.me/2018/10/26/数据库/分库分表的几种常见形式以及可能遇到的难/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="flycloud">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg">
+      <meta itemprop="image" content="http://flycloud.me/images/blog/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -522,8 +524,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/" itemprop="url">
-                  消息ACK机制及消费进度管理
+                <a class="post-title-link" href="/2018/10/26/数据库/分库分表的几种常见形式以及可能遇到的难/" itemprop="url">
+                  分库分表的几种常见玩法及如何解决跨库查询等问题
                 </a>
               
             
@@ -539,8 +541,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-11T09:01:22+08:00">
-                2017-12-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-26T14:51:39+08:00">
+                2018-10-26
               </time>
             
 
@@ -562,8 +564,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/RocketMQ/" itemprop="url" rel="index">
-                    <span itemprop="name">RocketMQ</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
                   </a>
                 </span>
 
@@ -598,13 +600,11 @@
 
       
         
-          <p><a href="http://jaskey.github.io/blog/2016/12/19/rocketmq-rebalance/" title="RokectMQ——水平扩展及负载均衡详解 " target="_blank" rel="external">RokectMQ——水平扩展及负载均衡详解</a> 中剖析过，consumer的每个实例是靠队列分配来决定如何消费消息的。那么消费进度具体是如何管理的，又是如何保证消息成功消费的?（RocketMQ有保证消息肯定消费成功的特性,失败则重试）？</p>
-<p>本文将详细解析消息具体是如何ack的，又是如何保证消费肯定成功的。</p>
-<p>由于以上工作所有的机制都实现在PushConsumer中，所以本文的原理均只适用于RocketMQ中的PushConsumer即Java客户端中的DefaultPushConsumer。 若使用了PullConsumer模式，类似的工作如何ack，如何保证消费等均需要使用方自己实现。</p>
-<p>注：广播消费和集群消费的处理有部分区别，以下均特指集群消费（CLSUTER），广播（BROADCASTING）下部分可能不适用。</p>
+          <p>在谈论数据库架构和数据库优化的时候，我们经常会听到“分库分表”、“分片”、“Sharding”…这样的关键词。让人感到高兴的是，这些朋友所服务的公司业务量正在（或者即将面临）高速增长，技术方面也面临着一些挑战。让人感到担忧的是，他们系统真的就需要“分库分表”了吗？“分库分表”有那么容易实践吗？为此，笔者整理了分库分表中可能遇到的一些问题，并结合以往经验介绍了对应的解决思路和建议。</p>
+<h3 id="垂直分表"><a href="#垂直分表" class="headerlink" title="垂直分表"></a>垂直分表</h3><p>垂直分表在日常开发和设计中比较常见，通俗的说法叫做“大表拆小表”，拆分是基于关系型数据库中的“列”（字段）进行的。通常情况，某个表中的字段比较多，可以新建立一张“扩展表”，将不经常使用或者长度较大的字段拆分出去放到“扩展表”中，如下图所示：<br><img src="http://static.tmaczhao.cn/images/9c4c53995cb45b36c37782bc6e5c21f6.jpg" alt=""></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/#more" rel="contents">
+            <a class="btn" href="/2018/10/26/数据库/分库分表的几种常见形式以及可能遇到的难/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -650,12 +650,12 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="flycloud.me/2017/12/05/rocketMQ/rocketMQ学习/RocketMQ命令/">
+    <link itemprop="mainEntityOfPage" href="flycloud.me/2018/10/26/数据库/MySQL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="flycloud">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg">
+      <meta itemprop="image" content="http://flycloud.me/images/blog/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -672,8 +672,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/12/05/rocketMQ/rocketMQ学习/RocketMQ命令/" itemprop="url">
-                  RocketMQ命令
+                <a class="post-title-link" href="/2018/10/26/数据库/MySQL/" itemprop="url">
+                  MySQL 必看
                 </a>
               
             
@@ -689,8 +689,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-05T09:22:53+08:00">
-                2017-12-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-26T14:51:39+08:00">
+                2018-10-26
               </time>
             
 
@@ -712,8 +712,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/RocketMQ/" itemprop="url" rel="index">
-                    <span itemprop="name">RocketMQ</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
                   </a>
                 </span>
 
@@ -748,15 +748,12 @@
 
       
         
-          <h2 id="1-1-控制台使用"><a href="#1-1-控制台使用" class="headerlink" title="1.1. 控制台使用"></a>1.1. 控制台使用</h2><p>RocketMQ 提供有控制台及一系列控制台命令，用于管理员对主题，集群，broker 等信息的管理；</p>
-<ul>
-<li>登录控制台<br>首先进入RocketMQ 工程，进入/RocketMQ/bin<br>在该目录下有个mqadmin 脚本</li>
-<li>查看帮助<br>在mqadmin 下可以查看有哪些命令<br>sh mqadmin</li>
-<li>查看具体命令的使用<br>sh mqadmin help 命令名称<br>例如，查看updateTopic 的使用<br>sh mqadmin help updateTopic</li>
-</ul>
+          <h2 id="1-什么是事务"><a href="#1-什么是事务" class="headerlink" title="1. 什么是事务"></a>1. 什么是事务</h2><p><a href="https://github.com/CyC2018/Interview-Notebook/blob/master/pics/185b9c49-4c13-4241-a848-fbff85c03a64.png" target="_blank" rel="external"><img src="https://github.com/CyC2018/Interview-Notebook/raw/master/pics/185b9c49-4c13-4241-a848-fbff85c03a64.png" alt="img"></a></p>
+<p>事务指的是满足 ACID 特性的一组操作，可以通过 Commit 提交一个事务，也可以使用 Rollback 进行回滚。</p>
+<h3 id="AUTOCOMMIT"><a href="#AUTOCOMMIT" class="headerlink" title="AUTOCOMMIT"></a>AUTOCOMMIT</h3><p>MySQL 默认采用自动提交模式。也就是说，如果不显式使用<code>START TRANSACTION</code>语句来开始一个事务，那么每个查询都会被当做一个事务自动提交</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/12/05/rocketMQ/rocketMQ学习/RocketMQ命令/#more" rel="contents">
+            <a class="btn" href="/2018/10/26/数据库/MySQL/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -802,12 +799,12 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="flycloud.me/2017/12/04/spring&springMvc/spring/Environment abstraction/">
+    <link itemprop="mainEntityOfPage" href="flycloud.me/2018/09/06/spring&springMvc/springMVC/2014-08-28-what-does-mvc-annotation-driven-do/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="flycloud">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg">
+      <meta itemprop="image" content="http://flycloud.me/images/blog/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -824,8 +821,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/12/04/spring&springMvc/spring/Environment abstraction/" itemprop="url">
-                  Environment abstraction
+                <a class="post-title-link" href="/2018/09/06/spring&springMvc/springMVC/2014-08-28-what-does-mvc-annotation-driven-do/" itemprop="url">
+                  mvc:annotation-driven到底帮我们做了什么
                 </a>
               
             
@@ -841,8 +838,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-04T15:11:29+08:00">
-                2017-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-06T10:16:38+08:00">
+                2018-09-06
               </time>
             
 
@@ -900,12 +897,23 @@
 
       
         
-          <h2 id="环境的抽象"><a href="#环境的抽象" class="headerlink" title="环境的抽象"></a>环境的抽象</h2><p><code>Environment</code>是一个集成到容器之中的特殊抽象，它针对应用的环境建立了两个关键的概念：<code>profile</code>和<code>properties</code>.</p>
-<p><em>profile</em>是命名好的，其中包含了多个Bean的定义的一个逻辑集合，只有当指定的profile被激活的时候，其中的Bean才会激活。无论是通过XML定义的还是通过注解解析的Bean都可以配置到profile之中。而<code>Environment</code>对象的角色就是跟profile相关联，然后决定来激活哪一个profile，还有哪一个profile为默认的profile。</p>
-<p><em>properties</em>在几乎所有的应用当中都有着重要的作用，当然也可能存在多个数据源：property文件，JVM系统property，系统环境变量，JNDI，servlet上下文参数，ad-hoc属性对象，Map等。<code>Environment</code>对象和property相关联，然后来给开发者一个方便的服务接口来配置这些数据源，并正确解析。</p>
+          <p>大家都知道在使用Spring MVC的时候需要在spring mvc的配置文件中加上<code>&lt;mvc:annotation-driven/&gt;</code>这句话，但是如果不加这句话一切有是可以正常work的，那到底是加还是不加呢，针对哪些功能是必须要加的呢？</p>
+<p>其实如果用一句话来描述<code>&lt;mvc:annotation-driven/&gt;</code>到底干了什么，实际上它就是一个spring的自定义标签，帮助我们自动配置一些bean到spring容器中，这些bean又会被进一步的被其他bean发现，最终实现一些预定义的功能。当然它也提供了一些属性(attribute)可以供我们做细微的调整。说到这里就不得不提<em>DispatcherServlet.properties</em>文件，如果你还不知道它在哪里，你可以在spring-webmvc-x.x.x.jar中的org.springframework.web.servlet包种找到它。就像它的名字所说，该文件会被Spring MVC的入口DispatcherServlet在初始化的使用作为默认配置使用。看看它里面的内容主要包括以下类：</p>
+<ol>
+<li>LocaleResolver</li>
+<li>ThemeResolver</li>
+<li>HandlerMapping</li>
+<li>HandlerAdapter</li>
+<li>HandlerExceptionResolver</li>
+<li>RequestToViewNameTranslator</li>
+<li>ViewResolver</li>
+<li>FlashMapManager</li>
+</ol>
+<p>这些组件都是spring mvc中的核心组件，<em>DispatcherServlet.properties</em>中就定义这些组件的默认实现类(默认策略)。那么DispatcherServlet是怎么使用这些默认策略的呢？其中有如下函数来初始化各组件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initStrategies</span><span class="params">(ApplicationContext context)</span> </span>&#123;</div><div class="line">	initMultipartResolver(context);</div><div class="line">	initLocaleResolver(context);</div><div class="line">	initThemeResolver(context);</div><div class="line">	initHandlerMappings(context);</div><div class="line">	initHandlerAdapters(context);</div><div class="line">	initHandlerExceptionResolvers(context);</div><div class="line">	initRequestToViewNameTranslator(context);</div><div class="line">	initViewResolvers(context);</div><div class="line">	initFlashMapManager(context);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/12/04/spring&springMvc/spring/Environment abstraction/#more" rel="contents">
+            <a class="btn" href="/2018/09/06/spring&springMvc/springMVC/2014-08-28-what-does-mvc-annotation-driven-do/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -946,7 +954,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1052,7 +1060,7 @@
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="http://7xowny.com1.z0.glb.clouddn.com/avatar.jpg"
+               src="http://flycloud.me/images/blog/avatar.jpg"
                alt="flycloud" />
           <p class="site-author-name" itemprop="name">flycloud</p>
            
@@ -1064,7 +1072,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">75</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1075,7 +1083,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -1086,7 +1094,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -1128,7 +1136,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1139,7 +1147,7 @@
 
         
 <div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https:/busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
 
@@ -1241,8 +1249,9 @@
      </ul>
  </nav>
 <link type="text/css" rel="stylesheet" href="http://cdn.bootcss.com/jQuery.mmenu/5.5.3/core/css/jquery.mmenu.all.css" />
-<link type="text/css" rel="stylesheet" href="http://7xowny.com1.z0.glb.clouddn.com/flyCloudMenu.css" />
-<script type="text/javascript" src="http://7xowny.com1.z0.glb.clouddn.com/jquery.mmenu.min.all.js"></script>
+<link type="text/css" rel="stylesheet" href="/css/flyCloudMenu.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.5.3/core/js/jquery.mmenu.min.all.js"></script>
+
 
 <script type="text/javascript">
   $(function () {
@@ -1262,6 +1271,28 @@
             });
 
             
+              var html="<li>" +"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+ " markdown style guide</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+" markdown style guide</a></li></ul>"
+              
+                   if($('li#'+"160>ul").length==0){
+                    $('li#'+"160").append(chirldHtml);
+                   }else{
+                    $('li#'+"160>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/maven/maven环境差异化应用/'>"+ " maven环境差异化应用</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/maven/maven环境差异化应用/'>"+" maven环境差异化应用</a></li></ul>"
+              
+                   if($('li#'+"220>ul").length==0){
+                    $('li#'+"220").append(chirldHtml);
+                   }else{
+                    $('li#'+"220>ul:first").append(html);
+                   }
+
+              
+            
               var html="<li>" +"<a href='/2017/11/20/maven/mirror和repository 区别/'>"+ " Maven：mirror和repository 区别</a></li>";
               var chirldHtml="<ul><li>"+"<a href='/2017/11/20/maven/mirror和repository 区别/'>"+" Maven：mirror和repository 区别</a></li></ul>"
               
@@ -1273,13 +1304,13 @@
 
               
             
-              var html="<li>" +"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+ " markdown style guide</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+" markdown style guide</a></li></ul>"
+              var html="<li>" +"<a href='/2017/12/20/架构&高并发/Java并发编程与高并发解决方案/'>"+ " Java并发编程与高并发解决方案</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/20/架构&高并发/Java并发编程与高并发解决方案/'>"+" Java并发编程与高并发解决方案</a></li></ul>"
               
-                   if($('li#'+"160>ul").length==0){
-                    $('li#'+"160").append(chirldHtml);
+                   if($('li#'+"400>ul").length==0){
+                    $('li#'+"400").append(chirldHtml);
                    }else{
-                    $('li#'+"160>ul:first").append(html);
+                    $('li#'+"400>ul:first").append(html);
                    }
 
               
@@ -1295,13 +1326,134 @@
 
               
             
-              var html="<li>" +"<a href='/2017/09/05/git&github/github/github项目排名/'>"+ " github项目排名</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github项目排名/'>"+" github项目排名</a></li></ul>"
+              var html="<li>" +"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(一)/'>"+ " 网站海量数据和高并发解决方案(一)</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(一)/'>"+" 网站海量数据和高并发解决方案(一)</a></li></ul>"
               
-                   if($('li#'+"52>ul").length==0){
-                    $('li#'+"52").append(chirldHtml);
+                   if($('li#'+"400>ul").length==0){
+                    $('li#'+"400").append(chirldHtml);
                    }else{
-                    $('li#'+"52>ul:first").append(html);
+                    $('li#'+"400>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(二)/'>"+ " 网站海量数据和高并发解决方案(二)</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(二)/'>"+" 网站海量数据和高并发解决方案(二)</a></li></ul>"
+              
+                   if($('li#'+"400>ul").length==0){
+                    $('li#'+"400").append(chirldHtml);
+                   }else{
+                    $('li#'+"400>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/30/集锦/50个最常用的UnixLinux命令/'>"+ " 50个最常用的UnixLinux命令</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/30/集锦/50个最常用的UnixLinux命令/'>"+" 50个最常用的UnixLinux命令</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/02/集锦/graphics/'>"+ " 程序员必知的七个图形工具</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/02/集锦/graphics/'>"+" 程序员必知的七个图形工具</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/30/集锦/promotion_rule/'>"+ " 零售行业优惠规则分析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/30/集锦/promotion_rule/'>"+" 零售行业优惠规则分析</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/05/30/集锦/shell/'>"+ " Shell脚本编程30分钟入门</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/05/30/集锦/shell/'>"+" Shell脚本编程30分钟入门</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/MySQL/'>"+ " MySQL 必看</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/MySQL/'>"+" MySQL 必看</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/MySQ大表优化/'>"+ " MySQL大表优化方案</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/MySQ大表优化/'>"+" MySQL大表优化方案</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/分库分表的几种常见形式以及可能遇到的难/'>"+ " 分库分表的几种常见玩法及如何解决跨库查询等问题</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/分库分表的几种常见形式以及可能遇到的难/'>"+" 分库分表的几种常见玩法及如何解决跨库查询等问题</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/大众点评订单系统分库分表实践/'>"+ " 大众点评订单系统分库分表实践</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/大众点评订单系统分库分表实践/'>"+" 大众点评订单系统分库分表实践</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/dubbo/dubbo学习/dubbo容器启动/'>"+ " dubbo容器启动</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/dubbo/dubbo学习/dubbo容器启动/'>"+" dubbo容器启动</a></li></ul>"
+              
+                   if($('li#'+"301>ul").length==0){
+                    $('li#'+"301").append(chirldHtml);
+                   }else{
+                    $('li#'+"301>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/dubbo/dubbo学习/dubbo服务启动/'>"+ " dubbo服务启动</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/dubbo/dubbo学习/dubbo服务启动/'>"+" dubbo服务启动</a></li></ul>"
+              
+                   if($('li#'+"301>ul").length==0){
+                    $('li#'+"301").append(chirldHtml);
+                   }else{
+                    $('li#'+"301>ul:first").append(html);
                    }
 
               
@@ -1328,8 +1480,41 @@
 
               
             
-              var html="<li>" +"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+ " java 注解总结</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+" java 注解总结</a></li></ul>"
+              var html="<li>" +"<a href='/2018/01/31/front/jquery/jQuery-plugin-authoring/'>"+ " 如何编写 jQuery 插件</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/31/front/jquery/jQuery-plugin-authoring/'>"+" 如何编写 jQuery 插件</a></li></ul>"
+              
+                   if($('li#'+"141>ul").length==0){
+                    $('li#'+"141").append(chirldHtml);
+                   }else{
+                    $('li#'+"141>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/05/git&github/github/github wiki下载/'>"+ " github wiki下载</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github wiki下载/'>"+" github wiki下载</a></li></ul>"
+              
+                   if($('li#'+"52>ul").length==0){
+                    $('li#'+"52").append(chirldHtml);
+                   }else{
+                    $('li#'+"52>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/05/git&github/github/github项目排名/'>"+ " github项目排名</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github项目排名/'>"+" github项目排名</a></li></ul>"
+              
+                   if($('li#'+"52>ul").length==0){
+                    $('li#'+"52").append(chirldHtml);
+                   }else{
+                    $('li#'+"52>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/05/16/java/java基础/2017-05-16-java-collection/'>"+ " Java - 集合框架完全解析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/05/16/java/java基础/2017-05-16-java-collection/'>"+" Java - 集合框架完全解析</a></li></ul>"
               
                    if($('li#'+"261>ul").length==0){
                     $('li#'+"261").append(chirldHtml);
@@ -1339,24 +1524,46 @@
 
               
             
-              var html="<li>" +"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+ " RocketMQ开发指南</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+" RocketMQ开发指南</a></li></ul>"
+              var html="<li>" +"<a href='/2018/01/09/java/java基础/2016-10-18-JavaCryptography/'>"+ " Java的加密解密</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/java/java基础/2016-10-18-JavaCryptography/'>"+" Java的加密解密</a></li></ul>"
               
-                   if($('li#'+"241>ul").length==0){
-                    $('li#'+"241").append(chirldHtml);
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
                    }else{
-                    $('li#'+"241>ul:first").append(html);
+                    $('li#'+"261>ul:first").append(html);
                    }
 
               
             
-              var html="<li>" +"<a href='/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/'>"+ " slf4j log4j logback关系详解和相关用法</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/'>"+" slf4j log4j logback关系详解和相关用法</a></li></ul>"
+              var html="<li>" +"<a href='/2017/03/20/java/java基础/Java集合/'>"+ " java 集合</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/java基础/Java集合/'>"+" java 集合</a></li></ul>"
               
-                   if($('li#'+"262>ul").length==0){
-                    $('li#'+"262").append(chirldHtml);
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
                    }else{
-                    $('li#'+"262>ul:first").append(html);
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/java基础/内部类的本质 /'>"+ " 内部类的本质</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/java基础/内部类的本质 /'>"+" 内部类的本质</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+ " java 注解总结</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+" java 注解总结</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
                    }
 
               
@@ -1372,17 +1579,6 @@
 
               
             
-              var html="<li>" +"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+ " MyBatis-generator 分析</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+" MyBatis-generator 分析</a></li></ul>"
-              
-                   if($('li#'+"200>ul").length==0){
-                    $('li#'+"200").append(chirldHtml);
-                   }else{
-                    $('li#'+"200>ul:first").append(html);
-                   }
-
-              
-            
               var html="<li>" +"<a href='/2016/06/26/java/日志/log4j学习/'>"+ " Log4j学习</a></li>";
               var chirldHtml="<ul><li>"+"<a href='/2016/06/26/java/日志/log4j学习/'>"+" Log4j学习</a></li></ul>"
               
@@ -1394,13 +1590,24 @@
 
               
             
-              var html="<li>" +"<a href='/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/'>"+ " 消息ACK机制及消费进度管理</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/'>"+" 消息ACK机制及消费进度管理</a></li></ul>"
+              var html="<li>" +"<a href='/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/'>"+ " slf4j log4j logback关系详解和相关用法</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/'>"+" slf4j log4j logback关系详解和相关用法</a></li></ul>"
               
-                   if($('li#'+"241>ul").length==0){
-                    $('li#'+"241").append(chirldHtml);
+                   if($('li#'+"262>ul").length==0){
+                    $('li#'+"262").append(chirldHtml);
                    }else{
-                    $('li#'+"241>ul:first").append(html);
+                    $('li#'+"262>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+ " MyBatis-generator 自动生成MyBatis代码</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+" MyBatis-generator 自动生成MyBatis代码</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
                    }
 
               
@@ -1412,6 +1619,61 @@
                     $('li#'+"200").append(chirldHtml);
                    }else{
                     $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+ " MyBatis-generator 分析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+" MyBatis-generator 分析</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/19/myBatis/mybatis学习/Mybatis二级缓存/'>"+ " Mybatis二级缓存</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/19/myBatis/mybatis学习/Mybatis二级缓存/'>"+" Mybatis二级缓存</a></li></ul>"
+              
+                   if($('li#'+"180>ul").length==0){
+                    $('li#'+"180").append(chirldHtml);
+                   }else{
+                    $('li#'+"180>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MybatisGeneator/'>"+ " MyBatis-generator</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MybatisGeneator/'>"+" MyBatis-generator</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/19/myBatis/mybatis学习/深入了解MyBatis二级缓存/'>"+ " Mybatis二级缓存</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/19/myBatis/mybatis学习/深入了解MyBatis二级缓存/'>"+" Mybatis二级缓存</a></li></ul>"
+              
+                   if($('li#'+"180>ul").length==0){
+                    $('li#'+"180").append(chirldHtml);
+                   }else{
+                    $('li#'+"180>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/17/myBatis/mybatis学习/Mybatis-spring整合/'>"+ " MyBatis spring整合</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/17/myBatis/mybatis学习/Mybatis-spring整合/'>"+" MyBatis spring整合</a></li></ul>"
+              
+                   if($('li#'+"180>ul").length==0){
+                    $('li#'+"180").append(chirldHtml);
+                   }else{
+                    $('li#'+"180>ul:first").append(html);
                    }
 
               
@@ -1438,6 +1700,39 @@
 
               
             
+              var html="<li>" +"<a href='/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/'>"+ " 消息ACK机制及消费进度管理</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/'>"+" 消息ACK机制及消费进度管理</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+ " RocketMQ开发指南</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+" RocketMQ开发指南</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/2016-07-25-spring-interview-details/'>"+ " Spring、Hibernate、Mybatis面试相关知识点</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/2016-07-25-spring-interview-details/'>"+" Spring、Hibernate、Mybatis面试相关知识点</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
               var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+ " BeanPostProcessor</a></li>";
               var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+" BeanPostProcessor</a></li></ul>"
               
@@ -1449,52 +1744,8 @@
 
               
             
-              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+ " MyBatis-generator 自动生成MyBatis代码</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+" MyBatis-generator 自动生成MyBatis代码</a></li></ul>"
-              
-                   if($('li#'+"200>ul").length==0){
-                    $('li#'+"200").append(chirldHtml);
-                   }else{
-                    $('li#'+"200>ul:first").append(html);
-                   }
-
-              
-            
-              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MybatisGeneator/'>"+ " MyBatis-generator 自动生成MyBatis代码</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MybatisGeneator/'>"+" MyBatis-generator 自动生成MyBatis代码</a></li></ul>"
-              
-                   if($('li#'+"200>ul").length==0){
-                    $('li#'+"200").append(chirldHtml);
-                   }else{
-                    $('li#'+"200>ul:first").append(html);
-                   }
-
-              
-            
               var html="<li>" +"<a href='/2017/12/04/spring&springMvc/spring/Environment abstraction/'>"+ " Environment abstraction</a></li>";
               var chirldHtml="<ul><li>"+"<a href='/2017/12/04/spring&springMvc/spring/Environment abstraction/'>"+" Environment abstraction</a></li></ul>"
-              
-                   if($('li#'+"101>ul").length==0){
-                    $('li#'+"101").append(chirldHtml);
-                   }else{
-                    $('li#'+"101>ul:first").append(html);
-                   }
-
-              
-            
-              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+ " 基于Java的容器配置</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+" 基于Java的容器配置</a></li></ul>"
-              
-                   if($('li#'+"101>ul").length==0){
-                    $('li#'+"101").append(chirldHtml);
-                   }else{
-                    $('li#'+"101>ul:first").append(html);
-                   }
-
-              
-            
-              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+ " ServletContext与ApplicationContext的区别</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+" ServletContext与ApplicationContext的区别</a></li></ul>"
               
                    if($('li#'+"101>ul").length==0){
                     $('li#'+"101").append(chirldHtml);
@@ -1515,41 +1766,96 @@
 
               
             
-              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+ " 看看Spring的源码(二)——bean实例化</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+" 看看Spring的源码(二)——bean实例化</a></li></ul>"
+              var html="<li>" +"<a href='/2018/07/14/spring&springMvc/spring/Spring事务配置解惑/'>"+ " Spring事务配置解惑</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/07/14/spring&springMvc/spring/Spring事务配置解惑/'>"+" Spring事务配置解惑</a></li></ul>"
               
-                   if($('li#'+"121>ul").length==0){
-                    $('li#'+"121").append(chirldHtml);
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
                    }else{
-                    $('li#'+"121>ul:first").append(html);
+                    $('li#'+"101>ul:first").append(html);
                    }
 
               
             
-              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+ " 看看Spring的源码 (一)——Bean加载过程</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+" 看看Spring的源码 (一)——Bean加载过程</a></li></ul>"
+              var html="<li>" +"<a href='/2018/08/14/spring&springMvc/spring/Spring与线程安全/'>"+ " Spring与线程安全</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/08/14/spring&springMvc/spring/Spring与线程安全/'>"+" Spring与线程安全</a></li></ul>"
               
-                   if($('li#'+"121>ul").length==0){
-                    $('li#'+"121").append(chirldHtml);
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
                    }else{
-                    $('li#'+"121>ul:first").append(html);
+                    $('li#'+"101>ul:first").append(html);
                    }
 
               
             
-              var html="<li>" +"<a href='/2017/11/17/myBatis/mybatis学习/Mybatis-spring整合/'>"+ " MyBatis spring整合</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/11/17/myBatis/mybatis学习/Mybatis-spring整合/'>"+" MyBatis spring整合</a></li></ul>"
+              var html="<li>" +"<a href='/2017/12/14/spring&springMvc/spring/spring单例与线程并发/'>"+ " spring单例与线程并发</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/14/spring&springMvc/spring/spring单例与线程并发/'>"+" spring单例与线程并发</a></li></ul>"
               
-                   if($('li#'+"180>ul").length==0){
-                    $('li#'+"180").append(chirldHtml);
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
                    }else{
-                    $('li#'+"180>ul:first").append(html);
+                    $('li#'+"101>ul:first").append(html);
                    }
 
               
             
-              var html="<li>" +"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+ " ContextLoaderListener And DispatcherServlet Concepts</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+" ContextLoaderListener And DispatcherServlet Concepts</a></li></ul>"
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+ " ServletContext与ApplicationContext的区别</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+" ServletContext与ApplicationContext的区别</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/spring 自动装配/'>"+ " spring 自动装配</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/spring 自动装配/'>"+" spring 自动装配</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/13/spring&springMvc/spring/使用Spring特性实现接口多实现类的动态调用/'>"+ " 使用Spring特性实现接口多实现类的动态调用</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/13/spring&springMvc/spring/使用Spring特性实现接口多实现类的动态调用/'>"+" 使用Spring特性实现接口多实现类的动态调用</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+ " 基于Java的容器配置</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+" 基于Java的容器配置</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/2017-07-31-RESTful_api_develop-api_doc/'>"+ " 接口开发从前到后-文档</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/2017-07-31-RESTful_api_develop-api_doc/'>"+" 接口开发从前到后-文档</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/09/06/spring&springMvc/springMVC/2014-08-28-what-does-mvc-annotation-driven-do/'>"+ " mvc:annotation-driven到底帮我们做了什么</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/09/06/spring&springMvc/springMVC/2014-08-28-what-does-mvc-annotation-driven-do/'>"+" mvc:annotation-driven到底帮我们做了什么</a></li></ul>"
               
                    if($('li#'+"102>ul").length==0){
                     $('li#'+"102").append(chirldHtml);
@@ -1570,8 +1876,30 @@
 
               
             
-              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+ " Spring Boot的启动器Starter详解</a></li>";
-              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+" Spring Boot的启动器Starter详解</a></li></ul>"
+              var html="<li>" +"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+ " ContextLoaderListener And DispatcherServlet Concepts</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+" ContextLoaderListener And DispatcherServlet Concepts</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/SpringMVC异常统一处理的几种方式/'>"+ " Exception Handling in Spring MVC</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/SpringMVC异常统一处理的几种方式/'>"+" Exception Handling in Spring MVC</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/springBoot/springboot学习/Spring Boot 单元测试/'>"+ " Spring Boot 单元测试</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/springBoot/springboot学习/Spring Boot 单元测试/'>"+" Spring Boot 单元测试</a></li></ul>"
               
                    if($('li#'+"281>ul").length==0){
                     $('li#'+"281").append(chirldHtml);
@@ -1588,6 +1916,182 @@
                     $('li#'+"281").append(chirldHtml);
                    }else{
                     $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+ " Spring Boot的启动器Starter详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+" Spring Boot的启动器Starter详解</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot事务/'>"+ " Spring Boot事务</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot事务/'>"+" Spring Boot事务</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot使用redis - 副本/'>"+ " Spring Boot的启动器Starter详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot使用redis - 副本/'>"+" Spring Boot的启动器Starter详解</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/13/spring源码/spring/2016-08-29-spring-schema (1)/'>"+ " Spring schema 解析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/13/spring源码/spring/2016-08-29-spring-schema (1)/'>"+" Spring schema 解析</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/spring 查看 加载bean/'>"+ " spring 查看 加载bean</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/spring 查看 加载bean/'>"+" spring 查看 加载bean</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+ " 看看Spring的源码 (一)——Bean加载过程</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+" 看看Spring的源码 (一)——Bean加载过程</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+ " 看看Spring的源码(二)——bean实例化</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+" 看看Spring的源码(二)——bean实例化</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/30/spring源码/springMVC/spring父子容器/'>"+ " Spring-SpringMVC父子容器&AOP使用总结</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/30/spring源码/springMVC/spring父子容器/'>"+" Spring-SpringMVC父子容器&AOP使用总结</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop 学习/'>"+ " spring aop学习</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop 学习/'>"+" spring aop学习</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop实现缓存/'>"+ " spring aop实现缓存</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop实现缓存/'>"+" spring aop实现缓存</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/shiro/新的RBAC：基于资源的权限管理/'>"+ " 新的RBAC：基于资源的权限管理(Resource-Based Access Control)</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/shiro/新的RBAC：基于资源的权限管理/'>"+" 新的RBAC：基于资源的权限管理(Resource-Based Access Control)</a></li></ul>"
+              
+                   if($('li#'+"360>ul").length==0){
+                    $('li#'+"360").append(chirldHtml);
+                   }else{
+                    $('li#'+"360>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/12/设计模式/singleton_pattern/'>"+ " 单例模式使用</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/12/设计模式/singleton_pattern/'>"+" 单例模式使用</a></li></ul>"
+              
+                   if($('li#'+"380>ul").length==0){
+                    $('li#'+"380").append(chirldHtml);
+                   }else{
+                    $('li#'+"380>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/12/设计模式/design-pattern/'>"+ " 设计模式原则</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/12/设计模式/design-pattern/'>"+" 设计模式原则</a></li></ul>"
+              
+                   if($('li#'+"380>ul").length==0){
+                    $('li#'+"380").append(chirldHtml);
+                   }else{
+                    $('li#'+"380>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/12/04/maven/MavenUsageSummary/'>"+ " Maven基础</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/12/04/maven/MavenUsageSummary/'>"+" Maven基础</a></li></ul>"
+              
+                   if($('li#'+"220>ul").length==0){
+                    $('li#'+"220").append(chirldHtml);
+                   }else{
+                    $('li#'+"220>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/多线程/ThreadLocal/'>"+ " ThreadLocal</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/多线程/ThreadLocal/'>"+" ThreadLocal</a></li></ul>"
+              
+                   if($('li#'+"264>ul").length==0){
+                    $('li#'+"264").append(chirldHtml);
+                   }else{
+                    $('li#'+"264>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/jvm/ClassLoader/'>"+ " ClassLoader</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/jvm/ClassLoader/'>"+" ClassLoader</a></li></ul>"
+              
+                   if($('li#'+"263>ul").length==0){
+                    $('li#'+"263").append(chirldHtml);
+                   }else{
+                    $('li#'+"263>ul:first").append(html);
                    }
 
               
@@ -1609,7 +2113,7 @@
              				position: 'top'
              			}, {
              				position: 'bottom',
-             				content : ['<div>Hosted by <a href="http://damonflycloud.info" target="_blank">FlyCloud</a></div>']
+             				content : ['<div>Hosted by <a href="http://flycloud.me" target="_blank">FlyCloud</a></div>']
              			}]
             });
           });

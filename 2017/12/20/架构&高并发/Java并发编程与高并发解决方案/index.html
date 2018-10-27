@@ -1,0 +1,2085 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/flyCloud.css?v=5.1.0"/
+
+
+  <meta name="keywords" content="架构&高并发," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/blog/flycloud.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="第1章 课程准备 并发编程初体验，通过两个例子： 计数器 HashMap   并发与高并发基本概念  第2章 并发基础 CPU多级缓存-缓存一致性说的是个啥子啊 CPU多级缓存-乱序执行优化代码执行顺序可能变化，一个核使用另一个核的某个变量时，顺序不对会导致错误 JAVA内存模型 Java内存模型抽象结构图 同步的8种操作 同步规则   并发的优势与风险">
+<meta name="keywords" content="架构&amp;高并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java并发编程与高并发解决方案">
+<meta property="og:url" content="flycloud.me/2017/12/20/架构&高并发/Java并发编程与高并发解决方案/index.html">
+<meta property="og:site_name" content="FlyCloud Blog">
+<meta property="og:description" content="第1章 课程准备 并发编程初体验，通过两个例子： 计数器 HashMap   并发与高并发基本概念  第2章 并发基础 CPU多级缓存-缓存一致性说的是个啥子啊 CPU多级缓存-乱序执行优化代码执行顺序可能变化，一个核使用另一个核的某个变量时，顺序不对会导致错误 JAVA内存模型 Java内存模型抽象结构图 同步的8种操作 同步规则   并发的优势与风险">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1fr8m4z108aj21320h7wgt.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1fr8m9w1209j20yd0m60yx.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1frayc7s2h7j21wu0dxdn2.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1frayksbb3mj21q20jyncx.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1fraym5tycij21qe0k5neo.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1frb0b4scztj21vr0nf15d.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1fraz6jowmrj218w0uxwyj.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1frb7dpnhmmj224n14tkjl.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1frb9s91lg5j20vp0gftak.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1frbb2tkjicj20eu0czq82.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1frbb4s8l6dj20b40csmyv.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1frbb5ut9fmj20p80c3gr2.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1frbc5uixkej21jb0nak5k.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1frbu7tbm5aj21va0u67pm.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1frbuitpj92j20pd0g4765.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1frburo42stj20mt0g9tbj.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1frbuwydjt7j20tb0dr75p.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1frbv5irpg2j20ri0h3ta3.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1frbv5p3b33j20sg0g60vk.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1frbv5v0kbaj20rt0gtdi0.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/8747d788gy1frbv625jwej20rw0gr785.jpg">
+<meta property="og:updated_time" content="2018-10-26T08:12:52.597Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java并发编程与高并发解决方案">
+<meta name="twitter:description" content="第1章 课程准备 并发编程初体验，通过两个例子： 计数器 HashMap   并发与高并发基本概念  第2章 并发基础 CPU多级缓存-缓存一致性说的是个啥子啊 CPU多级缓存-乱序执行优化代码执行顺序可能变化，一个核使用另一个核的某个变量时，顺序不对会导致错误 JAVA内存模型 Java内存模型抽象结构图 同步的8种操作 同步规则   并发的优势与风险">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/8747d788gy1fr8m4z108aj21320h7wgt.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":0,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="flycloud.me/2017/12/20/架构&高并发/Java并发编程与高并发解决方案/"/>
+
+
+
+
+
+  <title> Java并发编程与高并发解决方案 | FlyCloud Blog </title>
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?060f8b2450825fadd6aff6e494ce6218";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="flycloud.me/2017/12/20/架构&高并发/Java并发编程与高并发解决方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flycloud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://flycloud.me/images/blog/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyCloud Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java并发编程与高并发解决方案
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-20T16:13:36+08:00">
+                2017-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/架构-高并发/" itemprop="url" rel="index">
+                    <span itemprop="name">架构&高并发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+            <span class="page-pv">热度
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>℃
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="第1章-课程准备"><a href="#第1章-课程准备" class="headerlink" title="第1章 课程准备"></a>第1章 课程准备</h3><ol>
+<li>并发编程初体验，通过两个例子：<ol>
+<li>计数器</li>
+<li>HashMap</li>
+</ol>
+</li>
+<li>并发与高并发基本概念</li>
+</ol>
+<h3 id="第2章-并发基础"><a href="#第2章-并发基础" class="headerlink" title="第2章 并发基础"></a>第2章 并发基础</h3><ol>
+<li>CPU多级缓存-缓存一致性<br>说的是个啥子啊</li>
+<li>CPU多级缓存-乱序执行优化<br>代码执行顺序可能变化，一个核使用另一个核的某个变量时，顺序不对会导致错误</li>
+<li>JAVA内存模型<ol>
+<li>Java内存模型抽象结构图</li>
+<li>同步的8种操作</li>
+<li>同步规则<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1fr8m4z108aj21320h7wgt.jpg" alt=""></li>
+</ol>
+</li>
+<li>并发的优势与风险<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1fr8m9w1209j20yd0m60yx.jpg" alt=""></li>
+</ol>
+<a id="more"></a>
+<h3 id="第3章-项目准备"><a href="#第3章-项目准备" class="headerlink" title="第3章 项目准备"></a>第3章 项目准备</h3><ol>
+<li>案例环境初始化</li>
+<li>案例准备工作<br>定义4个注解：线程安全，线程不安全，推荐写法，不推荐写法</li>
+<li>并发模拟-工具<ol>
+<li>PostMan测试并发</li>
+<li>Apache Bench</li>
+<li>JMeter</li>
+</ol>
+</li>
+<li>并发模拟-代码<ol>
+<li>CountDownLatch</li>
+<li>Semaphore</li>
+</ol>
+</li>
+</ol>
+<h3 id="第4章-线程安全性"><a href="#第4章-线程安全性" class="headerlink" title="第4章 线程安全性"></a>第4章 线程安全性</h3><ol>
+<li>线程安全性</li>
+<li>原子性<ol>
+<li>AtomicXXX<br>Unsafe操作，CAS</li>
+<li>AtomicLong、LongAdder（说了一大堆，没图，没字，听不懂）</li>
+<li>AtomicReference（没看出来实际用处）、AtomicReferenceFieldUpdater：更新某个类的某个值</li>
+<li>AtomicStampReference：CAS的ABA问题</li>
+<li>锁：<ol>
+<li>synchronized：依赖JVM<ol>
+<li>修饰代码块，作用于对象</li>
+<li>修饰方法，作用于对象</li>
+<li>修饰静态方法，作用于类（所有对象）</li>
+<li>修饰类，作用于类（所有对象）</li>
+</ol>
+</li>
+<li>Lock依赖特殊的CPU指令，代码实现：ReentrantLock</li>
+<li>对比：<ol>
+<li>synchronized：不可中断锁，适合竞争不激烈，可读性好</li>
+<li>Lock：可中断锁，多样化同步，竞争激烈时能维持常态</li>
+<li>Atomic：竞争激烈时能维持常态，比Lock性能好；但只能同步一个值</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>可见性<ol>
+<li>不可见性出现的原因，3个</li>
+<li>volatile，通过加入”内存屏障”和”禁止重排序””优化来实现;PS：没有原子性</li>
+</ol>
+</li>
+<li>有序性<ol>
+<li>happens-before原则<ol>
+<li>程序次序规则</li>
+<li>锁定规则</li>
+<li>volatile变量规则</li>
+<li>传递规则</li>
+<li>程序启动规则</li>
+<li>程序终端规则</li>
+<li>程序终结规则</li>
+<li>对象终结规则</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="第5章-安全发布对象"><a href="#第5章-安全发布对象" class="headerlink" title="第5章 安全发布对象"></a>第5章 安全发布对象</h3><ol>
+<li>安全发布对象-发布与逸出<ol>
+<li>举了个例子，一个方法，返回了一个对象的某个字段，但是这个字段可被修改</li>
+<li>举了个逸出的例子，PS：看不懂，也听不懂</li>
+</ol>
+</li>
+<li>安全的发布对象<ol>
+<li>懒汉模式 - 不安全模式</li>
+<li>饥汉模式 - 安全</li>
+<li>懒汉模式 - 安全 - synchronized</li>
+<li>懒汉模式 - 不安全 - 双重检查 + synchronized<br>指令重排列问题导致返回未初始化完成的对象<br>PS：synchronized保证所标志的区块的互斥性和可见性<br>1、互斥性：同时只能有一个线程<br>2、可见性：指线程离开synchronized区块后，另一个线程接触到的就是上一个线程改变后的对象状态</li>
+<li>懒汉模式 - 安全 - 双重检查 + synchronized + volatile</li>
+<li>枚举方式实现</li>
+</ol>
+</li>
+</ol>
+<h3 id="第6章-线程安全策略"><a href="#第6章-线程安全策略" class="headerlink" title="第6章 线程安全策略"></a>第6章 线程安全策略</h3><ol>
+<li><p>不可变对象</p>
+<ol>
+<li>满足的条件：<ol>
+<li>对象创建以后其状态就不能修改</li>
+<li>所有域都是final类型</li>
+<li>对象是正确创建的（在对象创建时间，this引用没有一处）</li>
+</ol>
+</li>
+<li>final关键字：类、方法、变量</li>
+<li>JDK: Collections.unmodifiableXXX()<br>Guava: ImmutableXXX</li>
+</ol>
+</li>
+<li><p>线程封闭</p>
+<ol>
+<li>Ad-hoc线程封闭：程序控制实现，最糟糕，忽略</li>
+<li>堆栈封闭：局部变量，无并发问题</li>
+<li>ThreadLocal线程封闭：特别好的封闭方法</li>
+<li>写了个Filter、Interceptor、ThreadLocal例子<br>在Filter存，在Interceptor remove，PS：在Filterremove也可以吧</li>
+</ol>
+</li>
+<li><p>线程不安全类与写法</p>
+<ol>
+<li>StringBuilder、StringBuffer<br>例子：多个线程append</li>
+<li>SimpleDateFormate、JodaTime<br>SimpleDateFormate要放到方法中new，别放到类中的field（线程不安全）<br>JodaTime线程安全</li>
+<li>ArrayList、HashSet、HashMap</li>
+<li>写法：先检查再执行：if( condition(a) ) { handler(a); }</li>
+</ol>
+</li>
+<li><p>同步容器</p>
+<ol>
+<li><p>ArrayList -&gt; Vector, Stack<br>举个例子：Vector被两个线程remove和get，数组越界异常</p>
+<p>List遍历时remove()，ConcurrentModificationException<br>参考：<a href="http://www.cnblogs.com/dolphin0520/p/3933551.html" target="_blank" rel="external">Java ConcurrentModificationException异常原因和解决方法</a></p>
+</li>
+<li><p>HashMap -&gt; HashTable(key, value 不能为null)</p>
+</li>
+<li><p>Collections.synchronized(List, Set, Map)</p>
+</li>
+</ol>
+</li>
+<li><p>并发容器</p>
+<ol>
+<li>ArrayList -&gt; CopyOnWriteArrayList 适合读多写少<br>读写分离、最终一致性、使用时另外开辟空间保证线程安全</li>
+<li>HashSet、TreeSet -&gt; CopyOnWriteArraySet、ConcurrentSkipListSet</li>
+<li>HashMap、TreeMap -&gt; ConcurrentHashMap、ConcurrentSkipListMap</li>
+</ol>
+</li>
+</ol>
+<h3 id="第7章-J-U-C之AQS"><a href="#第7章-J-U-C之AQS" class="headerlink" title="第7章 J.U.C之AQS"></a>第7章 J.U.C之AQS</h3><ol>
+<li><p>AQS简介</p>
+</li>
+<li><p>CountDownLatch<br>举个例子1：基本使用<br>举个例子2：规定时间内完成，不完成也不管了</p>
+</li>
+<li><p>Semaphore，控制并发数<br>Demo：线程调用时拿Semaphore的”资源”，可拿1个或多个，semaphore.acquire()<br>Demo：线程尝试获取，获取不到直接结束；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (semaphore.tryAcquire()) &#123; <span class="comment">// 尝试获取一个许可</span></div><div class="line">  test(threadNum);</div><div class="line">  semaphore.release(); <span class="comment">// 释放一个许可</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>CyclicBarrier：<br>Demo：让线程n个n个的一起执行，并且线程等待n个都完成了，继续执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> CyclicBarrier barrier = <span class="keyword">new</span> CyclicBarrier(<span class="number">5</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">race</span><span class="params">(<span class="keyword">int</span> threadNum)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">  Thread.sleep(<span class="number">1000</span>);</div><div class="line">  log.info(<span class="string">"&#123;&#125; is ready"</span>, threadNum);</div><div class="line">  barrier.await();</div><div class="line">  log.info(<span class="string">"&#123;&#125; continue"</span>, threadNum);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Demo2：设置线程等待时间，超过时间后会抛：BarrierException</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">race</span><span class="params">(<span class="keyword">int</span> threadNum)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    Thread.sleep(<span class="number">1000</span>);</div><div class="line">    log.info(<span class="string">"&#123;&#125; is ready"</span>, threadNum);</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        barrier.await(<span class="number">2000</span>, TimeUnit.MILLISECONDS);</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        log.warn(<span class="string">"BarrierException"</span>, e);</div><div class="line">    &#125;</div><div class="line">    log.info(<span class="string">"&#123;&#125; continue"</span>, threadNum);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Demo3：构造时，定义个线程执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> CyclicBarrier barrier = <span class="keyword">new</span> CyclicBarrier(<span class="number">5</span>, () -&gt; &#123;</div><div class="line">        log.info(<span class="string">"callback is running"</span>);</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>ReentrantLock</p>
+<ol>
+<li>ReentrantLock和synchronized区别</li>
+<li>ReentrantLock独有的功能<ol>
+<li>可指定是公平锁还是非公平锁</li>
+<li>提供Condition类，可以分组唤醒需要唤醒的线程</li>
+<li>提供能够终端等待锁的线程的机制，lock.lockInterruptibly()</li>
+</ol>
+</li>
+<li>ReentrantReadWriteRock<br>Demo：读写HashMap，问题，读多写少，可能遇到饥饿问题，写不进</li>
+<li>StampedLock</li>
+<li>Condition</li>
+</ol>
+</li>
+<li><p>Condition</p>
+</li>
+</ol>
+<h3 id="第8章-J-U-C组件拓展"><a href="#第8章-J-U-C组件拓展" class="headerlink" title="第8章 J.U.C组件拓展"></a>第8章 J.U.C组件拓展</h3><ol>
+<li>Callable，有返回值</li>
+<li>Future接口<br>Demo</li>
+<li>FutureTask类<br>Demo</li>
+<li>Fork/Join</li>
+<li>BlockingQueue接口<br>处理满队列的put()阻塞，和空队列的take()阻塞<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1frayc7s2h7j21wu0dxdn2.jpg" alt=""><ol>
+<li>ArrayBlockingQueue</li>
+<li>DelayQueue</li>
+<li>LinkedBlockingQueue</li>
+<li>PriorityBlockingQueue</li>
+<li>SynchronousQueue，只允许一个元素</li>
+</ol>
+</li>
+</ol>
+<h3 id="第9章-线程调度-线程池"><a href="#第9章-线程调度-线程池" class="headerlink" title="第9章 线程调度-线程池"></a>第9章 线程调度-线程池</h3><ol>
+<li>new Thread 弊端<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1frayksbb3mj21q20jyncx.jpg" alt=""></li>
+<li>线程池的好处<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1fraym5tycij21qe0k5neo.jpg" alt=""></li>
+<li>ThreadPoolExecutor<ol>
+<li>corePoolSize：核心线程数量</li>
+<li>maximumPoolSize：最大线程数</li>
+<li>workQueue：阻塞队列</li>
+<li>keepAliveTime：</li>
+<li>unit</li>
+<li>threadFactory</li>
+<li>rejectHandler</li>
+</ol>
+</li>
+<li>线程池状态<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1frb0b4scztj21vr0nf15d.jpg" alt=""><ol>
+<li>execute()</li>
+<li>submit()</li>
+<li>shutdown()</li>
+<li>shutdownNow()</li>
+<li>getTaskCount()</li>
+<li>getCompletedTaskCount()</li>
+<li>getPoolSize()</li>
+<li>getActiveCount()</li>
+</ol>
+</li>
+<li>线程池类图<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1fraz6jowmrj218w0uxwyj.jpg" alt=""></li>
+<li>Executor框架接口<ol>
+<li>Executors.newCachedThreadPool</li>
+<li>Executors.newFixedThreadPool</li>
+<li>Executors.newScheduledThreadPool</li>
+<li>Executors.newSingleThreadExecutors</li>
+</ol>
+</li>
+</ol>
+<h3 id="第10章-多线程并发拓展"><a href="#第10章-多线程并发拓展" class="headerlink" title="第10章 多线程并发拓展"></a>第10章 多线程并发拓展</h3><ol>
+<li>死锁<ol>
+<li>必要条件<ol>
+<li>互斥条件</li>
+<li>请求和保持条件</li>
+<li>不剥夺条件</li>
+<li>环路等待条件</li>
+</ol>
+</li>
+<li>死锁Demo</li>
+<li>死锁检测</li>
+</ol>
+</li>
+<li>并发最佳实践<ol>
+<li>使用本地变量</li>
+<li>使用不可变类</li>
+<li>最小化锁的作用于范围：S = 1/(1 - a + a/n)</li>
+<li>使用线程池</li>
+<li>宁可使用同步也不要使用线程的wait和notify</li>
+<li>使用BlockingQueue实现生产-消费你模式</li>
+<li>使用并发集合而不是加了锁的同步集合</li>
+<li>使用Semaphore创建有界的访问</li>
+<li>宁可使用同步代码块，也不实用同步的方法</li>
+<li>避免使用静态变量</li>
+</ol>
+</li>
+<li>Spring与线程安全<ol>
+<li>需要开发者保证</li>
+<li>Spring bean： singleton、prototype</li>
+<li>无状态对象</li>
+</ol>
+</li>
+<li>HashMap与ConcurrentHashMap解析<ol>
+<li>HashMap线程不安全，死循环分析</li>
+</ol>
+</li>
+<li>多线程并发与线程安全总结<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1frb7dpnhmmj224n14tkjl.jpg" alt=""></li>
+</ol>
+<h3 id="第11章-高并发之扩容思路"><a href="#第11章-高并发之扩容思路" class="headerlink" title="第11章 高并发之扩容思路"></a>第11章 高并发之扩容思路</h3><ol>
+<li>扩容<ol>
+<li>垂直扩容：提高系统部件能力</li>
+<li>水平扩容：增加增多的系统成员来实现</li>
+<li>运用车子运送木材例子：<ol>
+<li>垂直扩容：换一辆装的更多木材的卡车</li>
+<li>水平扩容：多辆卡车</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>扩容-数据库<ol>
+<li>读操作扩展：memcache、redis、CDN等缓存</li>
+<li>写操作扩展：Cassandra、Hbase等</li>
+</ol>
+</li>
+</ol>
+<h3 id="第12章-高并发之缓存思路"><a href="#第12章-高并发之缓存思路" class="headerlink" title="第12章 高并发之缓存思路"></a>第12章 高并发之缓存思路</h3><ol>
+<li>缓存特征<ol>
+<li>命中率：命中数/ (命中数 + 没有命中数)</li>
+<li>最大元素（空间）</li>
+<li>清空策略：FIFO, LFU（最少使用）, LRU（最近最少使用），过期时间，随机等</li>
+</ol>
+</li>
+<li>缓存命中率影响因素<ol>
+<li>业务场景和业务需求：读多写少</li>
+<li>缓存的设计（粒度和策略）</li>
+<li>缓存容量和基础设施</li>
+</ol>
+</li>
+<li>缓存分类和应用场景<ol>
+<li>本地缓存</li>
+<li>分布式缓存</li>
+</ol>
+</li>
+<li>Guava Cache</li>
+<li>Memcache</li>
+<li>Redis</li>
+<li>高并发之缓存-高并发场景问题及实战讲解<ol>
+<li>高并发场景下缓存常见问题<ol>
+<li>缓存一致性<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1frb9s91lg5j20vp0gftak.jpg" alt=""></li>
+<li>缓存并发问题<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1frbb2tkjicj20eu0czq82.jpg" alt=""></li>
+<li>缓存穿透问题<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1frbb4s8l6dj20b40csmyv.jpg" alt=""></li>
+<li>缓存的雪崩现象<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1frbb5ut9fmj20p80c3gr2.jpg" alt=""></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="第13章-高并发之消息队列思路"><a href="#第13章-高并发之消息队列思路" class="headerlink" title="第13章 高并发之消息队列思路"></a>第13章 高并发之消息队列思路</h3><ol>
+<li>消息队列<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1frbc5uixkej21jb0nak5k.jpg" alt=""><br>例子：系统发送短信，发送邮件之类；如果发送失败了，可以返回队列继续处理，或者做其他处理，做到异步解耦<br>下订单例子<br>消息队列的好处，网上搜</li>
+<li>消息队列特性<ol>
+<li>业务无关：制作消息分发</li>
+<li>FIFO</li>
+<li>容灾：节点的动态增删和消息的持久化</li>
+<li>性能：吞吐量提升，系统内部通讯效率提高</li>
+</ol>
+</li>
+<li>为什么需要消息队列<br>【生产】和【消费】的速度或稳定性等因素不一致</li>
+<li>好处<ol>
+<li>业务解耦，无需等待结果</li>
+<li>最终一致性，记录 + 补偿</li>
+<li>广播</li>
+<li>错峰与流控</li>
+</ol>
+</li>
+<li>Kafka</li>
+<li>RabbitMQ</li>
+</ol>
+<h3 id="第14章-高并发之应用拆分思路"><a href="#第14章-高并发之应用拆分思路" class="headerlink" title="第14章 高并发之应用拆分思路"></a>第14章 高并发之应用拆分思路</h3><ol>
+<li>应用拆分<ol>
+<li>功能模块拆分，防止一个模块崩了，导致其他模块不能使用<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1frbu7tbm5aj21va0u67pm.jpg" alt=""></li>
+<li>弊端：<ol>
+<li>拆分前管理一个应用就好了，拆分后需要管理多个应用，管理成本会提高很多，而且服务器成本也会提升</li>
+<li>应用多了，带来更多的网络开销</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>应用拆分原则<ol>
+<li>业务优先</li>
+<li>循序渐进</li>
+<li>兼顾技术：重构、分层</li>
+<li>可靠测试</li>
+</ol>
+</li>
+<li>应用拆分 - 思考<ol>
+<li>应用之间通信：RPC(dubbo等)、消息队列<ol>
+<li>RPC实时性更高，一般不会使用http，webservice</li>
+<li>消息队列：传输数据包小，数据量大，实时性要求不高的场景</li>
+</ol>
+</li>
+<li>应用之间数据库设计：每个应用都有独立的数据库</li>
+<li>避免事务操作跨应用</li>
+</ol>
+</li>
+<li>Dubbo<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1frbuitpj92j20pd0g4765.jpg" alt=""></li>
+<li>微服务<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1frburo42stj20mt0g9tbj.jpg" alt=""><br>要解决的4个问题<ol>
+<li>1</li>
+<li>2</li>
+<li>3</li>
+<li>4</li>
+</ol>
+</li>
+</ol>
+<h3 id="第15章-高并发之应用限流思路"><a href="#第15章-高并发之应用限流思路" class="headerlink" title="第15章 高并发之应用限流思路"></a>第15章 高并发之应用限流思路</h3><ol>
+<li>应用限流</li>
+</ol>
+<p><img src="https://ws1.sinaimg.cn/large/8747d788gy1frbuwydjt7j20tb0dr75p.jpg" alt=""></p>
+<ol>
+<li>应用限流 - 算法<ol>
+<li>计数器法<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1frbv5irpg2j20ri0h3ta3.jpg" alt=""></li>
+<li>滑动窗口<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1frbv5p3b33j20sg0g60vk.jpg" alt=""></li>
+<li>漏桶算法<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1frbv5v0kbaj20rt0gtdi0.jpg" alt=""></li>
+<li>令牌桶算法<br><img src="https://ws1.sinaimg.cn/large/8747d788gy1frbv625jwej20rw0gr785.jpg" alt=""></li>
+</ol>
+</li>
+</ol>
+<h3 id="第16章-高并发之服务降级与服务熔断思路"><a href="#第16章-高并发之服务降级与服务熔断思路" class="headerlink" title="第16章 高并发之服务降级与服务熔断思路"></a>第16章 高并发之服务降级与服务熔断思路</h3><ol>
+<li>服务降级：当请求处理不了， 返回个默认处理结果<ol>
+<li>分类<ol>
+<li>自动降级：超时、失败次数、故障、限流</li>
+<li>主动降级秒杀、双11大促等人工降级</li>
+</ol>
+</li>
+<li>要考虑的问题<ol>
+<li>核心服务、非核心服务</li>
+<li>是否支持降级，降级策略</li>
+<li>业务放通场景，策略</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>服务熔断</li>
+<li>Hystrix<ol>
+<li>再通过第三方客户端访问（通常是通过网络）依赖服务出现高延迟或者失败时，位系统提供保护和控制</li>
+<li>在分布式系统中防止级联失败</li>
+<li>快速失败（Fail fast）同时能快速恢复</li>
+<li>提供失败回退（Fallback）和优雅的服务降级机制</li>
+</ol>
+</li>
+</ol>
+<h3 id="第17章-高并发之数据库切库分库分表思路"><a href="#第17章-高并发之数据库切库分库分表思路" class="headerlink" title="第17章 高并发之数据库切库分库分表思路"></a>第17章 高并发之数据库切库分库分表思路</h3><ol>
+<li>数据库瓶颈<ol>
+<li>单个库数据量太大（1T ~ 2T）：多个库</li>
+<li>单个数据库服务器压力过大、读写瓶颈：多个库</li>
+<li>单个表数据量过大：分表</li>
+</ol>
+</li>
+<li>数据库切库<ol>
+<li>切库的基础及实际运用：读写分离</li>
+<li>自定义注解完成数据库切库</li>
+</ol>
+</li>
+<li>数据库支持多个数据源与分库<ol>
+<li>支持多数据源吗、分库</li>
+<li>数据库支持多个数据源 - 代码实现</li>
+</ol>
+</li>
+<li>数据库分表<ol>
+<li>什么时候考虑分表<ol>
+<li>表的数据大到在优化sql和建立索引后，基本操作的速度还是非常慢</li>
+<li>根据表的数据的快速增长，提前分表</li>
+</ol>
+</li>
+<li>分表策略<ol>
+<li>横向</li>
+<li>纵向</li>
+</ol>
+</li>
+<li>mubatis分表插件，shardbatis2.0</li>
+</ol>
+</li>
+</ol>
+<h3 id="第18章-高并发之高可用手段介绍"><a href="#第18章-高并发之高可用手段介绍" class="headerlink" title="第18章 高并发之高可用手段介绍"></a>第18章 高并发之高可用手段介绍</h3><ol>
+<li>高可用的一些手段<ol>
+<li>任务调度系统分布式：elastic-job + zookeeper</li>
+<li>主备切换：apache curator + zookeeper分布式锁实现</li>
+<li>监控报警机制</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/架构-高并发/" rel="tag"># 架构&高并发</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/19/myBatis/mybatis学习/深入了解MyBatis二级缓存/" rel="next" title="Mybatis二级缓存">
+                <i class="fa fa-chevron-left"></i> Mybatis二级缓存
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/09/java/java基础/2016-10-18-JavaCryptography/" rel="prev" title="Java的加密解密">
+                Java的加密解密 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="donate-btn">作者</div>
+    <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyCloud Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命在于折腾!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://flycloud.me/images/blog/avatar.jpg"
+               alt="flycloud" />
+          <p class="site-author-name" itemprop="name">flycloud</p>
+           
+              <p class="site-description motion-element" itemprop="description">Stay Hungry,Stay Foolish</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">flycloud : Stay Hungry,Stay Foolish</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https:/busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+ 
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+<a id="hamburger" class="mm-slideout" href="#mmenu"><span></span></a>
+
+<nav id="mmenu">
+     <ul>
+
+     </ul>
+ </nav>
+<link type="text/css" rel="stylesheet" href="http://cdn.bootcss.com/jQuery.mmenu/5.5.3/core/css/jquery.mmenu.all.css" />
+<link type="text/css" rel="stylesheet" href="/css/flyCloudMenu.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.5.3/core/js/jquery.mmenu.min.all.js"></script>
+
+
+<script type="text/javascript">
+  $(function () {
+          $.getJSON("/json/menu.json",function(data){
+            $.each( data, function() {
+            var html="<li id='" + this.id + "'>" +"<span>"+this.text + "</span></li>"
+            var chirldHtml="<ul><li id='"+this.id+"'>"+"<span>"+this.text+"</span></li></ul>"
+            if(this.pid==''){
+                $('#mmenu>ul:first').append(html);
+              }else{
+              if($('li#'+this.pid+">ul").length==0){
+                 $('#'+this.pid).append(chirldHtml);
+              }else{
+                $('li#'+this.pid+">ul").append(html);
+              }
+             }
+            });
+
+            
+              var html="<li>" +"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+ " markdown style guide</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/01/13/Markdown/markdown-style-guide/'>"+" markdown style guide</a></li></ul>"
+              
+                   if($('li#'+"160>ul").length==0){
+                    $('li#'+"160").append(chirldHtml);
+                   }else{
+                    $('li#'+"160>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/maven/maven环境差异化应用/'>"+ " maven环境差异化应用</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/maven/maven环境差异化应用/'>"+" maven环境差异化应用</a></li></ul>"
+              
+                   if($('li#'+"220>ul").length==0){
+                    $('li#'+"220").append(chirldHtml);
+                   }else{
+                    $('li#'+"220>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/maven/mirror和repository 区别/'>"+ " Maven：mirror和repository 区别</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/maven/mirror和repository 区别/'>"+" Maven：mirror和repository 区别</a></li></ul>"
+              
+                   if($('li#'+"220>ul").length==0){
+                    $('li#'+"220").append(chirldHtml);
+                   }else{
+                    $('li#'+"220>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/20/架构&高并发/Java并发编程与高并发解决方案/'>"+ " Java并发编程与高并发解决方案</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/20/架构&高并发/Java并发编程与高并发解决方案/'>"+" Java并发编程与高并发解决方案</a></li></ul>"
+              
+                   if($('li#'+"400>ul").length==0){
+                    $('li#'+"400").append(chirldHtml);
+                   }else{
+                    $('li#'+"400>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/servlet/Servlet详解/'>"+ " Servlet详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/servlet/Servlet详解/'>"+" Servlet详解</a></li></ul>"
+              
+                   if($('li#'+"70>ul").length==0){
+                    $('li#'+"70").append(chirldHtml);
+                   }else{
+                    $('li#'+"70>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(一)/'>"+ " 网站海量数据和高并发解决方案(一)</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(一)/'>"+" 网站海量数据和高并发解决方案(一)</a></li></ul>"
+              
+                   if($('li#'+"400>ul").length==0){
+                    $('li#'+"400").append(chirldHtml);
+                   }else{
+                    $('li#'+"400>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(二)/'>"+ " 网站海量数据和高并发解决方案(二)</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/架构&高并发/网站海量数据和高并发解决方案(二)/'>"+" 网站海量数据和高并发解决方案(二)</a></li></ul>"
+              
+                   if($('li#'+"400>ul").length==0){
+                    $('li#'+"400").append(chirldHtml);
+                   }else{
+                    $('li#'+"400>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/30/集锦/50个最常用的UnixLinux命令/'>"+ " 50个最常用的UnixLinux命令</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/30/集锦/50个最常用的UnixLinux命令/'>"+" 50个最常用的UnixLinux命令</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/02/集锦/graphics/'>"+ " 程序员必知的七个图形工具</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/02/集锦/graphics/'>"+" 程序员必知的七个图形工具</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/30/集锦/promotion_rule/'>"+ " 零售行业优惠规则分析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/30/集锦/promotion_rule/'>"+" 零售行业优惠规则分析</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/05/30/集锦/shell/'>"+ " Shell脚本编程30分钟入门</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/05/30/集锦/shell/'>"+" Shell脚本编程30分钟入门</a></li></ul>"
+              
+                   if($('li#'+"320>ul").length==0){
+                    $('li#'+"320").append(chirldHtml);
+                   }else{
+                    $('li#'+"320>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/MySQL/'>"+ " MySQL 必看</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/MySQL/'>"+" MySQL 必看</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/MySQ大表优化/'>"+ " MySQL大表优化方案</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/MySQ大表优化/'>"+" MySQL大表优化方案</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/分库分表的几种常见形式以及可能遇到的难/'>"+ " 分库分表的几种常见玩法及如何解决跨库查询等问题</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/分库分表的几种常见形式以及可能遇到的难/'>"+" 分库分表的几种常见玩法及如何解决跨库查询等问题</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/10/26/数据库/大众点评订单系统分库分表实践/'>"+ " 大众点评订单系统分库分表实践</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/10/26/数据库/大众点评订单系统分库分表实践/'>"+" 大众点评订单系统分库分表实践</a></li></ul>"
+              
+                   if($('li#'+"340>ul").length==0){
+                    $('li#'+"340").append(chirldHtml);
+                   }else{
+                    $('li#'+"340>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/dubbo/dubbo学习/dubbo容器启动/'>"+ " dubbo容器启动</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/dubbo/dubbo学习/dubbo容器启动/'>"+" dubbo容器启动</a></li></ul>"
+              
+                   if($('li#'+"301>ul").length==0){
+                    $('li#'+"301").append(chirldHtml);
+                   }else{
+                    $('li#'+"301>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/dubbo/dubbo学习/dubbo服务启动/'>"+ " dubbo服务启动</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/dubbo/dubbo学习/dubbo服务启动/'>"+" dubbo服务启动</a></li></ul>"
+              
+                   if($('li#'+"301>ul").length==0){
+                    $('li#'+"301").append(chirldHtml);
+                   }else{
+                    $('li#'+"301>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/11/front/frontTec/前端常见跨域解决方案（全）/'>"+ " 前端常见跨域解决方案（全）</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/11/front/frontTec/前端常见跨域解决方案（全）/'>"+" 前端常见跨域解决方案（全）</a></li></ul>"
+              
+                   if($('li#'+"141>ul").length==0){
+                    $('li#'+"141").append(chirldHtml);
+                   }else{
+                    $('li#'+"141>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+ " Git远程操作详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/01/git&github/git/git远程操作详解/'>"+" Git远程操作详解</a></li></ul>"
+              
+                   if($('li#'+"51>ul").length==0){
+                    $('li#'+"51").append(chirldHtml);
+                   }else{
+                    $('li#'+"51>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/31/front/jquery/jQuery-plugin-authoring/'>"+ " 如何编写 jQuery 插件</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/31/front/jquery/jQuery-plugin-authoring/'>"+" 如何编写 jQuery 插件</a></li></ul>"
+              
+                   if($('li#'+"141>ul").length==0){
+                    $('li#'+"141").append(chirldHtml);
+                   }else{
+                    $('li#'+"141>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/05/git&github/github/github wiki下载/'>"+ " github wiki下载</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github wiki下载/'>"+" github wiki下载</a></li></ul>"
+              
+                   if($('li#'+"52>ul").length==0){
+                    $('li#'+"52").append(chirldHtml);
+                   }else{
+                    $('li#'+"52>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/05/git&github/github/github项目排名/'>"+ " github项目排名</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/05/git&github/github/github项目排名/'>"+" github项目排名</a></li></ul>"
+              
+                   if($('li#'+"52>ul").length==0){
+                    $('li#'+"52").append(chirldHtml);
+                   }else{
+                    $('li#'+"52>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/05/16/java/java基础/2017-05-16-java-collection/'>"+ " Java - 集合框架完全解析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/05/16/java/java基础/2017-05-16-java-collection/'>"+" Java - 集合框架完全解析</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/java/java基础/2016-10-18-JavaCryptography/'>"+ " Java的加密解密</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/java/java基础/2016-10-18-JavaCryptography/'>"+" Java的加密解密</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/java基础/Java集合/'>"+ " java 集合</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/java基础/Java集合/'>"+" java 集合</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/java基础/内部类的本质 /'>"+ " 内部类的本质</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/java基础/内部类的本质 /'>"+" 内部类的本质</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+ " java 注解总结</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/java/java基础/java 注解总结/'>"+" java 注解总结</a></li></ul>"
+              
+                   if($('li#'+"261>ul").length==0){
+                    $('li#'+"261").append(chirldHtml);
+                   }else{
+                    $('li#'+"261>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/06/26/java/日志/log4j例子/'>"+ " Log4j例子</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/06/26/java/日志/log4j例子/'>"+" Log4j例子</a></li></ul>"
+              
+                   if($('li#'+"262>ul").length==0){
+                    $('li#'+"262").append(chirldHtml);
+                   }else{
+                    $('li#'+"262>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/06/26/java/日志/log4j学习/'>"+ " Log4j学习</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/06/26/java/日志/log4j学习/'>"+" Log4j学习</a></li></ul>"
+              
+                   if($('li#'+"262>ul").length==0){
+                    $('li#'+"262").append(chirldHtml);
+                   }else{
+                    $('li#'+"262>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/'>"+ " slf4j log4j logback关系详解和相关用法</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/12/java/日志/slf4j log4j logback关系详解和相关用法/'>"+" slf4j log4j logback关系详解和相关用法</a></li></ul>"
+              
+                   if($('li#'+"262>ul").length==0){
+                    $('li#'+"262").append(chirldHtml);
+                   }else{
+                    $('li#'+"262>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+ " MyBatis-generator 自动生成MyBatis代码</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MyBatis-generator 自动生成MyBatis代码/'>"+" MyBatis-generator 自动生成MyBatis代码</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MyBatis配件文件详解/'>"+ " MyBatis generator 配置文件详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MyBatis配件文件详解/'>"+" MyBatis generator 配置文件详解</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+ " MyBatis-generator 分析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/21/myBatis/MBG/MyBatis-generator 分析/'>"+" MyBatis-generator 分析</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/19/myBatis/mybatis学习/Mybatis二级缓存/'>"+ " Mybatis二级缓存</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/19/myBatis/mybatis学习/Mybatis二级缓存/'>"+" Mybatis二级缓存</a></li></ul>"
+              
+                   if($('li#'+"180>ul").length==0){
+                    $('li#'+"180").append(chirldHtml);
+                   }else{
+                    $('li#'+"180>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/07/14/myBatis/MBG/MybatisGeneator/'>"+ " MyBatis-generator</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/07/14/myBatis/MBG/MybatisGeneator/'>"+" MyBatis-generator</a></li></ul>"
+              
+                   if($('li#'+"200>ul").length==0){
+                    $('li#'+"200").append(chirldHtml);
+                   }else{
+                    $('li#'+"200>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/19/myBatis/mybatis学习/深入了解MyBatis二级缓存/'>"+ " Mybatis二级缓存</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/19/myBatis/mybatis学习/深入了解MyBatis二级缓存/'>"+" Mybatis二级缓存</a></li></ul>"
+              
+                   if($('li#'+"180>ul").length==0){
+                    $('li#'+"180").append(chirldHtml);
+                   }else{
+                    $('li#'+"180>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/17/myBatis/mybatis学习/Mybatis-spring整合/'>"+ " MyBatis spring整合</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/17/myBatis/mybatis学习/Mybatis-spring整合/'>"+" MyBatis spring整合</a></li></ul>"
+              
+                   if($('li#'+"180>ul").length==0){
+                    $('li#'+"180").append(chirldHtml);
+                   }else{
+                    $('li#'+"180>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/05/rocketMQ/rocketMQ学习/RocketMQ命令/'>"+ " RocketMQ命令</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/05/rocketMQ/rocketMQ学习/RocketMQ命令/'>"+" RocketMQ命令</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/04/rocketMQ/rocketMQ学习/十分钟入门RocketMQ/'>"+ " 十分钟入门RocketMQ</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/rocketMQ/rocketMQ学习/十分钟入门RocketMQ/'>"+" 十分钟入门RocketMQ</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/'>"+ " 消息ACK机制及消费进度管理</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/11/rocketMQ/rocketMQ学习/消息ACK机制及消费进度管理/'>"+" 消息ACK机制及消费进度管理</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+ " RocketMQ开发指南</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/rocketMQ/rocketMQ学习/RocketMQ基础/'>"+" RocketMQ开发指南</a></li></ul>"
+              
+                   if($('li#'+"241>ul").length==0){
+                    $('li#'+"241").append(chirldHtml);
+                   }else{
+                    $('li#'+"241>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/2016-07-25-spring-interview-details/'>"+ " Spring、Hibernate、Mybatis面试相关知识点</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/2016-07-25-spring-interview-details/'>"+" Spring、Hibernate、Mybatis面试相关知识点</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+ " BeanPostProcessor</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/BeanPostProcessor/'>"+" BeanPostProcessor</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/04/spring&springMvc/spring/Environment abstraction/'>"+ " Environment abstraction</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/04/spring&springMvc/spring/Environment abstraction/'>"+" Environment abstraction</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+ " How to use the Spring FactoryBean</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/07/spring&springMvc/spring/How to use the Spring FactoryBean/'>"+" How to use the Spring FactoryBean</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/07/14/spring&springMvc/spring/Spring事务配置解惑/'>"+ " Spring事务配置解惑</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/07/14/spring&springMvc/spring/Spring事务配置解惑/'>"+" Spring事务配置解惑</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/08/14/spring&springMvc/spring/Spring与线程安全/'>"+ " Spring与线程安全</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/08/14/spring&springMvc/spring/Spring与线程安全/'>"+" Spring与线程安全</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/14/spring&springMvc/spring/spring单例与线程并发/'>"+ " spring单例与线程并发</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/14/spring&springMvc/spring/spring单例与线程并发/'>"+" spring单例与线程并发</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+ " ServletContext与ApplicationContext的区别</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/25/spring&springMvc/spring/spring-differerce-between-application-context-and-servlet-context/'>"+" ServletContext与ApplicationContext的区别</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/spring 自动装配/'>"+ " spring 自动装配</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/spring 自动装配/'>"+" spring 自动装配</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/13/spring&springMvc/spring/使用Spring特性实现接口多实现类的动态调用/'>"+ " 使用Spring特性实现接口多实现类的动态调用</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/13/spring&springMvc/spring/使用Spring特性实现接口多实现类的动态调用/'>"+" 使用Spring特性实现接口多实现类的动态调用</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+ " 基于Java的容器配置</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/基于Java的容器配置/'>"+" 基于Java的容器配置</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/2017-07-31-RESTful_api_develop-api_doc/'>"+ " 接口开发从前到后-文档</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/2017-07-31-RESTful_api_develop-api_doc/'>"+" 接口开发从前到后-文档</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/09/06/spring&springMvc/springMVC/2014-08-28-what-does-mvc-annotation-driven-do/'>"+ " mvc:annotation-driven到底帮我们做了什么</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/09/06/spring&springMvc/springMVC/2014-08-28-what-does-mvc-annotation-driven-do/'>"+" mvc:annotation-driven到底帮我们做了什么</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/Exception/'>"+ " Exception Handling in Spring MVC</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/Exception/'>"+" Exception Handling in Spring MVC</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+ " ContextLoaderListener And DispatcherServlet Concepts</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/17/spring&springMvc/springMVC/ContextLoaderListener And DispatcherServlet Concepts/'>"+" ContextLoaderListener And DispatcherServlet Concepts</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/06/spring&springMvc/springMVC/SpringMVC异常统一处理的几种方式/'>"+ " Exception Handling in Spring MVC</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/06/spring&springMvc/springMVC/SpringMVC异常统一处理的几种方式/'>"+" Exception Handling in Spring MVC</a></li></ul>"
+              
+                   if($('li#'+"102>ul").length==0){
+                    $('li#'+"102").append(chirldHtml);
+                   }else{
+                    $('li#'+"102>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/09/springBoot/springboot学习/Spring Boot 单元测试/'>"+ " Spring Boot 单元测试</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/09/springBoot/springboot学习/Spring Boot 单元测试/'>"+" Spring Boot 单元测试</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/14/springBoot/springboot学习/Spring Boot 默认日志logback配置解析/'>"+ " springBoot默认日志logback配置解析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/14/springBoot/springboot学习/Spring Boot 默认日志logback配置解析/'>"+" springBoot默认日志logback配置解析</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+ " Spring Boot的启动器Starter详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot的启动器Starter详解/'>"+" Spring Boot的启动器Starter详解</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot事务/'>"+ " Spring Boot事务</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot事务/'>"+" Spring Boot事务</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot使用redis - 副本/'>"+ " Spring Boot的启动器Starter详解</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/springBoot/springboot学习/Spring Boot使用redis - 副本/'>"+" Spring Boot的启动器Starter详解</a></li></ul>"
+              
+                   if($('li#'+"281>ul").length==0){
+                    $('li#'+"281").append(chirldHtml);
+                   }else{
+                    $('li#'+"281>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/03/13/spring源码/spring/2016-08-29-spring-schema (1)/'>"+ " Spring schema 解析</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/03/13/spring源码/spring/2016-08-29-spring-schema (1)/'>"+" Spring schema 解析</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/spring 查看 加载bean/'>"+ " spring 查看 加载bean</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/spring 查看 加载bean/'>"+" spring 查看 加载bean</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+ " 看看Spring的源码 (一)——Bean加载过程</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (一)——Bean加载过程/'>"+" 看看Spring的源码 (一)——Bean加载过程</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+ " 看看Spring的源码(二)——bean实例化</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/09/13/spring源码/spring/看看Spring的源码 (二)-——bean实例化/'>"+" 看看Spring的源码(二)——bean实例化</a></li></ul>"
+              
+                   if($('li#'+"121>ul").length==0){
+                    $('li#'+"121").append(chirldHtml);
+                   }else{
+                    $('li#'+"121>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/10/30/spring源码/springMVC/spring父子容器/'>"+ " Spring-SpringMVC父子容器&AOP使用总结</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/10/30/spring源码/springMVC/spring父子容器/'>"+" Spring-SpringMVC父子容器&AOP使用总结</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop 学习/'>"+ " spring aop学习</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop 学习/'>"+" spring aop学习</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop实现缓存/'>"+ " spring aop实现缓存</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/30/spring&springMvc/spring/spring aop/spring aop实现缓存/'>"+" spring aop实现缓存</a></li></ul>"
+              
+                   if($('li#'+"101>ul").length==0){
+                    $('li#'+"101").append(chirldHtml);
+                   }else{
+                    $('li#'+"101>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/11/20/shiro/新的RBAC：基于资源的权限管理/'>"+ " 新的RBAC：基于资源的权限管理(Resource-Based Access Control)</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/11/20/shiro/新的RBAC：基于资源的权限管理/'>"+" 新的RBAC：基于资源的权限管理(Resource-Based Access Control)</a></li></ul>"
+              
+                   if($('li#'+"360>ul").length==0){
+                    $('li#'+"360").append(chirldHtml);
+                   }else{
+                    $('li#'+"360>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2018/01/12/设计模式/singleton_pattern/'>"+ " 单例模式使用</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2018/01/12/设计模式/singleton_pattern/'>"+" 单例模式使用</a></li></ul>"
+              
+                   if($('li#'+"380>ul").length==0){
+                    $('li#'+"380").append(chirldHtml);
+                   }else{
+                    $('li#'+"380>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/12/12/设计模式/design-pattern/'>"+ " 设计模式原则</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/12/12/设计模式/design-pattern/'>"+" 设计模式原则</a></li></ul>"
+              
+                   if($('li#'+"380>ul").length==0){
+                    $('li#'+"380").append(chirldHtml);
+                   }else{
+                    $('li#'+"380>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2016/12/04/maven/MavenUsageSummary/'>"+ " Maven基础</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2016/12/04/maven/MavenUsageSummary/'>"+" Maven基础</a></li></ul>"
+              
+                   if($('li#'+"220>ul").length==0){
+                    $('li#'+"220").append(chirldHtml);
+                   }else{
+                    $('li#'+"220>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/多线程/ThreadLocal/'>"+ " ThreadLocal</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/多线程/ThreadLocal/'>"+" ThreadLocal</a></li></ul>"
+              
+                   if($('li#'+"264>ul").length==0){
+                    $('li#'+"264").append(chirldHtml);
+                   }else{
+                    $('li#'+"264>ul:first").append(html);
+                   }
+
+              
+            
+              var html="<li>" +"<a href='/2017/03/20/java/jvm/ClassLoader/'>"+ " ClassLoader</a></li>";
+              var chirldHtml="<ul><li>"+"<a href='/2017/03/20/java/jvm/ClassLoader/'>"+" ClassLoader</a></li></ul>"
+              
+                   if($('li#'+"263>ul").length==0){
+                    $('li#'+"263").append(chirldHtml);
+                   }else{
+                    $('li#'+"263>ul:first").append(html);
+                   }
+
+              
+            
+
+            $('#mmenu').mmenu({
+             extensions		: [ 'widescreen', 'theme-white', 'effect-menu-slide', 'pagedim-black','pageshadow'],
+             			counters		: true,
+             			dividers		: {
+             				fixed 	: true
+             			},
+             			navbar 			: {
+             				title	: 'blog-catalog'
+             			},
+             			navbars			: [{
+             				position: 'top',
+             				content : ['searchfield']
+             			}, {
+             				position: 'top'
+             			}, {
+             				position: 'bottom',
+             				content : ['<div>Hosted by <a href="http://flycloud.me" target="_blank">FlyCloud</a></div>']
+             			}]
+            });
+          });
+
+          
+      $("table").wrap("<div class='table-area'></div>");
+
+
+       /**$(".donate-btn").hover(function () {
+        $('#sidebar').css('display','block');
+        $('.header-inner').css('display','inherit');
+       $('.sidebar-inner').css('display','inherit');
+        });
+
+         $('#hamburger').click(function(){
+         $('.sidebar').css('display','none');
+          $('#mm-blocker').on("click",function(){
+          $('.sidebar').css('display','block');
+        })
+       });**/
+       
+       
+
+      });
+</script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+ 
+
+</body>
+
+ 
+
+</html>
